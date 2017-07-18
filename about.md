@@ -4,12 +4,4 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
-
-You can find the source code for the Jekyll new theme at:
-{% include icon-github.html username="jekyll" %} /
-[minima](https://github.com/jekyll/minima)
-
-You can find the source code for Jekyll at
-{% include icon-github.html username="jekyll" %} /
-[jekyll](https://github.com/jekyll/jekyll)
+My name is Matt Goodman. I'm a recent grad from the The University of Pennsylvania where I studied Electrical Engineering. My interests have always varied widely: signal processing, political science, Longhorns football, art, finance, and yes, technology. The content of this blog will reflect the fact that I find boring subjects to be really interesting.
