@@ -13,7 +13,7 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Everything is Fascinating
+title: The Examined Life
 email: mattgoodman13 (at) gmail (dot.) com
 description: > # this means to ignore newlines until "baseurl:"
     This is a blog for the type of person who thinks there is something fascinating about everything. If you can find beauty or enjoyment in the mundane, life can never be boring.
@@ -23,7 +23,7 @@ twitter_username: goodmattg
 github_username:  goodmattg
 
 # Build settings
-markdown: kramdown
+markdown: redcarpet
 theme: minima
 gems:
   - jekyll-feed
