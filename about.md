@@ -4,4 +4,4 @@ title: About
 permalink: /about/
 ---
 
-My name is Matt Goodman. I'm a recent grad from the The University of Pennsylvania where I studied Electrical Engineering. My interests have always varied widely: signal processing, political science, Longhorns football, art, finance, and yes, technology. The content of this blog will reflect the fact that I find boring subjects to be really interesting.
+My name is Matt Goodman. I'm a recent grad from the The University of Pennsylvania where I majored in Electrical Engineering and pursued minors in Math and Computer Science. My interests are varied: signal processing, political science, philosophy, history, trading, machine learning, network theory, foreign policy, art, design, finance, and yes, technology. The content of this blog will reflect the fact that I'm consistently learning in a number of subjects.
