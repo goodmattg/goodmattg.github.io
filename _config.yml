@@ -24,6 +24,7 @@ github_username:  goodmattg
 
 # Build settings
 markdown: redcarpet
+highlighter: rouge
 theme: minima
 gems:
   - jekyll-feed
