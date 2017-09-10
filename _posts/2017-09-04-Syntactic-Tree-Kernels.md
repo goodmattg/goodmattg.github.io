@@ -56,9 +56,12 @@ $$K(T_1,T_2) = h(T_1) \cdot h(T_2)$$
 
 Where $h$ is a function that produces all of the subtrees of a tree. Again, the dot-product between $h(T_1)$ and $h(T_2)$ will count all of the subtrees $T_1$ and $T_2$ have in common. They define the indicator function $I_i(n)$ to be 1 if the subtree $i$ is rooted at node $n$ and 0 otherwise. Therefore, we can rewrite the dot-product above.
 
-$$h(T_1) \cdot h(T_2) = \sum_i h_i(T_1)h_i(T_2)$$
-$$ = \sum_{n_1 \in N_1}\sum_{n_2 \in N_2} \sum_i I_i(n_1) I_i(n_2)$$
-$$ = \sum_{n_1 \in N_1}\sum_{n_2 \in N_2} C(n_1, n_2)$$
+\begin{align}
+h(T_1) \cdot h(T_2) &= \sum_i h_i(T_1)h_i(T_2)
+    \\\\ & = \sum_{n_1 \in N_1}\sum_{n_2 \in N_2} \sum_i I_i(n_1) I_i(n_2)
+    \\\\ & = \sum_{n_1 \in N_1}\sum_{n_2 \in N_2} C(n_1, n_2)
+\end{align}
+
 
 Where $C(n_1,n_2)$ is defined as $\sum_i I_i(n_1)I_i(n_2)$. We note that $C(n_1, n_2)$ can be computed recursively in polynomial time:
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-09-09T16:43:26-04:00</updated><id>http://localhost:4000/</id><title type="html">The Examined Life</title><subtitle>This is a blog for the type of person who thinks there is something fascinating about everything. If you can find beauty or enjoyment in the mundane, life can never be boring.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-09-09T23:49:04-04:00</updated><id>http://localhost:4000/</id><title type="html">The Examined Life</title><subtitle>This is a blog for the type of person who thinks there is something fascinating about everything. If you can find beauty or enjoyment in the mundane, life can never be boring.
 </subtitle><entry><title type="html">Syntactic Tree Kernels</title><link href="http://localhost:4000/2017/09/04/Syntactic-Tree-Kernels.html" rel="alternate" type="text/html" title="Syntactic Tree Kernels" /><published>2017-09-04T00:00:00-04:00</published><updated>2017-09-04T00:00:00-04:00</updated><id>http://localhost:4000/2017/09/04/Syntactic-Tree-Kernels</id><content type="html" xml:base="http://localhost:4000/2017/09/04/Syntactic-Tree-Kernels.html">&lt;h2 id=&quot;motivation&quot;&gt;Motivation&lt;/h2&gt;
 
 &lt;p&gt;This post encapsulates the work I undertook with Dean Fulgoni for our final project (Kaggle competition) in Big Data Analytics. Credit to Professor Chris Callison-Burch for steering me away from some topics that “could easily be Phd theses” and to Professor Zach Ives for being an excellent teacher.&lt;/p&gt;
@@ -55,9 +55,11 @@
 
 &lt;p&gt;Where $h$ is a function that produces all of the subtrees of a tree. Again, the dot-product between $h(T_1)$ and $h(T_2)$ will count all of the subtrees $T_1$ and $T_2$ have in common. They define the indicator function $I_i(n)$ to be 1 if the subtree $i$ is rooted at node $n$ and 0 otherwise. Therefore, we can rewrite the dot-product above.&lt;/p&gt;
 
-&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;h(T_1) \cdot h(T_2) = \sum_i h_i(T_1)h_i(T_2)&lt;/script&gt;
-&lt;script type=&quot;math/tex&quot;&gt;= \sum_{n_1 \in N_1}\sum_{n_2 \in N_2} \sum_i I_i(n_1) I_i(n_2)&lt;/script&gt;
-&lt;script type=&quot;math/tex&quot;&gt;= \sum_{n_1 \in N_1}\sum_{n_2 \in N_2} C(n_1, n_2)&lt;/script&gt;&lt;/p&gt;
+&lt;p&gt;\begin{align}
+h(T_1) \cdot h(T_2) &amp;amp;= \sum_i h_i(T_1)h_i(T_2)
+    \\ &amp;amp; = \sum_{n_1 \in N_1}\sum_{n_2 \in N_2} \sum_i I_i(n_1) I_i(n_2)
+    \\ &amp;amp; = \sum_{n_1 \in N_1}\sum_{n_2 \in N_2} C(n_1, n_2)
+\end{align}&lt;/p&gt;
 
 &lt;p&gt;Where $C(n_1,n_2)$ is defined as $\sum_i I_i(n_1)I_i(n_2)$. We note that $C(n_1, n_2)$ can be computed recursively in polynomial time:&lt;/p&gt;
 
