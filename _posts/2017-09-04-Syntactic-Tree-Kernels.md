@@ -46,7 +46,7 @@ Key to the effectiveness of tree kernel features in solving problems is the choi
 
 Example of constituency parse tree, from Moschitti ACL Tutorial 2012. Sentence tokens are always leaves and in order.
 
-### Collins-Duffy Tree Kernel
+### Syntatic Tree Kernel or "Collins-Duffy" (STK)
 
 For our tree kernel features we only implemented the Collins-Duffy tree kernel [6]. The general idea of the Collins-Duffy Tree Kernel is that we want to compare the number of common subtrees between two input trees. The naive approach in exponential time is to enumerate all possible subtrees of the two input trees and then perform the dot-product. Collins and Duffy propose the following derivation.
 
@@ -80,6 +80,8 @@ $$K_{norm}(T_1,T_2) = \frac{K(T_1,T_2)}{K(T_1,T_1)K(T_2,T_2)}$$
 We generated features with the ST and SST tree kernels for each question pair using $\lambda \in \{1, 0.8, 0.5, 0.2, 0.1, 0.05, 0.2\}$ totaling 14 tree kernel features. Determining the optimal $\lambda$ for this task would be a good exploration on its own.
 
 ## Pipeline
+
+[\\TODO Insert the pipeline graphic here]
 
 
 ## Synactic Tree Kernels in Python
@@ -331,7 +333,7 @@ def _CollinsDuffy_(tree1, tree2, lam, NORMALIZE_FLAG, SST_ON):
 
 
 '''
-Implementation of the Partial Tree (PT) Kernel from:
+Implementation of the Partial Tree Kernel (PTK) from:
 "Efficient Convolution Kernels for Dependency and Constituent Syntactic Trees"
 by Alessandro Moschitti
 '''
@@ -420,22 +422,35 @@ def _MoschittiPT_(tree1, tree2, lam, mu, NORMALIZE_FLAG):
     if (NORMALIZE_FLAG):
         t1_score = _ptKernel_(tree1, tree1, lam, mu)
         t2_score = _ptKernel_(tree2, tree2, lam, mu)
-        return (raw_score,(raw_score / math.sqrt(t1_score * t2_score)))
+        return (raw_score,(raw_core / math.sqrt(t1_score * t2_score)))
     else:
         return (raw_score,-1)
 
 
 ```
 
+## Towards Syntactic-Semantic Tree Kernels
 
+Ignoring all of the theory and code above would not be unreasonable. The major criticism of ST and SST kernels is that they are syntactic, and syntax is not meaning. A simple example:
+
+1. The girl went to the store to buy __eggs__ for the family.
+2. The girl went to the store to buy __milk__ for the family.
+
+The sentences generate the same parse tree [\\TODO PARSE TREE GRAPHIC HERE] but have completely different meanings.
 
 ## Lesson Learned, Hardly Earned
+
+Research tools like StanfordCoreNLP are not performant. Most my time was spent building tooling, testing my implementations of paper algorithms, and questioning my sanity for embarking on this rabbit hole.
 
 ## If We Only Had More Time
 
 I would have worked on:
 
+- Reworking this kernel as a feature generator in a deep learning approach. Consider that the behavior of this entire field is based around using these as a mathematically valid kernel in an SVM. Deep learning has showed greater promise in solving these types of problems because the neural network structure is more adaptable.
+
 - Grammars: Quora’s user base can be divided into Indian subcontinent and the United States. This matters because we don’t expect perfect grammar from people whose first language isn’t English. Can we detect
+
+- A complete syntactic semantic system using a deep learning approach with ST or SST ke
 
 [1]: https://plato.stanford.edu/entries/questions/
 [2]: http://svmlight.joachims.org/

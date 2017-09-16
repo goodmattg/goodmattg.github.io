@@ -23,7 +23,7 @@ twitter_username: goodmattg
 github_username:  goodmattg
 
 # Build settings
-markdown: redcarpet
+markdown: kramdown
 highlighter: rouge
 theme: minima
 gems:

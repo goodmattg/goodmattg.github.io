@@ -25,7 +25,7 @@
     
     
     <a class="site-title" href="/">The Examined Life</a>
-  
+
     
       <nav class="site-nav">
         <input type="checkbox" id="nav-trigger" class="nav-trigger" />
@@ -45,20 +45,22 @@
             
             <a class="page-link" href="/about/">About</a>
             
-          
+        
             
             
-          
+        
             
             
-          
+        
             
             
-          
+        
         </div>
       </nav>
     
   </div>
+
+  <link href="https://fonts.googleapis.com/css?family=Lato|Lora:400,700" rel="stylesheet">
 </header>
 
 
@@ -69,7 +71,7 @@
   <header class="post-header">
     <h1 class="post-title" itemprop="name headline">Syntactic Tree Kernels</h1>
     <p class="post-meta">
-      <time datetime="2017-09-04T00:00:00-04:00" itemprop="datePublished">
+      <time datetime="2017-09-04T00:00:00-07:00" itemprop="datePublished">
         
         Sep 4, 2017
       </time>
@@ -123,7 +125,7 @@
 
 <p>Example of constituency parse tree, from Moschitti ACL Tutorial 2012. Sentence tokens are always leaves and in order.</p>
 
-<h3 id="collins-duffy-tree-kernel">Collins-Duffy Tree Kernel</h3>
+<h3 id="syntatic-tree-kernel-or-collins-duffy-stk">Syntatic Tree Kernel or “Collins-Duffy” (STK)</h3>
 
 <p>For our tree kernel features we only implemented the Collins-Duffy tree kernel [6]. The general idea of the Collins-Duffy Tree Kernel is that we want to compare the number of common subtrees between two input trees. The naive approach in exponential time is to enumerate all possible subtrees of the two input trees and then perform the dot-product. Collins and Duffy propose the following derivation.</p>
 
@@ -156,6 +158,8 @@ h(T_1) \cdot h(T_2) &amp;= \sum_i h_i(T_1)h_i(T_2)
 <p>We generated features with the ST and SST tree kernels for each question pair using $\lambda \in {1, 0.8, 0.5, 0.2, 0.1, 0.05, 0.2}$ totaling 14 tree kernel features. Determining the optimal $\lambda$ for this task would be a good exploration on its own.</p>
 
 <h2 id="pipeline">Pipeline</h2>
+
+<p>[\TODO Insert the pipeline graphic here]</p>
 
 <h2 id="synactic-tree-kernels-in-python">Synactic Tree Kernels in Python</h2>
 
@@ -404,7 +408,7 @@ If NORMALIZE_FLAG set to False, tuple[1] = -1
 
 
 <span class="s">'''
-Implementation of the Partial Tree (PT) Kernel from:
+Implementation of the Partial Tree Kernel (PTK) from:
 "Efficient Convolution Kernels for Dependency and Constituent Syntactic Trees"
 by Alessandro Moschitti
 '''</span>
@@ -493,7 +497,7 @@ If NORMALIZE_FLAG set to False, tuple[1] = -1
     <span class="k">if</span> <span class="p">(</span><span class="n">NORMALIZE_FLAG</span><span class="p">):</span>
         <span class="n">t1_score</span> <span class="o">=</span> <span class="n">_ptKernel_</span><span class="p">(</span><span class="n">tree1</span><span class="p">,</span> <span class="n">tree1</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
         <span class="n">t2_score</span> <span class="o">=</span> <span class="n">_ptKernel_</span><span class="p">(</span><span class="n">tree2</span><span class="p">,</span> <span class="n">tree2</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">raw_score</span><span class="p">,(</span><span class="n">raw_score</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">t1_score</span> <span class="o">*</span> <span class="n">t2_score</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">raw_score</span><span class="p">,(</span><span class="n">raw_core</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">t1_score</span> <span class="o">*</span> <span class="n">t2_score</span><span class="p">)))</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">raw_score</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 
@@ -501,14 +505,35 @@ If NORMALIZE_FLAG set to False, tuple[1] = -1
 </code></pre>
 </div>
 
+<h2 id="towards-syntactic-semantic-tree-kernels">Towards Syntactic-Semantic Tree Kernels</h2>
+
+<p>Ignoring all of the theory and code above would not be unreasonable. The major criticism of ST and SST kernels is that they are syntactic, and syntax is not meaning. A simple example:</p>
+
+<ol>
+  <li>The girl went to the store to buy <strong>eggs</strong> for the family.</li>
+  <li>The girl went to the store to buy <strong>milk</strong> for the family.</li>
+</ol>
+
+<p>The sentences generate the same parse tree [\TODO PARSE TREE GRAPHIC HERE] but have completely different meanings.</p>
+
 <h2 id="lesson-learned-hardly-earned">Lesson Learned, Hardly Earned</h2>
+
+<p>Research tools like StanfordCoreNLP are not performant. Most my time was spent building tooling, testing my implementations of paper algorithms, and questioning my sanity for embarking on this rabbit hole.</p>
 
 <h2 id="if-we-only-had-more-time">If We Only Had More Time</h2>
 
 <p>I would have worked on:</p>
 
 <ul>
-  <li>Grammars: Quora’s user base can be divided into Indian subcontinent and the United States. This matters because we don’t expect perfect grammar from people whose first language isn’t English. Can we detect</li>
+  <li>
+    <p>Reworking this kernel as a feature generator in a deep learning approach. Consider that the behavior of this entire field is based around using these as a mathematically valid kernel in an SVM. Deep learning has showed greater promise in solving these types of problems because the neural network structure is more adaptable.</p>
+  </li>
+  <li>
+    <p>Grammars: Quora’s user base can be divided into Indian subcontinent and the United States. This matters because we don’t expect perfect grammar from people whose first language isn’t English. Can we detect</p>
+  </li>
+  <li>
+    <p>A complete syntactic semantic system using a deep learning approach with ST or SST ke</p>
+  </li>
 </ul>
 
 <ul>
