@@ -1,25 +1,31 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-09-16T12:32:28-07:00</updated><id>http://localhost:4000/</id><title type="html">The Examined Life</title><subtitle>This is a blog for the type of person who thinks there is something fascinating about everything. If you can find beauty or enjoyment in the mundane, life can never be boring.
-</subtitle><entry><title type="html">Syntactic Tree Kernels</title><link href="http://localhost:4000/2017/09/04/Syntactic-Tree-Kernels.html" rel="alternate" type="text/html" title="Syntactic Tree Kernels" /><published>2017-09-04T00:00:00-07:00</published><updated>2017-09-04T00:00:00-07:00</updated><id>http://localhost:4000/2017/09/04/Syntactic-Tree-Kernels</id><content type="html" xml:base="http://localhost:4000/2017/09/04/Syntactic-Tree-Kernels.html">&lt;h2 id=&quot;motivation&quot;&gt;Motivation&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.5">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2017-09-17T00:28:14-07:00</updated><id>/</id><title type="html">The Examined Life</title><subtitle>This is a blog for the type of person who thinks there is something fascinating about everything. If you can find beauty or enjoyment in the mundane, life can never be boring.
+</subtitle><entry><title type="html">Syntactic Tree Kernels</title><link href="/2017/09/04/Syntactic-Tree-Kernels.html" rel="alternate" type="text/html" title="Syntactic Tree Kernels" /><published>2017-09-04T00:00:00-07:00</published><updated>2017-09-04T00:00:00-07:00</updated><id>/2017/09/04/Syntactic-Tree-Kernels</id><content type="html" xml:base="/2017/09/04/Syntactic-Tree-Kernels.html">&lt;h2 id=&quot;motivation&quot;&gt;Motivation&lt;/h2&gt;
 
-&lt;p&gt;This post encapsulates the work I undertook with Dean Fulgoni for our final project (Kaggle competition) in Big Data Analytics. Credit to Professor Chris Callison-Burch for steering me away from some topics that “could easily be Phd theses” and to Professor Zach Ives for being an excellent teacher.&lt;/p&gt;
+&lt;p&gt;This post encapsulates the work I did with Dean Fulgoni for our final project (Kaggle competition) in Big Data Analytics. Credit to Professor Chris Callison-Burch for steering me away from some topics that “could easily be Phd theses” and to Professor Zachary Ives for being an excellent teacher.&lt;/p&gt;
 
 &lt;h2 id=&quot;the-problem-we-tried-to-solve&quot;&gt;The Problem We Tried to Solve&lt;/h2&gt;
 
-&lt;p&gt;The question is deviously simple - given two input questions, tell whether they ask the same thing (i.e. have the same intent as a question). Not to get off track, but this begs some thought on the nature of what a question is and whether a question is separable from context. See the &lt;a href=&quot;https://plato.stanford.edu/entries/questions/&quot;&gt;Stanford Philosophy Archive&lt;/a&gt; for an excellent review of the philosophy of questions. The challenge was posed as a supervised learning question with a human labeled training set. Even a cursory read of the training set showed that the human labeling was inconsistent, with varying standards for semantic similarity.&lt;/p&gt;
+&lt;p&gt;The question is deviously simple - given two input questions, tell whether they ask the same thing (i.e. have the same intent as a question). Not to get off track, but this begs some thought on the nature of what a question is and whether a question is separable from context. See the &lt;a href=&quot;https://plato.stanford.edu/entries/questions/&quot;&gt;Stanford Encyclopedia of Philosophy (SEP)&lt;/a&gt; for an excellent review of the philosophy of questions. My view on this problem is colored by the philosophical undertstanding of questions. We can assume that questions on Quora are requesting information,  not testing the knowledge of the user base.&lt;/p&gt;
 
-&lt;p&gt;These were labeled as asking the same question:&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;… a question [is] an abstract thing for which an interrogative sentence is a piece of notation. (Belnap and Steel, 1976)&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;ol&gt;
-  &lt;li&gt;Should I buy a Nexus 6P or a Oneplus 3?&lt;/li&gt;
-  &lt;li&gt;Which one is better Nexus 6p or oneplus 3?&lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;The challenge was posed as a supervised learning question with a human labeled training set. A cursory glance at the training set showed that the human labeling was inconsistent, with varying standards to classify questions as semantically the same.&lt;/p&gt;
 
-&lt;p&gt;These were labeled as asking different questions:&lt;/p&gt;
+&lt;p&gt;These were labeled as asking two different questions:&lt;/p&gt;
 
-&lt;ol&gt;
+&lt;ul&gt;
   &lt;li&gt;Do we need smart cities or smart politicians?&lt;/li&gt;
   &lt;li&gt;Do we need smart cities or smart laws?&lt;/li&gt;
-&lt;/ol&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We can see that the classification of this pair is debatable. Politicians are not laws. However, politicians are the only people with the power to make laws. Where is the line drawn for semantic similarity? How do we even approach situations where the the map between language and abstract meaning is complex?&lt;/p&gt;
+
+&lt;p&gt;\begin{align}
+    Politician &amp;amp;\ne Law
+    \\ Politician &amp;amp;\rightarrow Law
+\end{align}&lt;/p&gt;
 
 &lt;p&gt;With an unclear standard for determining whether two questions had the same intent, we decided to train the model ‘loosely’. Overfitting would kill our performance on the test set. We partitioned the feature set into &lt;strong&gt;syntactic features&lt;/strong&gt; and &lt;strong&gt;semantic features&lt;/strong&gt;. I’ll touch on semantic features later, but I decided to focus on syntactic features because it was much lower hanging fruit. The question became how to quantify the syntactic similarity of two sentences.&lt;/p&gt;
 
@@ -29,9 +35,38 @@
 
 &lt;h2 id=&quot;syntactic-tree-kernel-theory&quot;&gt;Syntactic Tree Kernel Theory&lt;/h2&gt;
 
-&lt;p&gt;As part of our search for unique features to encode syntactic and semantic similarity, we found that so called Tree Kernels had been shown to be highly effective in augmenting SVMs designed to solve problems in question classification, question answering, Semantic Role Labeling, and named entity recognition. The broad idea behind the theory is that syntactic features must exist to learn semantic structures. To do so, we us design kernels that map from tree structures (e.g. parse, dependency, etc.) to scores that measure the syntactic similarity of the two trees.&lt;/p&gt;
+&lt;p&gt;As part of our search for unique features to encode syntactic and semantic similarity, we found that so called Tree Kernels had been shown to be highly effective in augmnting SVMs designed to solve problems in question classification, question answering, Semantic Role Labeling, and named entity recognition. The broad idea behind the theory is that syntactic features must be quantified to learn semantic structures. It isn’t enough to say, compare lists of POS tags for two sentences because the structure of the sentences shape their meanings. We therefore design kernels that map from tree structures (i.e. constituency parse trees) to scores that measure the syntactic similarity of the two trees. Note that these scores are bounded for use in an SVM framework, but could easily be used as features in a deep learning framework.&lt;/p&gt;
 
-&lt;h3 id=&quot;core-theory-and-definitions&quot;&gt;Core Theory and Definitions&lt;/h3&gt;
+&lt;h3 id=&quot;kernel-definition&quot;&gt;Kernel Definition&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;This is taken almost verbatim from Dr. Moschitti’s ACL 2012 tutorial on State-of-the-art Kernels in Natural Language Processing. All credit goes to him.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;The point of all this is we can ensure our SVM kernel is valid only if the matrix of transformed points is positive semi-definite.&lt;/p&gt;
+
+&lt;p&gt;A &lt;strong&gt;kernel&lt;/strong&gt; is a function:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;k: (\overrightarrow{x},\overrightarrow{z}) \rightarrow \Phi(\overrightarrow{x}) \cdot \Phi(\overrightarrow{z}) ~~~~~~\forall \overrightarrow{x}, \overrightarrow{z} \in X&lt;/script&gt;
+
+&lt;p&gt;Mercer’s Conditions for a valid kernel:&lt;/p&gt;
+
+&lt;p&gt;Let $X$ be a finite input space and let $K(x,z)$ be a symmetric function on $X$. Then $K(x,z)$ is a kernel function IFF matrix:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;k(x,z) = \Phi(x) \cdot \Phi(z)&lt;/script&gt;
+
+&lt;p&gt;is positive semi-definite (non-negative eigenvaules). That is, if the matrix is positive semi-definite we can find a $\Phi$ that implements the kernel function $k$.&lt;/p&gt;
+
+&lt;h2 id=&quot;tree-definition&quot;&gt;Tree Definition&lt;/h2&gt;
+
+&lt;p&gt;We worked exclusively with &lt;strong&gt;consitituency parse trees&lt;/strong&gt;. Anywhere I write “tree”, I am referring to a constituency parse tree. A consistituency parse tree breaks down a sentence into phrases using a well-defined, &lt;strong&gt;context-free&lt;/strong&gt;, phrase structure grammar. A context-free grammar is a set of rules that describes all possible strings in a formal language. Given any sentence, we have a formal way to define that sentence as made up of phrases, nouns, verbs, etc. Noam Chomsky was the first define context-free grammars in linguistics to describe the universal structure of natural language. We use the Penn-Treebank II formal grammar for this project. Here is a small sample of the Penn-Treebank II formal grammar:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;RB&lt;/strong&gt;: Adverb&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;IN&lt;/strong&gt;: Preposition&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;PP&lt;/strong&gt;: Prepositional Phrase&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;VP&lt;/strong&gt;: Verb Phrase&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;tree-kernel-core-theory-and-definitions&quot;&gt;Tree Kernel Core Theory and Definitions&lt;/h3&gt;
 
 &lt;p&gt;A tree kernel is a function: $f: (tree_1, tree_2) \rightarrow \mathbf{R}^+ $&lt;/p&gt;
 
@@ -39,7 +74,7 @@
 
 &lt;p&gt;Key to the effectiveness of tree kernel features in solving problems is the choice of tree structure. Moschitti shows in [4,5] that different tree kernels are effective for different choices of syntax trees in solving different classes of problems. We used Stanford NLP to generate parse trees from the input sentences. A parse tree is an ordered tree that represents the syntax of a sentence according to some context-free grammar. There are two main classes of parse trees: constituency and dependency. A dependency parse trees is the tree structure generated by the dependencies of a sentence. While dependencies can be highly useful in generating features, as described in Section 4.1, Moschitti found that constituency parse trees were most effective in solving classification related problems. A constituency parse tree breaks down the tokens of sentence into their constituent grammars.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/const_tree.png&quot; alt=&quot;Consituency Parse Tree&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/const_tree.png&quot; alt=&quot;Consituency Parse Tree&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;GRAPHIC_OF_THE_PARSE_TREE_HERE&lt;/strong&gt;&lt;/p&gt;
 
@@ -83,159 +118,24 @@ h(T_1) \cdot h(T_2) &amp;amp;= \sum_i h_i(T_1)h_i(T_2)
 
 &lt;h2 id=&quot;synactic-tree-kernels-in-python&quot;&gt;Synactic Tree Kernels in Python&lt;/h2&gt;
 
-&lt;p&gt;As far as I know, this is the first implentation of synactic tree kernels in Python. This code may eventually move to its own maintained repository if it’s needed. If you find any bugs please reach out. Moschitti’s cited implementation is:&lt;/p&gt;
+&lt;p&gt;As far as I know, this is the first implentation of synactic tree kernels in Python. This code may eventually move to its own maintained repository if it’s needed. If you find any bugs please reach out. Dr. Moschitti’s cited implementation is:&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://svmlight.joachims.org/&quot;&gt;SVM-Light&lt;/a&gt; written by Thorsten Joachims in C. His implementation is most-likely faster (no comparison benchmark yet). My implementation is however easier to grasp and is isolated from a complete SVM library.&lt;/p&gt;
 
 &lt;h3 id=&quot;building-the-parse-tree&quot;&gt;Building the Parse Tree&lt;/h3&gt;
 
-&lt;p&gt;As described in the Pipeline section we used Stanford CoreNLP to generate our parse trees. There are faster libraries to generate syntactic trees (CITE_HERE), but we liked the depth of customizability built-in to CoreNLP. For production, I would never use Stanford CoreNLP; it is a research tool. Oddly enough, Stanford CoreNLP will print a parse tree for a given sentence with well-defined structure to console (i.e. pretty print), but provides no functionality to store the tree in a reasonable format (linked list, hashmap, etc. ). The code in this subsection is used to take the raw text output of Stanford CoreNLP and store it good format for running tree kernels. This is by no means optimized.&lt;/p&gt;
+&lt;p&gt;As described in the Pipeline section we used Stanford CoreNLP to generate our constituency parse trees. There aren’t many libaries that are good for consitituency parsing, and CoreNLP is by far the most stable and customizable. Oddly enough, Stanford CoreNLP will print a constituency parse tree for a given sentence with well-defined structure to console (i.e. pretty print), but provides no functionality to store the tree in a reasonable format (linked list, hashmap, etc. ). The code in this subsection is available on my &lt;a href=&quot;https://github.com/goodmattg/quora_kaggle/blob/master/TreeBuild.py&quot;&gt;Github&lt;/a&gt; and is used to take the raw text output of Stanford CoreNLP and store in the schema below for tree kernel computation. We label each token with an Id and store the tokens for fast computation, but admittedly poor space complexity.&lt;/p&gt;
 
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;re&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;bisect&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;collections&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;defaultdict&lt;/span&gt;
- &lt;span class=&quot;c&quot;&gt;# example of autovivification&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;tree&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;defaultdict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tree&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;ul&gt;
+  &lt;li&gt;curid:    &lt;em&gt;Integer&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;parid:    &lt;em&gt;Integer&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;posOrTok:  &lt;em&gt;String&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;indent:    &lt;em&gt;Integer&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;children:    &lt;em&gt;[Integer]&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;childrenTok:  &lt;em&gt;[String]&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
-
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;_leadingSpaces_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lstrip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;_findParent_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;curIndent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;parid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;treeRef&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;tmpid&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;parid&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;curIndent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;treeRef&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tmpid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'indent'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]):&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;tmpid&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;treeRef&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tmpid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'parid'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tmpid&lt;/span&gt;
-
-
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;_generateTree_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rawTokens&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;treeRef&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-
-    &lt;span class=&quot;c&quot;&gt;# (token&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;REGEX_OPEN&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;r&quot;^&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s*&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;(([a-zA-Z0-9_']*)&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s*$&quot;&lt;/span&gt;
-
-    &lt;span class=&quot;c&quot;&gt;# (token (tok1 tok2) (tok3 tok4) .... (tokx toky))&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;REGEX_COMP&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;r&quot;^&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s*&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;(([a-zA-Z0-9_']+)&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s*((?:[(]([a-zA-Z0-9_;.,?'!]+)&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s*([a-zA-Z0-9_;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;.,?!']+)[)]&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s*)+)&quot;&lt;/span&gt;
-
-    &lt;span class=&quot;c&quot;&gt;# (, ,) as stand-alone. Used for match() not search()&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;REGEX_PUNC&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;r&quot;^&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s*&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;([,!?.'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s*[,!?.'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;)&quot;&lt;/span&gt;
-
-    &lt;span class=&quot;c&quot;&gt;# (tok1 tok2) as stand-alone&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;REGEX_SOLO_PAIR&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;r&quot;^&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s*&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;(([a-zA-Z0-9_']+)&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s*([a-zA-Z0-9_']+)&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;)&quot;&lt;/span&gt;
-
-    &lt;span class=&quot;c&quot;&gt;# (tok1 tok2) used in search()&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;REGEX_ISOL_IN_COMP&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;r&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;(([a-zA-Z0-9_;.,?!']+)&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s*([a-zA-Z0-9_;.,?!']+)&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;)&quot;&lt;/span&gt;
-    &lt;span class=&quot;c&quot;&gt;# (punc punc) used in search()&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;REGEX_PUNC_SOLO&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;r&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;([,!?.'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s*[,!?.'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;)&quot;&lt;/span&gt;
-
-
-    &lt;span class=&quot;c&quot;&gt;# manually insert Root token&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;treeRef&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;treeRef&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'curid'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                             &lt;span class=&quot;s&quot;&gt;'parid'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                             &lt;span class=&quot;s&quot;&gt;'posOrTok'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'ROOT'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                             &lt;span class=&quot;s&quot;&gt;'indent'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                            &lt;span class=&quot;s&quot;&gt;'children'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[],&lt;/span&gt;
-                            &lt;span class=&quot;s&quot;&gt;'childrenTok'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[]}&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;ID_CTR&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tok&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rawTokens&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:]:&lt;/span&gt;
-
-        &lt;span class=&quot;n&quot;&gt;curIndent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_leadingSpaces_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tok&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# the current indent level&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;parid&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_findParent_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;curIndent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ID_CTR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;treeRef&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# determine parid&lt;/span&gt;
-
-        &lt;span class=&quot;c&quot;&gt;# CHECK FOR COMPOSITE TOKENS&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;checkChild&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;REGEX_COMP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tok&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;checkChild&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;treeRef&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ID_CTR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'curid'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ID_CTR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                               &lt;span class=&quot;s&quot;&gt;'parid'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                               &lt;span class=&quot;s&quot;&gt;'posOrTok'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;checkChild&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-                               &lt;span class=&quot;s&quot;&gt;'indent'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;curIndent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                              &lt;span class=&quot;s&quot;&gt;'children'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[],&lt;/span&gt;
-                              &lt;span class=&quot;s&quot;&gt;'childrenTok'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[]}&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;upCTR&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ID_CTR&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;ID_CTR&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-            &lt;span class=&quot;c&quot;&gt;# Eliminate further punctuation&lt;/span&gt;
-
-            &lt;span class=&quot;n&quot;&gt;subCheck&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;REGEX_PUNC_SOLO&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;checkChild&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;subs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;findall&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;REGEX_ISOL_IN_COMP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;subCheck&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ch&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;subs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-                &lt;span class=&quot;c&quot;&gt;# THE INDENTING IS WRONG HERE - THE HEIRARCHY IS MESSED UP - check test output&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;treeRef&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ID_CTR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'curid'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ID_CTR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                                   &lt;span class=&quot;s&quot;&gt;'parid'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;upCTR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                                   &lt;span class=&quot;s&quot;&gt;'posOrTok'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-                                   &lt;span class=&quot;s&quot;&gt;'indent'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;curIndent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                                  &lt;span class=&quot;s&quot;&gt;'children'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[],&lt;/span&gt;
-                                  &lt;span class=&quot;s&quot;&gt;'childrenTok'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[]}&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;ID_CTR&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;treeRef&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ID_CTR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'curid'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ID_CTR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                                   &lt;span class=&quot;s&quot;&gt;'parid'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ID_CTR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                                   &lt;span class=&quot;s&quot;&gt;'posOrTok'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-                                   &lt;span class=&quot;s&quot;&gt;'indent'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;curIndent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                                  &lt;span class=&quot;s&quot;&gt;'children'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[],&lt;/span&gt;
-                                  &lt;span class=&quot;s&quot;&gt;'childrenTok'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[]}&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;ID_CTR&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;continue&lt;/span&gt;
-
-
-
-        &lt;span class=&quot;n&quot;&gt;checkSingle&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;REGEX_SOLO_PAIR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tok&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;checkSingle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;treeRef&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ID_CTR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'curid'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ID_CTR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                               &lt;span class=&quot;s&quot;&gt;'parid'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                               &lt;span class=&quot;s&quot;&gt;'posOrTok'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;checkSingle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-                               &lt;span class=&quot;s&quot;&gt;'indent'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;curIndent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                              &lt;span class=&quot;s&quot;&gt;'children'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[],&lt;/span&gt;
-                              &lt;span class=&quot;s&quot;&gt;'childrenTok'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[]}&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;ID_CTR&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;treeRef&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ID_CTR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'curid'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ID_CTR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                               &lt;span class=&quot;s&quot;&gt;'parid'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ID_CTR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                               &lt;span class=&quot;s&quot;&gt;'posOrTok'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;checkSingle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-                               &lt;span class=&quot;s&quot;&gt;'indent'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;curIndent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                              &lt;span class=&quot;s&quot;&gt;'children'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[],&lt;/span&gt;
-                              &lt;span class=&quot;s&quot;&gt;'childrenTok'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[]}&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;ID_CTR&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;continue&lt;/span&gt;
-
-
-        &lt;span class=&quot;n&quot;&gt;checkPunc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;REGEX_PUNC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tok&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;checkPunc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# ignore punctuation&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;continue&lt;/span&gt;
-
-        &lt;span class=&quot;n&quot;&gt;checkMatch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;REGEX_OPEN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tok&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;checkMatch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;treeRef&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ID_CTR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'curid'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ID_CTR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                               &lt;span class=&quot;s&quot;&gt;'parid'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                               &lt;span class=&quot;s&quot;&gt;'posOrTok'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;checkMatch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-                               &lt;span class=&quot;s&quot;&gt;'indent'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;curIndent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                              &lt;span class=&quot;s&quot;&gt;'children'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[],&lt;/span&gt;
-                              &lt;span class=&quot;s&quot;&gt;'childrenTok'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[]}&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;ID_CTR&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;continue&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
-
-
-&lt;span class=&quot;s&quot;&gt;'''
-_generateTree_() method only provides tree (dict representation) listing parents.
-This is a naive method to add a &quot;children&quot; field to the tree - necessary for optimal Tree Kernel methods.
-'''&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;# Switching to 2-pass O(N)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;_flipTree_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;treeRef&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;c&quot;&gt;# Pass 1 fill in children&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;treeRef&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;items&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;bisect&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;insort&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;treeRef&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'parid'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]][&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'children'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;c&quot;&gt;# Pass 2 map children to tokens&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;treeRef&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;items&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;treeRef&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'childrenTok'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;treeRef&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'posOrTok'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ch&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;treeRef&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'children'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;treeRef&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'childrenTok'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;treeRef&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'posOrTok'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;tree-kernels&quot;&gt;Tree Kernels&lt;/h3&gt;
+&lt;h3 id=&quot;computing-tree-kernels&quot;&gt;Computing Tree Kernels&lt;/h3&gt;
 
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
 &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;np&lt;/span&gt;
@@ -427,7 +327,7 @@ If NORMALIZE_FLAG set to False, tuple[1] = -1
 
 &lt;h2 id=&quot;towards-syntactic-semantic-tree-kernels&quot;&gt;Towards Syntactic-Semantic Tree Kernels&lt;/h2&gt;
 
-&lt;p&gt;Ignoring all of the theory and code above would not be unreasonable. The major criticism of ST and SST kernels is that they are syntactic, and syntax is not meaning. A simple example:&lt;/p&gt;
+&lt;p&gt;Ignoring all of the theory and code above would not be unreasonable. The major criticism of ST, PTK, SSTK kernels is that they are syntactic, and syntax is not meaning. A simple example:&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;The girl went to the store to buy &lt;strong&gt;eggs&lt;/strong&gt; for the family.&lt;/li&gt;
@@ -460,7 +360,7 @@ If NORMALIZE_FLAG set to False, tuple[1] = -1
   &lt;li&gt;Grammar lends structure to meaning&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;There are so many problems with the system we wanted to build that I’ll address in a later section. As a teaser, consider that&lt;/p&gt;</content><author><name></name></author><summary type="html">Motivation</summary></entry><entry><title type="html">Recommitment to Posting</title><link href="http://localhost:4000/2017/09/04/Recommitment-to-Posting.html" rel="alternate" type="text/html" title="Recommitment to Posting" /><published>2017-09-04T00:00:00-07:00</published><updated>2017-09-04T00:00:00-07:00</updated><id>http://localhost:4000/2017/09/04/Recommitment-to-Posting</id><content type="html" xml:base="http://localhost:4000/2017/09/04/Recommitment-to-Posting.html">&lt;p&gt;I dropped the ball w.r.t posting my work and thoughts. I’m going to be posting a lot more starting with recaps of old research projects and coding.&lt;/p&gt;</content><author><name></name></author><summary type="html">I dropped the ball w.r.t posting my work and thoughts. I’m going to be posting a lot more starting with recaps of old research projects and coding.</summary></entry><entry><title type="html">Update: Graph-based Model Election Forecasting</title><link href="http://localhost:4000/research/gsp/polling/forecasting/2017/03/25/graph-election-update.html" rel="alternate" type="text/html" title="Update: Graph-based Model Election Forecasting" /><published>2017-03-25T00:00:00-07:00</published><updated>2017-03-25T00:00:00-07:00</updated><id>http://localhost:4000/research/gsp/polling/forecasting/2017/03/25/graph-election-update</id><content type="html" xml:base="http://localhost:4000/research/gsp/polling/forecasting/2017/03/25/graph-election-update.html">&lt;p&gt;While I am no longer directly working on the project, I am still an informal advisor to the undergraduates currently working to improve the model. The challenge we currently face is quite intriguing. We have the data: presidential election, senatorial election, median income, demographics, poverty, etc. The new issue is how we combine the graph shift operators from each of these data sets to produce an optimal graph shift operator (that results in minimum norm-1 error).&lt;/p&gt;
+&lt;p&gt;There are so many problems with the system we wanted to build that I’ll address in a later section. As a teaser, consider that&lt;/p&gt;</content><author><name></name></author><summary type="html">Motivation</summary></entry><entry><title type="html">Recommitment to Posting</title><link href="/2017/09/04/Recommitment-to-Posting.html" rel="alternate" type="text/html" title="Recommitment to Posting" /><published>2017-09-04T00:00:00-07:00</published><updated>2017-09-04T00:00:00-07:00</updated><id>/2017/09/04/Recommitment-to-Posting</id><content type="html" xml:base="/2017/09/04/Recommitment-to-Posting.html">&lt;p&gt;I dropped the ball w.r.t posting my work and thoughts. I’m going to be posting a lot more starting with recaps of old research projects and coding.&lt;/p&gt;</content><author><name></name></author><summary type="html">I dropped the ball w.r.t posting my work and thoughts. I’m going to be posting a lot more starting with recaps of old research projects and coding.</summary></entry><entry><title type="html">Update: Graph-based Model Election Forecasting</title><link href="/research/gsp/polling/forecasting/2017/03/25/graph-election-update.html" rel="alternate" type="text/html" title="Update: Graph-based Model Election Forecasting" /><published>2017-03-25T00:00:00-07:00</published><updated>2017-03-25T00:00:00-07:00</updated><id>/research/gsp/polling/forecasting/2017/03/25/graph-election-update</id><content type="html" xml:base="/research/gsp/polling/forecasting/2017/03/25/graph-election-update.html">&lt;p&gt;While I am no longer directly working on the project, I am still an informal advisor to the undergraduates currently working to improve the model. The challenge we currently face is quite intriguing. We have the data: presidential election, senatorial election, median income, demographics, poverty, etc. The new issue is how we combine the graph shift operators from each of these data sets to produce an optimal graph shift operator (that results in minimum norm-1 error).&lt;/p&gt;
 
 &lt;p&gt;Let’s first use intuition. Our goal is to predict presidential elections, so we can reason that the presidential election graph shift operator should receive the most weight. The question becomes exactly how much weight should this receive? And of course how do we distribute the remaining weight?&lt;/p&gt;
 

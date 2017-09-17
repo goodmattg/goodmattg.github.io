@@ -5,22 +5,28 @@ title: Syntactic Tree Kernels
 
 ## Motivation
 
-This post encapsulates the work I undertook with Dean Fulgoni for our final project (Kaggle competition) in Big Data Analytics. Credit to Professor Chris Callison-Burch for steering me away from some topics that "could easily be Phd theses" and to Professor Zach Ives for being an excellent teacher.
+This post encapsulates the work I did with Dean Fulgoni for our final project (Kaggle competition) in Big Data Analytics. Credit to Professor Chris Callison-Burch for steering me away from some topics that "could easily be Phd theses" and to Professor Zachary Ives for being an excellent teacher.
 
 ## The Problem We Tried to Solve
 
- The question is deviously simple - given two input questions, tell whether they ask the same thing (i.e. have the same intent as a question). Not to get off track, but this begs some thought on the nature of what a question is and whether a question is separable from context. See the [Stanford Philosophy Archive][1] for an excellent review of the philosophy of questions. The challenge was posed as a supervised learning question with a human labeled training set. Even a cursory read of the training set showed that the human labeling was inconsistent, with varying standards for semantic similarity.
+ The question is deviously simple - given two input questions, tell whether they ask the same thing (i.e. have the same intent as a question). Not to get off track, but this begs some thought on the nature of what a question is and whether a question is separable from context. See the [Stanford Encyclopedia of Philosophy (SEP)][1] for an excellent review of the philosophy of questions. My view on this problem is colored by the philosophical undertstanding of questions. We can assume that questions on Quora are requesting information,  not testing the knowledge of the user base.
+
+ > ... a question [is] an abstract thing for which an interrogative sentence is a piece of notation. (Belnap and Steel, 1976)
+
+ The challenge was posed as a supervised learning question with a human labeled training set. A cursory glance at the training set showed that the human labeling was inconsistent, with varying standards to classify questions as semantically the same.
+
+These were labeled as asking two different questions:
+
+- Do we need smart cities or smart politicians?
+- Do we need smart cities or smart laws?
+
+We can see that the classification of this pair is debatable. Politicians are not laws. However, politicians are the only people with the power to make laws. Where is the line drawn for semantic similarity? How do we even approach situations where the the map between language and abstract meaning is complex?
 
 
-These were labeled as asking the same question:
-
-1. Should I buy a Nexus 6P or a Oneplus 3?
-2. Which one is better Nexus 6p or oneplus 3?
-
-These were labeled as asking different questions:
-
-1. Do we need smart cities or smart politicians?
-2. Do we need smart cities or smart laws?
+\begin{align}
+    Politician &\ne Law
+    \\\\ Politician &\rightarrow Law
+\end{align}
 
 With an unclear standard for determining whether two questions had the same intent, we decided to train the model 'loosely'. Overfitting would kill our performance on the test set. We partitioned the feature set into **syntactic features** and **semantic features**. I'll touch on semantic features later, but I decided to focus on syntactic features because it was much lower hanging fruit. The question became how to quantify the syntactic similarity of two sentences.
 
@@ -30,9 +36,38 @@ I'll save the complete literature review for a separate post. We chose to use Tr
 
 ## Syntactic Tree Kernel Theory
 
-As part of our search for unique features to encode syntactic and semantic similarity, we found that so called Tree Kernels had been shown to be highly effective in augmenting SVMs designed to solve problems in question classification, question answering, Semantic Role Labeling, and named entity recognition. The broad idea behind the theory is that syntactic features must exist to learn semantic structures. To do so, we us design kernels that map from tree structures (e.g. parse, dependency, etc.) to scores that measure the syntactic similarity of the two trees.
+As part of our search for unique features to encode syntactic and semantic similarity, we found that so called Tree Kernels had been shown to be highly effective in augmnting SVMs designed to solve problems in question classification, question answering, Semantic Role Labeling, and named entity recognition. The broad idea behind the theory is that syntactic features must be quantified to learn semantic structures. It isn't enough to say, compare lists of POS tags for two sentences because the structure of the sentences shape their meanings. We therefore design kernels that map from tree structures (i.e. constituency parse trees) to scores that measure the syntactic similarity of the two trees. Note that these scores are bounded for use in an SVM framework, but could easily be used as features in a deep learning framework.
 
-### Core Theory and Definitions
+### Kernel Definition
+
+*This is taken almost verbatim from Dr. Moschitti's ACL 2012 tutorial on State-of-the-art Kernels in Natural Language Processing. All credit goes to him.*
+
+The point of all this is we can ensure our SVM kernel is valid only if the matrix of transformed points is positive semi-definite.
+
+A **kernel** is a function:
+
+$$ k: (\overrightarrow{x},\overrightarrow{z}) \rightarrow \Phi(\overrightarrow{x}) \cdot \Phi(\overrightarrow{z}) ~~~~~~\forall \overrightarrow{x}, \overrightarrow{z} \in X$$
+
+
+Mercer's Conditions for a valid kernel:
+
+Let $X$ be a finite input space and let $K(x,z)$ be a symmetric function on $X$. Then $K(x,z)$ is a kernel function IFF matrix:
+
+$$ k(x,z) = \Phi(x) \cdot \Phi(z)$$
+
+is positive semi-definite (non-negative eigenvaules). That is, if the matrix is positive semi-definite we can find a $\Phi$ that implements the kernel function $k$.
+
+
+## Tree Definition
+
+We worked exclusively with **consitituency parse trees**. Anywhere I write "tree", I am referring to a constituency parse tree. A consistituency parse tree breaks down a sentence into phrases using a well-defined, **context-free**, phrase structure grammar. A context-free grammar is a set of rules that describes all possible strings in a formal language. Given any sentence, we have a formal way to define that sentence as made up of phrases, nouns, verbs, etc. Noam Chomsky was the first define context-free grammars in linguistics to describe the universal structure of natural language. We use the Penn-Treebank II formal grammar for this project. Here is a small sample of the Penn-Treebank II formal grammar:
+
+- **RB**: Adverb
+- **IN**: Preposition
+- **PP**: Prepositional Phrase
+- **VP**: Verb Phrase
+
+### Tree Kernel Core Theory and Definitions
 
 A tree kernel is a function: $f: (tree_1, tree_2) \rightarrow \mathbf{R}^+ $
 
@@ -86,159 +121,24 @@ We generated features with the ST and SST tree kernels for each question pair us
 
 ## Synactic Tree Kernels in Python
 
-As far as I know, this is the first implentation of synactic tree kernels in Python. This code may eventually move to its own maintained repository if it's needed. If you find any bugs please reach out. Moschitti's cited implementation is:
+As far as I know, this is the first implentation of synactic tree kernels in Python. This code may eventually move to its own maintained repository if it's needed. If you find any bugs please reach out. Dr. Moschitti's cited implementation is:
 
 [SVM-Light][2] written by Thorsten Joachims in C. His implementation is most-likely faster (no comparison benchmark yet). My implementation is however easier to grasp and is isolated from a complete SVM library.
 
 ### Building the Parse Tree
 
-As described in the Pipeline section we used Stanford CoreNLP to generate our parse trees. There are faster libraries to generate syntactic trees (CITE_HERE), but we liked the depth of customizability built-in to CoreNLP. For production, I would never use Stanford CoreNLP; it is a research tool. Oddly enough, Stanford CoreNLP will print a parse tree for a given sentence with well-defined structure to console (i.e. pretty print), but provides no functionality to store the tree in a reasonable format (linked list, hashmap, etc. ). The code in this subsection is used to take the raw text output of Stanford CoreNLP and store it good format for running tree kernels. This is by no means optimized.
+As described in the Pipeline section we used Stanford CoreNLP to generate our constituency parse trees. There aren't many libaries that are good for consitituency parsing, and CoreNLP is by far the most stable and customizable. Oddly enough, Stanford CoreNLP will print a constituency parse tree for a given sentence with well-defined structure to console (i.e. pretty print), but provides no functionality to store the tree in a reasonable format (linked list, hashmap, etc. ). The code in this subsection is available on my [Github][3] and is used to take the raw text output of Stanford CoreNLP and store in the schema below for tree kernel computation. We label each token with an Id and store the tokens for fast computation, but admittedly poor space complexity.
 
-```python
-
-import re
-import bisect
-from collections import defaultdict
- # example of autovivification
-def tree(): return defaultdict(tree)
-
-
-def _leadingSpaces_(target):
-    return len(target) - len(target.lstrip())
-
-def _findParent_(curIndent, parid, treeRef):
-    tmpid = parid
-    while (curIndent <= treeRef[tmpid]['indent']):
-        tmpid = treeRef[tmpid]['parid']
-    return tmpid
-
-
-def _generateTree_(rawTokens, treeRef):
-
-    # (token
-    REGEX_OPEN = r"^\s*\(([a-zA-Z0-9_']*)\s*$"
-
-    # (token (tok1 tok2) (tok3 tok4) .... (tokx toky))
-    REGEX_COMP = r"^\s*\(([a-zA-Z0-9_']+)\s*((?:[(]([a-zA-Z0-9_;.,?'!]+)\s*([a-zA-Z0-9_;\.,?!']+)[)]\s*)+)"
-
-    # (, ,) as stand-alone. Used for match() not search()
-    REGEX_PUNC = r"^\s*\([,!?.'\"]\s*[,!?.'\"]\)"
-
-    # (tok1 tok2) as stand-alone
-    REGEX_SOLO_PAIR = r"^\s*\(([a-zA-Z0-9_']+)\s*([a-zA-Z0-9_']+)\)"
-
-    # (tok1 tok2) used in search()
-    REGEX_ISOL_IN_COMP = r"\(([a-zA-Z0-9_;.,?!']+)\s*([a-zA-Z0-9_;.,?!']+)\)"
-    # (punc punc) used in search()
-    REGEX_PUNC_SOLO = r"\([,!?.'\"]\s*[,!?.'\"]\)"
-
-
-    # manually insert Root token
-    treeRef[len(treeRef)] = {'curid':0,
-                             'parid':-1,
-                             'posOrTok':'ROOT',
-                             'indent':0,
-                            'children':[],
-                            'childrenTok':[]}
-    ID_CTR = 1
-
-    for tok in rawTokens[1:]:
-
-        curIndent = _leadingSpaces_(tok) # the current indent level
-        parid = _findParent_(curIndent, ID_CTR-1, treeRef) # determine parid
-
-        # CHECK FOR COMPOSITE TOKENS
-        checkChild = re.match(REGEX_COMP, tok)
-        if (checkChild):
-            treeRef[ID_CTR] = {'curid':ID_CTR,
-                               'parid':parid,
-                               'posOrTok':checkChild.group(1),
-                               'indent':curIndent,
-                              'children':[],
-                              'childrenTok':[]}
-            upCTR = ID_CTR
-            ID_CTR += 1
-            # Eliminate further punctuation
-
-            subCheck = re.sub(REGEX_PUNC_SOLO,'',checkChild.group(2))
-            subs = re.findall(REGEX_ISOL_IN_COMP, subCheck)
-            for ch in subs:
-                # THE INDENTING IS WRONG HERE - THE HEIRARCHY IS MESSED UP - check test output
-                treeRef[ID_CTR] = {'curid':ID_CTR,
-                                   'parid':upCTR,
-                                   'posOrTok':ch[0],
-                                   'indent':curIndent+2,
-                                  'children':[],
-                                  'childrenTok':[]}
-                ID_CTR += 1
-                treeRef[ID_CTR] = {'curid':ID_CTR,
-                                   'parid':ID_CTR-1,
-                                   'posOrTok':ch[1],
-                                   'indent':curIndent+2,
-                                  'children':[],
-                                  'childrenTok':[]}
-                ID_CTR += 1
-            continue
+- curid:&emsp;&emsp;&emsp;&nbsp;*Integer*
+- parid:&emsp;&emsp;&emsp;&nbsp;*Integer*
+- posOrTok:&emsp;&nbsp;*String*
+- indent:&emsp;&emsp;&ensp;&nbsp;*Integer*
+- children:&emsp;&nbsp;&ensp;&nbsp;*[Integer]*
+- childrenTok:&nbsp;&nbsp;*[String]*
 
 
 
-        checkSingle = re.match(REGEX_SOLO_PAIR, tok)
-        if (checkSingle):
-            treeRef[ID_CTR] = {'curid':ID_CTR,
-                               'parid':parid,
-                               'posOrTok':checkSingle.group(1),
-                               'indent':curIndent+2,
-                              'children':[],
-                              'childrenTok':[]}
-            ID_CTR += 1
-            treeRef[ID_CTR] = {'curid':ID_CTR,
-                               'parid':ID_CTR-1,
-                               'posOrTok':checkSingle.group(2),
-                               'indent':curIndent+2,
-                              'children':[],
-                              'childrenTok':[]}
-            ID_CTR += 1
-            continue
-
-
-        checkPunc = re.match(REGEX_PUNC, tok)
-        if (checkPunc): # ignore punctuation
-            continue
-
-        checkMatch = re.match(REGEX_OPEN, tok)
-        if (checkMatch):
-            treeRef[ID_CTR] = {'curid':ID_CTR,
-                               'parid':parid,
-                               'posOrTok':checkMatch.group(1),
-                               'indent':curIndent,
-                              'children':[],
-                              'childrenTok':[]}
-            ID_CTR += 1
-            continue
-
-    return
-
-
-'''
-_generateTree_() method only provides tree (dict representation) listing parents.
-This is a naive method to add a "children" field to the tree - necessary for optimal Tree Kernel methods.
-'''
-
-# Switching to 2-pass O(N)
-def _flipTree_(treeRef):
-    # Pass 1 fill in children
-    for k,v in treeRef.items():
-        if (k > 0):
-            bisect.insort(treeRef[v['parid']]['children'], k)
-    # Pass 2 map children to tokens
-    for k,v in treeRef.items():
-        if (k > 0):
-            treeRef[k]['childrenTok'] = [treeRef[ch]['posOrTok'] for ch in treeRef[k]['children']]
-    treeRef[0]['childrenTok'] = treeRef[1]['posOrTok']
-
-```
-
-### Tree Kernels
+### Computing Tree Kernels
 
 
 ```python
@@ -431,7 +331,7 @@ def _MoschittiPT_(tree1, tree2, lam, mu, NORMALIZE_FLAG):
 
 ## Towards Syntactic-Semantic Tree Kernels
 
-Ignoring all of the theory and code above would not be unreasonable. The major criticism of ST and SST kernels is that they are syntactic, and syntax is not meaning. A simple example:
+Ignoring all of the theory and code above would not be unreasonable. The major criticism of ST, PTK, SSTK kernels is that they are syntactic, and syntax is not meaning. A simple example:
 
 1. The girl went to the store to buy __eggs__ for the family.
 2. The girl went to the store to buy __milk__ for the family.
@@ -454,7 +354,7 @@ I would have worked on:
 
 [1]: https://plato.stanford.edu/entries/questions/
 [2]: http://svmlight.joachims.org/
-
+[3]: https://github.com/goodmattg/quora_kaggle/blob/master/TreeBuild.py
 
 
 
