@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.5">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2017-09-18T19:37:09-07:00</updated><id>/</id><title type="html">An Examined Life</title><subtitle>I firmly believe that the unexamined life isn't worth living. This is a place to examine just a few of the things that are worth understanding.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.5">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2017-09-24T21:41:44-07:00</updated><id>/</id><title type="html">An Examined Life</title><subtitle>I firmly believe that the unexamined life isn't worth living. This is a place to examine just a few of the things that are worth understanding.
 </subtitle><entry><title type="html">Syntactic Tree Kernels</title><link href="/2017/09/04/Syntactic-Tree-Kernels.html" rel="alternate" type="text/html" title="Syntactic Tree Kernels" /><published>2017-09-04T00:00:00-07:00</published><updated>2017-09-04T00:00:00-07:00</updated><id>/2017/09/04/Syntactic-Tree-Kernels</id><content type="html" xml:base="/2017/09/04/Syntactic-Tree-Kernels.html">&lt;h2 id=&quot;motivation&quot;&gt;Motivation&lt;/h2&gt;
 
-&lt;p&gt;This post encapsulates the work I did with Dean Fulgoni for our final project (Kaggle competition) in Big Data Analytics. Credit to Professor Chris Callison-Burch for steering me away from some topics that “could easily be Phd theses” and to Professor Zachary Ives for being an excellent teacher.&lt;/p&gt;
+&lt;p&gt;This post encapsulates the work I did with Dean Fulgoni for our final project in Big Data Analytics. Credit to Professor Chris Callison-Burch for steering me away from some topics that “could easily be Phd theses” and to Professor Zachary Ives for being an excellent teacher.&lt;/p&gt;
 
 &lt;h2 id=&quot;the-problem-we-tried-to-solve&quot;&gt;The Problem We Tried to Solve&lt;/h2&gt;
 
-&lt;p&gt;The question is deviously simple - given two input questions, tell whether they ask the same thing (i.e. have the same intent as a question). Not to get off track, but this begs some thought on the nature of what a question is and whether a question is separable from context. See the &lt;a href=&quot;https://plato.stanford.edu/entries/questions/&quot;&gt;Stanford Encyclopedia of Philosophy (SEP)&lt;/a&gt; for an excellent review of the philosophy of questions. My view on this problem is colored by the philosophical undertstanding of questions. We can assume that questions on Quora are requesting information,  not testing the knowledge of the user base.&lt;/p&gt;
+&lt;p&gt;The problem is deviously simple - given two input questions, tell whether the questions ask the same thing (i.e. seek to reveal the same previously unknown knowledge). Not to get off track, but this begs some thought on the nature of what a question is and whether a question is separable from its posed context. See the &lt;a href=&quot;https://plato.stanford.edu/entries/questions/&quot;&gt;Stanford Encyclopedia of Philosophy (SEP)&lt;/a&gt; for an excellent review of the philosophy of questions. I won’t be discussing it in detail, but my view on this problem is colored by the philosophical undertstanding of questions. We can assume that questions on Quora are requesting information,  not testing the knowledge of the user base.&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;… a question [is] an abstract thing for which an interrogative sentence is a piece of notation. (Belnap and Steel, 1976)&lt;/p&gt;
@@ -27,7 +27,7 @@
     \\ Politician &amp;amp;\rightarrow Law
 \end{align}&lt;/p&gt;
 
-&lt;p&gt;With an unclear standard for determining whether two questions had the same intent, we decided to train the model ‘loosely’. Overfitting would kill our performance on the test set. We partitioned the feature set into &lt;strong&gt;syntactic features&lt;/strong&gt; and &lt;strong&gt;semantic features&lt;/strong&gt;. I’ll touch on semantic features later, but I decided to focus on syntactic features because it was much lower hanging fruit. The question became how to quantify the syntactic similarity of two sentences.&lt;/p&gt;
+&lt;p&gt;With an unclear standard for determining whether two questions had the same intent, we decided to approach the problem ‘loosely’. Overfitting in any specific approach would kill our performance on the test set. We partitioned the feature set into &lt;strong&gt;syntactic features&lt;/strong&gt; and &lt;strong&gt;semantic features&lt;/strong&gt;. I’ll touch on semantic features later, but I decided to focus on syntactic features because it was much lower hanging fruit. The question became how to quantify the syntactic similarity of two sentences.&lt;/p&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;f: (sentence_1, sentence_2) \rightarrow s \in [0,1]&lt;/script&gt;
 
@@ -35,13 +35,13 @@
 
 &lt;h2 id=&quot;syntactic-tree-kernel-theory&quot;&gt;Syntactic Tree Kernel Theory&lt;/h2&gt;
 
-&lt;p&gt;As part of our search for unique features to encode syntactic and semantic similarity, we found that so called Tree Kernels had been shown to be highly effective in augmnting SVMs designed to solve problems in question classification, question answering, Semantic Role Labeling, and named entity recognition. The broad idea behind the theory is that syntactic features must be quantified to learn semantic structures. It isn’t enough to say, compare lists of POS tags for two sentences because the structure of the sentences shape their meanings. We therefore design kernels that map from tree structures (i.e. constituency parse trees) to scores that measure the syntactic similarity of the two trees. Note that these scores are bounded for use in an SVM framework, but could easily be used as features in a deep learning framework.&lt;/p&gt;
+&lt;p&gt;As part of our search for unique features to encode syntactic and semantic similarity, we found that so called Tree Kernels had been shown to be highly effective in augmnting SVMs designed to solve problems in question classification, question answering, Semantic Role Labeling, and named entity recognition. The broad idea behind the theory is that syntactic features must be quantified to learn semantic structures. It isn’t enough to say, compare lists of POS tags for two sentences because the structure of the sentences shape their meanings. We therefore design kernels that map from tree structures (e.g. constituency parse trees) to scores that measure the syntactic similarity of the two trees. Note that these scores are bounded for use in an SVM framework, but could easily be used as features in a deep learning framework.&lt;/p&gt;
 
 &lt;h3 id=&quot;kernel-definition&quot;&gt;Kernel Definition&lt;/h3&gt;
 
-&lt;p&gt;&lt;em&gt;This is taken almost verbatim from Moschitti’s ACL 2012 tutorial on State-of-the-art Kernels in Natural Language Processing. All credit goes to him.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;The next few section are taken almost verbatim from Moschitti’s ACL 2012 tutorial on State-of-the-art Kernels in Natural Language Processing. All credit goes to him and his colleagues.&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;The point of all this is we can ensure our SVM kernel is valid only if the matrix of transformed points is positive semi-definite.&lt;/p&gt;
+&lt;p&gt;The point of the following math is that we can ensure our SVM kernel is valid only if the matrix of transformed points is positive semi-definite. You can review the literature for the proof.&lt;/p&gt;
 
 &lt;p&gt;A &lt;strong&gt;kernel&lt;/strong&gt; is a function:&lt;/p&gt;
 
@@ -66,13 +66,13 @@
   &lt;li&gt;&lt;strong&gt;VP&lt;/strong&gt;: Verb Phrase&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Below is an exmample of a constituency parse tree for the sentence:&lt;/p&gt;
+&lt;p&gt;Below is an example of a constituency parse tree for the sentence:&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;I will never stop learning.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;Notice that sentence tokens (the words) are always leaves and in their natural language order.&lt;/p&gt;
+&lt;p&gt;Notice that sentence tokens (the words) are always leaves of the tree and in their natural language order. That is, we should always be able to read the tree leaves from left to right and have our exact sentence.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/ConstituencyTree.jpg&quot; alt=&quot;Consituency Parse Tree&quot; /&gt;&lt;/p&gt;
 
@@ -118,7 +118,7 @@ h(T_1) \cdot h(T_2) &amp;amp;= \sum_i h_i(T_1)h_i(T_2)
 
 &lt;h2 id=&quot;synactic-tree-kernels-in-python&quot;&gt;Synactic Tree Kernels in Python&lt;/h2&gt;
 
-&lt;p&gt;As far as I know, this is the first implentation of synactic tree kernels in Python. This code may eventually move to its own maintained repository if it’s needed. If you find any bugs please reach out. Dr. Moschitti’s cited implementation is:&lt;/p&gt;
+&lt;p&gt;As far as I know, this is the first implentation of synactic tree kernels in Python. This code may eventually move to its own maintained repository if it’s needed. If you find any bugs please reach out to me. Dr. Moschitti’s cited implementation is:&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://svmlight.joachims.org/&quot;&gt;SVM-Light&lt;/a&gt; written by Thorsten Joachims in C. His implementation is most-likely faster (no comparison benchmark yet). My implementation is however easier to grasp and is isolated from a complete SVM library.&lt;/p&gt;
 
@@ -327,20 +327,20 @@ If NORMALIZE_FLAG set to False, tuple[1] = -1
 
 &lt;h2 id=&quot;towards-syntactic-semantic-tree-kernels&quot;&gt;Towards Syntactic-Semantic Tree Kernels&lt;/h2&gt;
 
-&lt;p&gt;Ignoring all of the theory and code above would not be unreasonable. The major criticism of ST, PTK, SSTK kernels is that they are syntactic, and syntax is not meaning. A simple example:&lt;/p&gt;
+&lt;p&gt;Ignoring all of the theory and code in the previous sections would not be unreasonable. The major criticism of ST and PTK kernels is that they are syntactic, and syntax is not meaning. A simple example:&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;The girl went to the store to buy &lt;strong&gt;eggs&lt;/strong&gt; for the family.&lt;/li&gt;
   &lt;li&gt;The girl went to the store to buy &lt;strong&gt;milk&lt;/strong&gt; for the family.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;The sentences generate the same constituency parse tree (minus) the differing terminal leaf, but have completely different meanings. Put plainly, the sentences above are grammatically the same except for the one word difference. However, the SST kernel we implemented above would give a very high similarity score for the &lt;strong&gt;meaning&lt;/strong&gt; of the two sentences even though we know that they have different meanings. Bloehdorn and Moschitti propose a theoretically elegant modification to solve our problem. Define the tree kernel as:&lt;/p&gt;
+&lt;p&gt;The sentences generate the same constituency parse tree (minus) the differing terminal leaf, but have completely different meanings. Put plainly, the sentences above are grammatically the same except for the one word difference. However, the SST kernel we implemented above would give a very high similarity score for the &lt;strong&gt;meaning&lt;/strong&gt; of the two sentences even though we know that they have different meanings. Bloehdorn and Moschitti propose a theoretically elegant modification to solve our problem. This new syntactic-semantic tree kernel (&lt;strong&gt;SSTK&lt;/strong&gt;) is defined as:&lt;/p&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;K_{SSTK} = comp(f_1, f_2) \prod_{t=1}^{nt_{(f1)}} SIM(f_1(t),f_2(t))&lt;/script&gt;
 
 &lt;p&gt;where $comp(f_1, f_2)$ is $1$ if $f_1$ differs from $f_2$ only in the terminal nodes and 0 otherwise, $nt(f_i)$ is the number of terminal nodes and $f_i(t)$ is the t-th terminal symbol of $f_i$ numbered from left to right, and $SIM$ is a function returning $[0, 1]$ where $0$ is completely different, and $1$ means the words are identical in meaning.&lt;/p&gt;
 
-&lt;p&gt;Now in plain English. If the two tree fragments don’t have the same non-terminal structure then we’re done. We’re still ignoring fragments that are not &lt;strong&gt;identical&lt;/strong&gt; in syntactic structure (grammar). Say the two tree fragments have the same non-terminal structure, but different terminal nodes (leaves). This means the two sentence structures have the same syntax but different words. So our indicator function $comp(f_1, f_2)$ returns 1, and we compute the multiplicative product by computing the similarity of each in-order pair of terminal leaves.&lt;/p&gt;
+&lt;p&gt;Now in plain English. If the two tree fragments don’t have the same non-terminal structure then we end the computation early. The SSTK is the same as PTK and SST in that it ignores tree fragments that are not &lt;strong&gt;identical&lt;/strong&gt; in syntactic structure (grammar). Say the two tree fragments have the same non-terminal structure, but different terminal nodes (leaves). This means the two sentence structures have the same syntax but different words. So our indicator function $comp(f_1, f_2)$ returns 1, and we compute the multiplicative product by computing the similarity of each in-order pair of terminal leaves.&lt;/p&gt;
 
 &lt;p&gt;This is where it gets admittedly ridiculous. How exactly do we quantify the semantic similarity of two words. Doesn’t this depend on the sentence context? This is where there is no good answer yet. There are computational kernels that give similarity metrics on word databases like WordNet, but we don’t have significant evidence on which is best for different classes of problems. Our implementation used the raw score returned by WordNet, but that isn’t very interesting.&lt;/p&gt;
 
