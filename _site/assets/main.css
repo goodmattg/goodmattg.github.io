@@ -185,23 +185,25 @@ pre > code { border: 0; padding-right: 0; padding-left: 0; }
 .highlight .vi { color: #008080; }
 .highlight .il { color: #099; }
 
+@font-face { font-family: 'CMU'; src: url("fonts/CMU/cmunrm.eot"); src: url("fonts/CMU/cmunrm.eot?#iefix") format("embedded-opentype"), url("fonts/CMU/cmunrm.woff") format("woff"), url("fonts/CMU/cmunrm.ttf") format("truetype"), url("fonts/CMU/cmunrm.svg#svgFontName") format("svg"); font-weight: normal; font-style: normal; }
+@font-face { font-family: 'CMU'; src: url("fonts/CMU/cmunti.eot"); src: url("fonts/CMU/cmunti.eot?#iefix") format("embedded-opentype"), url("fonts/CMU/cmunti.woff") format("woff"), url("fonts/CMU/cmunti.ttf") format("truetype"), url("fonts/CMU/cmunti.svg#svgFontName") format("svg"); font-weight: normal; font-style: italic; }
+@font-face { font-family: 'CMU'; src: url("fonts/CMU/cmunbx.eot"); src: url("fonts/CMU/cmunbx.eot?#iefix") format("embedded-opentype"), url("fonts/CMU/cmunbx.woff") format("woff"), url("fonts/CMU/cmunbx.ttf") format("truetype"), url("fonts/CMU/cmunbx.svg#svgFontName") format("svg"); font-weight: bold; font-style: normal; }
+@font-face { font-family: 'CMU'; src: url("fonts/CMU/cmunbi.eot"); src: url("fonts/CMU/cmunbi.eot?#iefix") format("embedded-opentype"), url("fonts/CMU/cmunbi.woff") format("woff"), url("fonts/CMU/cmunbi.ttf") format("truetype"), url("fonts/CMU/cmunbi.svg#svgFontName") format("svg"); font-weight: bold; font-style: italic; }
 .highlighter-rouge .highlight { background-color: #f6f6f6; }
 
 pre, code { background-color: #f6f6f6; }
 
-.post-title { font-size: 64px; letter-spacing: 1px; }
+.post-title { font-size: 64px; }
 
-blockquote { letter-spacing: 1px; }
+h2.footer-heading { font-family: 'CMU','Droid Serif', serif; letter-spacing: 0px; }
 
-h2.footer-heading { font-family: 'Lato', sans-serif; letter-spacing: 0px; }
+h1 { font-family: 'CMU', 'Lora', serif; font-weight: bold; }
 
-h1 { font-family: 'Lora', serif; font-weight: bold; letter-spacing: 1px; }
+h2 { font-family: 'CMU', 'Lora', serif; font-weight: bold; }
 
-h2 { font-family: 'Lora', serif; font-weight: bold; letter-spacing: 1px; }
+h3 { font-family: 'CMU', 'Lora', serif; font-weight: bold; }
 
-h3 { font-family: 'Lora', serif; font-weight: bold; letter-spacing: 1px; }
-
-body { font-family: 'Lato', sans-serif; }
+body { font-family: 'CMU','Droid Serif', serif; }
 
 .highlight table td { padding: 5px; }
 
