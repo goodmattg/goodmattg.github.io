@@ -193,15 +193,15 @@ pre > code { border: 0; padding-right: 0; padding-left: 0; }
 
 pre, code { background-color: #f6f6f6; }
 
-.post-title { font-size: 64px; }
+.post-title { font-size: 48px; }
 
 h2.footer-heading { font-family: 'CMU','Droid Serif', serif; letter-spacing: 0px; }
 
-h1 { font-family: 'CMU', 'Lora', serif; font-weight: bold; }
+h1 { font-family: 'CMU', 'Lora', serif; }
 
-h2 { font-family: 'CMU', 'Lora', serif; font-weight: bold; }
+h2 { font-family: 'CMU', 'Lora', serif; font-weight: bold; letter-spacing: 0px; }
 
-h3 { font-family: 'CMU', 'Lora', serif; font-weight: bold; }
+h3 { font-family: 'CMU', 'Lora', serif; font-weight: bold; letter-spacing: 0px; }
 
 body { font-family: 'CMU','Droid Serif', serif; }
 

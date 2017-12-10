@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>About</title>
-  <meta name="description" content="I firmly believe that the unexamined life isn&#39;t worth living. This is a place to examine just a few of the things that are worth understanding.">
+  <title>Dynamic Time Warping for Clustering Time Series Data</title>
+  <meta name="description" content="This post is as much a meditation on using Dynamic Time Warping (DTW) in production as it is a review of my work. I have so many questions about this subject...">
 
   <link rel="stylesheet" href="/assets/main.css">
-  <link rel="canonical" href="http://localhost:4000/about/">
+  <link rel="canonical" href="http://localhost:4000/2017/12/10/Dynamic-Time-Warping.html">
   <link rel="alternate" type="application/rss+xml" title="An Examined Life" href="/feed.xml">
   
   
@@ -66,17 +66,47 @@
 
     <main class="page-content" aria-label="Content">
       <div class="wrapper">
-        <article class="post">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title">About</h1>
+    <h1 class="post-title" itemprop="name headline">Dynamic Time Warping for Clustering Time Series Data</h1>
+    <p class="post-meta">
+      <time datetime="2017-12-10T00:00:00-08:00" itemprop="datePublished">
+        
+        Dec 10, 2017
+      </time>
+      </p>
   </header>
 
-  <div class="post-content">
-    <p>My name is Matthew Goodman. I’m a recent grad from the The University of Pennsylvania where I majored in Electrical Engineering with a focus on signal processing and pursued minors in Math and Computer Science. My interests are varied: probability, signal processing, political science, philosophy, history, trading, machine learning, network theory, foreign policy, art, design, finance, and yes, technology. The content of this blog will reflect the fact that I’m consistently learning in a number of subjects.</p>
+  <div class="post-content" itemprop="articleBody">
+    <p>This post is as much a meditation on using Dynamic Time Warping (DTW) in production as it is a review of my work. I have so many questions about this subject. If you have any answers, I hope you will reach out.</p>
+
+<h2 id="motivation">Motivation</h2>
+
+<p>This was for the Wikipedia competition hosted by Kaggle competition to predict future page view counts on Wikipedia. Like so many of the solutions now the winning approach used RNNs to learn a set of hyperparameters on the entire dataset that are then fed in to a predict locally on each time series. This begs comparison to multivel hierarchical models from a Bayesian perspective, but I’ll save that for a later post. I treat these competitions as a way to explore new classes of techniques more than as competition to win. And it’s from that perspective that I settled on Dynamic Time Warping as the technique I wanted to explore. The big question I had was:</p>
+
+<blockquote>
+  <p>Instead of learning hyperparameters on our entire corpus of time series, wouldn’t it be great if we could find a way to sub divide our corpus into highly <strong>similar</strong> groups, and then learn hyperparameters on those groups?</p>
+</blockquote>
+
+<p>In the context of the <a href="https://www.kaggle.com/c/web-traffic-time-series-forecasting/discussion/43795">winning solution</a> this would clustering layer would sit a layer above the RNN. In the language of hierarchical multilevel models, this would adding another level to the model that where we then compute posterior distributions on the hyperparameters for each group, with additional hyperparameters for the entire population. This yielded the question of how to cluster time series data - and the best answer on offer was Dynamic Time Warping.</p>
+
+<p>** FIGURE SHOWING THE MULTIVEL MODEL AND THE GROUP LAYER SITTING ABOVE AN RNN BOX **</p>
+
+<h2 id="literature-review-dtw">Literature Review: DTW</h2>
+
+<p>This review is informal but should provide sufficient grounding.</p>
+
+<h2 id="theory-dtw">Theory: DTW</h2>
+
+<p>** MATLAB plot of 3d path through two signals - would look great **</p>
+
+<h2 id="dtw-nearest-neigbhor-clustering">DTW Nearest-Neigbhor Clustering</h2>
+
 
   </div>
 
+  
 </article>
 
       </div>
