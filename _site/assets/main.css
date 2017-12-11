@@ -191,7 +191,7 @@ pre > code { border: 0; padding-right: 0; padding-left: 0; }
 @font-face { font-family: 'CMU'; src: url("fonts/CMU/cmunbi.eot"); src: url("fonts/CMU/cmunbi.eot?#iefix") format("embedded-opentype"), url("fonts/CMU/cmunbi.woff") format("woff"), url("fonts/CMU/cmunbi.ttf") format("truetype"), url("fonts/CMU/cmunbi.svg#svgFontName") format("svg"); font-weight: bold; font-style: italic; }
 .highlighter-rouge .highlight { background-color: #f6f6f6; }
 
-pre, code { background-color: #f6f6f6; }
+pre, code { background-color: #f6f6f6; font-size: 12px; }
 
 .post-title { font-size: 48px; }
 

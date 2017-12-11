@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-12-09T22:46:57-08:00</updated><id>http://localhost:4000/</id><title type="html">An Examined Life</title><subtitle>I firmly believe that the unexamined life isn't worth living. This is a place to examine just a few of the things that are worth understanding.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-12-10T16:23:37-08:00</updated><id>http://localhost:4000/</id><title type="html">An Examined Life</title><subtitle>I firmly believe that the unexamined life isn't worth living. This is a place to examine just a few of the things that are worth understanding.
 </subtitle><entry><title type="html">Dynamic Time Warping for Clustering Time Series Data</title><link href="http://localhost:4000/2017/12/10/Dynamic-Time-Warping.html" rel="alternate" type="text/html" title="Dynamic Time Warping for Clustering Time Series Data" /><published>2017-12-10T00:00:00-08:00</published><updated>2017-12-10T00:00:00-08:00</updated><id>http://localhost:4000/2017/12/10/Dynamic-Time-Warping</id><content type="html" xml:base="http://localhost:4000/2017/12/10/Dynamic-Time-Warping.html">&lt;p&gt;This post is as much a meditation on using Dynamic Time Warping (DTW) in production as it is a review of my work. I have so many questions about this subject. If you have any answers, I hope you will reach out.&lt;/p&gt;
 
 &lt;h2 id=&quot;motivation&quot;&gt;Motivation&lt;/h2&gt;
@@ -9,19 +9,84 @@
   &lt;p&gt;Instead of learning hyperparameters on our entire corpus of time series, wouldn’t it be great if we could find a way to sub divide our corpus into highly &lt;strong&gt;similar&lt;/strong&gt; groups, and then learn hyperparameters on those groups?&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;In the context of the &lt;a href=&quot;https://www.kaggle.com/c/web-traffic-time-series-forecasting/discussion/43795&quot;&gt;winning solution&lt;/a&gt; this would clustering layer would sit a layer above the RNN. In the language of hierarchical multilevel models, this would adding another level to the model that where we then compute posterior distributions on the hyperparameters for each group, with additional hyperparameters for the entire population. This yielded the question of how to cluster time series data - and the best answer on offer was Dynamic Time Warping.&lt;/p&gt;
-
-&lt;p&gt;** FIGURE SHOWING THE MULTIVEL MODEL AND THE GROUP LAYER SITTING ABOVE AN RNN BOX **&lt;/p&gt;
+&lt;p&gt;In the context of the &lt;a href=&quot;https://www.kaggle.com/c/web-traffic-time-series-forecasting/discussion/43795&quot;&gt;winning solution&lt;/a&gt; this clustering layer would sit a layer above the RNN. In the language of hierarchical multilevel models, this would adding another level to the model that where we then compute posterior distributions on the hyperparameters for each group, with additional hyperparameters for the entire population. This yielded the question of how to cluster time series data.
+I looked to the research and settled on Dynamic Time Warping (DTW) from Keogh et. al from UC Riverside. For any pair of time series signals, we can find the energy of the signal that minimizes the distance between two input signals. DTW can easily show that time warped signals are the same. This technique has been highly effective in classifying EEG and other time-varying signals. As&lt;/p&gt;
 
 &lt;h2 id=&quot;literature-review-dtw&quot;&gt;Literature Review: DTW&lt;/h2&gt;
 
-&lt;p&gt;This review is informal but should provide sufficient grounding.&lt;/p&gt;
+&lt;p&gt;This review is informal but should provide sufficient grounding. Most of the important work has been done by Keogh&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Rakthanmanon, T., Campana, B., Mueen, A., Batista, G., Westover, B., Zhu, Q., … Keogh, E. (n.d.). Searching and Mining Trillions of Time Series Subsequences under Dynamic Time Warping.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Mueen, A., &amp;amp; Keogh, E. (2016). Extracting Optimal Performance from Dynamic Time Warping, 2129–2130.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Lemire, D. (2009). Faster retrieval with a two-pass dynamic-time-warping lower bound, 42, 2169–2180. http://doi.org/10.1016/j.patcog.2008.11.030&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Keogh, E. (n.d.). Clustering of Time Series Subsequences is Meaningless : Implications for Previous and Future Research.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;H. Sakoe and S. Chiba, “Dynamic programming algorithm optimization for spoken word recognition,” IEEE Trans. Acoust. Speech, Lang. Process., vol. 26, no. 1, pp. 43–50, 1978.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;MuÌller, Meinard. Information Retrieval for Music and Motion. Springer, 2010.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h2 id=&quot;theory-dtw&quot;&gt;Theory: DTW&lt;/h2&gt;
 
-&lt;p&gt;** MATLAB plot of 3d path through two signals - would look great **&lt;/p&gt;
+&lt;p&gt;For an excellent review of the computational aspects of DTW I recommend “Abdullah Mueen, Eamonn J. Keogh: Extracting Optimal Performance from Dynamic Time Warping. KDD 2016: 2129-2130”. Refer to Meinard for a solid review of DTW theory.&lt;/p&gt;
 
-&lt;h2 id=&quot;dtw-nearest-neigbhor-clustering&quot;&gt;DTW Nearest-Neigbhor Clustering&lt;/h2&gt;</content><author><name></name></author><summary type="html">This post is as much a meditation on using Dynamic Time Warping (DTW) in production as it is a review of my work. I have so many questions about this subject. If you have any answers, I hope you will reach out.</summary></entry><entry><title type="html">Syntactic Tree Kernels</title><link href="http://localhost:4000/2017/09/04/Syntactic-Tree-Kernels.html" rel="alternate" type="text/html" title="Syntactic Tree Kernels" /><published>2017-09-04T00:00:00-07:00</published><updated>2017-09-04T00:00:00-07:00</updated><id>http://localhost:4000/2017/09/04/Syntactic-Tree-Kernels</id><content type="html" xml:base="http://localhost:4000/2017/09/04/Syntactic-Tree-Kernels.html">&lt;h2 id=&quot;motivation&quot;&gt;Motivation&lt;/h2&gt;
+&lt;p&gt;Dynamic Time Warping is a path-searching algorithm. DTW finds the minimum cost path between the complete matrix of pairwise distances between two time-series we will label $X$ and $Y$. Define $X := (x_1, x_2, …, x_n)$ and $Y:=(y_1, y_2,…,y_n)$. This matrix of pairwise distances is referred to as the &lt;em&gt;cost&lt;/em&gt; matrix $C$. Define the function $c(x,y)$ as the cost or local distance function between two points $x$ and $y$. If $c(x,y)=0$, the two points are identical. Therefore, low cost implies similarity, high cost implies dissimilarity. DTW finds a path through the cost matrix of minimum total cost. Each valid path through the cost matrix is called a “warping” path. The set of all warping paths is labeled $W$.&lt;/p&gt;
+
+&lt;p&gt;This recursive function gives the minimum cost path:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\gamma(i,j)~=~d(q_i, c_j)+min\{\gamma(i-1,j-1), \gamma(i-1, j), \gamma(i, j-1)\}&lt;/script&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/posts/DTW/DTWTrace.jpg&quot; alt=&quot;DTW Trace&quot; /&gt;
+&lt;em&gt;Figure 1. DTW computed optimal path between sinusoid &amp;amp; sinusoid + sinc over $[0,6\pi]$&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;dtw-nearest-neigbhor-clustering&quot;&gt;DTW Nearest-Neigbhor Clustering&lt;/h2&gt;
+
+&lt;p&gt;The Wikipedia challenge provide 145,000 time-series to predict. Ideally, I would have computed pairwise DTW distances for all 145,000 pairs, and then run agglomerative clustering with Ward linkage to generate clusters. The computation wasn’t feasible on my desktop setup, and I wasn’t willing to go the AWS route for this exercise. Instead, I decided to randomly sample 10,000 rows, compute pairwise DTWs for the row sample, run hierarchical clustering on the pairwise distance matrix, and finally assign all nonsampled rows to the cluster matching of their nearest neighbhor. Admittedly this was not the ideal solution. By assigning all nonsampled rows to the cluster containing their nearest neighbor (i.e. minimizing DTW distance), I likely unbalanced the clusters. Furthermore, nearest-neighbor clustering is meaningless with high-dimensionality inputs. I considered nearest-neightbor defensible because my dimensionality was unitary. That is, I only clustered on the DTW distance and so avoided have high-dimensionality inputs. I didn’t compute any rough heuristics to quantify the distribution of nonsampled rows to clusters due to time constraints.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;“As noted by (Agrawal et al., 1993, Bradley and Fayyad, 1998), in high dimensions the very concept of nearest neighbor has little meaning, because the ratio of the distance to the nearest neighbor over the distance to the average neighbor rapidly approaches one as the dimensionality increases.” [2]&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I ending up doing a minor rewrite of Prof. Eamonn Keogh’s UCR-DTW C++ tool to do nearest-neighbor search instead of subsequence search. The tool now searches a list of time-series to find the one that minimizes the DTW distance instead of subsequence search to find the subsequence that minimizes distance. Because of optimizations in the UCR-DTW tool (via research by Lemire, Kim, et. al) the tool only computes the full DTW in &amp;lt;10% of cases.&lt;/p&gt;
+
+&lt;p&gt;After clustering, about 80,000 rows belong to one cluster - so we could conceptualize that cluster as the base data set and run our standard model. I would be curious to train the winning solution on each of my clusters to see if that improved its performance. The smaller cluster had predictable features like single large spikes, uniformity, two spikes, clear seasonality, etc. Using different linkage whole and partial linkage patterns instead of ward only increased the size of the largest cluster. This indicates that there is no signicant distinction for the majority of the time series signals in the corpus.&lt;/p&gt;
+
+&lt;h2 id=&quot;code-appendix&quot;&gt;Code Appendix&lt;/h2&gt;
+
+&lt;div class=&quot;language-matlab highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;c1&quot;&gt;%% Define original signal&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;pi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;pi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.25&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;%% Modify a section of the signal&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;xind&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;floor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.40&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;floor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.60&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ymod&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ymod&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sinc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;%% Compute DTW&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;zg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;repmat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;zgmod&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;repmat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ymod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;d2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sqrt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;zg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;zgmod&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.^&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dtw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ymod&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;%% Plotting&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;meshgrid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;d2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sub2ind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;iy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;1.5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(:));&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;mesh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;</content><author><name></name></author><summary type="html">This post is as much a meditation on using Dynamic Time Warping (DTW) in production as it is a review of my work. I have so many questions about this subject. If you have any answers, I hope you will reach out.</summary></entry><entry><title type="html">Syntactic Tree Kernels</title><link href="http://localhost:4000/2017/09/04/Syntactic-Tree-Kernels.html" rel="alternate" type="text/html" title="Syntactic Tree Kernels" /><published>2017-09-04T00:00:00-07:00</published><updated>2017-09-04T00:00:00-07:00</updated><id>http://localhost:4000/2017/09/04/Syntactic-Tree-Kernels</id><content type="html" xml:base="http://localhost:4000/2017/09/04/Syntactic-Tree-Kernels.html">&lt;h2 id=&quot;motivation&quot;&gt;Motivation&lt;/h2&gt;
 
 &lt;p&gt;This post encapsulates the work I did with Dean Fulgoni for our final project in Big Data Analytics. Credit to Professor Chris Callison-Burch for steering me away from some topics that “could easily be Phd theses” and to Professor Zachary Ives for being an excellent teacher.&lt;/p&gt;
 

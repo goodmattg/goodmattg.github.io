@@ -53,16 +53,12 @@ $code-background: #f6f6f6;
 .highlighter-rouge .highlight { background-color: $code-background; }
 pre, code {
     background-color: $code-background;
+    font-size: 12px;
 }
 
 .post-title {
     font-size: 48px;
-
 }
-
-// blockquote {
-
-// }
 
 h2.footer-heading {
     font-family: 'CMU','Droid Serif', serif;
@@ -89,7 +85,6 @@ body {
 }
 
 // Color scheme for Rouge
-
 .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
 .highlight, .highlight .w {
