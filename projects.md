@@ -4,6 +4,11 @@ title: Projects
 permalink: /projects/
 ---
 
+## Identifying Semantically Identical Question Pairs From Quora
+
+**Paper**: [PDF][3]
+
+Our project is in the domain of natural language processing and natural language understanding. The broad problem we address is how to judge the semantic intent of language irrespective of its syntactic structure, specifically on indi- vidual sentences. What constitutes the meaning of a sen- tence is subjective and never fully tangible. Regardless, it is clear that sentences convey intent, such that a human could tell if two sentences are semantically identical, and even the degree to which this is true. How this is done by the mind is difficult to understand in itself, which makes modeling such a process quite challenging... [Read more][3]
 
 ## Graph-based Model Election Forecasting
 
@@ -31,3 +36,4 @@ The brief explanation is that counties voting patterns are predictable, and this
 
 [1]:{{ site.url }}/assets/downloads/finalGraphReport.pdf
 [2]:{{ site.url }}/assets/downloads/finalGraphPresentation.pdf
+[3]:{{ site.url }}/assets/downloads/FinalProjectPaper.pdf
