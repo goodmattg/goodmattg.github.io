@@ -1,5 +1,49 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.5">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2017-12-13T19:05:28-08:00</updated><id>/</id><title type="html">Explicitly Normal</title><subtitle>I firmly believe that the unexamined life isn't worth living. This is a place to examine just a few of the things that are worth understanding.
-</subtitle><entry><title type="html">Dynamic Time Warping for Clustering Time Series Data</title><link href="/2017/12/10/Dynamic-Time-Warping.html" rel="alternate" type="text/html" title="Dynamic Time Warping for Clustering Time Series Data" /><published>2017-12-10T00:00:00-08:00</published><updated>2017-12-10T00:00:00-08:00</updated><id>/2017/12/10/Dynamic-Time-Warping</id><content type="html" xml:base="/2017/12/10/Dynamic-Time-Warping.html">&lt;p&gt;This post is as much a meditation on using Dynamic Time Warping (DTW) in production as it is a review of my work. I have so many questions about this subject. If you have any answers, I hope you will reach out.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-02-17T19:32:47-08:00</updated><id>http://localhost:4000/</id><title type="html">Explicitly Normal</title><subtitle>I firmly believe that the unexamined life isn't worth living. This is a place to examine just a few of the things that are worth understanding.
+</subtitle><entry><title type="html">The Theory of Probability Project</title><link href="http://localhost:4000/2018/02/17/The-Theory-Of-Probability-Project.html" rel="alternate" type="text/html" title="The Theory of Probability Project" /><published>2018-02-17T00:00:00-08:00</published><updated>2018-02-17T00:00:00-08:00</updated><id>http://localhost:4000/2018/02/17/The-Theory-Of-Probability-Project</id><content type="html" xml:base="http://localhost:4000/2018/02/17/The-Theory-Of-Probability-Project.html">&lt;p&gt;I’m not sure that I learned much in college. To put it bluntly, I don’t feel as if I had to put in very much work to do decently well in college courses. It’s not hard to see why.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Grade inflation at Ivy League schools is well documented&lt;/li&gt;
+  &lt;li&gt;It wasn’t that hard to do average in the college courses I took. Most of the tests I remember taking had several questions that did not require mastery of the material - but sufficed to memorize the application of a few formulae.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;My fellow students and I were masters at getting the A-. You would drill hard on the subset of the material you knew would show up, and pray for partial credit on the questions that required intuition. This implies that true intuition for material comes from mastery of said material.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-idea-a-gedanken-experiment&quot;&gt;The Idea: a &lt;em&gt;gedanken&lt;/em&gt; experiment&lt;/h2&gt;
+
+&lt;p&gt;The idea behind the project is to see what happens when you work through an entire textbook. Did you gain some sort of magic insight, or is there no light at the end of the tunnel? Are you know master of this specific domain? Is there any feeling of accomplishment to be had? Better yet, I want to be able to review a textbook by actually saying what it did for me. Reviewing a cleaning product is easy - you use the product and it does or does not work. Reviewing a textbook is harder - how do you quantify the benefit a book gives you, especially if you haven’t read the book for it’s intended purpose, to convey a body knowledge.&lt;/p&gt;
+
+&lt;p&gt;My goal is to read every chapter, work every problem, and write about the experience. This is going to be a public diary of my struggling with the material. I’m no genius - so this will take a lot of effort to finish. I’ve selected &lt;em&gt;“The Theory of Probability”&lt;/em&gt; by Santosh S. Venkatesh. Why is this book different from all other books? Well for one, I am selfish. I took Professor Venkatesh’s course “Engineering Probability” at Penn and did quite well. To be sure, Professor Venkatesh was one of the most engaging professors I had in college.&lt;/p&gt;
+
+&lt;p&gt;The moment I opened “Theory” and saw the phrase “&lt;em&gt;gedanken&lt;/em&gt; experiment” I knew this was the book. In my limited experience, I’ve found that when academics write textbooks, they have a tend to deviate from their own speaking style and revert to bland academic writing. Add to the fact that most textbooks are viewed as vehicles to deliver formulae, and it’s clear why textbooks aren’t beach reading material.In stark contrast, Professor Venkatesh doesn’t stray a beat from his physical teaching style. I can imagine him saying everything in this book word for word, because I’ve heard him say so many of these phrases word for word. If I could distill Venkatesh’s style to its core, it is to ruminate on points of intellectual curiosity, not to linger on them, per say, but to give important points the cogent philosophical discussion they deserve. It’s easy for academic text to go too far with these musings - but Venkatesh toes the line with grace.&lt;/p&gt;
+
+&lt;p&gt;Lastly, I simply enjoy probability. I may go to graduate school to study the subject, and see no harm in deeply understanding the material.&lt;/p&gt;
+
+&lt;h2 id=&quot;chapter-11-17&quot;&gt;Chapter 1.1-1.7&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;This books chapter’s are one-indexed…&lt;/li&gt;
+  &lt;li&gt;Going through the elements of Kolmogorov representation of probability
+    &lt;ul&gt;
+      &lt;li&gt;$A=B$ iff $A \subseteq B$ and $B \subseteq A$&lt;/li&gt;
+      &lt;li&gt;Intersection: $A \cap B$&lt;/li&gt;
+      &lt;li&gt;Union: $A \cup B$&lt;/li&gt;
+      &lt;li&gt;Complement: $\Omega~\backslash~A$ = $A^c$&lt;/li&gt;
+      &lt;li&gt;$\Omega$ is &lt;em&gt;certainty&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;$\emptyset$ is &lt;em&gt;impossible&lt;/em&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;For finite sets, the family of all events in the probability space, $\mathcal{F}$, is closed.
+    &lt;ul&gt;
+      &lt;li&gt;$A \in \mathcal{F} \rightarrow A^c \in \mathcal{F}$&lt;/li&gt;
+      &lt;li&gt;$A \cup A^c = \Omega \in \mathcal{F}$&lt;/li&gt;
+      &lt;li&gt;$(A \cup A^c)^c = \emptyset \in \mathcal{F}$&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Systems of sets closed under unions and complements are also called “fields” - author says that have more in common with algebreic systems.&lt;/li&gt;
+  &lt;li&gt;Closure under finite unions does not guarantee closure under countably infinite unions.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;(a,b]^c = (0,1]~\backslash~(a,b] = (0,a] \cup (b,1] \in R(\mathcal{J})&lt;/script&gt;</content><author><name></name></author><summary type="html">I’m not sure that I learned much in college. To put it bluntly, I don’t feel as if I had to put in very much work to do decently well in college courses. It’s not hard to see why.</summary></entry><entry><title type="html">Dynamic Time Warping for Clustering Time Series Data</title><link href="http://localhost:4000/2017/12/10/Dynamic-Time-Warping.html" rel="alternate" type="text/html" title="Dynamic Time Warping for Clustering Time Series Data" /><published>2017-12-10T00:00:00-08:00</published><updated>2017-12-10T00:00:00-08:00</updated><id>http://localhost:4000/2017/12/10/Dynamic-Time-Warping</id><content type="html" xml:base="http://localhost:4000/2017/12/10/Dynamic-Time-Warping.html">&lt;p&gt;This post is as much a meditation on using Dynamic Time Warping (DTW) in production as it is a review of my work. I have so many questions about this subject. If you have any answers, I hope you will reach out.&lt;/p&gt;
 
 &lt;h2 id=&quot;motivation&quot;&gt;Motivation&lt;/h2&gt;
 
@@ -47,7 +91,7 @@ I looked to the research and settled on Dynamic Time Warping (DTW) from Keogh et
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;\gamma(i,j)~=~d(q_i, c_j)+min\{\gamma(i-1,j-1), \gamma(i-1, j), \gamma(i, j-1)\}&lt;/script&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/posts/DTW/DTWTrace.jpg&quot; alt=&quot;DTW Trace&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/posts/DTW/DTWTrace.jpg&quot; alt=&quot;DTW Trace&quot; /&gt;
 &lt;em&gt;Figure 1. DTW computed optimal path between sinusoid &amp;amp; sinusoid + sinc over $[0,6\pi]$&lt;/em&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;dtw-nearest-neigbhor-clustering&quot;&gt;DTW Nearest-Neigbhor Clustering&lt;/h2&gt;
@@ -86,7 +130,7 @@ I looked to the research and settled on Dynamic Time Warping (DTW) from Keogh et
     &lt;span class=&quot;nb&quot;&gt;mesh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content><author><name></name></author><summary type="html">This post is as much a meditation on using Dynamic Time Warping (DTW) in production as it is a review of my work. I have so many questions about this subject. If you have any answers, I hope you will reach out.</summary></entry><entry><title type="html">Syntactic Tree Kernels</title><link href="/2017/09/04/Syntactic-Tree-Kernels.html" rel="alternate" type="text/html" title="Syntactic Tree Kernels" /><published>2017-09-04T00:00:00-07:00</published><updated>2017-09-04T00:00:00-07:00</updated><id>/2017/09/04/Syntactic-Tree-Kernels</id><content type="html" xml:base="/2017/09/04/Syntactic-Tree-Kernels.html">&lt;h2 id=&quot;motivation&quot;&gt;Motivation&lt;/h2&gt;
+&lt;/div&gt;</content><author><name></name></author><summary type="html">This post is as much a meditation on using Dynamic Time Warping (DTW) in production as it is a review of my work. I have so many questions about this subject. If you have any answers, I hope you will reach out.</summary></entry><entry><title type="html">Syntactic Tree Kernels</title><link href="http://localhost:4000/2017/09/04/Syntactic-Tree-Kernels.html" rel="alternate" type="text/html" title="Syntactic Tree Kernels" /><published>2017-09-04T00:00:00-07:00</published><updated>2017-09-04T00:00:00-07:00</updated><id>http://localhost:4000/2017/09/04/Syntactic-Tree-Kernels</id><content type="html" xml:base="http://localhost:4000/2017/09/04/Syntactic-Tree-Kernels.html">&lt;h2 id=&quot;motivation&quot;&gt;Motivation&lt;/h2&gt;
 
 &lt;p&gt;This post encapsulates the work I did with Dean Fulgoni for our final project in Big Data Analytics. Credit to Professor Chris Callison-Burch for steering me away from some topics that “could easily be Phd theses” and to Professor Zachary Ives for being an excellent teacher.&lt;/p&gt;
 
@@ -161,7 +205,7 @@ I looked to the research and settled on Dynamic Time Warping (DTW) from Keogh et
 
 &lt;p&gt;Notice that sentence tokens (the words) are always leaves of the tree and in their natural language order. That is, we should always be able to read the tree leaves from left to right and have our exact sentence.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/ConstituencyTree.jpg&quot; alt=&quot;Consituency Parse Tree&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/ConstituencyTree.jpg&quot; alt=&quot;Consituency Parse Tree&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;tree-kernel-core-theory-and-definitions&quot;&gt;Tree Kernel Core Theory and Definitions&lt;/h3&gt;
 
@@ -452,7 +496,7 @@ If NORMALIZE_FLAG set to False, tuple[1] = -1
   &lt;li&gt;
     &lt;p&gt;Using different metrics for WordNet semantic similarities like Resnik, Wu &amp;amp; Palmer, or Lin.&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><summary type="html">Motivation</summary></entry><entry><title type="html">Recommitment to Posting</title><link href="/2017/09/04/Recommitment-to-Posting.html" rel="alternate" type="text/html" title="Recommitment to Posting" /><published>2017-09-04T00:00:00-07:00</published><updated>2017-09-04T00:00:00-07:00</updated><id>/2017/09/04/Recommitment-to-Posting</id><content type="html" xml:base="/2017/09/04/Recommitment-to-Posting.html">&lt;p&gt;I dropped the ball w.r.t posting my work and thoughts. I’m going to be posting a lot more starting with recaps of old research projects and coding.&lt;/p&gt;</content><author><name></name></author><summary type="html">I dropped the ball w.r.t posting my work and thoughts. I’m going to be posting a lot more starting with recaps of old research projects and coding.</summary></entry><entry><title type="html">Update: Graph-based Model Election Forecasting</title><link href="/research/gsp/polling/forecasting/2017/03/25/graph-election-update.html" rel="alternate" type="text/html" title="Update: Graph-based Model Election Forecasting" /><published>2017-03-25T00:00:00-07:00</published><updated>2017-03-25T00:00:00-07:00</updated><id>/research/gsp/polling/forecasting/2017/03/25/graph-election-update</id><content type="html" xml:base="/research/gsp/polling/forecasting/2017/03/25/graph-election-update.html">&lt;p&gt;While I am no longer directly working on the project, I am still an informal advisor to the undergraduates currently working to improve the model. The challenge we currently face is quite intriguing. We have the data: presidential election, senatorial election, median income, demographics, poverty, etc. The new issue is how we combine the graph shift operators from each of these data sets to produce an optimal graph shift operator (that results in minimum norm-1 error).&lt;/p&gt;
+&lt;/ul&gt;</content><author><name></name></author><summary type="html">Motivation</summary></entry><entry><title type="html">Recommitment to Posting</title><link href="http://localhost:4000/2017/09/04/Recommitment-to-Posting.html" rel="alternate" type="text/html" title="Recommitment to Posting" /><published>2017-09-04T00:00:00-07:00</published><updated>2017-09-04T00:00:00-07:00</updated><id>http://localhost:4000/2017/09/04/Recommitment-to-Posting</id><content type="html" xml:base="http://localhost:4000/2017/09/04/Recommitment-to-Posting.html">&lt;p&gt;I dropped the ball w.r.t posting my work and thoughts. I’m going to be posting a lot more starting with recaps of old research projects and coding.&lt;/p&gt;</content><author><name></name></author><summary type="html">I dropped the ball w.r.t posting my work and thoughts. I’m going to be posting a lot more starting with recaps of old research projects and coding.</summary></entry><entry><title type="html">Update: Graph-based Model Election Forecasting</title><link href="http://localhost:4000/research/gsp/polling/forecasting/2017/03/25/graph-election-update.html" rel="alternate" type="text/html" title="Update: Graph-based Model Election Forecasting" /><published>2017-03-25T00:00:00-07:00</published><updated>2017-03-25T00:00:00-07:00</updated><id>http://localhost:4000/research/gsp/polling/forecasting/2017/03/25/graph-election-update</id><content type="html" xml:base="http://localhost:4000/research/gsp/polling/forecasting/2017/03/25/graph-election-update.html">&lt;p&gt;While I am no longer directly working on the project, I am still an informal advisor to the undergraduates currently working to improve the model. The challenge we currently face is quite intriguing. We have the data: presidential election, senatorial election, median income, demographics, poverty, etc. The new issue is how we combine the graph shift operators from each of these data sets to produce an optimal graph shift operator (that results in minimum norm-1 error).&lt;/p&gt;
 
 &lt;p&gt;Let’s first use intuition. Our goal is to predict presidential elections, so we can reason that the presidential election graph shift operator should receive the most weight. The question becomes exactly how much weight should this receive? And of course how do we distribute the remaining weight?&lt;/p&gt;
 
