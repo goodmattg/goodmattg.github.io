@@ -199,11 +199,13 @@ h2.footer-heading { font-family: 'CMU','Droid Serif', serif; letter-spacing: 0px
 
 h1 { font-family: 'CMU', 'Lora', serif; }
 
-h2 { font-family: 'CMU', 'Lora', serif; font-weight: bold; letter-spacing: 0px; }
+h2 { font-family: 'CMU', 'Lora', serif; }
 
-h3 { font-family: 'CMU', 'Lora', serif; font-weight: bold; letter-spacing: 0px; }
+h3 { font-family: 'CMU', 'Lora', serif; }
 
 body { font-family: 'CMU','Droid Serif', serif; }
+
+.center-image { margin: 1rem auto; display: block; }
 
 .highlight table td { padding: 5px; }
 
