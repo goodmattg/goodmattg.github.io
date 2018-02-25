@@ -41,9 +41,6 @@ This recursive function gives the minimum cost path:
 
 $$\gamma(i,j)~=~d(q_i, c_j)+min\{\gamma(i-1,j-1), \gamma(i-1, j), \gamma(i, j-1)\}$$
 
-<img src="http://....jpg" width="200" height="200" />
-
-
 ![DTW Trace]({{ site.url }}/assets/posts/DTW/DTWTrace.jpg =50x)
 *Figure 1. DTW computed optimal path between sinusoid & sinusoid + sinc over $[0,6\pi]$*
 
