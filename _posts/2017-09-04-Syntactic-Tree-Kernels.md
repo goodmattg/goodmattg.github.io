@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Syntactic Tree Kernels
+comments: true
 ---
 
 ## Motivation

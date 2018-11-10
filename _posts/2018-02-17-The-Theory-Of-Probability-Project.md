@@ -1,6 +1,7 @@
 ---
 layout: post
 title: The Theory of Probability Project
+comments: true
 
 
 ---

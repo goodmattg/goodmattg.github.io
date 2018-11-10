@@ -1,6 +1,7 @@
 ---
 layout: post
-title: Proving Newton's Binomial Theorem 
+title: Proving Newton's Binomial Theorem
+comments: true
 ---
 
 ## Proving Newton's Binomial Theorem
