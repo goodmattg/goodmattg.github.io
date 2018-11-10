@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Dynamic Time Warping for Clustering Time Series Data
+comments: true
 ---
 
 This post is as much a meditation on using Dynamic Time Warping (DTW) in production as it is a review of my work. I have so many questions about this subject. If you have any answers, I hope you will reach out.
