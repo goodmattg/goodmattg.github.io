@@ -23,7 +23,7 @@ twitter_username: goodmattg
 github_username:  goodmattg
 
 disqus:
-  shortname: my_disqus_shortname
+  shortname: https-goodmattg-github-io
 
 # Build settings
 markdown: kramdown
