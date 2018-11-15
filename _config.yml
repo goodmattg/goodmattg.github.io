@@ -29,7 +29,7 @@ disqus:
 markdown: kramdown
 highlighter: rouge
 theme: minima
-gems:
+plugins:
   - jekyll-feed
 exclude:
   - Gemfile
