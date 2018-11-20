@@ -16,7 +16,7 @@
 title: Explicitly Normal
 email: mattgoodman13 (at) gmail (dot.) com
 description: > # this means to ignore newlines until "baseurl:"
-    I firmly believe that the unexamined life isn't worth living. This is a place to examine just a few of the things that are worth understanding.
+    An online repository of my research, thoughts, and projects.
 baseurl: "" # the subpath of your site, e.g. /blog
 
 # Must be enabled to support Disqus (Minima >2.5.0)
