@@ -10,7 +10,7 @@ This post encapsulates the work I did with Dean Fulgoni for our final project in
 
 ## The Problem We Tried to Solve
 
- The problem is deviously simple - given two input questions, tell whether the questions ask the same thing (i.e. seek to reveal the same previously unknown knowledge). Not to get off track, but this begs some thought on the nature of what a question is and whether a question is separable from its posed context. See the [Stanford Encyclopedia of Philosophy (SEP)][1] for an excellent review of the philosophy of questions. I won't be discussing it in detail, but my view on this problem is colored by the philosophical undertstanding of questions. We can assume that questions on Quora are requesting information,  not testing the knowledge of the user base.
+ The problem is deviously simple - given two input questions, tell whether the questions ask the same thing (i.e. seek to reveal the same previously unknown knowledge). Not to get off track, but this begs some thought on the nature of what a question is and whether a question is separable from its posed context. See the [Stanford Encyclopedia of Philosophy (SEP)][1] for an excellent review of the philosophy of questions. I won't be discussing it in detail, but my view on this problem is colored by the philosophical understanding of questions. We can assume that questions on Quora are requesting information,  not testing the knowledge of the user base.
 
  > ... a question [is] an abstract thing for which an interrogative sentence is a piece of notation. (Belnap and Steel, 1976)
 
@@ -37,7 +37,7 @@ I'll save the complete literature review for a separate post. We chose to use Tr
 
 ## Syntactic Tree Kernel Theory
 
-As part of our search for unique features to encode syntactic and semantic similarity, we found that so called Tree Kernels had been shown to be highly effective in augmnting SVMs designed to solve problems in question classification, question answering, Semantic Role Labeling, and named entity recognition. The broad idea behind the theory is that syntactic features must be quantified to learn semantic structures. It isn't enough to say, compare lists of POS tags for two sentences because the structure of the sentences shape their meanings. We therefore design kernels that map from tree structures (e.g. constituency parse trees) to scores that measure the syntactic similarity of the two trees. Note that these scores are bounded for use in an SVM framework, but could easily be used as features in a deep learning framework.
+As part of our search for unique features to encode syntactic and semantic similarity, we found that so called Tree Kernels had been shown to be highly effective in augmenting SVMs designed to solve problems in question classification, question answering, Semantic Role Labeling, and named entity recognition. The broad idea behind the theory is that syntactic features must be quantified to learn semantic structures. It isn't enough to say, compare lists of POS tags for two sentences because the structure of the sentences shape their meanings. We therefore design kernels that map from tree structures (e.g. constituency parse trees) to scores that measure the syntactic similarity of the two trees. Note that these scores are bounded for use in an SVM framework, but could easily be used as features in a deep learning framework.
 
 ### Kernel Definition
 
@@ -56,12 +56,12 @@ Let $X$ be a finite input space and let $K(x,z)$ be a symmetric function on $X$.
 
 $$ k(x,z) = \Phi(x) \cdot \Phi(z)$$
 
-is positive semi-definite (non-negative eigenvaules). That is, if the matrix is positive semi-definite we can find a $\Phi$ that implements the kernel function $k$.
+is positive semi-definite (non-negative eigenvalues). That is, if the matrix is positive semi-definite we can find a $\Phi$ that implements the kernel function $k$.
 
 
 ## Tree Definition
 
-We worked exclusively with **consitituency parse trees**. Anywhere I write "tree", I am referring to a constituency parse tree. A consistituency parse tree breaks down a sentence into phrases using a well-defined, **context-free**, phrase structure grammar. A context-free grammar is a set of rules that describes all possible strings in a formal language. Given any sentence, we have a formal way to define that sentence as made up of phrases, nouns, verbs, etc. Noam Chomsky was the first define context-free grammars in linguistics to describe the universal structure of natural language. We use the Penn-Treebank II formal grammar for this project. Here is a small sample of the Penn-Treebank II formal grammar:
+We worked exclusively with **constituency parse trees**. Anywhere I write "tree", I am referring to a constituency parse tree. A constituency parse tree breaks down a sentence into phrases using a well-defined, **context-free**, phrase structure grammar. A context-free grammar is a set of rules that describes all possible strings in a formal language. Given any sentence, we have a formal way to define that sentence as made up of phrases, nouns, verbs, etc. Noam Chomsky was the first define context-free grammars in linguistics to describe the universal structure of natural language. We use the Penn-Treebank II formal grammar for this project. Here is a small sample of the Penn-Treebank II formal grammar:
 
 - **RB**: Adverb
 - **IN**: Preposition
@@ -74,7 +74,7 @@ Below is an example of a constituency parse tree for the sentence:
 
 Notice that sentence tokens (the words) are always leaves of the tree and in their natural language order. That is, we should always be able to read the tree leaves from left to right and have our exact sentence.
 
-![Consituency Parse Tree]({{ site.url }}/assets/ConstituencyTree.jpg)
+![Constituency Parse Tree]({{ site.url }}/assets/ConstituencyTree.jpg)
 
 
 ### Tree Kernel Core Theory and Definitions
@@ -85,7 +85,7 @@ A tree is defined recursively as a set of nodes, each of which has a value and a
 
 Key to the effectiveness of tree kernel features in solving problems is the choice of tree structure. Moschitti shows that different tree kernels are effective for different choices of syntax trees in solving different classes of problems. We used Stanford NLP to generate parse trees from the input sentences. A parse tree is an ordered tree that represents the syntax of a sentence according to some context-free grammar. There are two main classes of parse trees: constituency and dependency. A dependency parse trees is the tree structure generated by the dependencies of a sentence. While dependencies can be highly useful in generating features, as described in Section 4.1, Moschitti found that constituency parse trees were most effective in solving classification related problems. A constituency parse tree breaks down the tokens of sentence into their constituent grammars.
 
-### Syntatic Tree Kernel or "Collins-Duffy" (STK)
+### Syntactic Tree Kernel or "Collins-Duffy" (STK)
 
 For our tree kernel features we only implemented the Collins-Duffy tree kernel. The general idea of the Collins-Duffy Tree Kernel is that we want to compare the number of common subtrees between two input trees. The naive approach in exponential time is to enumerate all possible subtrees of the two input trees and then perform the dot-product. Obviously generating every subtree of each sentence, and then taking the dot-product of all of the subtrees to find how many the two sentences have in common would be a computationally nightmarish $O(n^2)$. We can take advantage of the fact that generating subtrees is recursive, and that if two parent nodes do not match, the subtrees rooted at those two nodes do not match. Collins and Duffy propose the following derivation.
 
@@ -121,13 +121,13 @@ We generated features with the ST and SST tree kernels for each question pair us
 
 ## Synactic Tree Kernels in Python
 
-As far as I know, this is the first implentation of synactic tree kernels in Python. This code may eventually move to its own maintained repository if it's needed. If you find any bugs please reach out to me. Dr. Moschitti's cited implementation is:
+As far as I know, this is the first implementation of syntactic tree kernels in Python. This code may eventually move to its own maintained repository if it's needed. If you find any bugs please reach out to me. Dr. Moschitti's cited implementation is:
 
 [SVM-Light][2] written by Thorsten Joachims in C. His implementation is most-likely faster (no comparison benchmark yet). My implementation is however easier to grasp and is isolated from a complete SVM library.
 
 ### Building the Parse Tree
 
-As described in the Pipeline section we used Stanford CoreNLP to generate our constituency parse trees. There aren't many libaries that are good for consitituency parsing, and CoreNLP is by far the most stable and customizable. Oddly enough, Stanford CoreNLP will print a constituency parse tree for a given sentence with well-defined structure to console (i.e. pretty print), but provides no functionality to store the tree in a reasonable format (linked list, hashmap, etc. ). The code in this subsection is available on my [Github][3] and is used to take the raw text output of Stanford CoreNLP and store in the schema below for tree kernel computation. We label each token with an Id and store the tokens for fast computation, but admittedly poor space complexity.
+As described in the Pipeline section we used Stanford CoreNLP to generate our constituency parse trees. There aren't many libraries that are good for constituency parsing, and CoreNLP is by far the most stable and customizable. Oddly enough, Stanford CoreNLP will print a constituency parse tree for a given sentence with well-defined structure to console (i.e. pretty print), but provides no functionality to store the tree in a reasonable format (linked list, hashmap, etc. ). The code in this subsection is available on my [Github][3] and is used to take the raw text output of Stanford CoreNLP and store in the schema below for tree kernel computation. We label each token with an Id and store the tokens for fast computation, but admittedly poor space complexity.
 
 - curid:&emsp;&emsp;&emsp;&nbsp;*Integer*
 - parid:&emsp;&emsp;&emsp;&nbsp;*Integer*
