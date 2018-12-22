@@ -12,7 +12,7 @@ I can relate. There is a recent paper from a major medical research center that 
 
 I am building a complex system consisting of multiple sub-components for my current work. These components include but are not limited to: frame OCR, frame scale normalization, tumor segmentation, tumor diagnosis, etc. For the final product to exceed expectations, every component needs to operate with extremely high performance. So while I know there's a universe of segmentation algorithms out there, one of which probably _does_ have amazing performance invariant to the heterogeneity of lesion interior, I can't slot in any of these systems without re-implementing them myself, and I can't rigorously determine which system to slot in because that would require verification on our real-world dataset. So I'm suddenly forced to make decisions about time to payoff, ease of implementation, and verifiability of a crude implementation. I ended up going with a brute-force style approach simply because it's the only thing that I could both quickly implement myself and verify correctness. 
 
-You'd think by now that these building blocks would be readily available with the research community, but they aren't. It's a self-enforced barrier to entry that we should work hard to tear down. It's also worth noting that [DeepMind][2] is looking into this problem as well.
+You would think by now that these building blocks would be readily available within the research community, but they aren't. It's a self-enforced barrier to entry that we should work hard to tear down. It is also worth noting that [DeepMind][2] is looking into the mammography problem as well.
 
 [1]: https://moalquraishi.wordpress.com/2018/12/09/alphafold-casp13-what-just-happened/
 
