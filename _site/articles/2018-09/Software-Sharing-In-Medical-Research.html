@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="I was reading Mohammed AlQuraishi's [post][1] "AlphaFold @ CASP13: What just happened?" recently about DeepMind's advance in protein folding. His point about...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="Software Sharing in Medical Research | Matt Goodman&#39;s Blog">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Software Sharing in Medical Research | Matt Goodman&#39;s Blog">
+  <meta name="twitter:description" content="I was reading Mohammed AlQuraishi&#39;s [post][1] &quot;AlphaFold @ CASP13: What just happened?&quot; recently about DeepMind&#39;s advance in protein folding. His point about...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2018-09/Software-Sharing-In-Medical-Research">
+  <meta property="og:title" content="Software Sharing in Medical Research | Matt Goodman&#39;s Blog">
+  <meta property="og:description" content="I was reading Mohammed AlQuraishi&#39;s [post][1] &quot;AlphaFold @ CASP13: What just happened?&quot; recently about DeepMind&#39;s advance in protein folding. His point about...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>Software Sharing in Medical Research | Matt Goodman's Blog</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2018-09/Software-Sharing-In-Medical-Research">
+  <link rel="alternate" type="application/rss+xml" title="Matt Goodman&#39;s Blog" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/" class="author_name">Matt Goodman's Blog</a>
+  <span class="author_job">It's All Good, Man</span>
+  <span class="author_bio mbm">A selection of my research and thoughts</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+        
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+         
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('mattgoodman13 (.a.t.) gmail (.d.o.t.) com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    <li><a href="http://linkedin.com/in/matthew-goodman-89b76989" class="social-link-item" target="_blank"><i class="fa fa-fw fa-linkedin"></i></a></li>
+    
+    
+    
+    
+    <li><a href="http://github.com/goodmattg" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="Software Sharing in Medical Research">Software Sharing in Medical Research</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        9 SEP 2018
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    3 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <p>I was reading Mohammed AlQuraishi’s <a href="https://moalquraishi.wordpress.com/2018/12/09/alphafold-casp13-what-just-happened/">post</a> “AlphaFold @ CASP13: What just happened?” recently about DeepMind’s advance in protein folding. His point about research siloing holding the whole field back resonated with me in light of my current work identifying malignant tumors in ultrasound images. To put it bluntly, it isn’t helpful that I can quickly find ten good papers claiming state-of-the-art performance on tumor segmentation if I can’t quickly download and verify the model performance on a non-toy dataset. In my view, a toy dataset is a dataset that doesn’t reflect the enumerable subtleties of real-world data. I.e. a dataset filtered to remove weird edge-cases, complex low probability situations, and messy inputs. As an aside, modern tumor ultrasound datasets are laughably perfect. They are all ~100 samples of perfectly cropped tumors with contiguous inner regions and no artefacts that would reflect rare conditions a radiologist would be trained to identify.</p>
+
+<blockquote>
+  <p>As I discussed earlier, it is clear that between the Xu and Zhang groups enough was known to develop a system that would have perhaps rivaled AlphaFold. But because of the siloed nature of the field, it only gets a “gradient update” once every two years. Academic groups are thus forced to independently rediscover the wheel over and over. In DeepMind’s case, even though the team was small in comparison to the total headcount wof academic groups, they were presumably able to share information on a very regular basis, and this surely contributed to their success.</p>
+</blockquote>
+
+<p>I can relate. There is a recent paper from a major medical research center that claims best-in-class performance on the tumor segmentation problem. A cursory reading yields that the best-in-class performance is probably legitimate and would extend well to my current work. The code is not publicly available and the research team immediately rejected my request to collaborate. In all fairness, I don’t know why they are hesitant to collaborate; there could be IP concerns related to grant providers, or it could be a plain desire to maintain competitive advantage. My place is not to ask why, but this does put my work in a tough position.</p>
+
+<p>I am building a complex system consisting of multiple sub-components for my current work. These components include but are not limited to: frame OCR, frame scale normalization, tumor segmentation, tumor diagnosis, etc. For the final product to exceed expectations, every component needs to operate with extremely high performance. So while I know there’s a universe of segmentation algorithms out there, one of which probably <em>does</em> have amazing performance invariant to the heterogeneity of lesion interior, I can’t slot in any of these systems without re-implementing them myself, and I can’t rigorously determine which system to slot in because that would require verification on our real-world dataset. So I’m suddenly forced to make decisions about time to payoff, ease of implementation, and verifiability of a crude implementation. I ended up going with a brute-force style approach simply because it’s the only thing that I could both quickly implement myself and verify correctness.</p>
+
+<p>You would think by now that these building blocks would be readily available within the research community, but they aren’t. It’s a self-enforced barrier to entry that we should work hard to tear down. It is also worth noting that <a href="https://deepmind.com/blog/applying-machine-learning-mammography/">DeepMind</a> is looking into the mammography problem as well.</p>
+
+
+  </article>
+</div>
+
+<div class="share-buttons">
+  <h6>Share on: </h6>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=http://localhost:4000/articles/2018-09/Software-Sharing-In-Medical-Research" class="twitter btn" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/articles/2018-09/Software-Sharing-In-Medical-Research" class="facebook btn" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=http://localhost:4000/articles/2018-09/Software-Sharing-In-Medical-Research" class="google-plus btn" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+    <li>
+      <a href="https://news.ycombinator.com/submitlink?u=http://localhost:4000/articles/2018-09/Software-Sharing-In-Medical-Research" class="hacker-news btn" title="Share on Hacker News"><i class="fa fa-hacker-news"></i><span> Hacker News</span></a>
+    </li>
+    <li>
+      <a href="https://www.reddit.com/submit?url=http://localhost:4000/articles/2018-09/Software-Sharing-In-Medical-Research" class="reddit btn" title="Share on Reddit"><i class="fa fa-reddit"></i><span> Reddit</span></a>
+    </li>
+  </ul>
+</div><!-- end share-buttons -->
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'https-goodmattg-github-io';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+        <footer>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+  &copy; 2019 Matt Goodman's Blog. Powered by <a href="http://jekyllrb.com/">Jekyll</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

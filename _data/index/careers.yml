@@ -1,0 +1,6 @@
+# careers section data
+# if you don't have language feature(language.yml is empty), ignore "i18n" items
+- name: Qualtrics
+  link: https://www.qualtrics.com/
+  date: 2017 - 2019
+  job: Software Developer

@@ -1,174 +1,469 @@
 <!DOCTYPE html>
-<html lang="en"><head>
-  <meta charset="utf-8">
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>Matt Goodman’s blog | An online repository of my research, thoughts, and projects.</title>
-<meta name="generator" content="Jekyll v3.7.4" />
-<meta property="og:title" content="Matt Goodman’s blog" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="An online repository of my research, thoughts, and projects." />
-<meta property="og:description" content="An online repository of my research, thoughts, and projects." />
-<link rel="canonical" href="http://localhost:4000/" />
-<meta property="og:url" content="http://localhost:4000/" />
-<meta property="og:site_name" content="Matt Goodman’s blog" />
-<script type="application/ld+json">
-{"name":"Matt Goodman’s blog","description":"An online repository of my research, thoughts, and projects.","@type":"WebSite","url":"http://localhost:4000/","headline":"Matt Goodman’s blog","@context":"http://schema.org"}</script>
-<!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Matt Goodman's blog" /></head>
-<body><header class="site-header" role="banner">
+  <meta name="description" content="A selection of my research and thoughts">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="Matt Goodman&#39;s Blog">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
 
-  <div class="wrapper">
-    
-    
-    <a class="site-title" href="/">Matt Goodman&#39;s blog</a>
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Matt Goodman&#39;s Blog">
+  <meta name="twitter:description" content="A selection of my research and thoughts">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
 
-    
-      <nav class="site-nav">
-        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
-        <label for="nav-trigger">
-          <span class="menu-icon">
-            <svg viewBox="0 0 18 15" width="18px" height="15px">
-              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
-              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
-              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
-            </svg>
-          </span>
-        </label>
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/">
+  <meta property="og:title" content="Matt Goodman&#39;s Blog">
+  <meta property="og:description" content="A selection of my research and thoughts">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>Matt Goodman's Blog</title>
 
-        <div class="trigger">
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/">
+  <link rel="alternate" type="application/rss+xml" title="Matt Goodman&#39;s Blog" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/" class="author_name">Matt Goodman's Blog</a>
+  <span class="author_job">It's All Good, Man</span>
+  <span class="author_bio mbm">A selection of my research and thoughts</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
           
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
             
-            
-            <a class="page-link" href="/about/">About</a>
-            
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
         
-            
-            
-        
-            
-            
-        
-            
-            
-            <a class="page-link" href="/projects/">Projects</a>
-            
-        
-            
-            
-        
-        </div>
-      </nav>
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+         
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
     
-  </div>
+      <li>
+      <script>gen_mail_to_link('mattgoodman13 (.a.t.) gmail (.d.o.t.) com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    <li><a href="http://linkedin.com/in/matthew-goodman-89b76989" class="social-link-item" target="_blank"><i class="fa fa-fw fa-linkedin"></i></a></li>
+    
+    
+    
+    
+    <li><a href="http://github.com/goodmattg" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
 
-  <link href="https://fonts.googleapis.com/css?family=Droid+Serif" rel="stylesheet">
-</header>
-<main class="page-content" aria-label="Content">
-      <div class="wrapper">
-        <div class="home">
-<h2 class="post-list-heading">Posts</h2>
-    <ul class="post-list"><li><span class="post-meta">Nov 25, 2018</span>
-        <h3>
-          <a class="post-link" href="/Syncing-PDFs-in-Mendeley-Desktop">
-            Syncing PDFs across Devices in Mendeley
-          </a>
-        </h3></li><li><span class="post-meta">Sep 9, 2018</span>
-        <h3>
-          <a class="post-link" href="/Software-Sharing-In-Medical-Research">
-            Software Sharing in Medical Research
-          </a>
-        </h3></li><li><span class="post-meta">Feb 25, 2018</span>
-        <h3>
-          <a class="post-link" href="/Newtons-Binomial-Theorem">
-            Proving Newton&#39;s Binomial Theorem
-          </a>
-        </h3></li><li><span class="post-meta">Feb 17, 2018</span>
-        <h3>
-          <a class="post-link" href="/The-Theory-Of-Probability-Project">
-            The Theory of Probability Project
-          </a>
-        </h3></li><li><span class="post-meta">Dec 10, 2017</span>
-        <h3>
-          <a class="post-link" href="/Dynamic-Time-Warping">
-            Dynamic Time Warping for Clustering Time Series Data
-          </a>
-        </h3></li><li><span class="post-meta">Sep 4, 2017</span>
-        <h3>
-          <a class="post-link" href="/Syntactic-Tree-Kernels">
-            Syntactic Tree Kernels
-          </a>
-        </h3></li><li><span class="post-meta">Sep 4, 2017</span>
-        <h3>
-          <a class="post-link" href="/Recommitment-to-Posting">
-            Recommitment to Posting
-          </a>
-        </h3></li><li><span class="post-meta">Mar 25, 2017</span>
-        <h3>
-          <a class="post-link" href="/research/gsp/polling/forecasting/graph-election-update">
-            Update: Graph-based Model Election Forecasting
-          </a>
-        </h3></li></ul>
-
-    <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p></div>
+</div>
 
       </div>
-    </main><footer class="site-footer">
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        
+<section class="post">
+  <header class="post-header">
+    <p class="post-meta">
+      <span class="post-date">
+        25 NOV 2018
+      </span>
+      
+      •
+      
+        <a class="post-cat" href="http://localhost:4000/categories/#help">help</a>
+        
+      
+      
+    </p>
+    <h4>
+      <a href="http://localhost:4000/articles/2018-11/Syncing-PDFs-in-Mendeley-Desktop" class="post-title" title="Syncing PDFs across Devices in Mendeley">Syncing PDFs across Devices in Mendeley</a>
+      
+    </h4>
 
-  <div class="wrapper">
+    
 
-    <h2 class="footer-heading">Matt Goodman&#39;s blog</h2>
+    </header>
 
-    <div class="footer-col-wrapper">
-      <div class="footer-col footer-col-1">
-        <ul class="contact-list">
-          <li>
-            
-              Matt Goodman&#39;s blog
-            
-            </li>
-            
-            <li><a href="mailto:mattgoodman13 (at) gmail (dot.) com">mattgoodman13 (at) gmail (dot.) com</a></li>
-            
-        </ul>
-      </div>
+    
+    <div class="post-description">
+      <p>
+        Mendeley is a great tool to keep track of papers and citations across multiple devices if you can figure out how to actually enable file (i.e. PDF) syncing across devices. The UX designers were on a lunch break when this one was cooked up.
+      </p>
+    </div>
+    
 
-      <div class="footer-col footer-col-2">
-        <ul class="social-media-list">
-          
-          <li>
-            <a href="https://github.com/goodmattg"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
-</span><span class="username">goodmattg</span></a>
+    
 
-          </li>
-          
+</section>
 
-          
-          <li>
-            <a href="https://twitter.com/goodmattg"><span class="icon icon--twitter"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
-</span><span class="username">goodmattg</span></a>
+<section class="post">
+  <header class="post-header">
+    <p class="post-meta">
+      <span class="post-date">
+        9 SEP 2018
+      </span>
+      
+      •
+      
+        <a class="post-cat" href="http://localhost:4000/categories/#thoughts">thoughts</a>
+        
+      
+      
+    </p>
+    <h4>
+      <a href="http://localhost:4000/articles/2018-09/Software-Sharing-In-Medical-Research" class="post-title" title="Software Sharing in Medical Research">Software Sharing in Medical Research</a>
+      
+    </h4>
 
-          </li>
-          
-        </ul>
-      </div>
+    
 
-      <div class="footer-col footer-col-3">
-        <p>An online repository of my research, thoughts, and projects.
-</p>
+    </header>
+
+    
+    <div class="post-description">
+      <p>
+        I was reading Mohammed AlQuraishi's [post][1] "AlphaFold @ CASP13: What just happened?" recently about DeepMind's advance in protein folding. His point about research siloing holding the whole field back resonated with me in light of my current work identifying malignant tumors in ultrasound images.
+      </p>
+    </div>
+    
+
+    
+
+</section>
+
+<section class="post">
+  <header class="post-header">
+    <p class="post-meta">
+      <span class="post-date">
+        25 FEB 2018
+      </span>
+      
+    </p>
+    <h4>
+      <a href="http://localhost:4000/articles/2018-02/Newtons-Binomial-Theorem" class="post-title" title="Proving Newton&#39;s Binomial Theorem">Proving Newton's Binomial Theorem</a>
+      
+    </h4>
+
+    
+
+    </header>
+
+    
+    <div class="post-description">
+      <p>
+        An amateur's attempt at proving Newton's Binomial Theorem
+      </p>
+    </div>
+    
+
+    
+
+</section>
+
+<section class="post">
+  <header class="post-header">
+    <p class="post-meta">
+      <span class="post-date">
+        17 FEB 2018
+      </span>
+      
+      •
+      
+        <a class="post-cat" href="http://localhost:4000/categories/#probability">probability</a>
+        
+      
+      
+    </p>
+    <h4>
+      <a href="http://localhost:4000/articles/2018-02/Theory-Of-Probability-Chapter-1" class="post-title" title="Theory of Probability (Chapter 1)">Theory of Probability (Chapter 1)</a>
+      
+    </h4>
+
+    
+
+    </header>
+
+    
+    <div class="post-description">
+      <p>
+        Reviewing a cleaning product is easy - you use the product and it does or does not work. Reviewing a textbook is harder - how do you quantify the benefit a book gives you, especially if you haven't read the book for its intended purpose, to convey a body knowledge.
+      </p>
+    </div>
+    
+
+    
+
+</section>
+
+<section class="post">
+  <header class="post-header">
+    <p class="post-meta">
+      <span class="post-date">
+        10 DEC 2017
+      </span>
+      
+      •
+      
+        <a class="post-cat" href="http://localhost:4000/categories/#DTW">DTW</a>
+        
+        <span>/</span>
+        
+      
+        <a class="post-cat" href="http://localhost:4000/categories/#ML">ML</a>
+        
+        <span>/</span>
+        
+      
+        <a class="post-cat" href="http://localhost:4000/categories/#Kaggle">Kaggle</a>
+        
+      
+      
+    </p>
+    <h4>
+      <a href="http://localhost:4000/articles/2017-12/Dynamic-Time-Warping" class="post-title" title="Dynamic Time Warping for Clustering Time Series Data">Dynamic Time Warping for Clustering Time Series Data</a>
+      
+    </h4>
+
+    
+
+    </header>
+
+    
+    <div class="post-description">
+      <p>
+        This post is as much a meditation on using Dynamic Time Warping (DTW) in production as it is a review of my work. I have so many questions about this subject. If you have any answers, I hope you will reach out.
+      </p>
+    </div>
+    
+
+    
+
+</section>
+
+<section class="post">
+  <header class="post-header">
+    <p class="post-meta">
+      <span class="post-date">
+        4 SEP 2017
+      </span>
+      
+      •
+      
+        <a class="post-cat" href="http://localhost:4000/categories/#ML">ML</a>
+        
+        <span>/</span>
+        
+      
+        <a class="post-cat" href="http://localhost:4000/categories/#NLP">NLP</a>
+        
+        <span>/</span>
+        
+      
+        <a class="post-cat" href="http://localhost:4000/categories/#kernels">kernels</a>
+        
+        <span>/</span>
+        
+      
+        <a class="post-cat" href="http://localhost:4000/categories/#Kaggle">Kaggle</a>
+        
+      
+      
+    </p>
+    <h4>
+      <a href="http://localhost:4000/articles/2017-09/Syntactic-Tree-Kernels" class="post-title" title="Syntactic Tree Kernels">Syntactic Tree Kernels</a>
+      
+    </h4>
+
+    
+
+    </header>
+
+    
+    <div class="post-description">
+      <p>
+        The problem is deviously simple - given two input questions, tell whether the questions ask the same thing (i.e. seek to reveal the same previously unknown knowledge).
+      </p>
+    </div>
+    
+
+    
+
+</section>
+
+<section class="post">
+  <header class="post-header">
+    <p class="post-meta">
+      <span class="post-date">
+        4 SEP 2017
+      </span>
+      
+    </p>
+    <h4>
+      <a href="http://localhost:4000/articles/2017-09/Recommitment-to-Posting" class="post-title" title="Recommitment to Posting">Recommitment to Posting</a>
+      
+    </h4>
+
+    
+
+    </header>
+
+    
+    <div class="post-description">
+      <p>
+        <p>I dropped the ball w.r.t posting my work and thoughts. I’m going to be posting a lot more starting with recaps of old research projects and coding.</p>
+
+      </p>
+    </div>
+    
+
+    
+
+</section>
+
+<section class="post">
+  <header class="post-header">
+    <p class="post-meta">
+      <span class="post-date">
+        25 MAR 2017
+      </span>
+      
+      •
+      
+        <a class="post-cat" href="http://localhost:4000/categories/#research">research</a>
+        
+        <span>/</span>
+        
+      
+        <a class="post-cat" href="http://localhost:4000/categories/#GSP">GSP</a>
+        
+        <span>/</span>
+        
+      
+        <a class="post-cat" href="http://localhost:4000/categories/#polling">polling</a>
+        
+        <span>/</span>
+        
+      
+        <a class="post-cat" href="http://localhost:4000/categories/#forecasting">forecasting</a>
+        
+      
+      
+    </p>
+    <h4>
+      <a href="http://localhost:4000/articles/2017-03/graph-election-update" class="post-title" title="Update: Graph-based Model Election Forecasting">Update: Graph-based Model Election Forecasting</a>
+      
+    </h4>
+
+    
+
+    </header>
+
+    
+    <div class="post-description">
+      <p>
+        While I am no longer directly working on the GSP Election project, I am still an informal advisor to the undergraduates currently working to improve the model.
+      </p>
+    </div>
+    
+
+    
+
+</section>
+
+
+        <footer>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+  &copy; 2019 Matt Goodman's Blog. Powered by <a href="http://jekyllrb.com/">Jekyll</a>
+</footer>
+
       </div>
     </div>
   </div>
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-        processEscapes: true
-      }
-    });
-  </script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
-</footer>
-</body>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
 
+
+</body>
 </html>

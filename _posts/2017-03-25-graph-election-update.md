@@ -1,12 +1,12 @@
 ---
-
 layout: post
 title: "Update: Graph-based Model Election Forecasting"
-categories: research GSP polling forecasting
+excerpt: "While I am no longer directly working on the GSP Election project, I am still an informal advisor to the undergraduates currently working to improve the model."
+categories: [research, GSP, polling, forecasting]
 comments: true
 ---
 
-While I am no longer directly working on the project, I am still an informal advisor to the undergraduates currently working to improve the model. The challenge we currently face is quite intriguing. We have the data: presidential election, senatorial election, median income, demographics, poverty, etc. The new issue is how we combine the graph shift operators from each of these data sets to produce an optimal graph shift operator (that results in minimum norm-1 error).
+While I am no longer directly working on the GSP Election project, I am still an informal advisor to the undergraduates currently working to improve the model. The challenge we currently face is quite intriguing. We have the data: presidential election, senatorial election, median income, demographics, poverty, etc. The new issue is how we combine the graph shift operators from each of these data sets to produce an optimal graph shift operator (that results in minimum norm-1 error).
 
 Let’s first use intuition. Our goal is to predict presidential elections, so we can reason that the presidential election graph shift operator should receive the most weight. The question becomes exactly how much weight should this receive? And of course how do we distribute the remaining weight?
 

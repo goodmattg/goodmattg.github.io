@@ -1,6 +1,8 @@
 ---
 layout: post
-title: Syntactic Tree Kernels
+title: "Syntactic Tree Kernels"
+excerpt: "The problem is deviously simple - given two input questions, tell whether the questions ask the same thing (i.e. seek to reveal the same previously unknown knowledge)."
+categories: [ML, NLP, kernels, Kaggle]
 comments: true
 ---
 
@@ -74,7 +76,7 @@ Below is an example of a constituency parse tree for the sentence:
 
 Notice that sentence tokens (the words) are always leaves of the tree and in their natural language order. That is, we should always be able to read the tree leaves from left to right and have our exact sentence.
 
-![Constituency Parse Tree]({{ site.url }}/assets/ConstituencyTree.jpg)
+![Constituency Parse Tree]({{ site.url }}/assets/posts/TreeKernel/ConstituencyTree.jpg)
 
 
 ### Tree Kernel Core Theory and Definitions

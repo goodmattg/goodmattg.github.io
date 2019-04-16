@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="An amateur's attempt at proving Newton's Binomial Theorem">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="Proving Newton&#39;s Binomial Theorem | Matt Goodman&#39;s Blog">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Proving Newton&#39;s Binomial Theorem | Matt Goodman&#39;s Blog">
+  <meta name="twitter:description" content="An amateur&#39;s attempt at proving Newton&#39;s Binomial Theorem">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2018-02/Newtons-Binomial-Theorem">
+  <meta property="og:title" content="Proving Newton&#39;s Binomial Theorem | Matt Goodman&#39;s Blog">
+  <meta property="og:description" content="An amateur&#39;s attempt at proving Newton&#39;s Binomial Theorem">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>Proving Newton's Binomial Theorem | Matt Goodman's Blog</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2018-02/Newtons-Binomial-Theorem">
+  <link rel="alternate" type="application/rss+xml" title="Matt Goodman&#39;s Blog" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/" class="author_name">Matt Goodman's Blog</a>
+  <span class="author_job">It's All Good, Man</span>
+  <span class="author_bio mbm">A selection of my research and thoughts</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+        
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+         
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('mattgoodman13 (.a.t.) gmail (.d.o.t.) com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    <li><a href="http://linkedin.com/in/matthew-goodman-89b76989" class="social-link-item" target="_blank"><i class="fa fa-fw fa-linkedin"></i></a></li>
+    
+    
+    
+    
+    <li><a href="http://github.com/goodmattg" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="Proving Newton&#39;s Binomial Theorem">Proving Newton's Binomial Theorem</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        25 FEB 2018
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    2 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <h2 id="proving-newtons-binomial-theorem">Proving Newton’s Binomial Theorem</h2>
+
+<p>Prove Newton’s Theorem for $t \in \mathbb{R}$ for $|x|&lt;1$. If $t=n$ is any positive integer obtain the standard binomial formula $(a+b)^n=\sum_{k=0}^n\binom{n}{k}a^{n-k}b^k$.</p>
+
+<script type="math/tex; mode=display">(1+x)^t=1+\binom{t}{1}x+\binom{t}{2}x^2+\binom{t}{3}x^3\cdots=\sum_{k=0}^{\infty}\binom{t}{k}x^k</script>
+
+<p>My calculus is rusty, so my first and only instinct when I see an infinite series like this with incrementing exponents is to use Taylor’s approximation theorem with remainder.</p>
+
+<script type="math/tex; mode=display">f^{n+1}(x) = \underbrace{\sum_{k=0}^{n}f^{(k)}(0)\frac{x^k}{k!}}_\text{T(x)}~+~\underbrace{\frac{1}{n!}\int_0^xt^nf^{n+1}(x-t)~dt}_{R_n(x)}</script>
+
+<p>Looking this over, we can tell this is probably a good approach. That initial term matches up almost perfectly to our proof objective. Let’s find the $k_{th}$ derivative of the function.</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align} 
+    f(x) & = (1+x)^t \\
+    f^{(k)}(x) & = t(t-1)(t-2) \cdots (t-k+1)(1+x)^{t-k} \\
+    & = t^{\underline{k}}(1+x)^{t-k} 
+\end{align} %]]></script>
+
+<p>We have the approximation term $T(x)$:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align}
+    T(x) & = \sum_{k=0}^{n}f^{(k)}(0)\frac{x^k}{k!} \\
+    & = \sum_{k=0}^{n}t^{\underline{k}}(1+(0))^{t-k}\frac{x^k}{k!} \\
+    & = \sum_{k=0}^{n}t^{\underline{k}}\frac{x^k}{k!} \\
+    & = \sum_{k=0}^{n}\binom{t}{k}x^k
+\end{align} %]]></script>
+
+<p>This matches perfectly! Now we just have to show that the remainder term $R(x) \rightarrow 0$ for $|x|&lt;1$. At this point I didn’t know what to do - I don’t yet have the experience in formal mathematical proofs to even understand the target approach for this style of problem. Referring to the internet, the solution is quite clear. We replace the $n+1_{th}$ derivative term with a positive function that is always greater than this derivative term. We then show that $R(x) \rightarrow 0$ integrating over the term with the positive function substituted in.</p>
+
+<p>First define the positive function $M(x)$ over the interval $|t|&lt;|x|$. We use the $M$ to represent maximum because it is cleaner than writing $MAX(x)$.</p>
+
+<script type="math/tex; mode=display">|f^{n+1}(t)| \leq max\{1,t^{n+1}\}(1+|x|)^{t-(n+1)} \leq M(x)^{n+1}</script>
+
+<p>We therefore have:</p>
+
+<script type="math/tex; mode=display">|R_n(x)| \leq \frac{M(x)^{n+1}}{n!}\int_0^xt^n~dt~=~\frac{M(x)^{n+1}x^{n+1}}{(n+1)!}</script>
+
+<p>The $(n+1)!$ term will grow exponentially fast as $n \rightarrow \infty$, so $R(x) \rightarrow 0$. As said earlier, we only needed to demonstrate that the remainder approached zero, so we are done.</p>
+
+<script type="math/tex; mode=display">\blacksquare</script>
+
+<h2 id="aside">Aside</h2>
+
+<p>I looked at the solution for this one and I can’t grasp why they specify this exact maximum bounding function. We’re quickly abandon the function so it hardly matters, but it seems like we could bound closer. Why $max(1,t^{n+1})$? Why not just $t^{n+1}$ or even $t^{\underline{n+1}}$? I’m guessing this is a matter of convention; we can see that over the interval $|t|&lt;|x|$, $|t^{n+1}| \leq 1$, so I’d venture the $max(1,t^{n+1})$ function is just to get rid of negatives in case $n+1$ is odd.</p>
+
+
+  </article>
+</div>
+
+<div class="share-buttons">
+  <h6>Share on: </h6>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=http://localhost:4000/articles/2018-02/Newtons-Binomial-Theorem" class="twitter btn" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/articles/2018-02/Newtons-Binomial-Theorem" class="facebook btn" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=http://localhost:4000/articles/2018-02/Newtons-Binomial-Theorem" class="google-plus btn" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+    <li>
+      <a href="https://news.ycombinator.com/submitlink?u=http://localhost:4000/articles/2018-02/Newtons-Binomial-Theorem" class="hacker-news btn" title="Share on Hacker News"><i class="fa fa-hacker-news"></i><span> Hacker News</span></a>
+    </li>
+    <li>
+      <a href="https://www.reddit.com/submit?url=http://localhost:4000/articles/2018-02/Newtons-Binomial-Theorem" class="reddit btn" title="Share on Reddit"><i class="fa fa-reddit"></i><span> Reddit</span></a>
+    </li>
+  </ul>
+</div><!-- end share-buttons -->
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'https-goodmattg-github-io';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+        <footer>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+  &copy; 2019 Matt Goodman's Blog. Powered by <a href="http://jekyllrb.com/">Jekyll</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Syncing PDFs across Devices in Mendeley
+excerpt: "Mendeley is a great tool to keep track of papers and citations across multiple devices if you can figure out how to actually enable file (i.e. PDF) syncing across devices. The UX designers were on a lunch break when this one was cooked up."
+categories: [help]
 comments: true
 ---
 
