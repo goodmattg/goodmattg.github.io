@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="This post is as much a meditation on using Dynamic Time Warping (DTW) in production as it is a review of my work. I have so many questions about this subject...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="Dynamic Time Warping for Clustering Time Series Data | Matt Goodman&#39;s Blog">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Dynamic Time Warping for Clustering Time Series Data | Matt Goodman&#39;s Blog">
+  <meta name="twitter:description" content="This post is as much a meditation on using Dynamic Time Warping (DTW) in production as it is a review of my work. I have so many questions about this subject...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2017-12/Dynamic-Time-Warping">
+  <meta property="og:title" content="Dynamic Time Warping for Clustering Time Series Data | Matt Goodman&#39;s Blog">
+  <meta property="og:description" content="This post is as much a meditation on using Dynamic Time Warping (DTW) in production as it is a review of my work. I have so many questions about this subject...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>Dynamic Time Warping for Clustering Time Series Data | Matt Goodman's Blog</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2017-12/Dynamic-Time-Warping">
+  <link rel="alternate" type="application/rss+xml" title="Matt Goodman&#39;s Blog" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/" class="author_name">Matt Goodman's Blog</a>
+  <span class="author_job">It's All Good, Man</span>
+  <span class="author_bio mbm">A selection of my research and thoughts</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+        
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+         
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('mattgoodman13 (.a.t.) gmail (.d.o.t.) com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    <li><a href="http://linkedin.com/in/matthew-goodman-89b76989" class="social-link-item" target="_blank"><i class="fa fa-fw fa-linkedin"></i></a></li>
+    
+    
+    
+    
+    <li><a href="http://github.com/goodmattg" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="Dynamic Time Warping for Clustering Time Series Data">Dynamic Time Warping for Clustering Time Series Data</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        10 DEC 2017
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    7 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <p>This post is as much a meditation on using Dynamic Time Warping (DTW) in production as it is a review of my work. I have so many questions about this subject. If you have any answers, I hope you will reach out.</p>
+
+<h2 id="motivation">Motivation</h2>
+
+<p>This was for the Wikipedia competition hosted by Kaggle competition to predict future page view counts on Wikipedia. Like so many of the solutions now the winning approach used RNNs to learn a set of hyperparameters on the entire dataset that are then fed in to a predict locally on each time series. This begs comparison to multivel hierarchical models from a Bayesian perspective, but I’ll save that for a later post. I treat these competitions as a way to explore new classes of techniques more than as competition to win. And it’s from that perspective that I settled on Dynamic Time Warping as the technique I wanted to explore. The big question I had was:</p>
+
+<blockquote>
+  <p>Instead of learning hyperparameters on our entire corpus of time series, wouldn’t it be great if we could find a way to sub divide our corpus into highly <strong>similar</strong> groups, and then learn hyperparameters on those groups?</p>
+</blockquote>
+
+<p>In the context of the <a href="https://www.kaggle.com/c/web-traffic-time-series-forecasting/discussion/43795">winning solution</a> this clustering layer would sit a layer above the RNN. In the language of hierarchical multilevel models, this would adding another level to the model that where we then compute posterior distributions on the hyperparameters for each group, with additional hyperparameters for the entire population. This yielded the question of how to cluster time series data.
+I looked to the research and settled on Dynamic Time Warping (DTW) from Keogh et. al from UC Riverside. For any pair of time series signals, we can find the energy of the signal that minimizes the distance between two input signals. DTW can easily show that time warped signals are the same. This technique has been highly effective in classifying EEG and other time-varying signals. As</p>
+
+<h2 id="literature-review-dtw">Literature Review: DTW</h2>
+
+<p>This review is informal but should provide sufficient grounding. Most of the important work has been done by Keogh</p>
+
+<ul>
+  <li>
+    <p>Rakthanmanon, T., Campana, B., Mueen, A., Batista, G., Westover, B., Zhu, Q., … Keogh, E. (n.d.). Searching and Mining Trillions of Time Series Subsequences under Dynamic Time Warping.</p>
+  </li>
+  <li>
+    <p>Mueen, A., &amp; Keogh, E. (2016). Extracting Optimal Performance from Dynamic Time Warping, 2129–2130.</p>
+  </li>
+  <li>
+    <p>Lemire, D. (2009). Faster retrieval with a two-pass dynamic-time-warping lower bound, 42, 2169–2180. http://doi.org/10.1016/j.patcog.2008.11.030</p>
+  </li>
+  <li>
+    <p>Keogh, E. (n.d.). Clustering of Time Series Subsequences is Meaningless : Implications for Previous and Future Research.</p>
+  </li>
+  <li>
+    <p>H. Sakoe and S. Chiba, “Dynamic programming algorithm optimization for spoken word recognition,” IEEE Trans. Acoust. Speech, Lang. Process., vol. 26, no. 1, pp. 43–50, 1978.</p>
+  </li>
+  <li>
+    <p>MuÌller, Meinard. Information Retrieval for Music and Motion. Springer, 2010.</p>
+  </li>
+</ul>
+
+<h2 id="theory-dtw">Theory: DTW</h2>
+
+<p>For an excellent review of the computational aspects of DTW I recommend “Abdullah Mueen, Eamonn J. Keogh: Extracting Optimal Performance from Dynamic Time Warping. KDD 2016: 2129-2130”. Refer to Meinard for a solid review of DTW theory.</p>
+
+<p>Dynamic Time Warping is a path-searching algorithm. DTW finds the minimum cost path between the complete matrix of pairwise distances between two time-series we will label $X$ and $Y$. Define $X := (x_1, x_2, …, x_n)$ and $Y:=(y_1, y_2,…,y_n)$. This matrix of pairwise distances is referred to as the <em>cost</em> matrix $C$. Define the function $c(x,y)$ as the cost or local distance function between two points $x$ and $y$. If $c(x,y)=0$, the two points are identical. Therefore, low cost implies similarity, high cost implies dissimilarity. DTW finds a path through the cost matrix of minimum total cost. Each valid path through the cost matrix is called a “warping” path. The set of all warping paths is labeled $W$.</p>
+
+<p>This recursive function gives the minimum cost path:</p>
+
+<script type="math/tex; mode=display">\gamma(i,j)~=~d(q_i, c_j)+min\{\gamma(i-1,j-1), \gamma(i-1, j), \gamma(i, j-1)\}</script>
+
+<p><img src="http://localhost:4000/assets/posts/DTW/DTWTrace.jpg" alt="DTW Trace" />
+<em>Figure 1. DTW computed optimal path between sinusoid &amp; sinusoid + sinc over $[0,6\pi]$</em></p>
+
+<h2 id="dtw-nearest-neigbhor-clustering">DTW Nearest-Neigbhor Clustering</h2>
+
+<p>The Wikipedia challenge provide 145,000 time-series to predict. Ideally, I would have computed pairwise DTW distances for all 145,000 pairs, and then run agglomerative clustering with Ward linkage to generate clusters. The computation wasn’t feasible on my desktop setup, and I wasn’t willing to go the AWS route for this exercise. Instead, I decided to randomly sample 10,000 rows, compute pairwise DTWs for the row sample, run hierarchical clustering on the pairwise distance matrix, and finally assign all nonsampled rows to the cluster matching of their nearest neighbhor. Admittedly this was not the ideal solution. By assigning all nonsampled rows to the cluster containing their nearest neighbor (i.e. minimizing DTW distance), I likely unbalanced the clusters. Furthermore, nearest-neighbor clustering is meaningless with high-dimensionality inputs. I considered nearest-neightbor defensible because my dimensionality was unitary. That is, I only clustered on the DTW distance and so avoided have high-dimensionality inputs. I didn’t compute any rough heuristics to quantify the distribution of nonsampled rows to clusters due to time constraints.</p>
+
+<blockquote>
+  <p>“As noted by (Agrawal et al., 1993, Bradley and Fayyad, 1998), in high dimensions the very concept of nearest neighbor has little meaning, because the ratio of the distance to the nearest neighbor over the distance to the average neighbor rapidly approaches one as the dimensionality increases.” [2]</p>
+</blockquote>
+
+<p>I ending up doing a minor rewrite of Prof. Eamonn Keogh’s UCR-DTW C++ tool to do nearest-neighbor search instead of subsequence search. The tool now searches a list of time-series to find the one that minimizes the DTW distance instead of subsequence search to find the subsequence that minimizes distance. Because of optimizations in the UCR-DTW tool (via research by Lemire, Kim, et. al) the tool only computes the full DTW in &lt;10% of cases.</p>
+
+<p>After clustering, about 80,000 rows belong to one cluster - so we could conceptualize that cluster as the base data set and run our standard model. I would be curious to train the winning solution on each of my clusters to see if that improved its performance. The smaller cluster had predictable features like single large spikes, uniformity, two spikes, clear seasonality, etc. Using different linkage whole and partial linkage patterns instead of ward only increased the size of the largest cluster. This indicates that there is no signicant distinction for the majority of the time series signals in the corpus.</p>
+
+<h2 id="code-appendix">Code Appendix</h2>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">%% Define original signal</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">:</span><span class="nb">pi</span><span class="p">/</span><span class="mi">64</span><span class="p">:</span><span class="mi">6</span><span class="o">*</span><span class="nb">pi</span><span class="p">;</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="mf">0.25</span><span class="o">*</span><span class="nb">sin</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+
+    <span class="c1">%% Modify a section of the signal</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">length</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
+    <span class="n">xind</span> <span class="o">=</span> <span class="p">(</span><span class="nb">floor</span><span class="p">(</span><span class="mf">0.40</span><span class="o">*</span><span class="n">N</span><span class="p">):</span><span class="nb">floor</span><span class="p">(</span><span class="mf">0.60</span><span class="o">*</span><span class="n">N</span><span class="p">));</span>
+    <span class="n">ymod</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
+    <span class="n">ymod</span><span class="p">(</span><span class="n">xind</span><span class="p">)</span> <span class="o">=</span> <span class="n">sinc</span><span class="p">(</span><span class="n">x</span><span class="p">(</span><span class="n">xind</span><span class="p">));</span>
+
+    <span class="c1">%% Compute DTW</span>
+    <span class="n">zg</span> <span class="o">=</span> <span class="nb">repmat</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">zgmod</span> <span class="o">=</span> <span class="nb">repmat</span><span class="p">(</span><span class="n">ymod</span><span class="o">'</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">);</span>
+    <span class="n">d2</span> <span class="o">=</span> <span class="nb">sqrt</span><span class="p">((</span><span class="n">zg</span> <span class="o">-</span> <span class="n">zgmod</span><span class="p">)</span> <span class="o">.^</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="p">[</span><span class="o">~</span><span class="p">,</span><span class="n">ix</span><span class="p">,</span><span class="n">iy</span><span class="p">]</span> <span class="o">=</span> <span class="n">dtw</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">ymod</span><span class="p">);</span>
+
+    <span class="c1">%% Plotting</span>
+    <span class="p">[</span><span class="n">xg</span><span class="p">,</span> <span class="n">yg</span><span class="p">]</span> <span class="o">=</span> <span class="nb">meshgrid</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">N</span><span class="p">);</span>
+    <span class="n">d2</span><span class="p">(</span><span class="nb">sub2ind</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">d2</span><span class="p">),</span> <span class="n">iy</span><span class="p">,</span> <span class="n">ix</span><span class="p">))</span> <span class="o">=</span> <span class="mf">1.5</span><span class="o">*</span><span class="nb">max</span><span class="p">(</span><span class="n">d2</span><span class="p">(:));</span>
+    <span class="nb">mesh</span><span class="p">(</span><span class="n">xg</span><span class="p">,</span> <span class="n">yg</span><span class="p">,</span> <span class="n">d2</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+
+  </article>
+</div>
+
+<div class="share-buttons">
+  <h6>Share on: </h6>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=http://localhost:4000/articles/2017-12/Dynamic-Time-Warping" class="twitter btn" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/articles/2017-12/Dynamic-Time-Warping" class="facebook btn" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=http://localhost:4000/articles/2017-12/Dynamic-Time-Warping" class="google-plus btn" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+    <li>
+      <a href="https://news.ycombinator.com/submitlink?u=http://localhost:4000/articles/2017-12/Dynamic-Time-Warping" class="hacker-news btn" title="Share on Hacker News"><i class="fa fa-hacker-news"></i><span> Hacker News</span></a>
+    </li>
+    <li>
+      <a href="https://www.reddit.com/submit?url=http://localhost:4000/articles/2017-12/Dynamic-Time-Warping" class="reddit btn" title="Share on Reddit"><i class="fa fa-reddit"></i><span> Reddit</span></a>
+    </li>
+  </ul>
+</div><!-- end share-buttons -->
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'https-goodmattg-github-io';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+        <footer>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+  &copy; 2019 Matt Goodman's Blog. Powered by <a href="http://jekyllrb.com/">Jekyll</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

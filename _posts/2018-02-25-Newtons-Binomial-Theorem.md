@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Proving Newton's Binomial Theorem
+excerpt: An amateur's attempt at proving Newton's Binomial Theorem
 comments: true
 ---
 

@@ -1,7 +1,13 @@
 ---
 layout: post
-title: Dynamic Time Warping for Clustering Time Series Data
+title: "Dynamic Time Warping for Clustering Time Series Data"
+excerpt: "This post is as much a meditation on using Dynamic Time Warping (DTW) in production as it is a review of my work. I have so many questions about this subject. If you have any answers, I hope you will reach out."
+categories: [DTW, ML, Kaggle]
 comments: true
+# image:
+#   feature: https://images.unsplash.com/photo-1534078362425-387ae9668c17?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3150&q=80
+#   credit: chuttersnap
+#   creditlink: https://unsplash.com/photos/Ki0dpxd3LGc
 ---
 
 This post is as much a meditation on using Dynamic Time Warping (DTW) in production as it is a review of my work. I have so many questions about this subject. If you have any answers, I hope you will reach out.
@@ -42,7 +48,7 @@ This recursive function gives the minimum cost path:
 
 $$\gamma(i,j)~=~d(q_i, c_j)+min\{\gamma(i-1,j-1), \gamma(i-1, j), \gamma(i, j-1)\}$$
 
-![DTW Trace]({{ site.url }}/assets/posts/DTW/DTWTrace.jpg =50x)
+![DTW Trace]({{ site.url }}/assets/posts/DTW/DTWTrace.jpg)
 *Figure 1. DTW computed optimal path between sinusoid & sinusoid + sinc over $[0,6\pi]$*
 
 ## DTW Nearest-Neigbhor Clustering

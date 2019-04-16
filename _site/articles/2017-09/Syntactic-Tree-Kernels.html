@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="The problem is deviously simple - given two input questions, tell whether the questions ask the same thing (i.e. seek to reveal the same previously unknown k...">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="Syntactic Tree Kernels | Matt Goodman&#39;s Blog">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Syntactic Tree Kernels | Matt Goodman&#39;s Blog">
+  <meta name="twitter:description" content="The problem is deviously simple - given two input questions, tell whether the questions ask the same thing (i.e. seek to reveal the same previously unknown k...">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2017-09/Syntactic-Tree-Kernels">
+  <meta property="og:title" content="Syntactic Tree Kernels | Matt Goodman&#39;s Blog">
+  <meta property="og:description" content="The problem is deviously simple - given two input questions, tell whether the questions ask the same thing (i.e. seek to reveal the same previously unknown k...">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>Syntactic Tree Kernels | Matt Goodman's Blog</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2017-09/Syntactic-Tree-Kernels">
+  <link rel="alternate" type="application/rss+xml" title="Matt Goodman&#39;s Blog" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/" class="author_name">Matt Goodman's Blog</a>
+  <span class="author_job">It's All Good, Man</span>
+  <span class="author_bio mbm">A selection of my research and thoughts</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+        
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+         
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('mattgoodman13 (.a.t.) gmail (.d.o.t.) com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    <li><a href="http://linkedin.com/in/matthew-goodman-89b76989" class="social-link-item" target="_blank"><i class="fa fa-fw fa-linkedin"></i></a></li>
+    
+    
+    
+    
+    <li><a href="http://github.com/goodmattg" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="Syntactic Tree Kernels">Syntactic Tree Kernels</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        4 SEP 2017
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    23 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <h2 id="motivation">Motivation</h2>
+
+<p>This post encapsulates the work I did with Dean Fulgoni for our final project in Big Data Analytics. Credit to Professor Chris Callison-Burch for steering me away from some topics that “could easily be Phd theses” and to Professor Zachary Ives for being an excellent teacher.</p>
+
+<h2 id="the-problem-we-tried-to-solve">The Problem We Tried to Solve</h2>
+
+<p>The problem is deviously simple - given two input questions, tell whether the questions ask the same thing (i.e. seek to reveal the same previously unknown knowledge). Not to get off track, but this begs some thought on the nature of what a question is and whether a question is separable from its posed context. See the <a href="https://plato.stanford.edu/entries/questions/">Stanford Encyclopedia of Philosophy (SEP)</a> for an excellent review of the philosophy of questions. I won’t be discussing it in detail, but my view on this problem is colored by the philosophical understanding of questions. We can assume that questions on Quora are requesting information,  not testing the knowledge of the user base.</p>
+
+<blockquote>
+  <p>… a question [is] an abstract thing for which an interrogative sentence is a piece of notation. (Belnap and Steel, 1976)</p>
+</blockquote>
+
+<p>The challenge was posed as a supervised learning question with a human labeled training set. A cursory glance at the training set showed that the human labeling was inconsistent, with varying standards to classify questions as semantically the same.</p>
+
+<p>These were labeled as asking two different questions:</p>
+
+<ul>
+  <li>Do we need smart cities or smart politicians?</li>
+  <li>Do we need smart cities or smart laws?</li>
+</ul>
+
+<p>We can see that the classification of this pair is debatable. Politicians are not laws. However, politicians are the only people with the power to make laws. Where is the line drawn for semantic similarity? How do we even approach situations where the the map between language and abstract meaning is complex?</p>
+
+<p>\begin{align}
+    Politician &amp;\ne Law
+    \\ Politician &amp;\rightarrow Law
+\end{align}</p>
+
+<p>With an unclear standard for determining whether two questions had the same intent, we decided to approach the problem ‘loosely’. Overfitting in any specific approach would kill our performance on the test set. We partitioned the feature set into <strong>syntactic features</strong> and <strong>semantic features</strong>. I’ll touch on semantic features later, but I decided to focus on syntactic features because it was much lower hanging fruit. The question became how to quantify the syntactic similarity of two sentences.</p>
+
+<script type="math/tex; mode=display">f: (sentence_1, sentence_2) \rightarrow s \in [0,1]</script>
+
+<p>I’ll save the complete literature review for a separate post. We chose to use Tree Kernels championed by Prof. Alessandro Moschitti of the University of Trento, Italy because of the elegance of the theoretical basis.</p>
+
+<h2 id="syntactic-tree-kernel-theory">Syntactic Tree Kernel Theory</h2>
+
+<p>As part of our search for unique features to encode syntactic and semantic similarity, we found that so called Tree Kernels had been shown to be highly effective in augmenting SVMs designed to solve problems in question classification, question answering, Semantic Role Labeling, and named entity recognition. The broad idea behind the theory is that syntactic features must be quantified to learn semantic structures. It isn’t enough to say, compare lists of POS tags for two sentences because the structure of the sentences shape their meanings. We therefore design kernels that map from tree structures (e.g. constituency parse trees) to scores that measure the syntactic similarity of the two trees. Note that these scores are bounded for use in an SVM framework, but could easily be used as features in a deep learning framework.</p>
+
+<h3 id="kernel-definition">Kernel Definition</h3>
+
+<p><em>The next few section are taken almost verbatim from Moschitti’s ACL 2012 tutorial on State-of-the-art Kernels in Natural Language Processing. All credit goes to him and his colleagues.</em></p>
+
+<p>The point of the following math is that we can ensure our SVM kernel is valid only if the matrix of transformed points is positive semi-definite. You can review the literature for the proof.</p>
+
+<p>A <strong>kernel</strong> is a function:</p>
+
+<script type="math/tex; mode=display">k: (\overrightarrow{x},\overrightarrow{z}) \rightarrow \Phi(\overrightarrow{x}) \cdot \Phi(\overrightarrow{z}) ~~~~~~\forall \overrightarrow{x}, \overrightarrow{z} \in X</script>
+
+<p>Mercer’s Conditions for a valid kernel:</p>
+
+<p>Let $X$ be a finite input space and let $K(x,z)$ be a symmetric function on $X$. Then $K(x,z)$ is a kernel function IFF matrix:</p>
+
+<script type="math/tex; mode=display">k(x,z) = \Phi(x) \cdot \Phi(z)</script>
+
+<p>is positive semi-definite (non-negative eigenvalues). That is, if the matrix is positive semi-definite we can find a $\Phi$ that implements the kernel function $k$.</p>
+
+<h2 id="tree-definition">Tree Definition</h2>
+
+<p>We worked exclusively with <strong>constituency parse trees</strong>. Anywhere I write “tree”, I am referring to a constituency parse tree. A constituency parse tree breaks down a sentence into phrases using a well-defined, <strong>context-free</strong>, phrase structure grammar. A context-free grammar is a set of rules that describes all possible strings in a formal language. Given any sentence, we have a formal way to define that sentence as made up of phrases, nouns, verbs, etc. Noam Chomsky was the first define context-free grammars in linguistics to describe the universal structure of natural language. We use the Penn-Treebank II formal grammar for this project. Here is a small sample of the Penn-Treebank II formal grammar:</p>
+
+<ul>
+  <li><strong>RB</strong>: Adverb</li>
+  <li><strong>IN</strong>: Preposition</li>
+  <li><strong>PP</strong>: Prepositional Phrase</li>
+  <li><strong>VP</strong>: Verb Phrase</li>
+</ul>
+
+<p>Below is an example of a constituency parse tree for the sentence:</p>
+
+<blockquote>
+  <p>I will never stop learning.</p>
+</blockquote>
+
+<p>Notice that sentence tokens (the words) are always leaves of the tree and in their natural language order. That is, we should always be able to read the tree leaves from left to right and have our exact sentence.</p>
+
+<p><img src="http://localhost:4000/assets/posts/TreeKernel/ConstituencyTree.jpg" alt="Constituency Parse Tree" /></p>
+
+<h3 id="tree-kernel-core-theory-and-definitions">Tree Kernel Core Theory and Definitions</h3>
+
+<p>A tree kernel is a function: $f: (tree_1, tree_2) \rightarrow \mathbf{R}^+ $</p>
+
+<p>A tree is defined recursively as a set of nodes, each of which has a value and a set of children, each of which are trees. A node is a “leaf” if it has no children. A node is “pre-terminal” if all of its child nodes are leaves. The “production” of a node is the subtree containing the node and its children. The production of two nodes are the same if the nodes have the same value and their children have the same value. Because we work are working with ordered trees, the children must have the same values in the same order to be part of the same production.</p>
+
+<p>Key to the effectiveness of tree kernel features in solving problems is the choice of tree structure. Moschitti shows that different tree kernels are effective for different choices of syntax trees in solving different classes of problems. We used Stanford NLP to generate parse trees from the input sentences. A parse tree is an ordered tree that represents the syntax of a sentence according to some context-free grammar. There are two main classes of parse trees: constituency and dependency. A dependency parse trees is the tree structure generated by the dependencies of a sentence. While dependencies can be highly useful in generating features, as described in Section 4.1, Moschitti found that constituency parse trees were most effective in solving classification related problems. A constituency parse tree breaks down the tokens of sentence into their constituent grammars.</p>
+
+<h3 id="syntactic-tree-kernel-or-collins-duffy-stk">Syntactic Tree Kernel or “Collins-Duffy” (STK)</h3>
+
+<p>For our tree kernel features we only implemented the Collins-Duffy tree kernel. The general idea of the Collins-Duffy Tree Kernel is that we want to compare the number of common subtrees between two input trees. The naive approach in exponential time is to enumerate all possible subtrees of the two input trees and then perform the dot-product. Obviously generating every subtree of each sentence, and then taking the dot-product of all of the subtrees to find how many the two sentences have in common would be a computationally nightmarish $O(n^2)$. We can take advantage of the fact that generating subtrees is recursive, and that if two parent nodes do not match, the subtrees rooted at those two nodes do not match. Collins and Duffy propose the following derivation.</p>
+
+<p>Define the tree kernel $K: f(T_1,T_2) \rightarrow \mathbf{R}^+$ where $T_1$ and $T_2$ are well-formed trees. The dot-product approach above is written:</p>
+
+<script type="math/tex; mode=display">K(T_1,T_2) = h(T_1) \cdot h(T_2)</script>
+
+<p>Where $h$ is a function that produces all of the subtrees of a tree. Again, the dot-product between $h(T_1)$ and $h(T_2)$ will count all of the subtrees $T_1$ and $T_2$ have in common. They define the indicator function $I_i(n)$ to be 1 if the subtree $i$ is rooted at node $n$ and 0 otherwise. Therefore, we can rewrite the dot-product above.</p>
+
+<p>\begin{align}
+h(T_1) \cdot h(T_2) &amp;= \sum_i h_i(T_1)h_i(T_2)
+    \\ &amp; = \sum_{n_1 \in N_1}\sum_{n_2 \in N_2} \sum_i I_i(n_1) I_i(n_2)
+    \\ &amp; = \sum_{n_1 \in N_1}\sum_{n_2 \in N_2} C(n_1, n_2)
+\end{align}</p>
+
+<p>Where $C(n_1,n_2)$ is defined as $\sum_i I_i(n_1)I_i(n_2)$. We note that $C(n_1, n_2)$ can be computed recursively in polynomial time:</p>
+
+<p>$C(n_1,n_2) = 0$ if the productions at $n_1$ and $n_2$ are different.</p>
+
+<p>$C(n_1,n_2) = \lambda$ if the productions at $n_1$ and $n_2$ are the same and $n_1$ and $n_2$ are pre-terminal.</p>
+
+<script type="math/tex; mode=display">C(n_1,n_2) = \lambda \prod_{j=1}^{nc(n_1)}(\sigma + C(ch(n_1,j),ch(n_2,j)))</script>
+
+<p>Where $0 &lt; \lambda \leq 1$ is a factor that down weights subtrees exponentially with their size, $nc(n_i)$ returns the number of children of node $i$, binary variable $\sigma \in {0,1}$ determines whether we use the ST or SST kernel, and $ch(n_i,j)$ selects the $j$th child of node $i$. The ST or subtree kernel is where $\sigma = 0$. For the ST kernel, the entire subtree must match to return a non-zero score. The SST or subset tree kernel is where $\sigma = 1$. For the SST kernel, non-zero scores can be achieved even if all of the subtrees of two nodes do not match.</p>
+
+<p>The distinction between the ST and SST kernels in the previous section is that the SST kernel is more forgiving than the ST kernel. The SST kernel can still return high scores even if the exact sentences are not the same. Likewise, the ST kernel heavily penalizes minor differences between constituency trees. The factor $\lambda$ can be viewed as a penalty we utilize so that kernel does not over-inflate the importance of matches between larger subtrees. These parameters become less important when we normalize the kernel score using:</p>
+
+<script type="math/tex; mode=display">K_{norm}(T_1,T_2) = \frac{K(T_1,T_2)}{K(T_1,T_1)K(T_2,T_2)}</script>
+
+<p>We generated features with the ST and SST tree kernels for each question pair using $\lambda \in {1, 0.8, 0.5, 0.2, 0.1, 0.05, 0.2}$ totaling 14 tree kernel features. Determining the optimal $\lambda$ for this task would be a good exploration on its own.</p>
+
+<h2 id="synactic-tree-kernels-in-python">Synactic Tree Kernels in Python</h2>
+
+<p>As far as I know, this is the first implementation of syntactic tree kernels in Python. This code may eventually move to its own maintained repository if it’s needed. If you find any bugs please reach out to me. Dr. Moschitti’s cited implementation is:</p>
+
+<p><a href="http://svmlight.joachims.org/">SVM-Light</a> written by Thorsten Joachims in C. His implementation is most-likely faster (no comparison benchmark yet). My implementation is however easier to grasp and is isolated from a complete SVM library.</p>
+
+<h3 id="building-the-parse-tree">Building the Parse Tree</h3>
+
+<p>As described in the Pipeline section we used Stanford CoreNLP to generate our constituency parse trees. There aren’t many libraries that are good for constituency parsing, and CoreNLP is by far the most stable and customizable. Oddly enough, Stanford CoreNLP will print a constituency parse tree for a given sentence with well-defined structure to console (i.e. pretty print), but provides no functionality to store the tree in a reasonable format (linked list, hashmap, etc. ). The code in this subsection is available on my <a href="https://github.com/goodmattg/quora_kaggle/blob/master/TreeBuild.py">Github</a> and is used to take the raw text output of Stanford CoreNLP and store in the schema below for tree kernel computation. We label each token with an Id and store the tokens for fast computation, but admittedly poor space complexity.</p>
+
+<ul>
+  <li>curid:    <em>Integer</em></li>
+  <li>parid:    <em>Integer</em></li>
+  <li>posOrTok:  <em>String</em></li>
+  <li>indent:    <em>Integer</em></li>
+  <li>children:    <em>[Integer]</em></li>
+  <li>childrenTok:  <em>[String]</em></li>
+</ul>
+
+<h3 id="computing-tree-kernels">Computing Tree Kernels</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">wordnet</span> <span class="k">as</span> <span class="n">wn</span>
+
+<span class="s">'''
+Helper Methods
+'''</span>
+<span class="k">def</span> <span class="nf">_isLeaf_</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">parentNode</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">parentNode</span><span class="p">][</span><span class="s">'children'</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">_isPreterminal_</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">parentNode</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">tree</span><span class="p">[</span><span class="n">parentNode</span><span class="p">][</span><span class="s">'children'</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">_isLeaf_</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">False</span>
+    <span class="k">return</span> <span class="bp">True</span>
+
+<span class="s">'''
+Implementation of the Colins-Duffy or Subset-Tree (SST) Kernel
+'''</span>
+
+<span class="k">def</span> <span class="nf">_cdHelper_</span><span class="p">(</span><span class="n">tree1</span><span class="p">,</span> <span class="n">tree2</span><span class="p">,</span> <span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">,</span> <span class="n">store</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">SST_ON</span><span class="p">):</span>
+    <span class="c"># No duplicate computations</span>
+    <span class="k">if</span> <span class="n">store</span><span class="p">[</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span>
+
+    <span class="c"># Leaves yield similarity score by definition</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">_isLeaf_</span><span class="p">(</span><span class="n">tree1</span><span class="p">,</span> <span class="n">node1</span><span class="p">)</span> <span class="ow">or</span> <span class="n">_isLeaf_</span><span class="p">(</span><span class="n">tree2</span><span class="p">,</span> <span class="n">node2</span><span class="p">)):</span>
+        <span class="n">store</span><span class="p">[</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">return</span>
+
+    <span class="c"># same parent node</span>
+    <span class="k">if</span> <span class="n">tree1</span><span class="p">[</span><span class="n">node1</span><span class="p">][</span><span class="s">'posOrTok'</span><span class="p">]</span> <span class="o">==</span> <span class="n">tree2</span><span class="p">[</span><span class="n">node2</span><span class="p">][</span><span class="s">'posOrTok'</span><span class="p">]:</span>
+        <span class="c"># same children tokens</span>
+        <span class="k">if</span> <span class="n">tree1</span><span class="p">[</span><span class="n">node1</span><span class="p">][</span><span class="s">'childrenTok'</span><span class="p">]</span> <span class="o">==</span> <span class="n">tree2</span><span class="p">[</span><span class="n">node2</span><span class="p">][</span><span class="s">'childrenTok'</span><span class="p">]:</span>
+            <span class="c"># Check if both nodes are pre-terminal</span>
+            <span class="k">if</span> <span class="n">_isPreterminal_</span><span class="p">(</span><span class="n">tree1</span><span class="p">,</span> <span class="n">node1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">_isPreterminal_</span><span class="p">(</span><span class="n">tree2</span><span class="p">,</span> <span class="n">node2</span><span class="p">):</span>
+                <span class="n">store</span><span class="p">[</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">]</span> <span class="o">=</span> <span class="n">lam</span>
+                <span class="k">return</span>
+            <span class="c"># Not pre-terminal. Recurse among the children of both token trees.</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">nChildren</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tree1</span><span class="p">[</span><span class="n">node1</span><span class="p">][</span><span class="s">'children'</span><span class="p">])</span>
+
+                <span class="n">runningTotal</span> <span class="o">=</span> <span class="bp">None</span>
+                <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nChildren</span><span class="p">):</span>
+                     <span class="c"># index -&gt;  node_id</span>
+                    <span class="n">tmp_n1</span> <span class="o">=</span> <span class="n">tree1</span><span class="p">[</span><span class="n">node1</span><span class="p">][</span><span class="s">'children'</span><span class="p">][</span><span class="n">idx</span><span class="p">]</span>
+                    <span class="n">tmp_n2</span> <span class="o">=</span> <span class="n">tree2</span><span class="p">[</span><span class="n">node2</span><span class="p">][</span><span class="s">'children'</span><span class="p">][</span><span class="n">idx</span><span class="p">]</span>
+                    <span class="c"># Recursively run helper</span>
+                    <span class="n">_cdHelper_</span><span class="p">(</span><span class="n">tree1</span><span class="p">,</span> <span class="n">tree2</span><span class="p">,</span> <span class="n">tmp_n1</span><span class="p">,</span> <span class="n">tmp_n2</span><span class="p">,</span> <span class="n">store</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">SST_ON</span><span class="p">)</span>
+                    <span class="c"># Set the initial value for the layer. Else multiplicative product.</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">runningTotal</span> <span class="o">==</span> <span class="bp">None</span><span class="p">):</span>
+                        <span class="n">runningTotal</span> <span class="o">=</span> <span class="n">SST_ON</span> <span class="o">+</span> <span class="n">store</span><span class="p">[</span><span class="n">tmp_n1</span><span class="p">,</span> <span class="n">tmp_n2</span><span class="p">]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">runningTotal</span> <span class="o">*=</span> <span class="p">(</span><span class="n">SST_ON</span> <span class="o">+</span> <span class="n">store</span><span class="p">[</span><span class="n">tmp_n1</span><span class="p">,</span> <span class="n">tmp_n2</span><span class="p">])</span>
+
+                <span class="n">store</span><span class="p">[</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">]</span> <span class="o">=</span> <span class="n">lam</span> <span class="o">*</span> <span class="n">runningTotal</span>
+                <span class="k">return</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">store</span><span class="p">[</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">else</span><span class="p">:</span> <span class="c"># parent nodes are different</span>
+        <span class="n">store</span><span class="p">[</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">return</span>
+
+
+<span class="k">def</span> <span class="nf">_cdKernel_</span><span class="p">(</span><span class="n">tree1</span><span class="p">,</span> <span class="n">tree2</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">SST_ON</span><span class="p">):</span>
+    <span class="c"># Fill the initial state of the store</span>
+    <span class="n">store</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">tree1</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">tree2</span><span class="p">)))</span>
+    <span class="n">store</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c"># O(N^2) to compute the tree dot product</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tree1</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tree2</span><span class="p">)):</span>
+            <span class="n">_cdHelper_</span><span class="p">(</span><span class="n">tree1</span><span class="p">,</span> <span class="n">tree2</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">store</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">SST_ON</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">store</span><span class="o">.</span><span class="nb">sum</span><span class="p">()</span>
+
+<span class="s">'''
+Returns a tuple w/ format: (raw, normalized)
+If NORMALIZE_FLAG set to False, tuple[1] = -1
+'''</span>
+<span class="k">def</span> <span class="nf">_CollinsDuffy_</span><span class="p">(</span><span class="n">tree1</span><span class="p">,</span> <span class="n">tree2</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">NORMALIZE_FLAG</span><span class="p">,</span> <span class="n">SST_ON</span><span class="p">):</span>
+    <span class="n">raw_score</span> <span class="o">=</span> <span class="n">_cdKernel_</span><span class="p">(</span><span class="n">tree1</span><span class="p">,</span> <span class="n">tree2</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">SST_ON</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">NORMALIZE_FLAG</span><span class="p">):</span>
+        <span class="n">t1_score</span> <span class="o">=</span> <span class="n">_cdKernel_</span><span class="p">(</span><span class="n">tree1</span><span class="p">,</span> <span class="n">tree1</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">SST_ON</span><span class="p">)</span>
+        <span class="n">t2_score</span> <span class="o">=</span> <span class="n">_cdKernel_</span><span class="p">(</span><span class="n">tree2</span><span class="p">,</span> <span class="n">tree2</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">SST_ON</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">raw_score</span><span class="p">,(</span><span class="n">raw_score</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">t1_score</span> <span class="o">*</span> <span class="n">t2_score</span><span class="p">)))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">raw_score</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+
+<span class="s">'''
+Implementation of the Partial Tree Kernel (PTK) from:
+"Efficient Convolution Kernels for Dependency and Constituent Syntactic Trees"
+by Alessandro Moschitti
+'''</span>
+
+<span class="s">'''
+The delta function is stolen from the Collins-Duffy kernel
+'''</span>
+
+<span class="k">def</span> <span class="nf">_deltaP_</span><span class="p">(</span><span class="n">tree1</span><span class="p">,</span> <span class="n">tree2</span><span class="p">,</span> <span class="n">seq1</span><span class="p">,</span> <span class="n">seq2</span><span class="p">,</span> <span class="n">store</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+
+<span class="c">#     # Enumerate subsequences of length p+1 for each child set</span>
+    <span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c"># generate delta(a,b)</span>
+        <span class="n">_delta_</span><span class="p">(</span><span class="n">tree1</span><span class="p">,</span> <span class="n">tree2</span><span class="p">,</span> <span class="n">seq1</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">seq2</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">store</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">store</span><span class="p">[</span><span class="n">seq1</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">seq2</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">runningTot</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">seq1</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">seq2</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                    <span class="n">scaleFactor</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">lam</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">seq1</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">-</span><span class="n">i</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">seq2</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">-</span><span class="n">r</span><span class="p">)</span>
+                    <span class="n">dp</span> <span class="o">=</span> <span class="n">_deltaP_</span><span class="p">(</span><span class="n">tree1</span><span class="p">,</span> <span class="n">tree2</span><span class="p">,</span> <span class="n">seq1</span><span class="p">[:</span><span class="n">i</span><span class="p">],</span> <span class="n">seq2</span><span class="p">[:</span><span class="n">r</span><span class="p">],</span> <span class="n">store</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">p</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                    <span class="n">runningTot</span> <span class="o">+=</span> <span class="p">(</span><span class="n">scaleFactor</span> <span class="o">*</span> <span class="n">dp</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">runningTot</span>
+
+<span class="k">def</span> <span class="nf">_delta_</span><span class="p">(</span><span class="n">tree1</span><span class="p">,</span> <span class="n">tree2</span><span class="p">,</span> <span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">,</span> <span class="n">store</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">mu</span><span class="p">):</span>
+<span class="c">#     print("Evaluating Delta: (%d,%d)" % (node1, node2))</span>
+
+    <span class="c"># No duplicate computations</span>
+    <span class="k">if</span> <span class="n">store</span><span class="p">[</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span>
+
+    <span class="c"># Leaves yield similarity score by definition</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">_isLeaf_</span><span class="p">(</span><span class="n">tree1</span><span class="p">,</span> <span class="n">node1</span><span class="p">)</span> <span class="ow">or</span> <span class="n">_isLeaf_</span><span class="p">(</span><span class="n">tree2</span><span class="p">,</span> <span class="n">node2</span><span class="p">)):</span>
+        <span class="n">store</span><span class="p">[</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">return</span>
+
+    <span class="c"># same parent node</span>
+    <span class="k">if</span> <span class="n">tree1</span><span class="p">[</span><span class="n">node1</span><span class="p">][</span><span class="s">'posOrTok'</span><span class="p">]</span> <span class="o">==</span> <span class="n">tree2</span><span class="p">[</span><span class="n">node2</span><span class="p">][</span><span class="s">'posOrTok'</span><span class="p">]:</span>
+
+        <span class="k">if</span> <span class="n">_isPreterminal_</span><span class="p">(</span><span class="n">tree1</span><span class="p">,</span> <span class="n">node1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">_isPreterminal_</span><span class="p">(</span><span class="n">tree2</span><span class="p">,</span> <span class="n">node2</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">tree1</span><span class="p">[</span><span class="n">node1</span><span class="p">][</span><span class="s">'childrenTok'</span><span class="p">]</span> <span class="o">==</span> <span class="n">tree2</span><span class="p">[</span><span class="n">node2</span><span class="p">][</span><span class="s">'childrenTok'</span><span class="p">]:</span>
+                <span class="n">store</span><span class="p">[</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">]</span> <span class="o">=</span> <span class="n">lam</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">store</span><span class="p">[</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">return</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c"># establishes p_max</span>
+            <span class="n">childmin</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tree1</span><span class="p">[</span><span class="n">node1</span><span class="p">][</span><span class="s">'children'</span><span class="p">]),</span> <span class="nb">len</span><span class="p">(</span><span class="n">tree2</span><span class="p">[</span><span class="n">node2</span><span class="p">][</span><span class="s">'children'</span><span class="p">]))</span>
+            <span class="n">deltaTot</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">childmin</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+                <span class="c"># compute delta_p</span>
+                <span class="n">deltaTot</span> <span class="o">+=</span> <span class="n">_deltaP_</span><span class="p">(</span><span class="n">tree1</span><span class="p">,</span> <span class="n">tree2</span><span class="p">,</span>
+                                     <span class="n">tree1</span><span class="p">[</span><span class="n">node1</span><span class="p">][</span><span class="s">'children'</span><span class="p">],</span>
+                                     <span class="n">tree2</span><span class="p">[</span><span class="n">node2</span><span class="p">][</span><span class="s">'children'</span><span class="p">],</span> <span class="n">store</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+
+            <span class="n">store</span><span class="p">[</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">]</span> <span class="o">=</span> <span class="n">mu</span> <span class="o">*</span> <span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="n">lam</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">deltaTot</span><span class="p">)</span>
+            <span class="k">return</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c"># parent nodes are different</span>
+        <span class="n">store</span><span class="p">[</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">return</span>
+
+<span class="k">def</span> <span class="nf">_ptKernel_</span><span class="p">(</span><span class="n">tree1</span><span class="p">,</span> <span class="n">tree2</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">mu</span><span class="p">):</span>
+    <span class="c"># Fill the initial state of the store</span>
+    <span class="n">store</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">tree1</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">tree2</span><span class="p">)))</span>
+    <span class="n">store</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c"># O(N^2) to compute the tree dot product</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tree1</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tree2</span><span class="p">)):</span>
+            <span class="n">_delta_</span><span class="p">(</span><span class="n">tree1</span><span class="p">,</span> <span class="n">tree2</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">store</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">store</span><span class="o">.</span><span class="nb">sum</span><span class="p">()</span>
+
+<span class="s">'''
+Returns a tuple w/ format: (raw, normalized)
+If NORMALIZE_FLAG set to False, tuple[1] = -1
+'''</span>
+<span class="k">def</span> <span class="nf">_MoschittiPT_</span><span class="p">(</span><span class="n">tree1</span><span class="p">,</span> <span class="n">tree2</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">NORMALIZE_FLAG</span><span class="p">):</span>
+    <span class="n">raw_score</span> <span class="o">=</span> <span class="n">_ptKernel_</span><span class="p">(</span><span class="n">tree1</span><span class="p">,</span> <span class="n">tree2</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">NORMALIZE_FLAG</span><span class="p">):</span>
+        <span class="n">t1_score</span> <span class="o">=</span> <span class="n">_ptKernel_</span><span class="p">(</span><span class="n">tree1</span><span class="p">,</span> <span class="n">tree1</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
+        <span class="n">t2_score</span> <span class="o">=</span> <span class="n">_ptKernel_</span><span class="p">(</span><span class="n">tree2</span><span class="p">,</span> <span class="n">tree2</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">raw_score</span><span class="p">,(</span><span class="n">raw_core</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">t1_score</span> <span class="o">*</span> <span class="n">t2_score</span><span class="p">)))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">raw_score</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+
+</code></pre></div></div>
+
+<h2 id="towards-syntactic-semantic-tree-kernels">Towards Syntactic-Semantic Tree Kernels</h2>
+
+<p>Ignoring all of the theory and code in the previous sections would not be unreasonable. The major criticism of ST and PTK kernels is that they are syntactic, and syntax is not meaning. A simple example:</p>
+
+<ol>
+  <li>The girl went to the store to buy <strong>eggs</strong> for the family.</li>
+  <li>The girl went to the store to buy <strong>milk</strong> for the family.</li>
+</ol>
+
+<p>The sentences generate the same constituency parse tree (minus) the differing terminal leaf, but have completely different meanings. Put plainly, the sentences above are grammatically the same except for the one word difference. However, the SST kernel we implemented above would give a very high similarity score for the <strong>meaning</strong> of the two sentences even though we know that they have different meanings. Bloehdorn and Moschitti propose a theoretically elegant modification to solve our problem. This new syntactic-semantic tree kernel (<strong>SSTK</strong>) is defined as:</p>
+
+<script type="math/tex; mode=display">K_{SSTK} = comp(f_1, f_2) \prod_{t=1}^{nt_{(f1)}} SIM(f_1(t),f_2(t))</script>
+
+<p>where $comp(f_1, f_2)$ is $1$ if $f_1$ differs from $f_2$ only in the terminal nodes and 0 otherwise, $nt(f_i)$ is the number of terminal nodes and $f_i(t)$ is the t-th terminal symbol of $f_i$ numbered from left to right, and $SIM$ is a function returning $[0, 1]$ where $0$ is completely different, and $1$ means the words are identical in meaning.</p>
+
+<p>Now in plain English. If the two tree fragments don’t have the same non-terminal structure then we end the computation early. The SSTK is the same as PTK and SST in that it ignores tree fragments that are not <strong>identical</strong> in syntactic structure (grammar). Say the two tree fragments have the same non-terminal structure, but different terminal nodes (leaves). This means the two sentence structures have the same syntax but different words. So our indicator function $comp(f_1, f_2)$ returns 1, and we compute the multiplicative product by computing the similarity of each in-order pair of terminal leaves.</p>
+
+<p>This is where it gets admittedly ridiculous. How exactly do we quantify the semantic similarity of two words. Doesn’t this depend on the sentence context? This is where there is no good answer yet. There are computational kernels that give similarity metrics on word databases like WordNet, but we don’t have significant evidence on which is best for different classes of problems. Our implementation used the raw score returned by WordNet, but that isn’t very interesting.</p>
+
+<h2 id="lesson-learned-hardly-earned">Lesson Learned, Hardly Earned</h2>
+
+<p>Research tools like StanfordCoreNLP are not performant. Most my time was spent building tooling, testing my implementations of paper algorithms, running batch jobs on AWS instances, debugging the batch processing jobs on AWS, and questioning my sanity for embarking on this rabbit hole.</p>
+
+<h2 id="if-we-only-had-more-time">If We Only Had More Time</h2>
+
+<p>I would have worked on:</p>
+
+<ul>
+  <li>
+    <p>Reworking this kernel as a feature generator in a deep learning approach. Consider that the behavior of this entire field is based around using these as a mathematically valid kernel in an SVM. Deep learning has showed greater promise in solving these types of problems because the neural network structure is more adaptable.</p>
+  </li>
+  <li>
+    <p>Grammars: A Google Trends search shows &gt;85% Quora’s user base can be divided as living on the Indian subcontinent and the United States, yet English is almost exclusively the only language used to ask/answer questions. This matters because we should not expect perfect English grammar from people whose first language isn’t English. Any effective model should detect common misuses of English grammar specific to users from the Indian subcontinent and subsequently “loosen”. Note that this is different from detecting common colloquial expressions or slang that native English speakers use.</p>
+  </li>
+  <li>
+    <p>More work on incorporating different word similarity databases into the SSTK kernel. This could be anything from Wordnet, to scraped data from forums, to the paraphrase database (PPDB) at UPenn.</p>
+  </li>
+  <li>
+    <p>Using different metrics for WordNet semantic similarities like Resnik, Wu &amp; Palmer, or Lin.</p>
+  </li>
+</ul>
+
+
+  </article>
+</div>
+
+<div class="share-buttons">
+  <h6>Share on: </h6>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=http://localhost:4000/articles/2017-09/Syntactic-Tree-Kernels" class="twitter btn" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/articles/2017-09/Syntactic-Tree-Kernels" class="facebook btn" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=http://localhost:4000/articles/2017-09/Syntactic-Tree-Kernels" class="google-plus btn" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+    <li>
+      <a href="https://news.ycombinator.com/submitlink?u=http://localhost:4000/articles/2017-09/Syntactic-Tree-Kernels" class="hacker-news btn" title="Share on Hacker News"><i class="fa fa-hacker-news"></i><span> Hacker News</span></a>
+    </li>
+    <li>
+      <a href="https://www.reddit.com/submit?url=http://localhost:4000/articles/2017-09/Syntactic-Tree-Kernels" class="reddit btn" title="Share on Reddit"><i class="fa fa-reddit"></i><span> Reddit</span></a>
+    </li>
+  </ul>
+</div><!-- end share-buttons -->
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'https-goodmattg-github-io';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+        <footer>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+  &copy; 2019 Matt Goodman's Blog. Powered by <a href="http://jekyllrb.com/">Jekyll</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>

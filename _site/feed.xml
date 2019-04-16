@@ -1,5 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-12-21T22:29:32-06:00</updated><id>http://localhost:4000/</id><title type="html">Matt Goodman’s blog</title><subtitle>An online repository of my research, thoughts, and projects.
-</subtitle><entry><title type="html">Syncing PDFs across Devices in Mendeley</title><link href="http://localhost:4000/Syncing-PDFs-in-Mendeley-Desktop" rel="alternate" type="text/html" title="Syncing PDFs across Devices in Mendeley" /><published>2018-11-25T00:00:00-06:00</published><updated>2018-11-25T00:00:00-06:00</updated><id>http://localhost:4000/Syncing-PDFs-in-Mendeley-Desktop</id><content type="html" xml:base="http://localhost:4000/Syncing-PDFs-in-Mendeley-Desktop">&lt;p&gt;Mendeley is a great tool to keep track of papers and citations across multiple devices if you can figure out how to actually enable file (i.e. PDF) syncing across devices. The UX designers were on a lunch break when this one was cooked up. The good news: enabling syncing is easy and you’ll never have to think about it again:&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Matt Goodman's Blog</title>
+    <description>A selection of my research and thoughts</description>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>2019-04-16</pubDate>
+    <lastBuildDate>Tue, 16 Apr 2019 19:18:12 -0400</lastBuildDate>
+    <generator>Jekyll v3.7.4</generator>
+    
+      <item>
+        <title>Syncing PDFs across Devices in Mendeley</title>
+        <description>&lt;p&gt;Mendeley is a great tool to keep track of papers and citations across multiple devices if you can figure out how to actually enable file (i.e. PDF) syncing across devices. The UX designers were on a lunch break when this one was cooked up. The good news: enabling syncing is easy and you’ll never have to think about it again:&lt;/p&gt;
 
 &lt;h3 id=&quot;step-1-open-mendeley-desktop&quot;&gt;Step 1) Open Mendeley Desktop&lt;/h3&gt;
 
@@ -25,7 +37,20 @@
 
 &lt;h3 id=&quot;step-5-enjoy&quot;&gt;Step 5) Enjoy&lt;/h3&gt;
 
-&lt;p&gt;The sync should start immediately and your files (PDFs) should be accessible across all devices.&lt;/p&gt;</content><author><name></name></author><summary type="html">Mendeley is a great tool to keep track of papers and citations across multiple devices if you can figure out how to actually enable file (i.e. PDF) syncing across devices. The UX designers were on a lunch break when this one was cooked up. The good news: enabling syncing is easy and you’ll never have to think about it again:</summary></entry><entry><title type="html">Software Sharing in Medical Research</title><link href="http://localhost:4000/Software-Sharing-In-Medical-Research" rel="alternate" type="text/html" title="Software Sharing in Medical Research" /><published>2018-09-09T00:00:00-05:00</published><updated>2018-09-09T00:00:00-05:00</updated><id>http://localhost:4000/Software-Sharing-In-Medical-Research</id><content type="html" xml:base="http://localhost:4000/Software-Sharing-In-Medical-Research">&lt;p&gt;I was reading Mohammed AlQuraishi’s &lt;a href=&quot;https://moalquraishi.wordpress.com/2018/12/09/alphafold-casp13-what-just-happened/&quot;&gt;post&lt;/a&gt; “AlphaFold @ CASP13: What just happened?” recently about DeepMind’s advance in protein folding. His point about research siloing holding the whole field back resonated with me, owing to my current work identifying malignant tumors in ultrasound images. To put it bluntly, it isn’t helpful that I can quickly find ten good papers claiming state-of-the-art performance on tumor segmentation if I can’t quickly download and verify the model performance on a non-toy dataset. In my view, a toy dataset is a dataset that doesn’t reflect the enumerable subtleties of real-world data. I.e. a dataset filtered to remove weird edge-cases, complex low probability situations, and messy inputs. As an aside, modern tumor ultrasound datasets are laughably perfect. They are all ~100 samples of perfectly cropped tumors with contiguous inner regions and no artefacts that would reflect rare conditions a radiologist would be trained to identify.&lt;/p&gt;
+&lt;p&gt;The sync should start immediately and your files (PDFs) should be accessible across all devices.&lt;/p&gt;
+</description>
+        <pubDate>2019-04-16</pubDate>
+        <link>http://localhost:4000/articles/2018-11/Syncing-PDFs-in-Mendeley-Desktop</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2018-11/Syncing-PDFs-in-Mendeley-Desktop</guid>
+        
+        
+        <category>help</category>
+        
+      </item>
+    
+      <item>
+        <title>Software Sharing in Medical Research</title>
+        <description>&lt;p&gt;I was reading Mohammed AlQuraishi’s &lt;a href=&quot;https://moalquraishi.wordpress.com/2018/12/09/alphafold-casp13-what-just-happened/&quot;&gt;post&lt;/a&gt; “AlphaFold @ CASP13: What just happened?” recently about DeepMind’s advance in protein folding. His point about research siloing holding the whole field back resonated with me in light of my current work identifying malignant tumors in ultrasound images. To put it bluntly, it isn’t helpful that I can quickly find ten good papers claiming state-of-the-art performance on tumor segmentation if I can’t quickly download and verify the model performance on a non-toy dataset. In my view, a toy dataset is a dataset that doesn’t reflect the enumerable subtleties of real-world data. I.e. a dataset filtered to remove weird edge-cases, complex low probability situations, and messy inputs. As an aside, modern tumor ultrasound datasets are laughably perfect. They are all ~100 samples of perfectly cropped tumors with contiguous inner regions and no artefacts that would reflect rare conditions a radiologist would be trained to identify.&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;As I discussed earlier, it is clear that between the Xu and Zhang groups enough was known to develop a system that would have perhaps rivaled AlphaFold. But because of the siloed nature of the field, it only gets a “gradient update” once every two years. Academic groups are thus forced to independently rediscover the wheel over and over. In DeepMind’s case, even though the team was small in comparison to the total headcount wof academic groups, they were presumably able to share information on a very regular basis, and this surely contributed to their success.&lt;/p&gt;
@@ -35,7 +60,21 @@
 
 &lt;p&gt;I am building a complex system consisting of multiple sub-components for my current work. These components include but are not limited to: frame OCR, frame scale normalization, tumor segmentation, tumor diagnosis, etc. For the final product to exceed expectations, every component needs to operate with extremely high performance. So while I know there’s a universe of segmentation algorithms out there, one of which probably &lt;em&gt;does&lt;/em&gt; have amazing performance invariant to the heterogeneity of lesion interior, I can’t slot in any of these systems without re-implementing them myself, and I can’t rigorously determine which system to slot in because that would require verification on our real-world dataset. So I’m suddenly forced to make decisions about time to payoff, ease of implementation, and verifiability of a crude implementation. I ended up going with a brute-force style approach simply because it’s the only thing that I could both quickly implement myself and verify correctness.&lt;/p&gt;
 
-&lt;p&gt;You’d think by now that these building blocks would be readily available with the research community, but they aren’t. It’s a self-enforced barrier to entry that we should work hard to tear down. It’s also worth noting that &lt;a href=&quot;https://deepmind.com/blog/applying-machine-learning-mammography/&quot;&gt;DeepMind&lt;/a&gt; is looking into this problem as well.&lt;/p&gt;</content><author><name></name></author><summary type="html">I was reading Mohammed AlQuraishi’s post “AlphaFold @ CASP13: What just happened?” recently about DeepMind’s advance in protein folding. His point about research siloing holding the whole field back resonated with me, owing to my current work identifying malignant tumors in ultrasound images. To put it bluntly, it isn’t helpful that I can quickly find ten good papers claiming state-of-the-art performance on tumor segmentation if I can’t quickly download and verify the model performance on a non-toy dataset. In my view, a toy dataset is a dataset that doesn’t reflect the enumerable subtleties of real-world data. I.e. a dataset filtered to remove weird edge-cases, complex low probability situations, and messy inputs. As an aside, modern tumor ultrasound datasets are laughably perfect. They are all ~100 samples of perfectly cropped tumors with contiguous inner regions and no artefacts that would reflect rare conditions a radiologist would be trained to identify.</summary></entry><entry><title type="html">Proving Newton’s Binomial Theorem</title><link href="http://localhost:4000/Newtons-Binomial-Theorem" rel="alternate" type="text/html" title="Proving Newton's Binomial Theorem" /><published>2018-02-25T00:00:00-06:00</published><updated>2018-02-25T00:00:00-06:00</updated><id>http://localhost:4000/Newtons-Binomial-Theorem</id><content type="html" xml:base="http://localhost:4000/Newtons-Binomial-Theorem">&lt;h2 id=&quot;proving-newtons-binomial-theorem&quot;&gt;Proving Newton’s Binomial Theorem&lt;/h2&gt;
+&lt;p&gt;You would think by now that these building blocks would be readily available within the research community, but they aren’t. It’s a self-enforced barrier to entry that we should work hard to tear down. It is also worth noting that &lt;a href=&quot;https://deepmind.com/blog/applying-machine-learning-mammography/&quot;&gt;DeepMind&lt;/a&gt; is looking into the mammography problem as well.&lt;/p&gt;
+
+</description>
+        <pubDate>2019-04-16</pubDate>
+        <link>http://localhost:4000/articles/2018-09/Software-Sharing-In-Medical-Research</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2018-09/Software-Sharing-In-Medical-Research</guid>
+        
+        
+        <category>thoughts</category>
+        
+      </item>
+    
+      <item>
+        <title>Proving Newton's Binomial Theorem</title>
+        <description>&lt;h2 id=&quot;proving-newtons-binomial-theorem&quot;&gt;Proving Newton’s Binomial Theorem&lt;/h2&gt;
 
 &lt;p&gt;Prove Newton’s Theorem for $t \in \mathbb{R}$ for $|x|&amp;lt;1$. If $t=n$ is any positive integer obtain the standard binomial formula $(a+b)^n=\sum_{k=0}^n\binom{n}{k}a^{n-k}b^k$.&lt;/p&gt;
 
@@ -80,9 +119,21 @@
 
 &lt;h2 id=&quot;aside&quot;&gt;Aside&lt;/h2&gt;
 
-&lt;p&gt;I looked at the solution for this one and I can’t grasp why they specify this exact maximum bounding function. We’re quickly abandon the function so it hardly matters, but it seems like we could bound closer. Why $max(1,t^{n+1})$? Why not just $t^{n+1}$ or even $t^{\underline{n+1}}$? I’m guessing this is a matter of convention; we can see that over the interval $|t|&amp;lt;|x|$, $|t^{n+1}| \leq 1$, so I’d venture the $max(1,t^{n+1})$ function is just to get rid of negatives in case $n+1$ is odd.&lt;/p&gt;</content><author><name></name></author><summary type="html">Proving Newton’s Binomial Theorem</summary></entry><entry><title type="html">The Theory of Probability Project</title><link href="http://localhost:4000/The-Theory-Of-Probability-Project" rel="alternate" type="text/html" title="The Theory of Probability Project" /><published>2018-02-17T00:00:00-06:00</published><updated>2018-02-17T00:00:00-06:00</updated><id>http://localhost:4000/The-Theory-Of-Probability-Project</id><content type="html" xml:base="http://localhost:4000/The-Theory-Of-Probability-Project">&lt;h2 id=&quot;a-gedanken-experiment&quot;&gt;A &lt;em&gt;gedanken&lt;/em&gt; experiment&lt;/h2&gt;
+&lt;p&gt;I looked at the solution for this one and I can’t grasp why they specify this exact maximum bounding function. We’re quickly abandon the function so it hardly matters, but it seems like we could bound closer. Why $max(1,t^{n+1})$? Why not just $t^{n+1}$ or even $t^{\underline{n+1}}$? I’m guessing this is a matter of convention; we can see that over the interval $|t|&amp;lt;|x|$, $|t^{n+1}| \leq 1$, so I’d venture the $max(1,t^{n+1})$ function is just to get rid of negatives in case $n+1$ is odd.&lt;/p&gt;
 
-&lt;p&gt;The idea behind the project is work through an entire textbook. Do you gain some sort of magic insight, or is there no light at the end of the tunnel? Are you now master of this specific domain? Is there any feeling of accomplishment to be had? Better yet, I want to be able to review a textbook by actually saying what it did for me. Reviewing a cleaning product is easy - you use the product and it does or does not work. Reviewing a textbook is harder - how do you quantify the benefit a book gives you, especially if you haven’t read the book for its intended purpose, to convey a body knowledge.&lt;/p&gt;
+</description>
+        <pubDate>2019-04-16</pubDate>
+        <link>http://localhost:4000/articles/2018-02/Newtons-Binomial-Theorem</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2018-02/Newtons-Binomial-Theorem</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Theory of Probability (Chapter 1)</title>
+        <description>&lt;h2 id=&quot;a-gedanken-experiment&quot;&gt;A &lt;em&gt;gedanken&lt;/em&gt; experiment&lt;/h2&gt;
+
+&lt;p&gt;Do you gain some sort of magic insight if you work through an entire textbook, or is there no light at the end of the tunnel? Are you now master of this specific domain? Is there any feeling of accomplishment to be had? Better yet, I want to be able to review a textbook by actually saying what it did for me. Reviewing a cleaning product is easy - you use the product and it does or does not work. Reviewing a textbook is harder - how do you quantify the benefit a book gives you, especially if you haven’t read the book for its intended purpose, to convey a body knowledge.&lt;/p&gt;
 
 &lt;p&gt;My goal is to attempt every chapter, work selected problems, and write about the experience. This is going to be a public diary of my grappling with the material. I’m not a prodigy - so this will take a lot of effort to finish. I’ve selected &lt;em&gt;“The Theory of Probability”&lt;/em&gt; by Santosh S. Venkatesh. I took Professor Venkatesh’s course “Engineering Probability” at Penn and did quite well. To be sure, Professor Venkatesh was one of the most engaging professors I had in college. Thank you to Oxford University Press for leaving the link to the solutions PDF in plain-text in the page source.&lt;/p&gt;
 
@@ -141,7 +192,20 @@
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;P_{out}(\mathcal{P_{in}}~|~\Omega_{in}, \mathcal{F}_{in})&lt;/script&gt;
 
-&lt;p&gt;The key advances in AI have been making machines that are excellent at operating within well defined probability spaces and event families. We’ll have made the next leap when machines are able to revise their outer probability distributions. For example, that doesn’t just mean an autonomous vehicle reacting to an obstacle it has never seen before, but reacting to a completely unfamiliar situation. Autonomous vehicles are programmed to slow down when people appear in front of the vehicle. If a jaguar suddenly enters the crosswalk, the car makes the deduction that a jaguar is person-like in that it moves, and slows down accordingly. The logic may be even less complex than that. But now the autonomous car is idling at a red light and an unusually angry strongman runs up and starts trying to tip the car. What to do now? This event has no probability because it wasn’t derivable in the context of the programmed event family. A truly intelligent vehicle would revise its notion of the probability space for driving to include other beings actively trying to impede the driving action, and react accordingly.&lt;/p&gt;</content><author><name></name></author><summary type="html">A gedanken experiment</summary></entry><entry><title type="html">Dynamic Time Warping for Clustering Time Series Data</title><link href="http://localhost:4000/Dynamic-Time-Warping" rel="alternate" type="text/html" title="Dynamic Time Warping for Clustering Time Series Data" /><published>2017-12-10T00:00:00-06:00</published><updated>2017-12-10T00:00:00-06:00</updated><id>http://localhost:4000/Dynamic-Time-Warping</id><content type="html" xml:base="http://localhost:4000/Dynamic-Time-Warping">&lt;p&gt;This post is as much a meditation on using Dynamic Time Warping (DTW) in production as it is a review of my work. I have so many questions about this subject. If you have any answers, I hope you will reach out.&lt;/p&gt;
+&lt;p&gt;The key advances in AI have been making machines that are excellent at operating within well defined probability spaces and event families. We’ll have made the next leap when machines are able to revise their outer probability distributions. For example, that doesn’t just mean an autonomous vehicle reacting to an obstacle it has never seen before, but reacting to a completely unfamiliar situation. Autonomous vehicles are programmed to slow down when people appear in front of the vehicle. If a jaguar suddenly enters the crosswalk, the car makes the deduction that a jaguar is person-like in that it moves, and slows down accordingly. The logic may be even less complex than that. But now the autonomous car is idling at a red light and an unusually angry strongman runs up and starts trying to tip the car. What to do now? This event has no probability because it wasn’t derivable in the context of the programmed event family. A truly intelligent vehicle would revise its notion of the probability space for driving to include other beings actively trying to impede the driving action, and react accordingly.&lt;/p&gt;
+</description>
+        <pubDate>2019-04-16</pubDate>
+        <link>http://localhost:4000/articles/2018-02/Theory-Of-Probability-Chapter-1</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2018-02/Theory-Of-Probability-Chapter-1</guid>
+        
+        
+        <category>probability</category>
+        
+      </item>
+    
+      <item>
+        <title>Dynamic Time Warping for Clustering Time Series Data</title>
+        <description>&lt;p&gt;This post is as much a meditation on using Dynamic Time Warping (DTW) in production as it is a review of my work. I have so many questions about this subject. If you have any answers, I hope you will reach out.&lt;/p&gt;
 
 &lt;h2 id=&quot;motivation&quot;&gt;Motivation&lt;/h2&gt;
 
@@ -189,7 +253,7 @@ I looked to the research and settled on Dynamic Time Warping (DTW) from Keogh et
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;\gamma(i,j)~=~d(q_i, c_j)+min\{\gamma(i-1,j-1), \gamma(i-1, j), \gamma(i, j-1)\}&lt;/script&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/posts/DTW/DTWTrace.jpg =50x&quot; alt=&quot;DTW Trace&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/posts/DTW/DTWTrace.jpg&quot; alt=&quot;DTW Trace&quot; /&gt;
 &lt;em&gt;Figure 1. DTW computed optimal path between sinusoid &amp;amp; sinusoid + sinc over $[0,6\pi]$&lt;/em&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;dtw-nearest-neigbhor-clustering&quot;&gt;DTW Nearest-Neigbhor Clustering&lt;/h2&gt;
@@ -227,7 +291,25 @@ I looked to the research and settled on Dynamic Time Warping (DTW) from Keogh et
     &lt;span class=&quot;n&quot;&gt;d2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sub2ind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;iy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;1.5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(:));&lt;/span&gt;
     &lt;span class=&quot;nb&quot;&gt;mesh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">This post is as much a meditation on using Dynamic Time Warping (DTW) in production as it is a review of my work. I have so many questions about this subject. If you have any answers, I hope you will reach out.</summary></entry><entry><title type="html">Syntactic Tree Kernels</title><link href="http://localhost:4000/Syntactic-Tree-Kernels" rel="alternate" type="text/html" title="Syntactic Tree Kernels" /><published>2017-09-04T00:00:00-05:00</published><updated>2017-09-04T00:00:00-05:00</updated><id>http://localhost:4000/Syntactic-Tree-Kernels</id><content type="html" xml:base="http://localhost:4000/Syntactic-Tree-Kernels">&lt;h2 id=&quot;motivation&quot;&gt;Motivation&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+</description>
+        <pubDate>2019-04-16</pubDate>
+        <link>http://localhost:4000/articles/2017-12/Dynamic-Time-Warping</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2017-12/Dynamic-Time-Warping</guid>
+        
+        
+        <category>DTW</category>
+        
+        <category>ML</category>
+        
+        <category>Kaggle</category>
+        
+      </item>
+    
+      <item>
+        <title>Syntactic Tree Kernels</title>
+        <description>&lt;h2 id=&quot;motivation&quot;&gt;Motivation&lt;/h2&gt;
 
 &lt;p&gt;This post encapsulates the work I did with Dean Fulgoni for our final project in Big Data Analytics. Credit to Professor Chris Callison-Burch for steering me away from some topics that “could easily be Phd theses” and to Professor Zachary Ives for being an excellent teacher.&lt;/p&gt;
 
@@ -302,7 +384,7 @@ I looked to the research and settled on Dynamic Time Warping (DTW) from Keogh et
 
 &lt;p&gt;Notice that sentence tokens (the words) are always leaves of the tree and in their natural language order. That is, we should always be able to read the tree leaves from left to right and have our exact sentence.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/ConstituencyTree.jpg&quot; alt=&quot;Constituency Parse Tree&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/posts/TreeKernel/ConstituencyTree.jpg&quot; alt=&quot;Constituency Parse Tree&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;tree-kernel-core-theory-and-definitions&quot;&gt;Tree Kernel Core Theory and Definitions&lt;/h3&gt;
 
@@ -592,7 +674,38 @@ If NORMALIZE_FLAG set to False, tuple[1] = -1
   &lt;li&gt;
     &lt;p&gt;Using different metrics for WordNet semantic similarities like Resnik, Wu &amp;amp; Palmer, or Lin.&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><summary type="html">Motivation</summary></entry><entry><title type="html">Recommitment to Posting</title><link href="http://localhost:4000/Recommitment-to-Posting" rel="alternate" type="text/html" title="Recommitment to Posting" /><published>2017-09-04T00:00:00-05:00</published><updated>2017-09-04T00:00:00-05:00</updated><id>http://localhost:4000/Recommitment-to-Posting</id><content type="html" xml:base="http://localhost:4000/Recommitment-to-Posting">&lt;p&gt;I dropped the ball w.r.t posting my work and thoughts. I’m going to be posting a lot more starting with recaps of old research projects and coding.&lt;/p&gt;</content><author><name></name></author><summary type="html">I dropped the ball w.r.t posting my work and thoughts. I’m going to be posting a lot more starting with recaps of old research projects and coding.</summary></entry><entry><title type="html">Update: Graph-based Model Election Forecasting</title><link href="http://localhost:4000/research/gsp/polling/forecasting/graph-election-update" rel="alternate" type="text/html" title="Update: Graph-based Model Election Forecasting" /><published>2017-03-25T00:00:00-05:00</published><updated>2017-03-25T00:00:00-05:00</updated><id>http://localhost:4000/research/gsp/polling/forecasting/graph-election-update</id><content type="html" xml:base="http://localhost:4000/research/gsp/polling/forecasting/graph-election-update">&lt;p&gt;While I am no longer directly working on the project, I am still an informal advisor to the undergraduates currently working to improve the model. The challenge we currently face is quite intriguing. We have the data: presidential election, senatorial election, median income, demographics, poverty, etc. The new issue is how we combine the graph shift operators from each of these data sets to produce an optimal graph shift operator (that results in minimum norm-1 error).&lt;/p&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>2019-04-16</pubDate>
+        <link>http://localhost:4000/articles/2017-09/Syntactic-Tree-Kernels</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2017-09/Syntactic-Tree-Kernels</guid>
+        
+        
+        <category>ML</category>
+        
+        <category>NLP</category>
+        
+        <category>kernels</category>
+        
+        <category>Kaggle</category>
+        
+      </item>
+    
+      <item>
+        <title>Recommitment to Posting</title>
+        <description>&lt;p&gt;I dropped the ball w.r.t posting my work and thoughts. I’m going to be posting a lot more starting with recaps of old research projects and coding.&lt;/p&gt;
+</description>
+        <pubDate>2019-04-16</pubDate>
+        <link>http://localhost:4000/articles/2017-09/Recommitment-to-Posting</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2017-09/Recommitment-to-Posting</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Update: Graph-based Model Election Forecasting</title>
+        <description>&lt;p&gt;While I am no longer directly working on the GSP Election project, I am still an informal advisor to the undergraduates currently working to improve the model. The challenge we currently face is quite intriguing. We have the data: presidential election, senatorial election, median income, demographics, poverty, etc. The new issue is how we combine the graph shift operators from each of these data sets to produce an optimal graph shift operator (that results in minimum norm-1 error).&lt;/p&gt;
 
 &lt;p&gt;Let’s first use intuition. Our goal is to predict presidential elections, so we can reason that the presidential election graph shift operator should receive the most weight. The question becomes exactly how much weight should this receive? And of course how do we distribute the remaining weight?&lt;/p&gt;
 
@@ -604,4 +717,22 @@ If NORMALIZE_FLAG set to False, tuple[1] = -1
 
 &lt;p&gt;To summarize the paper - we have a framework to combine independent graph shift operators to produce an optimal graph shift operator. This is fantastic, except the runtime is frankly garbage. After contacting the authors to get a missing piece of code, our undergraduate implemented the algorithm. Did it work? We don’t know! Running to find the optimal combination of 7 different 3111x3111 graph the algorithm would take ~70 days. This is likely an exaggeration. I read through the paper and the runtime appears to be O(N^4). If we take advantage of MATLAB’s matrix operations we can get this down to O(N^3). At this point all optimizations we make don’t reduce the order of the runtime, just the absolute duration. I am confident we could reimplement the algorithm using MATLAB’s built in parallel processing framework and then run on a computing cluster for a total computing time of 1 day max. I am excited to see how far below the 5% norm-1 error we go with an optimal graph shift operator.&lt;/p&gt;
 
-&lt;p&gt;The question beyond this is time-frame weighting within individual datasets (prioritizing more recent data), but one thing at a time.&lt;/p&gt;</content><author><name></name></author><summary type="html">While I am no longer directly working on the project, I am still an informal advisor to the undergraduates currently working to improve the model. The challenge we currently face is quite intriguing. We have the data: presidential election, senatorial election, median income, demographics, poverty, etc. The new issue is how we combine the graph shift operators from each of these data sets to produce an optimal graph shift operator (that results in minimum norm-1 error).</summary></entry></feed>
+&lt;p&gt;The question beyond this is time-frame weighting within individual datasets (prioritizing more recent data), but one thing at a time.&lt;/p&gt;
+</description>
+        <pubDate>2019-04-16</pubDate>
+        <link>http://localhost:4000/articles/2017-03/graph-election-update</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2017-03/graph-election-update</guid>
+        
+        
+        <category>research</category>
+        
+        <category>GSP</category>
+        
+        <category>polling</category>
+        
+        <category>forecasting</category>
+        
+      </item>
+    
+  </channel>
+</rss>
