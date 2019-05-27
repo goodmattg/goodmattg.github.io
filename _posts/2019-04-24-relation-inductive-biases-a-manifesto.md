@@ -8,9 +8,22 @@ comments: true
 
 The authors present a succinct and powerful manifesto of the importance of graph networks in artificial intelligence research. The paper is a move to synthesize the previously disjoint field of graph neural networks into a single framework: "Graph Networks (GN)".
 
-FIGURE HERE
+# Thoughts 
 
-## Notes
+We have a much needed survey paper that unifies graph networks (GNs) and refocuses attention away from the technical details of network composition/functionality back to the marquee goal of building networks that achieve combinatorial generalization through flexible computation on structured representation. This topic aligns strongly with my research interests and made me consider a few areas to explore moving forward:
+
+- Recurrent GNs for sequences of graphs
+- Reinforcement learning as a method to adaptively modify graph structures during the course of computation. This would solve a personal thought experiment of training a self-aware image classifier that has the means to create new buckets. This would involve an update function that has the capacity to add/remove new buckets to the image classifier based on some spectral representation of the class output probabilities. In the formalism of GN, this is creating update/aggregation functions that can create/destroy nodes and edges.
+
+# Quotes
+
+> We suggest that a key path forward for modern AI is to commit to combinatorial generalization as a top priority. 
+
+> When learning, we either fit new knowledge into our existing structured representations, or adjust the structure itself to better accommodate (and make use of) the new and the old. 
+
+> Combinatorial generalization can be viewed as "the infinite use of finite means" - von Humboldt
+
+# Notes
 
 - prioritize "combinatorial generalization", the ability to generate new inferences, predictions, and behaviors from know building blocks 
     - i.e. _putting the pieces together_
@@ -62,24 +75,6 @@ FIGURE HERE
         - update/aggregation functions are reused implying combinatorial generalization
 
 
+## Cite
 
-> We suggest that a key path forward for modern AI is to commit to combinatorial generalization as a top priority. 
-
-
-# Thoughts 
-
-> When learning, we either fit new knowledge into our existing structured representations, or adjust the structure itself to better accommodate (and make use of) the new and the old. 
-
-My initial reading of this yielded the natural extension that we should be applying reinforcement learning to structured representation. 
-
-FIGURE SHOWING GN, DRN, ETC
-
-@misc{battaglia2018relational,
-    title={Relational inductive biases, deep learning, and graph networks},
-    author={Peter W. Battaglia and Jessica B. Hamrick and Victor Bapst and Alvaro Sanchez-Gonzalez and Vinicius Zambaldi and Mateusz Malinowski and Andrea Tacchetti and David Raposo and Adam Santoro and Ryan Faulkner and Caglar Gulcehre and Francis Song and Andrew Ballard and Justin Gilmer and George Dahl and Ashish Vaswani and Kelsey Allen and Charles Nash and Victoria Langston and Chris Dyer and Nicolas Heess and Daan Wierstra and Pushmeet Kohli and Matt Botvinick and Oriol Vinyals and Yujia Li and Razvan Pascanu},
-    year={2018},
-    eprint={1806.01261},
-    archivePrefix={arXiv},
-    primaryClass={cs.LG}
-}
-
+Battaglia, Peter W., et al. "Relational inductive biases, deep learning, and graph networks." arXiv preprint arXiv:1806.01261 (2018)
