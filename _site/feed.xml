@@ -5,9 +5,185 @@
     <description>A selection of my research and thoughts</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>2019-04-16</pubDate>
-    <lastBuildDate>Tue, 16 Apr 2019 19:18:12 -0400</lastBuildDate>
+    <pubDate>2019-05-27</pubDate>
+    <lastBuildDate>Mon, 27 May 2019 18:34:50 -0400</lastBuildDate>
     <generator>Jekyll v3.7.4</generator>
+    
+      <item>
+        <title>The Four: The Hidden DNA of Amazon, Apple, Facebook, and Google [FINISHED]</title>
+        <description>&lt;p&gt;Professor Scott Galloway’s treatise on the four tech giants of our age is incendiary and prophetic. I blitzed through Galloway’s book on a flight from Austin to New York and couldn’t escape the thought that my life is textbook confirmation of his thesis. I read The Four on an iPad during a flight that I priced with Google. I had just purchased a bunch of basics in bulk for my new apartment from Amazon on a MacBook. Facebook should go without saying - I’m under 25, so I compulsively check Messenger and Instagram. The Four almost exclusively dominate my interactions with my friends, peers, and family. And while this should be cause for privacy concerns, I likely won’t act until the risks, which are not readily apparent, outweigh the enormous benefits. We pay for free connection, free search, and the ability to cheaply acquire every product in existence with our data. It’s easy react negatively to handing over so much data to large companies: “it’s my data, how dare they monetize it ….” but that’s quite literally the price of free services. Where I get angry is when legacy companies acquire my data, usually from shady third party data providers - hotels, credit agencies, etc. Legacy companies = terrible security. They don’t have the vested interest or the technical ability to maintain a state-of-the-art security operation. At least Google has never suffered a major data breach. It speaks to my biases/preferences/experience, but when I rent a storage unit my main concern is that the unit is secure from theft. I rarely consider if the storage proprietor has checked to see what I have stored in the locker. And a key technical point to remember in the case of every digital storage provider is that any these companies don’t just stored your data in plain sight. There isn’t a file of “Matt_personal_data.txt” on a database somewhere. This information is all encrypted and then sharded a thousand ways to Sunday because the companies themselves have a vested interest to protect your data from adversaries.&lt;/p&gt;
+
+&lt;p&gt;There are other lessons about life and career management that are common to this family of book. They are well argued in the book (see quotes below).&lt;/p&gt;
+
+&lt;h1 id=&quot;quotes-from-the-advice-section&quot;&gt;Quotes from the “Advice” Section&lt;/h1&gt;
+
+&lt;p&gt;Excerpt From: Galloway, Scott. “The Four.” Penguin Publishing Group, 2017-10-03. Apple Books. 
+This material may be protected by copyright.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;“In sum, it’s never been a better time to be exceptional, or a worse time to be average.”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Excerpt From: Galloway, Scott. “The Four.” Penguin Publishing Group, 2017-10-03. Apple Books. 
+This material may be protected by copyright.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;“Young people who have a strong sense of their own identity, remain poised under stress, and learn and apply what they’ve learned, do better than peers who are more easily flustered, get hung up on petty issues, and let their emotions drive their responses to stimuli.”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Excerpt From: Galloway, Scott. “The Four.” Penguin Publishing Group, 2017-10-03. Apple Books. 
+This material may be protected by copyright.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;“Familiarity breeds contempt. External hires are paid nearly 20 percent more than company veterans at the same level, despite receiving lower performance evaluations and still being more likely to quit.”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Excerpt From: Galloway, Scott. “The Four.” Penguin Publishing Group, 2017-10-03. Apple Books. 
+This material may be protected by copyright.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;“Sectors are asset classes—the cool ones are overinvested, driving down returns on human capital (compensation for working there). If you want to work for Vogue, produce films, or open a restaurant, you had better get immense psychological reward from your gig, as the comp, and returns on your efforts, will likely suck. Competition will be fierce, and even if you manage to get in, you’ll be easily replaceable, as there are always younger, hipper candidates nipping at your heels.”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Excerpt From: Galloway, Scott. “The Four.” Penguin Publishing Group, 2017-10-03. Apple Books. 
+This material may be protected by copyright.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;“The slope of the trajectory for your career is (unfairly) set the first five years post-graduation. If you want the trajectory to be steep, you’ll need to burn a lot of fuel. The world is not yours for the taking, but for the trying. Try hard, really hard.”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+</description>
+        <pubDate>2019-05-27</pubDate>
+        <link>http://localhost:4000/articles/2019-05/The-Four</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2019-05/The-Four</guid>
+        
+        
+        <category>books</category>
+        
+      </item>
+    
+      <item>
+        <title>Relational Inductive Biases: a manifesto</title>
+        <description>&lt;p&gt;The authors present a succinct and powerful manifesto of the importance of graph networks in artificial intelligence research. The paper is a move to synthesize the previously disjoint field of graph neural networks into a single framework: “Graph Networks (GN)”.&lt;/p&gt;
+
+&lt;h1 id=&quot;thoughts&quot;&gt;Thoughts&lt;/h1&gt;
+
+&lt;p&gt;We have a much needed survey paper that unifies graph networks (GNs) and refocuses attention away from the technical details of network composition/functionality back to the marquee goal of building networks that achieve combinatorial generalization through flexible computation on structured representation. This topic aligns strongly with my research interests and made me consider a few areas to explore moving forward:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Recurrent GNs for sequences of graphs&lt;/li&gt;
+  &lt;li&gt;Reinforcement learning as a method to adaptively modify graph structures during the course of computation. This would solve a personal thought experiment of training a self-aware image classifier that has the means to create new buckets. This would involve an update function that has the capacity to add/remove new buckets to the image classifier based on some spectral representation of the class output probabilities. In the formalism of GN, this is creating update/aggregation functions that can create/destroy nodes and edges.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;quotes&quot;&gt;Quotes&lt;/h1&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;We suggest that a key path forward for modern AI is to commit to combinatorial generalization as a top priority.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;When learning, we either fit new knowledge into our existing structured representations, or adjust the structure itself to better accommodate (and make use of) the new and the old.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Combinatorial generalization can be viewed as “the infinite use of finite means” - von Humboldt&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;notes&quot;&gt;Notes&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;prioritize “combinatorial generalization”, the ability to generate new inferences, predictions, and behaviors from know building blocks
+    &lt;ul&gt;
+      &lt;li&gt;i.e. &lt;em&gt;putting the pieces together&lt;/em&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;combinatorial generalization is the goal, so we should bias towards learning on structured representations and computations
+    &lt;ul&gt;
+      &lt;li&gt;Generalizing on structured representations is easier than generalizing on unstructured representations&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;The world is &lt;em&gt;compositional&lt;/em&gt;, therefore our methods should be compositional
+    &lt;ul&gt;
+      &lt;li&gt;This does not mean we mean to trade off structure for flexibility. We consider the concepts jointly (i.e. nature &lt;em&gt;and&lt;/em&gt; nurture)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Graph neural networks (GNs) exemplify this functional ambition by learning relations between “explicitly structured data”
+    &lt;ul&gt;
+      &lt;li&gt;learning $\rightarrow$ flexible&lt;/li&gt;
+      &lt;li&gt;structured $\rightarrow$ composing known building blocks&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;GN methods contain strong &lt;strong&gt;relational inductive biases&lt;/strong&gt;
+  1) Relational reasoning
+      - &lt;em&gt;structure&lt;/em&gt; is composing a set of known building blocks
+      - &lt;em&gt;structured representation&lt;/em&gt; describe this composition
+      - structured representations consist of &lt;em&gt;entities&lt;/em&gt; connected by &lt;em&gt;relations&lt;/em&gt; according to &lt;em&gt;rules&lt;/em&gt;
+          - &lt;em&gt;entity&lt;/em&gt; is an element with attributes
+          - &lt;em&gt;relation&lt;/em&gt; is a property between entities
+          - &lt;em&gt;rule&lt;/em&gt; is a function that maps discrete pairs of entity-relations
+      - &lt;em&gt;relational reasoning&lt;/em&gt; involves manipulating structured representations
+  2) Inductive biases
+      - An &lt;em&gt;inductive bias&lt;/em&gt; allows a learning algorithm to prioritize one solution over another, independent of the observed data.
+          - E.g. prior in Bayesian statistics, regularization terms, algorithm architecture, composition of layers in NN, etc.
+  3) &lt;strong&gt;Relational Inductive Biases&lt;/strong&gt;
+      - “Inductive biases which impose constraints on relationships and interactions among entities in a learning process”&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Graph Networks&lt;/em&gt; (GN)
+    &lt;ul&gt;
+      &lt;li&gt;$G = (u, V, E)$
+        &lt;ul&gt;
+          &lt;li&gt;&lt;strong&gt;u&lt;/strong&gt;: Global attribute&lt;/li&gt;
+          &lt;li&gt;&lt;strong&gt;V&lt;/strong&gt; is the set of nodes w/ cardinality $N^v$ where each node $v_i$ has attributes&lt;/li&gt;
+          &lt;li&gt;&lt;strong&gt;E&lt;/strong&gt; is the set of edges w/ cardinality $N^e$ where each edge $e_v$ has attributes. $E = {(e_k,r_k,s_k)}_{k=1:N^{e}}$
+            &lt;ul&gt;
+              &lt;li&gt;$e_k$ is the edge’s attribute&lt;/li&gt;
+              &lt;li&gt;$r_k$ is the index of the receiver node&lt;/li&gt;
+              &lt;li&gt;$s_k$ is the index of the sender node&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;GN &lt;em&gt;block&lt;/em&gt; := $f: G \rightarrow G$
+        &lt;ul&gt;
+          &lt;li&gt;GN block algorithm
+  1) Compute updated edge attributes: $e_k^{‘} = \phi^e(e_k,v_{r_k},v_{s_k},u)$
+  2) Aggregate edge attributes per node: $\bar{e}_i^{‘} = \rho^{e \rightarrow v}(E_i^{‘})$
+  3) Compute updated node attributes: $v_i^{‘} = \phi^v(\bar{e}_i^{‘}, v_i, u)$
+  4) Aggregate edge attributes globally: $\bar{e}^{‘} = \rho^{e \rightarrow u}(E^{‘})$
+  5) Aggregate node attributes globally: $\bar{v}_i^{‘} = \rho^{v \rightarrow u}(V^{‘})$
+  6) Compute updated global attribute: $u^{‘} = \phi^u(\bar{e}^{‘}, \bar{v}^{‘}, u)$&lt;/li&gt;
+          &lt;li&gt;TLDR
+            &lt;ul&gt;
+              &lt;li&gt;Update functions: $\phi$
+                &lt;ul&gt;
+                  &lt;li&gt;SOA use NN as update function ($NN_e, NN_v, NN_u$)&lt;/li&gt;
+                  &lt;li&gt;Can include RNN as $\phi$, but this is not in literature yet&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;Aggregation functions: $\rho$&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Relational inductive biases in GN
+        &lt;ul&gt;
+          &lt;li&gt;arbitrary relationships among entities. i.e. the GN architecture doesn’t determine how entities interact.&lt;/li&gt;
+          &lt;li&gt;GN are invariant to ordering on input (b/c input is graph, and graph represented as set)&lt;/li&gt;
+          &lt;li&gt;update/aggregation functions are reused implying combinatorial generalization&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;cite&quot;&gt;Cite&lt;/h2&gt;
+
+&lt;p&gt;Battaglia, Peter W., et al. “Relational inductive biases, deep learning, and graph networks.” arXiv preprint arXiv:1806.01261 (2018)&lt;/p&gt;
+</description>
+        <pubDate>2019-05-27</pubDate>
+        <link>http://localhost:4000/articles/2019-04/relation-inductive-biases-a-manifesto</link>
+        <guid isPermaLink="true">http://localhost:4000/articles/2019-04/relation-inductive-biases-a-manifesto</guid>
+        
+        
+        <category>Deep Learning</category>
+        
+        <category>Graph Neural Networks (GN)</category>
+        
+      </item>
     
       <item>
         <title>Syncing PDFs across Devices in Mendeley</title>
@@ -39,7 +215,7 @@
 
 &lt;p&gt;The sync should start immediately and your files (PDFs) should be accessible across all devices.&lt;/p&gt;
 </description>
-        <pubDate>2019-04-16</pubDate>
+        <pubDate>2019-05-27</pubDate>
         <link>http://localhost:4000/articles/2018-11/Syncing-PDFs-in-Mendeley-Desktop</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2018-11/Syncing-PDFs-in-Mendeley-Desktop</guid>
         
@@ -63,7 +239,7 @@
 &lt;p&gt;You would think by now that these building blocks would be readily available within the research community, but they aren’t. It’s a self-enforced barrier to entry that we should work hard to tear down. It is also worth noting that &lt;a href=&quot;https://deepmind.com/blog/applying-machine-learning-mammography/&quot;&gt;DeepMind&lt;/a&gt; is looking into the mammography problem as well.&lt;/p&gt;
 
 </description>
-        <pubDate>2019-04-16</pubDate>
+        <pubDate>2019-05-27</pubDate>
         <link>http://localhost:4000/articles/2018-09/Software-Sharing-In-Medical-Research</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2018-09/Software-Sharing-In-Medical-Research</guid>
         
@@ -122,7 +298,7 @@
 &lt;p&gt;I looked at the solution for this one and I can’t grasp why they specify this exact maximum bounding function. We’re quickly abandon the function so it hardly matters, but it seems like we could bound closer. Why $max(1,t^{n+1})$? Why not just $t^{n+1}$ or even $t^{\underline{n+1}}$? I’m guessing this is a matter of convention; we can see that over the interval $|t|&amp;lt;|x|$, $|t^{n+1}| \leq 1$, so I’d venture the $max(1,t^{n+1})$ function is just to get rid of negatives in case $n+1$ is odd.&lt;/p&gt;
 
 </description>
-        <pubDate>2019-04-16</pubDate>
+        <pubDate>2019-05-27</pubDate>
         <link>http://localhost:4000/articles/2018-02/Newtons-Binomial-Theorem</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2018-02/Newtons-Binomial-Theorem</guid>
         
@@ -194,7 +370,7 @@
 
 &lt;p&gt;The key advances in AI have been making machines that are excellent at operating within well defined probability spaces and event families. We’ll have made the next leap when machines are able to revise their outer probability distributions. For example, that doesn’t just mean an autonomous vehicle reacting to an obstacle it has never seen before, but reacting to a completely unfamiliar situation. Autonomous vehicles are programmed to slow down when people appear in front of the vehicle. If a jaguar suddenly enters the crosswalk, the car makes the deduction that a jaguar is person-like in that it moves, and slows down accordingly. The logic may be even less complex than that. But now the autonomous car is idling at a red light and an unusually angry strongman runs up and starts trying to tip the car. What to do now? This event has no probability because it wasn’t derivable in the context of the programmed event family. A truly intelligent vehicle would revise its notion of the probability space for driving to include other beings actively trying to impede the driving action, and react accordingly.&lt;/p&gt;
 </description>
-        <pubDate>2019-04-16</pubDate>
+        <pubDate>2019-05-27</pubDate>
         <link>http://localhost:4000/articles/2018-02/Theory-Of-Probability-Chapter-1</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2018-02/Theory-Of-Probability-Chapter-1</guid>
         
@@ -258,13 +434,13 @@ I looked to the research and settled on Dynamic Time Warping (DTW) from Keogh et
 
 &lt;h2 id=&quot;dtw-nearest-neigbhor-clustering&quot;&gt;DTW Nearest-Neigbhor Clustering&lt;/h2&gt;
 
-&lt;p&gt;The Wikipedia challenge provide 145,000 time-series to predict. Ideally, I would have computed pairwise DTW distances for all 145,000 pairs, and then run agglomerative clustering with Ward linkage to generate clusters. The computation wasn’t feasible on my desktop setup, and I wasn’t willing to go the AWS route for this exercise. Instead, I decided to randomly sample 10,000 rows, compute pairwise DTWs for the row sample, run hierarchical clustering on the pairwise distance matrix, and finally assign all nonsampled rows to the cluster matching of their nearest neighbhor. Admittedly this was not the ideal solution. By assigning all nonsampled rows to the cluster containing their nearest neighbor (i.e. minimizing DTW distance), I likely unbalanced the clusters. Furthermore, nearest-neighbor clustering is meaningless with high-dimensionality inputs. I considered nearest-neightbor defensible because my dimensionality was unitary. That is, I only clustered on the DTW distance and so avoided have high-dimensionality inputs. I didn’t compute any rough heuristics to quantify the distribution of nonsampled rows to clusters due to time constraints.&lt;/p&gt;
+&lt;p&gt;The Wikipedia challenge provide 145,000 time-series to predict. Ideally, I would have computed pairwise DTW distances for all 145,000 pairs, and then run agglomerative clustering with Ward linkage to generate clusters. The computation wasn’t feasible on my desktop setup, and I wasn’t willing to go the AWS route for this exercise. Instead, I decided to randomly sample 10,000 rows, compute pairwise DTWs for the row sample, run hierarchical clustering on the pairwise distance matrix, and finally assign all non-sampled rows to the cluster matching of their nearest neighbor. Admittedly this was not the ideal solution. By assigning all non-sampled rows to the cluster containing their nearest neighbor (i.e. minimizing DTW distance), I likely unbalanced the clusters. Furthermore, nearest-neighbor clustering is meaningless with high-dimensionality inputs. I considered nearest-neighbor defensible because my dimensionality was unitary. That is, I only clustered on the DTW distance and so avoided have high-dimensionality inputs. I didn’t compute any rough heuristics to quantify the distribution of non-sampled rows to clusters due to time constraints.&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;“As noted by (Agrawal et al., 1993, Bradley and Fayyad, 1998), in high dimensions the very concept of nearest neighbor has little meaning, because the ratio of the distance to the nearest neighbor over the distance to the average neighbor rapidly approaches one as the dimensionality increases.” [2]&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;I ending up doing a minor rewrite of Prof. Eamonn Keogh’s UCR-DTW C++ tool to do nearest-neighbor search instead of subsequence search. The tool now searches a list of time-series to find the one that minimizes the DTW distance instead of subsequence search to find the subsequence that minimizes distance. Because of optimizations in the UCR-DTW tool (via research by Lemire, Kim, et. al) the tool only computes the full DTW in &amp;lt;10% of cases.&lt;/p&gt;
+&lt;p&gt;I ending up doing a minor rewrite of Prof. Eamonn Keogh’s UCR-DTW C++ tool to do nearest-neighbor search instead of sub-sequence search. The tool now searches a list of time-series to find the one that minimizes the DTW distance instead of sub-sequence search to find the sub-sequence that minimizes distance. Because of optimizations in the UCR-DTW tool (via research by Lemire, Kim, et. al) the tool only computes the full DTW in &amp;lt;10% of cases.&lt;/p&gt;
 
 &lt;p&gt;After clustering, about 80,000 rows belong to one cluster - so we could conceptualize that cluster as the base data set and run our standard model. I would be curious to train the winning solution on each of my clusters to see if that improved its performance. The smaller cluster had predictable features like single large spikes, uniformity, two spikes, clear seasonality, etc. Using different linkage whole and partial linkage patterns instead of ward only increased the size of the largest cluster. This indicates that there is no signicant distinction for the majority of the time series signals in the corpus.&lt;/p&gt;
 
@@ -294,7 +470,7 @@ I looked to the research and settled on Dynamic Time Warping (DTW) from Keogh et
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 </description>
-        <pubDate>2019-04-16</pubDate>
+        <pubDate>2019-05-27</pubDate>
         <link>http://localhost:4000/articles/2017-12/Dynamic-Time-Warping</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2017-12/Dynamic-Time-Warping</guid>
         
@@ -677,7 +853,7 @@ If NORMALIZE_FLAG set to False, tuple[1] = -1
 &lt;/ul&gt;
 
 </description>
-        <pubDate>2019-04-16</pubDate>
+        <pubDate>2019-05-27</pubDate>
         <link>http://localhost:4000/articles/2017-09/Syntactic-Tree-Kernels</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2017-09/Syntactic-Tree-Kernels</guid>
         
@@ -696,7 +872,7 @@ If NORMALIZE_FLAG set to False, tuple[1] = -1
         <title>Recommitment to Posting</title>
         <description>&lt;p&gt;I dropped the ball w.r.t posting my work and thoughts. I’m going to be posting a lot more starting with recaps of old research projects and coding.&lt;/p&gt;
 </description>
-        <pubDate>2019-04-16</pubDate>
+        <pubDate>2019-05-27</pubDate>
         <link>http://localhost:4000/articles/2017-09/Recommitment-to-Posting</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2017-09/Recommitment-to-Posting</guid>
         
@@ -719,7 +895,7 @@ If NORMALIZE_FLAG set to False, tuple[1] = -1
 
 &lt;p&gt;The question beyond this is time-frame weighting within individual datasets (prioritizing more recent data), but one thing at a time.&lt;/p&gt;
 </description>
-        <pubDate>2019-04-16</pubDate>
+        <pubDate>2019-05-27</pubDate>
         <link>http://localhost:4000/articles/2017-03/graph-election-update</link>
         <guid isPermaLink="true">http://localhost:4000/articles/2017-03/graph-election-update</guid>
         

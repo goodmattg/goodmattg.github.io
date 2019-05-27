@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="DeepMind, Google Brain, MIT, and University of Edinburgh collaborators produce a manifesto on graph networks">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="Relational Inductive Biases: a manifesto | Matt Goodman&#39;s Blog">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Relational Inductive Biases: a manifesto | Matt Goodman&#39;s Blog">
+  <meta name="twitter:description" content="DeepMind, Google Brain, MIT, and University of Edinburgh collaborators produce a manifesto on graph networks">
+  
+    <meta property="twitter:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="http://localhost:4000/articles/2019-04/relation-inductive-biases-a-manifesto">
+  <meta property="og:title" content="Relational Inductive Biases: a manifesto | Matt Goodman&#39;s Blog">
+  <meta property="og:description" content="DeepMind, Google Brain, MIT, and University of Edinburgh collaborators produce a manifesto on graph networks">
+  
+    <meta property="og:image" content="http://localhost:4000/img/leonids-logo.png">
+  
+  <title>Relational Inductive Biases: a manifesto | Matt Goodman's Blog</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="http://localhost:4000/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/main.css">
+
+  <link rel="canonical" href="http://localhost:4000/articles/2019-04/relation-inductive-biases-a-manifesto">
+  <link rel="alternate" type="application/rss+xml" title="Matt Goodman&#39;s Blog" href="http://localhost:4000/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="http://localhost:4000/" class="author_name">Matt Goodman's Blog</a>
+  <span class="author_job">It's All Good, Man</span>
+  <span class="author_bio mbm">A selection of my research and thoughts</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="http://localhost:4000/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="http://localhost:4000/archive/">Archive</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="http://localhost:4000/categories/">Categories</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="http://localhost:4000/resume/">Resume</a>
+      </li>
+        
+      <li class="nav-item">
+        <a href="http://localhost:4000/tags/">Tags</a>
+      </li>
+         
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('mattgoodman13 (.a.t.) gmail (.d.o.t.) com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    <li><a href="http://linkedin.com/in/matthew-goodman-89b76989" class="social-link-item" target="_blank"><i class="fa fa-fw fa-linkedin"></i></a></li>
+    
+    
+    
+    
+    <li><a href="http://github.com/goodmattg" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "http://localhost:4000/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="Relational Inductive Biases: a manifesto">Relational Inductive Biases: a manifesto</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        24 APR 2019
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    4 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <p>The authors present a succinct and powerful manifesto of the importance of graph networks in artificial intelligence research. The paper is a move to synthesize the previously disjoint field of graph neural networks into a single framework: “Graph Networks (GN)”.</p>
+
+<h1 id="thoughts">Thoughts</h1>
+
+<p>We have a much needed survey paper that unifies graph networks (GNs) and refocuses attention away from the technical details of network composition/functionality back to the marquee goal of building networks that achieve combinatorial generalization through flexible computation on structured representation. This topic aligns strongly with my research interests and made me consider a few areas to explore moving forward:</p>
+
+<ul>
+  <li>Recurrent GNs for sequences of graphs</li>
+  <li>Reinforcement learning as a method to adaptively modify graph structures during the course of computation. This would solve a personal thought experiment of training a self-aware image classifier that has the means to create new buckets. This would involve an update function that has the capacity to add/remove new buckets to the image classifier based on some spectral representation of the class output probabilities. In the formalism of GN, this is creating update/aggregation functions that can create/destroy nodes and edges.</li>
+</ul>
+
+<h1 id="quotes">Quotes</h1>
+
+<blockquote>
+  <p>We suggest that a key path forward for modern AI is to commit to combinatorial generalization as a top priority.</p>
+</blockquote>
+
+<blockquote>
+  <p>When learning, we either fit new knowledge into our existing structured representations, or adjust the structure itself to better accommodate (and make use of) the new and the old.</p>
+</blockquote>
+
+<blockquote>
+  <p>Combinatorial generalization can be viewed as “the infinite use of finite means” - von Humboldt</p>
+</blockquote>
+
+<h1 id="notes">Notes</h1>
+
+<ul>
+  <li>prioritize “combinatorial generalization”, the ability to generate new inferences, predictions, and behaviors from know building blocks
+    <ul>
+      <li>i.e. <em>putting the pieces together</em></li>
+    </ul>
+  </li>
+  <li>combinatorial generalization is the goal, so we should bias towards learning on structured representations and computations
+    <ul>
+      <li>Generalizing on structured representations is easier than generalizing on unstructured representations</li>
+    </ul>
+  </li>
+  <li>The world is <em>compositional</em>, therefore our methods should be compositional
+    <ul>
+      <li>This does not mean we mean to trade off structure for flexibility. We consider the concepts jointly (i.e. nature <em>and</em> nurture)</li>
+    </ul>
+  </li>
+  <li>Graph neural networks (GNs) exemplify this functional ambition by learning relations between “explicitly structured data”
+    <ul>
+      <li>learning $\rightarrow$ flexible</li>
+      <li>structured $\rightarrow$ composing known building blocks</li>
+    </ul>
+  </li>
+  <li>GN methods contain strong <strong>relational inductive biases</strong>
+  1) Relational reasoning
+      - <em>structure</em> is composing a set of known building blocks
+      - <em>structured representation</em> describe this composition
+      - structured representations consist of <em>entities</em> connected by <em>relations</em> according to <em>rules</em>
+          - <em>entity</em> is an element with attributes
+          - <em>relation</em> is a property between entities
+          - <em>rule</em> is a function that maps discrete pairs of entity-relations
+      - <em>relational reasoning</em> involves manipulating structured representations
+  2) Inductive biases
+      - An <em>inductive bias</em> allows a learning algorithm to prioritize one solution over another, independent of the observed data.
+          - E.g. prior in Bayesian statistics, regularization terms, algorithm architecture, composition of layers in NN, etc.
+  3) <strong>Relational Inductive Biases</strong>
+      - “Inductive biases which impose constraints on relationships and interactions among entities in a learning process”</li>
+  <li><em>Graph Networks</em> (GN)
+    <ul>
+      <li>$G = (u, V, E)$
+        <ul>
+          <li><strong>u</strong>: Global attribute</li>
+          <li><strong>V</strong> is the set of nodes w/ cardinality $N^v$ where each node $v_i$ has attributes</li>
+          <li><strong>E</strong> is the set of edges w/ cardinality $N^e$ where each edge $e_v$ has attributes. $E = {(e_k,r_k,s_k)}_{k=1:N^{e}}$
+            <ul>
+              <li>$e_k$ is the edge’s attribute</li>
+              <li>$r_k$ is the index of the receiver node</li>
+              <li>$s_k$ is the index of the sender node</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>GN <em>block</em> := $f: G \rightarrow G$
+        <ul>
+          <li>GN block algorithm
+  1) Compute updated edge attributes: $e_k^{‘} = \phi^e(e_k,v_{r_k},v_{s_k},u)$
+  2) Aggregate edge attributes per node: $\bar{e}_i^{‘} = \rho^{e \rightarrow v}(E_i^{‘})$
+  3) Compute updated node attributes: $v_i^{‘} = \phi^v(\bar{e}_i^{‘}, v_i, u)$
+  4) Aggregate edge attributes globally: $\bar{e}^{‘} = \rho^{e \rightarrow u}(E^{‘})$
+  5) Aggregate node attributes globally: $\bar{v}_i^{‘} = \rho^{v \rightarrow u}(V^{‘})$
+  6) Compute updated global attribute: $u^{‘} = \phi^u(\bar{e}^{‘}, \bar{v}^{‘}, u)$</li>
+          <li>TLDR
+            <ul>
+              <li>Update functions: $\phi$
+                <ul>
+                  <li>SOA use NN as update function ($NN_e, NN_v, NN_u$)</li>
+                  <li>Can include RNN as $\phi$, but this is not in literature yet</li>
+                </ul>
+              </li>
+              <li>Aggregation functions: $\rho$</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Relational inductive biases in GN
+        <ul>
+          <li>arbitrary relationships among entities. i.e. the GN architecture doesn’t determine how entities interact.</li>
+          <li>GN are invariant to ordering on input (b/c input is graph, and graph represented as set)</li>
+          <li>update/aggregation functions are reused implying combinatorial generalization</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="cite">Cite</h2>
+
+<p>Battaglia, Peter W., et al. “Relational inductive biases, deep learning, and graph networks.” arXiv preprint arXiv:1806.01261 (2018)</p>
+
+  </article>
+</div>
+
+<div class="share-buttons">
+  <h6>Share on: </h6>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=http://localhost:4000/articles/2019-04/relation-inductive-biases-a-manifesto" class="twitter btn" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/articles/2019-04/relation-inductive-biases-a-manifesto" class="facebook btn" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=http://localhost:4000/articles/2019-04/relation-inductive-biases-a-manifesto" class="google-plus btn" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+    <li>
+      <a href="https://news.ycombinator.com/submitlink?u=http://localhost:4000/articles/2019-04/relation-inductive-biases-a-manifesto" class="hacker-news btn" title="Share on Hacker News"><i class="fa fa-hacker-news"></i><span> Hacker News</span></a>
+    </li>
+    <li>
+      <a href="https://www.reddit.com/submit?url=http://localhost:4000/articles/2019-04/relation-inductive-biases-a-manifesto" class="reddit btn" title="Share on Reddit"><i class="fa fa-reddit"></i><span> Reddit</span></a>
+    </li>
+  </ul>
+</div><!-- end share-buttons -->
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'https-goodmattg-github-io';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+        <footer>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+  &copy; 2019 Matt Goodman's Blog. Powered by <a href="http://jekyllrb.com/">Jekyll</a>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://localhost:4000/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://localhost:4000/js/main.js"></script>
+
+
+</body>
+</html>
