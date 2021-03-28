@@ -1,4 +1,4 @@
-baseURL = "https://example.com" 
+baseURL = "https://goodmattg.github.io" 
 disableKinds = ["taxonomy", "term"] 
 enableEmoji = true 
 googleAnalytics = "" # add your tracking id
@@ -7,14 +7,13 @@ title = "Matt Goodman"
 
 [params]
 author = "Matthew Goodman" 
-description = "A simple monospaced resume theme for Hugo." 
+description = "The website of Matthew Goodman" 
 favicon = "favicon.ico" # path to a .ico to use as favicon
 logo = "" # url or path to a logo to put in the header
 math = true # enable KaTeX (https://katex.org/) globally
 
 [params.footer]
 text = "By Matthew Goodman"
-url = "https://github.com/ojroques/hugo-researcher"
 [params.style] # appearance options (can be omitted)
 avatarSize = "120px"
 colorBlack = "#222222"
