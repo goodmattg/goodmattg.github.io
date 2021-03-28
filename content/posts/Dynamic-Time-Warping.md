@@ -6,6 +6,8 @@ categories = ["DTW", "ML", "Kaggle"]
 comments = true
 +++
 
+# Dynamic Time Warping for Clustering Time Series Data
+
 ## Motivation
 
 This was for the Wikipedia competition hosted by Kaggle competition to predict future page view counts on Wikipedia. Like so many of the solutions now the winning approach used RNNs to learn a set of hyperparameters on the entire dataset that are then fed in to a predict locally on each time series. This begs comparison to multivel hierarchical models from a Bayesian perspective, but I'll save that for a later post. I treat these competitions as a way to explore new classes of techniques more than as competition to win. And it's from that perspective that I settled on Dynamic Time Warping as the technique I wanted to explore. The big question I had was:

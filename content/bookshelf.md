@@ -2,7 +2,7 @@
 Title = "Bookshelf"
 +++
 
-# An incomplete attempt to track my reading
+## An attempt to track my reading (incomplete)
 
 Book | Author | Started | Finished | Notes 
 -----|-------|-------|-------|--------

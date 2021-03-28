@@ -6,6 +6,8 @@ categories = ["ML", "NLP", "kernels", "Kaggle"]
 comments = true
 +++
 
+# Syntactic Tree Kernels
+
 ## Motivation
 
 This post encapsulates the work I did with Dean Fulgoni for our final project in Big Data Analytics. Credit to Professor Chris Callison-Burch for steering me away from some topics that "could easily be Phd theses" and to Professor Zachary Ives for being an excellent teacher.

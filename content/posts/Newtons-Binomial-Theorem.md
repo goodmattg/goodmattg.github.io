@@ -5,7 +5,7 @@ description = "An amateur's attempt at proving Newton's Binomial Theorem"
 comments = true
 +++
 
-## Proving Newton's Binomial Theorem
+# Proving Newton's Binomial Theorem
 
 Prove Newton's Theorem for $t \in \mathbb{R}$ for $\|x\|<1$. If $t=n$ is any positive integer obtain the standard binomial formula $(a+b)^n=\sum_{k=0}^n\binom{n}{k}a^{n-k}b^k$. 
 

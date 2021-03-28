@@ -6,6 +6,8 @@ categories = ["thoughts"]
 comments = true
 +++
 
+# Software Sharing in Medical Research
+
 I was reading Mohammed AlQuraishi's post[^1] "AlphaFold @ CASP13: What just happened?" recently about DeepMind's advance in protein folding. His point about research siloing holding the whole field back resonated with me in light of my current work identifying malignant tumors in ultrasound images. To put it bluntly, it isn't helpful that I can quickly find ten good papers claiming state-of-the-art performance on tumor segmentation if I can't quickly download and verify the model performance on a non-toy dataset. In my view, a toy dataset is a dataset that doesn't reflect the enumerable subtleties of real-world data. I.e. a dataset filtered to remove weird edge-cases, complex low probability situations, and messy inputs. As an aside, modern tumor ultrasound datasets are laughably perfect. They are all ~100 samples of perfectly cropped tumors with contiguous inner regions and no artefacts that would reflect rare conditions a radiologist would be trained to identify.
 
 > As I discussed earlier, it is clear that between the Xu and Zhang groups enough was known to develop a system that would have perhaps rivaled AlphaFold. But because of the siloed nature of the field, it only gets a “gradient update” once every two years. Academic groups are thus forced to independently rediscover the wheel over and over. In DeepMind’s case, even though the team was small in comparison to the total headcount wof academic groups, they were presumably able to share information on a very regular basis, and this surely contributed to their success.

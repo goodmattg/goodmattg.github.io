@@ -6,9 +6,11 @@ categories = ["probability"]
 comments = true
 +++
 
+# Theory of Probability (Chapter 1)
+
 ### Retrospect (03/27/21)
 
-_I remember this time clearly. It was a mental high point and a physical low point. Unsuprisingly, I only made it through two chapters. Theoretical probability is not my strength, and I found this material impossible to work through without peer feedback. Life is meant to be lived; I don't feel the to take on masochistic intellectual challenges anymore._
+_I remember this time in my life clearly. It was a mental high point and a physical low point. Unsurprisingly, I only made it through two chapters. Theoretical probability is not my strength, and I found this material impossible to work through without peer feedback. Life is meant to be lived; I don't feel the pressure to take on masochistic intellectual challenges anymore._
 
 ## A _gedanken_ experiment
 
