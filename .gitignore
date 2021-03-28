@@ -1,3 +1,12 @@
-.sass-cache
+# Hugo static generated
+/public
+/resources/_gen
+!/resources
+
+# OSX
+.DS_Store
+
+# VSCode
 .vscode
-.jekyll-metadata
+# disqus-shortname: https-goodmattg-github-io
+
