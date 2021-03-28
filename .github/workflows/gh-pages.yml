@@ -1,3 +1,6 @@
+# https://github.com/peaceiris/actions-hugo#%EF%B8%8F-use-hugo-extended
+# https://github.com/peaceiris/actions-gh-pages#%EF%B8%8F-first-deployment-with-github_token
+
 name: github pages
 
 on:
