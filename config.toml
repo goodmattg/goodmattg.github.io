@@ -1,4 +1,4 @@
-baseURL = "https://https://goodmattg.github.io/" 
+baseURL = "https://example.com" 
 disableKinds = ["taxonomy", "term"] 
 enableEmoji = true 
 googleAnalytics = "" # add your tracking id
@@ -49,6 +49,10 @@ weight = 4
 [[menu.main]]
 name = "Bookshelf"
 url = "/bookshelf"
+weight = 2
+[[menu.main]]
+name = "Quotes"
+url = "/quotes"
 weight = 2
 
 [markup.goldmark.renderer]

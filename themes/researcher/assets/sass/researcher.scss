@@ -135,9 +135,10 @@ $y-medium: 1.0rem;
     }
     pre code {
         all: unset;
+        // Increase line spacing in code blocks. Also prefer JetBrains Mono for code.
         span {
             line-height: 1.4;            
-            font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New;
+            font-family: JetBrains Mono,Consolas,Monaco,Lucida Console,Liberation Mono,Courier New;
         }
     }
     .highlight {

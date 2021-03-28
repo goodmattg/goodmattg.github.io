@@ -9,5 +9,4 @@ title = "Contact"
 ## Social
 
 1. [Github](https://github.com/goodmattg)
-2. [dfas]
-3. [LinkedIn](#)
+2. [LinkedIn](https://www.linkedin.com/in/matthew-goodman-89b76989/)

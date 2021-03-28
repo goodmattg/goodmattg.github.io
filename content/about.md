@@ -6,8 +6,11 @@ title = "About"
 
 {{< figure class="avatar" src="/avatar.jpg" >}}
 
-This is a Hugo based resume template. You can find the full source code on
-[GitHub](https://github.com/ojroques/hugo-researcher).
+Experienced software engineer primarily focused on applied machine learning. I’m specialized in distributed AutoML services and deep-learning based computer vision.
+
+My professional experience is mainly in C/C++, Python, and Scala and spans the software engineering stack from platform engineering to algorithm development.
+
+In my free time I enjoy exploring new languages (Rust/Haskell/Erlang), and taking on quantitative challenges. I’ve completed projects in a wide variety of domains including quantitative finance, natural language processing, and Bayesian statistical modeling.
 
 ## Research Interest
 
@@ -19,43 +22,16 @@ Fusce pharetra diam ac nisi aliquet, velegestas ex iaculis. Pellentesque
 laoreet cursus tellus sed pellentesque. Praesent a rhoncus elit[^2]. Nunc
 ipsum nisl, consequat sit amet pretium quis, gravida id ipsum.
 
-## Publications
+## Timeline
 
-In chronological order:
-1. F.Bar, J.Doe: Effects of having a placeholder of a name
-2. S.Holmes, J.Watson: Consequences of living with a sociopath in London
-
-## Typography
-
-This is a [link](http://google.com). Something *italics* and something **bold**.
-
-Here is a table:
-
-Year | Award | Category
------|-------|--------
-2014 | Emmy  | Won Outstanding Lead Actor in a miniseries or a movie
-2015 | BAFTA | Nominated for Best Leading Actor for Sherlock
-2014 | Satellite | Won Best Actor miniseries or television film
-
-Here is a horizontal rule:
+Year | Position
+-----|-------
+2020-Present | Computer Vision Research Engineer, ByteDance AI Lab.
+2019-2020 | Masters in Computer Science, UPenn. Computer Vision research in GRASP.
+2017-2019 | Qualtrics. Platform engineering, launched Conjoint, exit after SAP acquisition.
+2013-2017 | BSE Electrical Engineering, UPenn. Minors: Math + CS. 
 
 ---
-
-Here is a blockquote:
-
-> To a great mind, nothing is little
-
-Here is a `code` block:
-
-```python
-def is_elementary():
-  return True
-```
-
-## References
-
-* Foo Bar: Head of Department, Placeholder Names, Lorem
-* John Doe: Associate Professor, Department of Computer Science, Ipsum
-
-[^1]: This is the first footnote.
-[^2]: This is the second footnote.
+>“Don’t aim at success—the more you aim at it and make it a target, the more you are going to miss it. For success, like happiness, cannot be pursued; it must ensue, and it only does so as the unintended side-effect of one’s dedication to a cause greater than oneself or as the by-product of one’s surrender to a person other than oneself.”
+>
+> Viktor E. Frankl. “Man's Search for Meaning.”
