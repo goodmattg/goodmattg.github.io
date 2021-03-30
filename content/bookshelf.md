@@ -7,7 +7,9 @@ Title = "Bookshelf"
 Book | Author | Started | Finished | Notes 
 -----|-------|-------|-------|--------
 How To Change Your Mind | Michael Pollan  | 03/23/21 |  | 
-Red Sorghum | Mo Yan | 7/14/20 | | That this won him the Nobel Prize is no longer suprising.
+Stranger in a Strange Land | Robert Heinlein | 03/09/21 | 03/12/21 | The word "grok" is overused in our industry, but I see why this book appeals to my kind of people.
+The Hobbit | J. R. R. Tolkien | 03/06/21 | 03/08/21 | Probably the 10th time I've read this book. Ideal Airbnb cabin reading.
+Red Sorghum | Mo Yan | 7/14/20 | | That this won him the Nobel Prize is no longer surprising.
 It Takes What it Takes | Trevor Moawad | 4/16/20 | |  
 Master of the Senate | Robert Caro | 1/12/20 | | 
 The Checklist Manifesto: How to Get Things Right | Atul Gawande | 11/25/19 | | 
