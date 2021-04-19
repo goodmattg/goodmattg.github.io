@@ -6,7 +6,7 @@ Title = "Bookshelf"
 
 Book | Author | Started | Finished | Notes 
 -----|-------|-------|-------|--------
-How To Change Your Mind | Michael Pollan  | 03/23/21 |  | 
+How To Change Your Mind | Michael Pollan  | 03/23/21 | 04/16/21 | If the United States reduces the schedule of psychadelics, the entire mental health industry could change. The actual chemical compound is publicly known and cheap to produce - the entire distribution of LSD, etc. would become part of the service industry (set/setting), instead of a medical process for SSRI's, anti-anxiety, etc. I won't be doing psychadelics anytime soon. My current pattern of consciousness is sufficiently malleable and enjoyable enough as it is. 
 Stranger in a Strange Land | Robert Heinlein | 03/09/21 | 03/12/21 | The word "grok" is overused in our industry, but I see why this book appeals to my kind of people.
 The Hobbit | J. R. R. Tolkien | 03/06/21 | 03/08/21 | Probably the 10th time I've read this book. Ideal Airbnb cabin reading.
 Red Sorghum | Mo Yan | 7/14/20 | | That this won him the Nobel Prize is no longer surprising.
