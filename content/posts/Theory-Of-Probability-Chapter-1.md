@@ -6,7 +6,11 @@ categories = ["probability"]
 comments = true
 +++
 
+{{< centered >}}
 # Theory of Probability (Chapter 1)
+<hr>
+<br>
+{{</ centered>}}
 
 ### Retrospect (03/27/21)
 

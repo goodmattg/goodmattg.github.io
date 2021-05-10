@@ -6,7 +6,11 @@ categories = ["ML", "NLP", "kernels", "Kaggle"]
 comments = true
 +++
 
+{{< centered >}}
 # Syntactic Tree Kernels
+<hr>
+<br>
+{{</ centered>}}
 
 ## Motivation
 

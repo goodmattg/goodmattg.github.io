@@ -6,7 +6,12 @@ categories = ["DTW", "ML", "Kaggle"]
 comments = true
 +++
 
+{{< centered >}}
 # Dynamic Time Warping for Clustering Time Series Data
+<hr>
+<br>
+{{</ centered>}}
+
 
 ## Motivation
 

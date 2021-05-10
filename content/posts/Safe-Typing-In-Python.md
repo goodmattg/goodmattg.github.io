@@ -6,7 +6,11 @@ categories = ["Types", "Programming Languages", "Lessons", "Python", "Scala"]
 comments = true
 +++
 
+{{< centered >}}
 # Lessons Learned using MyPy in Production
+<hr>
+<br>
+{{</ centered>}}
 
 When we talk about type safety in the context of statically typed languages, we mean that the language builds in a typing checking mechanism into the compiler. No type-check, no compilation.
 

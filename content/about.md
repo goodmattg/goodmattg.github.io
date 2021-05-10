@@ -22,7 +22,7 @@ In my free time I enjoy playing sports, building things, and taking on new chall
 
 Year | Position
 -----|-------
-2020-Present | Computer Vision Research Engineer, ByteDance AI Lab.
+2020-Present | Deep Learning Research Engineer, Computer Vision, ByteDance AI Lab.
 2019-2020 | Masters in Computer Science, UPenn. Computer Vision research in GRASP.
 2017-2019 | Qualtrics. Platform engineering, launched Conjoint, exit after SAP acquisition.
 2013-2017 | BSE Electrical Engineering, UPenn. Minors: Math + CS. 

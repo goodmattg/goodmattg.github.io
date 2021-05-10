@@ -6,7 +6,11 @@ categories = ["Deep Learning", "Graph Neural Networks (GN)"]
 comments = true
 +++
 
+{{< centered >}}
 # Relational Inductive Biases: a manifesto
+<hr>
+<br>
+{{</ centered>}}
 
 The authors present a succinct and powerful manifesto of the importance of graph networks in artificial intelligence research. The paper is a move to synthesize the previously disjoint field of graph neural networks into a single framework: "Graph Networks (GN)".
 
