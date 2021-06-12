@@ -6,7 +6,9 @@ Title = "Bookshelf"
 
 Book | Author | Started | Finished | Notes 
 -----|-------|-------|-------|--------
-Who Gets What - And Why | Alvin E. Roth | 05/07/21 | |
+Hail Mary | Andy Weir | 06/08/21 | 06/12/21 | Better than the Martian for obvious reasons once you've read this book. Not so much fiction, as a kinematics primer with a narrative wrapped around it. I'd like an edition of the book with the math all worked out in the margins.
+Why Buddhism is True | Robert Wright | 05/15/21 | 06/04/21 | 
+Who Gets What - And Why | Alvin E. Roth | 05/07/21 | 05/13/21 | Refreshing to get detailed but accesible case studies on concepts in market design (liquidity, thickness, trust, congestion, etc.) that make you feel like you get it. Obviously there's a lot of great mathematics behind the scenes, but the writing style made me intuit what was going on in the markets I see in my day-to-day life. For anyone who intends to build a platform or marketplace, this is a must-read. 
 Why We Sleep | Matthew Walker | 04/17/21 | |
 How To Change Your Mind | Michael Pollan  | 03/23/21 | 04/16/21 | If the United States reduces the schedule of psychadelics, the entire mental health industry could change. The actual chemical compound is publicly known and cheap to produce - the entire distribution of LSD, etc. would become part of the service industry (set/setting), instead of a medical process for SSRI's, anti-anxiety, etc. I won't be doing psychadelics anytime soon. My current pattern of consciousness is sufficiently malleable and enjoyable enough as it is. 
 Stranger in a Strange Land | Robert Heinlein | 03/09/21 | 03/12/21 | The word "grok" is overused in our industry, but I see why this book appeals to my kind of people.
