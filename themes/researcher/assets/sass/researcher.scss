@@ -81,11 +81,11 @@ $y-medium: 1.0rem;
         max-width: 100%;
     }
     .avatar > img {
-        border-radius: 50%;
+        border-radius: 3%;
         float: right;
-        margin: -8px 0 0 16px;
+        margin: 0px 0 0 16px;
         height: $avatar-size;
-        width: $avatar-size;
+        // width: $avatar-size;
     }
     ol {
         counter-reset: list;
