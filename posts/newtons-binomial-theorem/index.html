@@ -1,28 +1,101 @@
-<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><title>Proving Newton's Binomial Theorem</title><meta name=description content="The website of Matthew Goodman"><meta name=author content="Matthew Goodman"><link rel=preconnect href=https://fonts.gstatic.com><link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel=stylesheet><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css integrity=sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2 crossorigin=anonymous><link rel=stylesheet href=/sass/researcher.min.css><link rel=icon type=image/ico href=https://goodmattg.github.io/favicon.ico></head><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css integrity=sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js integrity=sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4 crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js integrity=sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa crossorigin=anonymous onload=renderMathInElement(document.body)></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"\\[",right:"\\]",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1}]})})</script><body><div class="container mt-5"><nav class="navbar navbar-expand-sm flex-column flex-sm-row text-nowrap p-0"><a class="navbar-brand mx-0 mr-sm-auto" href=https://goodmattg.github.io>Matt Goodman</a><div class="navbar-nav flex-row flex-wrap justify-content-center"><a class="nav-item nav-link" href=/about>About</a>
+<!doctype html><html><head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<title>Proving Newton's Binomial Theorem</title>
+<meta name=description content="The website of Matthew Goodman">
+<meta name=author content="Matthew Goodman">
+<link rel=preconnect href=https://fonts.gstatic.com>
+<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel=stylesheet>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css integrity=sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2 crossorigin=anonymous>
+<link rel=stylesheet href=/sass/researcher.min.css>
+<link rel=icon type=image/ico href=https://goodmattg.github.io/favicon.ico>
+</head>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css integrity=sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X crossorigin=anonymous>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js integrity=sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4 crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js integrity=sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa crossorigin=anonymous onload=renderMathInElement(document.body)></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"\\[",right:"\\]",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1}]})})</script>
+<body><div class="container mt-5">
+<nav class="navbar navbar-expand-sm flex-column flex-sm-row text-nowrap p-0">
+<a class="navbar-brand mx-0 mr-sm-auto" href=https://goodmattg.github.io>
+Matt Goodman
+</a>
+<div class="navbar-nav flex-row flex-wrap justify-content-center">
+<a class="nav-item nav-link" href=/about>
+About
+</a>
 <span class="nav-item navbar-text mx-1">|</span>
-<a class="nav-item nav-link" href=/posts>Posts</a>
+<a class="nav-item nav-link" href=/posts>
+Posts
+</a>
 <span class="nav-item navbar-text mx-1">|</span>
-<a class="nav-item nav-link" href=/bookshelf>Bookshelf</a>
+<a class="nav-item nav-link" href=/bookshelf>
+Bookshelf
+</a>
 <span class="nav-item navbar-text mx-1">|</span>
-<a class="nav-item nav-link" href=/quotes>Quotes</a>
+<a class="nav-item nav-link" href=/quotes>
+Quotes
+</a>
 <span class="nav-item navbar-text mx-1">|</span>
-<a class="nav-item nav-link" href=/resume>Resume</a>
+<a class="nav-item nav-link" href=/resume>
+Resume
+</a>
 <span class="nav-item navbar-text mx-1">|</span>
-<a class="nav-item nav-link" href=/contact>Contact</a></div></nav></div><hr><div id=content><div class=container><div style=text-align:center class=centered-div><h1 id=proving-newtons-binomial-theorem>Proving Newton&rsquo;s Binomial Theorem</h1><hr><br></div><p>Prove Newton&rsquo;s Theorem for $t \in \mathbb{R}$ for $|x|&lt;1$. If $t=n$ is any positive integer obtain the standard binomial formula $(a+b)^n=\sum_{k=0}^n\binom{n}{k}a^{n-k}b^k$.</p><p>$$(1+x)^t=1+\binom{t}{1}x+\binom{t}{2}x^2+\binom{t}{3}x^3\cdots=\sum_{k=0}^{\infty}\binom{t}{k}x^k$$</p><p>My calculus is rusty, so my first and only instinct when I see an infinite series like this with incrementing exponents is to use Taylor&rsquo;s approximation theorem with remainder.</p><p>$$f^{n+1}(x) = \underbrace{\sum_{k=0}^{n}f^{(k)}(0)\frac{x^k}{k!}}_\text{T(x)}~+~\underbrace{\frac{1}{n!}\int_0^xt^nf^{n+1}(x-t)~dt}_{R_n(x)}$$</p><p>Looking this over, we can tell this is probably a good approach. That initial term matches up almost perfectly to our proof objective. Let&rsquo;s find the $k_{th}$ derivative of the function.</p><p>$$
+<a class="nav-item nav-link" href=/contact>
+Contact
+</a>
+</div>
+</nav>
+</div>
+<hr>
+<div id=content>
+<div class=container>
+<div style=text-align:center class=centered-div>
+<h1 id=proving-newtons-binomial-theorem>Proving Newton&rsquo;s Binomial Theorem</h1>
+<hr>
+<br>
+</div>
+<p>Prove Newton&rsquo;s Theorem for $t \in \mathbb{R}$ for $|x|&lt;1$. If $t=n$ is any positive integer obtain the standard binomial formula $(a+b)^n=\sum_{k=0}^n\binom{n}{k}a^{n-k}b^k$.</p>
+<p>$$(1+x)^t=1+\binom{t}{1}x+\binom{t}{2}x^2+\binom{t}{3}x^3\cdots=\sum_{k=0}^{\infty}\binom{t}{k}x^k$$</p>
+<p>My calculus is rusty, so my first and only instinct when I see an infinite series like this with incrementing exponents is to use Taylor&rsquo;s approximation theorem with remainder.</p>
+<p>$$f^{n+1}(x) = \underbrace{\sum_{k=0}^{n}f^{(k)}(0)\frac{x^k}{k!}}_\text{T(x)}~+~\underbrace{\frac{1}{n!}\int_0^xt^nf^{n+1}(x-t)~dt}_{R_n(x)}$$</p>
+<p>Looking this over, we can tell this is probably a good approach. That initial term matches up almost perfectly to our proof objective. Let&rsquo;s find the $k_{th}$ derivative of the function.</p>
+<p>$$
 \begin{aligned}
 f(x) & = (1+x)^t \cr
 f^{(k)}(x) & = t(t-1)(t-2) \cdots (t-k+1)(1+x)^{t-k} \cr
 & = t^{\underline{k}}(1+x)^{t-k}
 \end{aligned}
-$$</p><p>We have the approximation term $T(x)$:</p><p>$$
+$$</p>
+<p>We have the approximation term $T(x)$:</p>
+<p>$$
 \begin{aligned}
 T(x) & = \sum_{k=0}^{n}f^{(k)}(0)\frac{x^k}{k!} \cr
 & = \sum_{k=0}^{n}t^{\underline{k}}(1+(0))^{t-k}\frac{x^k}{k!} \cr
 & = \sum_{k=0}^{n}t^{\underline{k}}\frac{x^k}{k!} \cr
 & = \sum_{k=0}^{n}\binom{t}{k}x^k
 \end{aligned}
-$$</p><p>This matches perfectly! Now we just have to show that the remainder term $R(x) \rightarrow 0$ for $|x|&lt;1$. At this point I didn&rsquo;t know what to do - I don&rsquo;t yet have the experience in formal mathematical proofs to even understand the target approach for this style of problem. Referring to the internet, the solution is quite clear. We replace the $n+1_{th}$ derivative term with a positive function that is always greater than this derivative term. We then show that $R(x) \rightarrow 0$ integrating over the term with the positive function substituted in.</p><p>First define the positive function $M(x)$ over the interval $|t|&lt;|x|$. We use the $M$ to represent maximum because it is cleaner than writing $MAX(x)$.</p><p>$$
+$$</p>
+<p>This matches perfectly! Now we just have to show that the remainder term $R(x) \rightarrow 0$ for $|x|&lt;1$. At this point I didn&rsquo;t know what to do - I don&rsquo;t yet have the experience in formal mathematical proofs to even understand the target approach for this style of problem. Referring to the internet, the solution is quite clear. We replace the $n+1_{th}$ derivative term with a positive function that is always greater than this derivative term. We then show that $R(x) \rightarrow 0$ integrating over the term with the positive function substituted in.</p>
+<p>First define the positive function $M(x)$ over the interval $|t|&lt;|x|$. We use the $M$ to represent maximum because it is cleaner than writing $MAX(x)$.</p>
+<p>$$
 |f^{n+1}(t)| \leq max{1,t^{n+1}}(1+|x|)^{t-(n+1)} \leq M(x)^{n+1}
-$$</p><p>We therefore have:</p><p>$$
+$$</p>
+<p>We therefore have:</p>
+<p>$$
 |R_n(x)| \leq \frac{M(x)^{n+1}}{n!}\int_0^xt^n~dt~=~\frac{M(x)^{n+1}x^{n+1}}{(n+1)!}
-$$</p><p>The $(n+1)!$ term will grow exponentially fast as $n \rightarrow \infty$, so $R(x) \rightarrow 0$. As said earlier, we only needed to demonstrate that the remainder approached zero, so we are done.</p><p>$$\blacksquare$$</p><h2 id=aside>Aside</h2><p>I looked at the solution for this one and I can&rsquo;t grasp why they specify this exact maximum bounding function. We&rsquo;re quickly abandon the function so it hardly matters, but it seems like we could bound closer. Why $max(1,t^{n+1})$? Why not just $t^{n+1}$ or even $t^{\underline{n+1}}$? I&rsquo;m guessing this is a matter of convention; we can see that over the interval $|t|&lt;|x|$, $|t^{n+1}| \leq 1$, so I&rsquo;d venture the $max(1,t^{n+1})$ function is just to get rid of negatives in case $n+1$ is odd.</p></div></div><div id=footer class=mb-5><script src=https://utteranc.es/client.js repo=goodmattg/goodmattg.github.io issue-term=pathname label=blog theme=github-light crossorigin=anonymous async></script><hr><div class="container text-center"><a href=https://goodmattg.github.io><small>By Matthew Goodman</small></a></div></div></body></html>
+$$</p>
+<p>The $(n+1)!$ term will grow exponentially fast as $n \rightarrow \infty$, so $R(x) \rightarrow 0$. As said earlier, we only needed to demonstrate that the remainder approached zero, so we are done.</p>
+<p>$$\blacksquare$$</p>
+<h2 id=aside>Aside</h2>
+<p>I looked at the solution for this one and I can&rsquo;t grasp why they specify this exact maximum bounding function. We&rsquo;re quickly abandon the function so it hardly matters, but it seems like we could bound closer. Why $max(1,t^{n+1})$? Why not just $t^{n+1}$ or even $t^{\underline{n+1}}$? I&rsquo;m guessing this is a matter of convention; we can see that over the interval $|t|&lt;|x|$, $|t^{n+1}| \leq 1$, so I&rsquo;d venture the $max(1,t^{n+1})$ function is just to get rid of negatives in case $n+1$ is odd.</p>
+</div>
+</div><div id=footer class=mb-5>
+<script src=https://utteranc.es/client.js repo=goodmattg/goodmattg.github.io issue-term=pathname label=blog theme=github-light crossorigin=anonymous async></script>
+<hr>
+<div class="container text-center">
+<a href=https://goodmattg.github.io><small>By Matthew Goodman</small></a>
+</div>
+</div>
+</body>
+</html>

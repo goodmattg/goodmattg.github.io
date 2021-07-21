@@ -1,25 +1,149 @@
-<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><title>Syntactic Tree Kernels</title><meta name=description content="The website of Matthew Goodman"><meta name=author content="Matthew Goodman"><link rel=preconnect href=https://fonts.gstatic.com><link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel=stylesheet><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css integrity=sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2 crossorigin=anonymous><link rel=stylesheet href=/sass/researcher.min.css><link rel=icon type=image/ico href=https://goodmattg.github.io/favicon.ico></head><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css integrity=sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js integrity=sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4 crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js integrity=sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa crossorigin=anonymous onload=renderMathInElement(document.body)></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"\\[",right:"\\]",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1}]})})</script><body><div class="container mt-5"><nav class="navbar navbar-expand-sm flex-column flex-sm-row text-nowrap p-0"><a class="navbar-brand mx-0 mr-sm-auto" href=https://goodmattg.github.io>Matt Goodman</a><div class="navbar-nav flex-row flex-wrap justify-content-center"><a class="nav-item nav-link" href=/about>About</a>
+<!doctype html><html><head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<title>Syntactic Tree Kernels</title>
+<meta name=description content="The website of Matthew Goodman">
+<meta name=author content="Matthew Goodman">
+<link rel=preconnect href=https://fonts.gstatic.com>
+<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel=stylesheet>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css integrity=sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2 crossorigin=anonymous>
+<link rel=stylesheet href=/sass/researcher.min.css>
+<link rel=icon type=image/ico href=https://goodmattg.github.io/favicon.ico>
+</head>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css integrity=sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X crossorigin=anonymous>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js integrity=sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4 crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js integrity=sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa crossorigin=anonymous onload=renderMathInElement(document.body)></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"\\[",right:"\\]",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1}]})})</script>
+<body><div class="container mt-5">
+<nav class="navbar navbar-expand-sm flex-column flex-sm-row text-nowrap p-0">
+<a class="navbar-brand mx-0 mr-sm-auto" href=https://goodmattg.github.io>
+Matt Goodman
+</a>
+<div class="navbar-nav flex-row flex-wrap justify-content-center">
+<a class="nav-item nav-link" href=/about>
+About
+</a>
 <span class="nav-item navbar-text mx-1">|</span>
-<a class="nav-item nav-link" href=/posts>Posts</a>
+<a class="nav-item nav-link" href=/posts>
+Posts
+</a>
 <span class="nav-item navbar-text mx-1">|</span>
-<a class="nav-item nav-link" href=/bookshelf>Bookshelf</a>
+<a class="nav-item nav-link" href=/bookshelf>
+Bookshelf
+</a>
 <span class="nav-item navbar-text mx-1">|</span>
-<a class="nav-item nav-link" href=/quotes>Quotes</a>
+<a class="nav-item nav-link" href=/quotes>
+Quotes
+</a>
 <span class="nav-item navbar-text mx-1">|</span>
-<a class="nav-item nav-link" href=/resume>Resume</a>
+<a class="nav-item nav-link" href=/resume>
+Resume
+</a>
 <span class="nav-item navbar-text mx-1">|</span>
-<a class="nav-item nav-link" href=/contact>Contact</a></div></nav></div><hr><div id=content><div class=container><div style=text-align:center class=centered-div><h1 id=syntactic-tree-kernels>Syntactic Tree Kernels</h1><hr><br></div><h2 id=motivation>Motivation</h2><p>This post encapsulates the work I did with Dean Fulgoni for our final project in Big Data Analytics. Credit to Professor Chris Callison-Burch for steering me away from some topics that &ldquo;could easily be Phd theses&rdquo; and to Professor Zachary Ives for being an excellent teacher.</p><h2 id=the-problem-we-tried-to-solve>The Problem We Tried to Solve</h2><p>The problem is deviously simple - given two input questions, tell whether the questions ask the same thing (i.e. seek to reveal the same previously unknown knowledge). Not to get off track, but this begs some thought on the nature of what a question is and whether a question is separable from its posed context. See the [Stanford Encyclopedia of Philosophy (SEP)]<sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup> for an excellent review of the philosophy of questions. I won&rsquo;t be discussing it in detail, but my view on this problem is colored by the philosophical understanding of questions. We can assume that questions on Quora are requesting information, not testing the knowledge of the user base.</p><blockquote><p>&mldr; a question [is] an abstract thing for which an interrogative sentence is a piece of notation. (Belnap and Steel, 1976)</p></blockquote><p>The challenge was posed as a supervised learning question with a human labeled training set. A cursory glance at the training set showed that the human labeling was inconsistent, with varying standards to classify questions as semantically the same.</p><p>These were labeled as asking two different questions:</p><ul><li>Do we need smart cities or smart politicians?</li><li>Do we need smart cities or smart laws?</li></ul><p>We can see that the classification of this pair is debatable. Politicians are not laws. However, politicians are the only people with the power to make laws. Where is the line drawn for semantic similarity? How do we even approach situations where the the map between language and abstract meaning is complex?</p><p>$$
+<a class="nav-item nav-link" href=/contact>
+Contact
+</a>
+</div>
+</nav>
+</div>
+<hr>
+<div id=content>
+<div class=container>
+<div style=text-align:center class=centered-div>
+<h1 id=syntactic-tree-kernels>Syntactic Tree Kernels</h1>
+<hr>
+<br>
+</div>
+<h2 id=motivation>Motivation</h2>
+<p>This post encapsulates the work I did with Dean Fulgoni for our final project in Big Data Analytics. Credit to Professor Chris Callison-Burch for steering me away from some topics that &ldquo;could easily be Phd theses&rdquo; and to Professor Zachary Ives for being an excellent teacher.</p>
+<h2 id=the-problem-we-tried-to-solve>The Problem We Tried to Solve</h2>
+<p>The problem is deviously simple - given two input questions, tell whether the questions ask the same thing (i.e. seek to reveal the same previously unknown knowledge). Not to get off track, but this begs some thought on the nature of what a question is and whether a question is separable from its posed context. See the [Stanford Encyclopedia of Philosophy (SEP)]<sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup> for an excellent review of the philosophy of questions. I won&rsquo;t be discussing it in detail, but my view on this problem is colored by the philosophical understanding of questions. We can assume that questions on Quora are requesting information, not testing the knowledge of the user base.</p>
+<blockquote>
+<p>&mldr; a question [is] an abstract thing for which an interrogative sentence is a piece of notation. (Belnap and Steel, 1976)</p>
+</blockquote>
+<p>The challenge was posed as a supervised learning question with a human labeled training set. A cursory glance at the training set showed that the human labeling was inconsistent, with varying standards to classify questions as semantically the same.</p>
+<p>These were labeled as asking two different questions:</p>
+<ul>
+<li>Do we need smart cities or smart politicians?</li>
+<li>Do we need smart cities or smart laws?</li>
+</ul>
+<p>We can see that the classification of this pair is debatable. Politicians are not laws. However, politicians are the only people with the power to make laws. Where is the line drawn for semantic similarity? How do we even approach situations where the the map between language and abstract meaning is complex?</p>
+<p>$$
 \begin{aligned}
 Politician &\ne Law \cr
 \\ Politician &\rightarrow Law \cr
 \end{aligned}
-$$</p><p>With an unclear standard for determining whether two questions had the same intent, we decided to approach the problem &lsquo;loosely&rsquo;. Overfitting in any specific approach would kill our performance on the test set. We partitioned the feature set into <strong>syntactic features</strong> and <strong>semantic features</strong>. I&rsquo;ll touch on semantic features later, but I decided to focus on syntactic features because it was much lower hanging fruit. The question became how to quantify the syntactic similarity of two sentences.</p><p>$$ f: (sentence_1, sentence_2) \rightarrow s \in [0,1] $$</p><p>I&rsquo;ll save the complete literature review for a separate post. We chose to use Tree Kernels championed by Prof. Alessandro Moschitti of the University of Trento, Italy because of the elegance of the theoretical basis.</p><h2 id=syntactic-tree-kernel-theory>Syntactic Tree Kernel Theory</h2><p>As part of our search for unique features to encode syntactic and semantic similarity, we found that so called Tree Kernels had been shown to be highly effective in augmenting SVMs designed to solve problems in question classification, question answering, Semantic Role Labeling, and named entity recognition. The broad idea behind the theory is that syntactic features must be quantified to learn semantic structures. It isn&rsquo;t enough to say, compare lists of POS tags for two sentences because the structure of the sentences shape their meanings. We therefore design kernels that map from tree structures (e.g. constituency parse trees) to scores that measure the syntactic similarity of the two trees. Note that these scores are bounded for use in an SVM framework, but could easily be used as features in a deep learning framework.</p><h3 id=kernel-definition>Kernel Definition</h3><p><em>The next few section are taken almost verbatim from Moschitti&rsquo;s ACL 2012 tutorial on State-of-the-art Kernels in Natural Language Processing. All credit goes to him and his colleagues.</em></p><p>The point of the following math is that we can ensure our SVM kernel is valid only if the matrix of transformed points is positive semi-definite. You can review the literature for the proof.</p><p>A <strong>kernel</strong> is a function:</p><p>$$ k: (\overrightarrow{x},\overrightarrow{z}) \rightarrow \Phi(\overrightarrow{x}) \cdot \Phi(\overrightarrow{z}) ~~~~~~\forall \overrightarrow{x}, \overrightarrow{z} \in X$$</p><p>Mercer&rsquo;s Conditions for a valid kernel:</p><p>Let $X$ be a finite input space and let $K(x,z)$ be a symmetric function on $X$. Then $K(x,z)$ is a kernel function IFF matrix:</p><p>$$ k(x,z) = \Phi(x) \cdot \Phi(z)$$</p><p>is positive semi-definite (non-negative eigenvalues). That is, if the matrix is positive semi-definite we can find a $\Phi$ that implements the kernel function $k$.</p><h2 id=tree-definition>Tree Definition</h2><p>We worked exclusively with <strong>constituency parse trees</strong>. Anywhere I write &ldquo;tree&rdquo;, I am referring to a constituency parse tree. A constituency parse tree breaks down a sentence into phrases using a well-defined, <strong>context-free</strong>, phrase structure grammar. A context-free grammar is a set of rules that describes all possible strings in a formal language. Given any sentence, we have a formal way to define that sentence as made up of phrases, nouns, verbs, etc. Noam Chomsky was the first define context-free grammars in linguistics to describe the universal structure of natural language. We use the Penn-Treebank II formal grammar for this project. Here is a small sample of the Penn-Treebank II formal grammar:</p><ul><li><strong>RB</strong>: Adverb</li><li><strong>IN</strong>: Preposition</li><li><strong>PP</strong>: Prepositional Phrase</li><li><strong>VP</strong>: Verb Phrase</li></ul><p>Below is an example of a constituency parse tree for the sentence:</p><blockquote><p>I will never stop learning.</p></blockquote><p>Notice that sentence tokens (the words) are always leaves of the tree and in their natural language order. That is, we should always be able to read the tree leaves from left to right and have our exact sentence.</p><p><img src=/assets/posts/TreeKernel/ConstituencyTree.jpg alt="Constituency Parse Tree"></p><h3 id=tree-kernel-core-theory-and-definitions>Tree Kernel Core Theory and Definitions</h3><p>A tree kernel is a function: $f: (tree_1, tree_2) \rightarrow \mathbf{R}^+ $</p><p>A tree is defined recursively as a set of nodes, each of which has a value and a set of children, each of which are trees. A node is a &ldquo;leaf&rdquo; if it has no children. A node is &ldquo;pre-terminal&rdquo; if all of its child nodes are leaves. The &ldquo;production&rdquo; of a node is the subtree containing the node and its children. The production of two nodes are the same if the nodes have the same value and their children have the same value. Because we work are working with ordered trees, the children must have the same values in the same order to be part of the same production.</p><p>Key to the effectiveness of tree kernel features in solving problems is the choice of tree structure. Moschitti shows that different tree kernels are effective for different choices of syntax trees in solving different classes of problems. We used Stanford NLP to generate parse trees from the input sentences. A parse tree is an ordered tree that represents the syntax of a sentence according to some context-free grammar. There are two main classes of parse trees: constituency and dependency. A dependency parse trees is the tree structure generated by the dependencies of a sentence. While dependencies can be highly useful in generating features, as described in Section 4.1, Moschitti found that constituency parse trees were most effective in solving classification related problems. A constituency parse tree breaks down the tokens of sentence into their constituent grammars.</p><h3 id=syntactic-tree-kernel-or-collins-duffy-stk>Syntactic Tree Kernel or &ldquo;Collins-Duffy&rdquo; (STK)</h3><p>For our tree kernel features we only implemented the Collins-Duffy tree kernel. The general idea of the Collins-Duffy Tree Kernel is that we want to compare the number of common subtrees between two input trees. The naive approach in exponential time is to enumerate all possible subtrees of the two input trees and then perform the dot-product. Obviously generating every subtree of each sentence, and then taking the dot-product of all of the subtrees to find how many the two sentences have in common would be a computationally nightmarish $O(n^2)$. We can take advantage of the fact that generating subtrees is recursive, and that if two parent nodes do not match, the subtrees rooted at those two nodes do not match. Collins and Duffy propose the following derivation.</p><p>Define the tree kernel $K: f(T_1,T_2) \rightarrow \mathbf{R}^+$ where $T_1$ and $T_2$ are well-formed trees. The dot-product approach above is written:</p><p>$$K(T_1,T_2) = h(T_1) \cdot h(T_2)$$</p><p>Where $h$ is a function that produces all of the subtrees of a tree. Again, the dot-product between $h(T_1)$ and $h(T_2)$ will count all of the subtrees $T_1$ and $T_2$ have in common. They define the indicator function $I_i(n)$ to be 1 if the subtree $i$ is rooted at node $n$ and 0 otherwise. Therefore, we can rewrite the dot-product above.</p><p>$$
+$$</p>
+<p>With an unclear standard for determining whether two questions had the same intent, we decided to approach the problem &lsquo;loosely&rsquo;. Overfitting in any specific approach would kill our performance on the test set. We partitioned the feature set into <strong>syntactic features</strong> and <strong>semantic features</strong>. I&rsquo;ll touch on semantic features later, but I decided to focus on syntactic features because it was much lower hanging fruit. The question became how to quantify the syntactic similarity of two sentences.</p>
+<p>$$ f: (sentence_1, sentence_2) \rightarrow s \in [0,1] $$</p>
+<p>I&rsquo;ll save the complete literature review for a separate post. We chose to use Tree Kernels championed by Prof. Alessandro Moschitti of the University of Trento, Italy because of the elegance of the theoretical basis.</p>
+<h2 id=syntactic-tree-kernel-theory>Syntactic Tree Kernel Theory</h2>
+<p>As part of our search for unique features to encode syntactic and semantic similarity, we found that so called Tree Kernels had been shown to be highly effective in augmenting SVMs designed to solve problems in question classification, question answering, Semantic Role Labeling, and named entity recognition. The broad idea behind the theory is that syntactic features must be quantified to learn semantic structures. It isn&rsquo;t enough to say, compare lists of POS tags for two sentences because the structure of the sentences shape their meanings. We therefore design kernels that map from tree structures (e.g. constituency parse trees) to scores that measure the syntactic similarity of the two trees. Note that these scores are bounded for use in an SVM framework, but could easily be used as features in a deep learning framework.</p>
+<h3 id=kernel-definition>Kernel Definition</h3>
+<p><em>The next few section are taken almost verbatim from Moschitti&rsquo;s ACL 2012 tutorial on State-of-the-art Kernels in Natural Language Processing. All credit goes to him and his colleagues.</em></p>
+<p>The point of the following math is that we can ensure our SVM kernel is valid only if the matrix of transformed points is positive semi-definite. You can review the literature for the proof.</p>
+<p>A <strong>kernel</strong> is a function:</p>
+<p>$$ k: (\overrightarrow{x},\overrightarrow{z}) \rightarrow \Phi(\overrightarrow{x}) \cdot \Phi(\overrightarrow{z}) ~~~~~~\forall \overrightarrow{x}, \overrightarrow{z} \in X$$</p>
+<p>Mercer&rsquo;s Conditions for a valid kernel:</p>
+<p>Let $X$ be a finite input space and let $K(x,z)$ be a symmetric function on $X$. Then $K(x,z)$ is a kernel function IFF matrix:</p>
+<p>$$ k(x,z) = \Phi(x) \cdot \Phi(z)$$</p>
+<p>is positive semi-definite (non-negative eigenvalues). That is, if the matrix is positive semi-definite we can find a $\Phi$ that implements the kernel function $k$.</p>
+<h2 id=tree-definition>Tree Definition</h2>
+<p>We worked exclusively with <strong>constituency parse trees</strong>. Anywhere I write &ldquo;tree&rdquo;, I am referring to a constituency parse tree. A constituency parse tree breaks down a sentence into phrases using a well-defined, <strong>context-free</strong>, phrase structure grammar. A context-free grammar is a set of rules that describes all possible strings in a formal language. Given any sentence, we have a formal way to define that sentence as made up of phrases, nouns, verbs, etc. Noam Chomsky was the first define context-free grammars in linguistics to describe the universal structure of natural language. We use the Penn-Treebank II formal grammar for this project. Here is a small sample of the Penn-Treebank II formal grammar:</p>
+<ul>
+<li><strong>RB</strong>: Adverb</li>
+<li><strong>IN</strong>: Preposition</li>
+<li><strong>PP</strong>: Prepositional Phrase</li>
+<li><strong>VP</strong>: Verb Phrase</li>
+</ul>
+<p>Below is an example of a constituency parse tree for the sentence:</p>
+<blockquote>
+<p>I will never stop learning.</p>
+</blockquote>
+<p>Notice that sentence tokens (the words) are always leaves of the tree and in their natural language order. That is, we should always be able to read the tree leaves from left to right and have our exact sentence.</p>
+<p><img src=/assets/posts/TreeKernel/ConstituencyTree.jpg alt="Constituency Parse Tree"></p>
+<h3 id=tree-kernel-core-theory-and-definitions>Tree Kernel Core Theory and Definitions</h3>
+<p>A tree kernel is a function: $f: (tree_1, tree_2) \rightarrow \mathbf{R}^+ $</p>
+<p>A tree is defined recursively as a set of nodes, each of which has a value and a set of children, each of which are trees. A node is a &ldquo;leaf&rdquo; if it has no children. A node is &ldquo;pre-terminal&rdquo; if all of its child nodes are leaves. The &ldquo;production&rdquo; of a node is the subtree containing the node and its children. The production of two nodes are the same if the nodes have the same value and their children have the same value. Because we work are working with ordered trees, the children must have the same values in the same order to be part of the same production.</p>
+<p>Key to the effectiveness of tree kernel features in solving problems is the choice of tree structure. Moschitti shows that different tree kernels are effective for different choices of syntax trees in solving different classes of problems. We used Stanford NLP to generate parse trees from the input sentences. A parse tree is an ordered tree that represents the syntax of a sentence according to some context-free grammar. There are two main classes of parse trees: constituency and dependency. A dependency parse trees is the tree structure generated by the dependencies of a sentence. While dependencies can be highly useful in generating features, as described in Section 4.1, Moschitti found that constituency parse trees were most effective in solving classification related problems. A constituency parse tree breaks down the tokens of sentence into their constituent grammars.</p>
+<h3 id=syntactic-tree-kernel-or-collins-duffy-stk>Syntactic Tree Kernel or &ldquo;Collins-Duffy&rdquo; (STK)</h3>
+<p>For our tree kernel features we only implemented the Collins-Duffy tree kernel. The general idea of the Collins-Duffy Tree Kernel is that we want to compare the number of common subtrees between two input trees. The naive approach in exponential time is to enumerate all possible subtrees of the two input trees and then perform the dot-product. Obviously generating every subtree of each sentence, and then taking the dot-product of all of the subtrees to find how many the two sentences have in common would be a computationally nightmarish $O(n^2)$. We can take advantage of the fact that generating subtrees is recursive, and that if two parent nodes do not match, the subtrees rooted at those two nodes do not match. Collins and Duffy propose the following derivation.</p>
+<p>Define the tree kernel $K: f(T_1,T_2) \rightarrow \mathbf{R}^+$ where $T_1$ and $T_2$ are well-formed trees. The dot-product approach above is written:</p>
+<p>$$K(T_1,T_2) = h(T_1) \cdot h(T_2)$$</p>
+<p>Where $h$ is a function that produces all of the subtrees of a tree. Again, the dot-product between $h(T_1)$ and $h(T_2)$ will count all of the subtrees $T_1$ and $T_2$ have in common. They define the indicator function $I_i(n)$ to be 1 if the subtree $i$ is rooted at node $n$ and 0 otherwise. Therefore, we can rewrite the dot-product above.</p>
+<p>$$
 \begin{aligned}
 h(T_1) \cdot h(T_2) &= \sum_i h_i(T_1)h_i(T_2)
 \\ & = \sum_{n_1 \in N_1}\sum_{n_2 \in N_2} \sum_i I_i(n_1) I_i(n_2)
 \\ & = \sum_{n_1 \in N_1}\sum_{n_2 \in N_2} C(n_1, n_2)
 \end{aligned}
-$$</p><p>Where $C(n_1,n_2)$ is defined as $\sum_i I_i(n_1)I_i(n_2)$. We note that $C(n_1, n_2)$ can be computed recursively in polynomial time:</p><p>$C(n_1,n_2) = 0$ if the productions at $n_1$ and $n_2$ are different.</p><p>$C(n_1,n_2) = \lambda$ if the productions at $n_1$ and $n_2$ are the same and $n_1$ and $n_2$ are pre-terminal.</p><p>$$C(n_1,n_2) = \lambda \prod_{j=1}^{nc(n_1)}(\sigma + C(ch(n_1,j),ch(n_2,j)))$$</p><p>Where $0 &lt; \lambda \leq 1$ is a factor that down weights subtrees exponentially with their size, $nc(n_i)$ returns the number of children of node $i$, binary variable $\sigma \in {0,1}$ determines whether we use the ST or SST kernel, and $ch(n_i,j)$ selects the $j$th child of node $i$. The ST or subtree kernel is where $\sigma = 0$. For the ST kernel, the entire subtree must match to return a non-zero score. The SST or subset tree kernel is where $\sigma = 1$. For the SST kernel, non-zero scores can be achieved even if all of the subtrees of two nodes do not match.</p><p>The distinction between the ST and SST kernels in the previous section is that the SST kernel is more forgiving than the ST kernel. The SST kernel can still return high scores even if the exact sentences are not the same. Likewise, the ST kernel heavily penalizes minor differences between constituency trees. The factor $\lambda$ can be viewed as a penalty we utilize so that kernel does not over-inflate the importance of matches between larger subtrees. These parameters become less important when we normalize the kernel score using:</p><p>$$K_{norm}(T_1,T_2) = \frac{K(T_1,T_2)}{K(T_1,T_1)K(T_2,T_2)}</p><p>We generated features with the ST and SST tree kernels for each question pair using $\lambda \in {1, 0.8, 0.5, 0.2, 0.1, 0.05, 0.2}$ totaling 14 tree kernel features. Determining the optimal $\lambda$ for this task would be a good exploration on its own.</p><h2 id=synactic-tree-kernels-in-python>Synactic Tree Kernels in Python</h2><p>As far as I know, this is the first implementation of syntactic tree kernels in Python. This code may eventually move to its own maintained repository if it&rsquo;s needed. If you find any bugs please reach out to me. Dr. Moschitti&rsquo;s cited implementation is:</p><p>[SVM-Light]<sup id=fnref:2><a href=#fn:2 class=footnote-ref role=doc-noteref>2</a></sup> written by Thorsten Joachims in C. His implementation is most-likely faster (no comparison benchmark yet). My implementation is however easier to grasp and is isolated from a complete SVM library.</p><h3 id=building-the-parse-tree>Building the Parse Tree</h3><p>As described in the Pipeline section we used Stanford CoreNLP to generate our constituency parse trees. There aren&rsquo;t many libraries that are good for constituency parsing, and CoreNLP is by far the most stable and customizable. Oddly enough, Stanford CoreNLP will print a constituency parse tree for a given sentence with well-defined structure to console (i.e. pretty print), but provides no functionality to store the tree in a reasonable format (linked list, hashmap, etc. ). The code in this subsection is available on my [Github]<sup id=fnref:3><a href=#fn:3 class=footnote-ref role=doc-noteref>3</a></sup> and is used to take the raw text output of Stanford CoreNLP and store in the schema below for tree kernel computation. We label each token with an Id and store the tokens for fast computation, but admittedly poor space complexity.</p><ul><li>curid:    <em>Integer</em></li><li>parid:    <em>Integer</em></li><li>posOrTok:  <em>String</em></li><li>indent:    <em>Integer</em></li><li>children:    <em>[Integer]</em></li><li>childrenTok:  <em>[String]</em></li></ul><h3 id=computing-tree-kernels>Computing Tree Kernels</h3><div class=highlight><div style=color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre style=color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79">  1
+$$</p>
+<p>Where $C(n_1,n_2)$ is defined as $\sum_i I_i(n_1)I_i(n_2)$. We note that $C(n_1, n_2)$ can be computed recursively in polynomial time:</p>
+<p>$C(n_1,n_2) = 0$ if the productions at $n_1$ and $n_2$ are different.</p>
+<p>$C(n_1,n_2) = \lambda$ if the productions at $n_1$ and $n_2$ are the same and $n_1$ and $n_2$ are pre-terminal.</p>
+<p>$$C(n_1,n_2) = \lambda \prod_{j=1}^{nc(n_1)}(\sigma + C(ch(n_1,j),ch(n_2,j)))$$</p>
+<p>Where $0 &lt; \lambda \leq 1$ is a factor that down weights subtrees exponentially with their size, $nc(n_i)$ returns the number of children of node $i$, binary variable $\sigma \in {0,1}$ determines whether we use the ST or SST kernel, and $ch(n_i,j)$ selects the $j$th child of node $i$. The ST or subtree kernel is where $\sigma = 0$. For the ST kernel, the entire subtree must match to return a non-zero score. The SST or subset tree kernel is where $\sigma = 1$. For the SST kernel, non-zero scores can be achieved even if all of the subtrees of two nodes do not match.</p>
+<p>The distinction between the ST and SST kernels in the previous section is that the SST kernel is more forgiving than the ST kernel. The SST kernel can still return high scores even if the exact sentences are not the same. Likewise, the ST kernel heavily penalizes minor differences between constituency trees. The factor $\lambda$ can be viewed as a penalty we utilize so that kernel does not over-inflate the importance of matches between larger subtrees. These parameters become less important when we normalize the kernel score using:</p>
+<p>$$K_{norm}(T_1,T_2) = \frac{K(T_1,T_2)}{K(T_1,T_1)K(T_2,T_2)}</p>
+<p>We generated features with the ST and SST tree kernels for each question pair using $\lambda \in {1, 0.8, 0.5, 0.2, 0.1, 0.05, 0.2}$ totaling 14 tree kernel features. Determining the optimal $\lambda$ for this task would be a good exploration on its own.</p>
+<h2 id=synactic-tree-kernels-in-python>Synactic Tree Kernels in Python</h2>
+<p>As far as I know, this is the first implementation of syntactic tree kernels in Python. This code may eventually move to its own maintained repository if it&rsquo;s needed. If you find any bugs please reach out to me. Dr. Moschitti&rsquo;s cited implementation is:</p>
+<p>[SVM-Light]<sup id=fnref:2><a href=#fn:2 class=footnote-ref role=doc-noteref>2</a></sup> written by Thorsten Joachims in C. His implementation is most-likely faster (no comparison benchmark yet). My implementation is however easier to grasp and is isolated from a complete SVM library.</p>
+<h3 id=building-the-parse-tree>Building the Parse Tree</h3>
+<p>As described in the Pipeline section we used Stanford CoreNLP to generate our constituency parse trees. There aren&rsquo;t many libraries that are good for constituency parsing, and CoreNLP is by far the most stable and customizable. Oddly enough, Stanford CoreNLP will print a constituency parse tree for a given sentence with well-defined structure to console (i.e. pretty print), but provides no functionality to store the tree in a reasonable format (linked list, hashmap, etc. ). The code in this subsection is available on my [Github]<sup id=fnref:3><a href=#fn:3 class=footnote-ref role=doc-noteref>3</a></sup> and is used to take the raw text output of Stanford CoreNLP and store in the schema below for tree kernel computation. We label each token with an Id and store the tokens for fast computation, but admittedly poor space complexity.</p>
+<ul>
+<li>curid:    <em>Integer</em></li>
+<li>parid:    <em>Integer</em></li>
+<li>posOrTok:  <em>String</em></li>
+<li>indent:    <em>Integer</em></li>
+<li>children:    <em>[Integer]</em></li>
+<li>childrenTok:  <em>[String]</em></li>
+</ul>
+<h3 id=computing-tree-kernels>Computing Tree Kernels</h3>
+<div class=highlight><div style=color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79">  1
 </span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79">  2
 </span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79">  3
 </span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79">  4
@@ -205,7 +329,9 @@ $$</p><p>Where $C(n_1,n_2)$ is defined as $\sum_i I_i(n_1)I_i(n_2)$. We note tha
 </span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79">184
 </span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79">185
 </span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79">186
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre style=color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>
 
 <span style=color:red>import</span> numpy <span style=color:red>as</span> np
 <span style=color:red>import</span> math
@@ -220,8 +346,8 @@ $$</p><p>Where $C(n_1,n_2)$ is defined as $\sum_i I_i(n_1)I_i(n_2)$. We note tha
 <span style=color:red>def</span> <span style=color:#ff0>_isPreterminal_</span>(tree, parentNode):
     <span style=color:red>for</span> idx in tree[parentNode][<span style=color:#87ceeb>&#39;children&#39;</span>]:
         <span style=color:red>if</span> not _isLeaf_(tree, idx):
-            <span style=color:red>return</span> False
-    <span style=color:red>return</span> True
+            <span style=color:red>return</span> <span style=color:red>False</span>
+    <span style=color:red>return</span> <span style=color:red>True</span>
 
 <span style=color:#87ceeb>&#39;&#39;&#39;
 </span><span style=color:#87ceeb>Implementation of the Colins-Duffy or Subset-Tree (SST) Kernel
@@ -249,7 +375,7 @@ $$</p><p>Where $C(n_1,n_2)$ is defined as $\sum_i I_i(n_1)I_i(n_2)$. We note tha
             <span style=color:red>else</span>:
                 nChildren = len(tree1[node1][<span style=color:#87ceeb>&#39;children&#39;</span>])
 
-                runningTotal = None
+                runningTotal = <span style=color:red>None</span>
                 <span style=color:red>for</span> idx in range(nChildren):
                      <span style=color:#0f0># index -&gt;  node_id</span>
                     tmp_n1 = tree1[node1][<span style=color:#87ceeb>&#39;children&#39;</span>][idx]
@@ -257,7 +383,7 @@ $$</p><p>Where $C(n_1,n_2)$ is defined as $\sum_i I_i(n_1)I_i(n_2)$. We note tha
                     <span style=color:#0f0># Recursively run helper</span>
                     _cdHelper_(tree1, tree2, tmp_n1, tmp_n2, store, lam, SST_ON)
                     <span style=color:#0f0># Set the initial value for the layer. Else multiplicative product.</span>
-                    <span style=color:red>if</span> (runningTotal == None):
+                    <span style=color:red>if</span> (runningTotal == <span style=color:red>None</span>):
                         runningTotal = SST_ON + store[tmp_n1, tmp_n2]
                     <span style=color:red>else</span>:
                         runningTotal *= (SST_ON + store[tmp_n1, tmp_n2])
@@ -391,4 +517,49 @@ $$</p><p>Where $C(n_1,n_2)$ is defined as $\sum_i I_i(n_1)I_i(n_2)$. We note tha
         <span style=color:red>return</span> (raw_score,-<span style=color:#f60>1</span>)
 
 
-</code></pre></td></tr></table></div></div><h2 id=towards-syntactic-semantic-tree-kernels>Towards Syntactic-Semantic Tree Kernels</h2><p>Ignoring all of the theory and code in the previous sections would not be unreasonable. The major criticism of ST and PTK kernels is that they are syntactic, and syntax is not meaning. A simple example:</p><ol><li>The girl went to the store to buy <strong>eggs</strong> for the family.</li><li>The girl went to the store to buy <strong>milk</strong> for the family.</li></ol><p>The sentences generate the same constituency parse tree (minus) the differing terminal leaf, but have completely different meanings. Put plainly, the sentences above are grammatically the same except for the one word difference. However, the SST kernel we implemented above would give a very high similarity score for the <strong>meaning</strong> of the two sentences even though we know that they have different meanings. Bloehdorn and Moschitti propose a theoretically elegant modification to solve our problem. This new syntactic-semantic tree kernel (<strong>SSTK</strong>) is defined as:</p><p>$$ K_{SSTK} = comp(f_1, f_2) \prod_{t=1}^{nt_{(f1)}} SIM(f_1(t),f_2(t)) $$</p><p>where $comp(f_1, f_2)$ is $1$ if $f_1$ differs from $f_2$ only in the terminal nodes and 0 otherwise, $nt(f_i)$ is the number of terminal nodes and $f_i(t)$ is the t-th terminal symbol of $f_i$ numbered from left to right, and $SIM$ is a function returning $[0, 1]$ where $0$ is completely different, and $1$ means the words are identical in meaning.</p><p>Now in plain English. If the two tree fragments don&rsquo;t have the same non-terminal structure then we end the computation early. The SSTK is the same as PTK and SST in that it ignores tree fragments that are not <strong>identical</strong> in syntactic structure (grammar). Say the two tree fragments have the same non-terminal structure, but different terminal nodes (leaves). This means the two sentence structures have the same syntax but different words. So our indicator function $comp(f_1, f_2)$ returns 1, and we compute the multiplicative product by computing the similarity of each in-order pair of terminal leaves.</p><p>This is where it gets admittedly ridiculous. How exactly do we quantify the semantic similarity of two words. Doesn&rsquo;t this depend on the sentence context? This is where there is no good answer yet. There are computational kernels that give similarity metrics on word databases like WordNet, but we don&rsquo;t have significant evidence on which is best for different classes of problems. Our implementation used the raw score returned by WordNet, but that isn&rsquo;t very interesting.</p><h2 id=lesson-learned-hardly-earned>Lesson Learned, Hardly Earned</h2><p>Research tools like StanfordCoreNLP are not performant. Most my time was spent building tooling, testing my implementations of paper algorithms, running batch jobs on AWS instances, debugging the batch processing jobs on AWS, and questioning my sanity for embarking on this rabbit hole.</p><h2 id=if-we-only-had-more-time>If We Only Had More Time</h2><p>I would have worked on:</p><p>[1] Reworking this kernel as a feature generator in a deep learning approach. Consider that the behavior of this entire field is based around using these as a mathematically valid kernel in an SVM. Deep learning has showed greater promise in solving these types of problems because the neural network structure is more adaptable.</p><p>[2] Grammars: A Google Trends search shows >85% Quora’s user base can be divided as living on the Indian subcontinent and the United States, yet English is almost exclusively the only language used to ask/answer questions. This matters because we should not expect perfect English grammar from people whose first language isn’t English. Any effective model should detect common misuses of English grammar specific to users from the Indian subcontinent and subsequently &ldquo;loosen&rdquo;. Note that this is different from detecting common colloquial expressions or slang that native English speakers use.</p><p>[3] More work on incorporating different word similarity databases into the SSTK kernel. This could be anything from Wordnet, to scraped data from forums, to the paraphrase database (PPDB) at UPenn.</p><p>[4] Using different metrics for WordNet semantic similarities like Resnik, Wu & Palmer, or Lin.</p><h3 id=links>Links</h3><section class=footnotes role=doc-endnotes><hr><ol><li id=fn:1 role=doc-endnote><p><a href=https://plato.stanford.edu/entries/questions/>https://plato.stanford.edu/entries/questions/</a>.&#160;<a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:2 role=doc-endnote><p><a href=http://svmlight.joachims.org/>http://svmlight.joachims.org/</a>&#160;<a href=#fnref:2 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:3 role=doc-endnote><p><a href=https://github.com/goodmattg/quora_kaggle/blob/master/TreeBuild.py>https://github.com/goodmattg/quora_kaggle/blob/master/TreeBuild.py</a>&#160;<a href=#fnref:3 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li></ol></section></div></div><div id=footer class=mb-5><script src=https://utteranc.es/client.js repo=goodmattg/goodmattg.github.io issue-term=pathname label=blog theme=github-light crossorigin=anonymous async></script><hr><div class="container text-center"><a href=https://goodmattg.github.io><small>By Matthew Goodman</small></a></div></div></body></html>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=towards-syntactic-semantic-tree-kernels>Towards Syntactic-Semantic Tree Kernels</h2>
+<p>Ignoring all of the theory and code in the previous sections would not be unreasonable. The major criticism of ST and PTK kernels is that they are syntactic, and syntax is not meaning. A simple example:</p>
+<ol>
+<li>The girl went to the store to buy <strong>eggs</strong> for the family.</li>
+<li>The girl went to the store to buy <strong>milk</strong> for the family.</li>
+</ol>
+<p>The sentences generate the same constituency parse tree (minus) the differing terminal leaf, but have completely different meanings. Put plainly, the sentences above are grammatically the same except for the one word difference. However, the SST kernel we implemented above would give a very high similarity score for the <strong>meaning</strong> of the two sentences even though we know that they have different meanings. Bloehdorn and Moschitti propose a theoretically elegant modification to solve our problem. This new syntactic-semantic tree kernel (<strong>SSTK</strong>) is defined as:</p>
+<p>$$ K_{SSTK} = comp(f_1, f_2) \prod_{t=1}^{nt_{(f1)}} SIM(f_1(t),f_2(t)) $$</p>
+<p>where $comp(f_1, f_2)$ is $1$ if $f_1$ differs from $f_2$ only in the terminal nodes and 0 otherwise, $nt(f_i)$ is the number of terminal nodes and $f_i(t)$ is the t-th terminal symbol of $f_i$ numbered from left to right, and $SIM$ is a function returning $[0, 1]$ where $0$ is completely different, and $1$ means the words are identical in meaning.</p>
+<p>Now in plain English. If the two tree fragments don&rsquo;t have the same non-terminal structure then we end the computation early. The SSTK is the same as PTK and SST in that it ignores tree fragments that are not <strong>identical</strong> in syntactic structure (grammar). Say the two tree fragments have the same non-terminal structure, but different terminal nodes (leaves). This means the two sentence structures have the same syntax but different words. So our indicator function $comp(f_1, f_2)$ returns 1, and we compute the multiplicative product by computing the similarity of each in-order pair of terminal leaves.</p>
+<p>This is where it gets admittedly ridiculous. How exactly do we quantify the semantic similarity of two words. Doesn&rsquo;t this depend on the sentence context? This is where there is no good answer yet. There are computational kernels that give similarity metrics on word databases like WordNet, but we don&rsquo;t have significant evidence on which is best for different classes of problems. Our implementation used the raw score returned by WordNet, but that isn&rsquo;t very interesting.</p>
+<h2 id=lesson-learned-hardly-earned>Lesson Learned, Hardly Earned</h2>
+<p>Research tools like StanfordCoreNLP are not performant. Most my time was spent building tooling, testing my implementations of paper algorithms, running batch jobs on AWS instances, debugging the batch processing jobs on AWS, and questioning my sanity for embarking on this rabbit hole.</p>
+<h2 id=if-we-only-had-more-time>If We Only Had More Time</h2>
+<p>I would have worked on:</p>
+<p>[1] Reworking this kernel as a feature generator in a deep learning approach. Consider that the behavior of this entire field is based around using these as a mathematically valid kernel in an SVM. Deep learning has showed greater promise in solving these types of problems because the neural network structure is more adaptable.</p>
+<p>[2] Grammars: A Google Trends search shows >85% Quora’s user base can be divided as living on the Indian subcontinent and the United States, yet English is almost exclusively the only language used to ask/answer questions. This matters because we should not expect perfect English grammar from people whose first language isn’t English. Any effective model should detect common misuses of English grammar specific to users from the Indian subcontinent and subsequently &ldquo;loosen&rdquo;. Note that this is different from detecting common colloquial expressions or slang that native English speakers use.</p>
+<p>[3] More work on incorporating different word similarity databases into the SSTK kernel. This could be anything from Wordnet, to scraped data from forums, to the paraphrase database (PPDB) at UPenn.</p>
+<p>[4] Using different metrics for WordNet semantic similarities like Resnik, Wu & Palmer, or Lin.</p>
+<h3 id=links>Links</h3>
+<section class=footnotes role=doc-endnotes>
+<hr>
+<ol>
+<li id=fn:1 role=doc-endnote>
+<p><a href=https://plato.stanford.edu/entries/questions/>https://plato.stanford.edu/entries/questions/</a>.&#160;<a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+</li>
+<li id=fn:2 role=doc-endnote>
+<p><a href=http://svmlight.joachims.org/>http://svmlight.joachims.org/</a>&#160;<a href=#fnref:2 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+</li>
+<li id=fn:3 role=doc-endnote>
+<p><a href=https://github.com/goodmattg/quora_kaggle/blob/master/TreeBuild.py>https://github.com/goodmattg/quora_kaggle/blob/master/TreeBuild.py</a>&#160;<a href=#fnref:3 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+</div>
+</div><div id=footer class=mb-5>
+<script src=https://utteranc.es/client.js repo=goodmattg/goodmattg.github.io issue-term=pathname label=blog theme=github-light crossorigin=anonymous async></script>
+<hr>
+<div class="container text-center">
+<a href=https://goodmattg.github.io><small>By Matthew Goodman</small></a>
+</div>
+</div>
+</body>
+</html>
