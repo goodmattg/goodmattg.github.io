@@ -14,11 +14,10 @@ In my free time I building things, taking on new challenges, and playing sports.
 
 ## Research and Product Interests
 
-- Generative content creation and detection for entertainment and defense
-- Blockchain technology to mint "authentic" - i.e. non-generative / edited content
 - AutoML for computer vision & deep learning
 - Tooling to accelerate deep learning
 - Large-scale video understanding & related engineering challenges
+- Generative content creation and detection for enterprise and defense
 
 
 ## Timeline
