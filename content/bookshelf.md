@@ -6,8 +6,10 @@ Title = "Bookshelf"
 
 Book | Author | Started | Finished | Notes 
 -----|-------|-------|-------|--------
-Venture Deals | Brad Feld, Jason Mendelson | 08/11/21 | - | | 
-The Tsar of Love And Techno | Anthony Marra | 08/11/21 | - | | 
+Zero to One | Peter Thiel | 08/25/21 | - | |
+Blood Meridian | Cormac McCarthy | 08/20 | - | |
+Venture Deals | Brad Feld, Jason Mendelson | 08/11/21 | 9/17/21 | Must read for any startup founder. Biggest takeways are pre/post money valuations, hire good lawyers, and know who you are dealing with and their incentives at all times. | 
+The Tsar of Love And Techno | Anthony Marra | 08/11/21 | 9/14/21 | Light read. Had never considered the scale of the war in Chechnya. Stalin was very bad. | 
 Stalingrad | Vasily Grossman | 08/07/21 | - | | 
 String Theory | David Foster Wallace | - | - | Tennis is not an "any given Sunday" type of sport. There are completely separate planes of competition that __never__ intersect. A top ranked ATP player will always beat a low level "qualies" player - even on a bad day. Also, the whole essay considering how silly it is that we ask professionals what was going through their heads at a pivotal moment. The answer is always nothing - that's why they are the best in the world. It's this specific ability honed by years of relentless practice to act without "thinking" at a high level in their domain. The best meditation on professionalism I've ever read.
 Hail Mary | Andy Weir | 06/08/21 | 06/12/21 | Better than the Martian for obvious reasons once you've read this book. Not so much fiction, as a kinematics primer with a narrative wrapped around it. I'd like an edition of the book with the math all worked out in the margins.
