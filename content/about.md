@@ -8,7 +8,7 @@ title = "About"
 
 Relentless reader and builder. I'm a software engineer with experience in deep-learning based computer vision, distributed AutoML services, platform engineering, and full-stack web development.
 
-In my free time I building things, taking on new challenges, and playing sports. If you have a new challenge, please reach out.
+In my free time I building things, taking on new challenges, and being active. If you have a new challenge, please reach out.
 
 -- Matt
 
