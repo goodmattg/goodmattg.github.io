@@ -6,7 +6,7 @@ Title = "Bookshelf"
 
 Book | Author | Started | Finished | Notes 
 -----|-------|-------|-------|--------
-Zero to One | Peter Thiel | 08/25/21 | - | |
+Zero to One | Peter Thiel | 08/25/21 | 10/12/21 | What important truth do you believe that very few people agree with you on? Competition is for losers; look to own small markets with excellent features and stickiness, then expand outward. Move last - “Let your plans be dark and impenetrable as night, and when you move, fall like a thunderbolt.”, Sun Tzu. Look for secrets to found companies. Founders are polarizing, don't be afraid to embrace it. We are building towards an accelerating future. |
 Blood Meridian | Cormac McCarthy | 08/20 | - | |
 Venture Deals | Brad Feld, Jason Mendelson | 08/11/21 | 9/17/21 | Must read for any startup founder. Biggest takeways are pre/post money valuations, hire good lawyers, and know who you are dealing with and their incentives at all times. | 
 The Tsar of Love And Techno | Anthony Marra | 08/11/21 | 9/14/21 | Light read. Had never considered the scale of the war in Chechnya. Stalin was very bad. | 

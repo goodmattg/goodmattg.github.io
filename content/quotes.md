@@ -4,6 +4,9 @@ Title = "Quotes"
 
 # Quotes
 
+Sun Tzu, The Art of War
+>“Let your plans be dark and impenetrable as night, and when you move, fall like a thunderbolt.”
+
 Excerpt From: Mo Yan & Howard Goldblatt. “Red Sorghum.” Penguin Books, 2012-01-18. Apple Books.
 >“They killed, they looted, and they defended their country in a valiant, stirring ballet that makes us unfilial descendants who now occupy the land pale by comparison. Surrounded by progress, I feel a nagging sense of our species’ regression”
 
