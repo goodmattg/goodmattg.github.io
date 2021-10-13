@@ -79,7 +79,7 @@ for epoch in range(2):
 
         optimizer.zero_grad()
 
-        # NOTE: CPU computes forward pass, backward pass
+        # NOTE: CPU computes forward pass, backward pass, update weights
         outputs = net(inputs)
         loss = criterion(outputs, labels)
         loss.backward()
@@ -96,7 +96,7 @@ Several things verify that our model works correctly:
 2. The loss decreases
 3. The accuracy on the validation increases
 
-This example is representative of how tutorials and most universities teach deep learning, but it is not useful in practice. Let's dig in on several of the assumptions that make this example so elegant. First, the MNIST dataset is __tiny__, only 9.9 MB,  and __static__. Why do we focus on this? Because in practice, the datasets we want to use to power insights or new features are __massive__ and __dynamic__ (constantly changing). It is easy in this example to download MNIST to our local device to train the model - it only takes a few seconds to make an HTTP request to the server with the tarball of the MNIST dataset and download the whole dataset. And once the dataset is in memory, the time cost of loading small batches of the dataset into our model on the CPU is __effectively optimal__. MNIST is just 28x28 pixel images - it takes almost no time to load a small batch of 28x28 images, and those images take up almost no RAM. You can't beat the speed of just loading data from disk onto CPU without fancy I/O optimizations which we'll cover in a later section. If we were lazy and inefficient, we could always re-download the MNIST dataset from the server every time we trained the model and __it would still work__. We would only add a few seconds to each training run, and the amount of memory we consume is only 9.9 MB. 
+This example is representative of how tutorials and most universities teach deep learning, but it is not useful in practice. Let's dig in on several of the assumptions that make this example so elegant. First, the MNIST dataset is __tiny__, only 9.9 MB,  and __static__. Why do we focus on this? Because in practice, the datasets we want to use to power insights or new features are __massive__ and __dynamic__ (constantly changing). It is easy in this example to download MNIST to our local device to train the model - it only takes a few seconds to make an HTTP request to the server with the tarball of the MNIST dataset and download the whole dataset. And once the dataset is in memory, the time cost of loading small batches of the dataset into our model on the CPU is __effectively optimal__. MNIST is just 28x28 pixel images - it takes almost no time to load a small batch of 28x28 images, and those images take up almost no RAM. You can't beat the speed of just loading data from disk onto CPUs without fancy I/O optimizations which we'll cover in a later section. If we were lazy and inefficient, we could always re-download the MNIST dataset from the server every time we trained the model and __it would still work__. We would only add a few seconds to each training run, and the amount of memory we consume is only 9.9 MB. 
 
 Also observe that all of the operations in the function above 
 
@@ -108,7 +108,12 @@ The questions I will repeat over and over in the context of our examples:
 
 # GPU Training on Machine
 
+This example is the same scenario as "CPU Training on Machine", but we now have 1 GPU in addition to our CPUs.
 
+![Edit Settings](/assets/posts/DL2021/SingleGPU.svg)
+
+https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader
+https://pytorch.org/docs/stable/notes/multiprocessing.html#multiprocessing-cuda-note
 
 # Multi-GPU Training on Machine
 # Multi-GPU Single Node Training Cloud
