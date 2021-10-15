@@ -112,6 +112,8 @@ This example is the same scenario as "CPU Training on Machine", but we now have 
 
 ![Edit Settings](/assets/posts/DL2021/SingleGPU.svg)
 
+![Edit Settings](/assets/posts/DL2021/LocalGlobalRank.svg)
+
 https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader
 https://pytorch.org/docs/stable/notes/multiprocessing.html#multiprocessing-cuda-note
 
