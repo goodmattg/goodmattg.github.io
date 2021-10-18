@@ -117,7 +117,30 @@ This example is the same scenario as "CPU Training on Machine", but we now have 
 https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader
 https://pytorch.org/docs/stable/notes/multiprocessing.html#multiprocessing-cuda-note
 
+# Distributed Backends (MPI, NCCL, GLOO)
+
+It will be useful to understand distributed communications backends before digging in to multi-gpu training. The plain english explanation is when training a model on a large dataset with multiple gpu's, it speeds things up to _parallelize_ the model training by sending different chunks of the data to each GPU, have each GPU compute weight updates separately, and then add up those weight updates to produce one global weight update at each time step. The copy of the model on each GPU will have the same weights after each iteration of backpropagatation, but we've now consumed _# gpu's_ times the data in a single iteration. Throughout this process the GPU's need to be in constant communication, and so a distributed communications protocol is required.
+
+Message Passing Interface (MPI) surfaced out of a supercomputing computing community working group in the 1990's. From the MPI 4.0 specification[^1]: 
+
+> MPI (Message-Passing Interface) is a message-passing library interface specification...
+MPI addresses primarily the message-passing parallel programming model, in which data is moved from the address space of one process to
+that of another process through cooperative operations on each process. Extensions to the
+“classical” message-passing model are provided in collective operations, remote-memory
+access operations, dynamic process creation, and parallel I/O
+
+[^1]: https://www.mpi-forum.org/docs/mpi-4.0/mpi40-report.pdf
+
 # Multi-GPU Training on Machine
+
+## Training
+
+![Edit Settings](/assets/posts/DL2021/MultiGPU.svg)
+image_caption
+
+https://pytorch.org/tutorials/intermediate/dist_tuto.html
+https://pytorch.org/docs/stable/distributed.html
+
 # Multi-GPU Single Node Training Cloud
 # Multi-GPU, Multi-Node Training Cloud
 
