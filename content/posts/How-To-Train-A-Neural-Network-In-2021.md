@@ -15,8 +15,12 @@ comments = true
 This post is going to cover the state of deep learning in 2021. If you're coming from a university classroom, get ready for an exhausting amount of detail. The classic pattern of "just feed some data through the network and backpropogate" is still the truth, but it takes ~5x more effort beyond the network to get anything useful.
 
 # Table of Contents
+
+{{< table_of_contents >}}
+
 # Theory
 
+TODO
 
 # Requirements
 
@@ -110,16 +114,18 @@ The questions I will repeat over and over in the context of our examples:
 
 This example is the same scenario as "CPU Training on Machine", but we now have 1 GPU in addition to our CPUs.
 
-![Edit Settings](/assets/posts/DL2021/SingleGPU.svg)
+![Single GPU](/assets/posts/DL2021/SingleGPU.svg)
 
-![Edit Settings](/assets/posts/DL2021/LocalGlobalRank.svg)
+![Local Globa rank](/assets/posts/DL2021/LocalGlobalRank.svg)
 
 https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader
 https://pytorch.org/docs/stable/notes/multiprocessing.html#multiprocessing-cuda-note
 
-# Distributed Backends (MPI, NCCL, GLOO)
+# Distributed Deep Learning
 
-It will be useful to understand distributed communications backends before digging in to multi-gpu training. The plain english explanation is when training a model on a large dataset with multiple gpu's, it speeds things up to _parallelize_ the model training by sending different chunks of the data to each GPU, have each GPU compute weight updates separately, and then add up those weight updates to produce one global weight update at each time step. The copy of the model on each GPU will have the same weights after each iteration of backpropagatation, but we've now consumed _# gpu's_ times the data in a single iteration. Throughout this process the GPU's need to be in constant communication, and so a distributed communications protocol is required.
+It will be useful to understand the role of distributed communications in DL before digging in to multi-GPU training. The plain english explanation is when training a model on a large dataset with multiple gpu's, it speeds things up to _parallelize_ the model training by sending different chunks of the data to each GPU, have each GPU compute weight updates separately, and then add up those weight updates to produce one global weight update at each time step. The copy of the model on each GPU will have the same weights after each iteration of backpropagatation, but we've now consumed _# gpu's_ times the data in a single iteration. Throughout this process the GPU's need to be in constant communication, and so a distributed communications protocol is required.
+
+## Message Passing Interface (MPI)
 
 Message Passing Interface (MPI) surfaced out of a supercomputing computing community working group in the 1990's. From the MPI 4.0 specification[^1]: 
 
@@ -131,11 +137,19 @@ access operations, dynamic process creation, and parallel I/O
 
 [^1]: https://www.mpi-forum.org/docs/mpi-4.0/mpi40-report.pdf
 
+MPI specifies _primitives_ (i.e. building blocks) that can be used to compose complex distributed communications patterns. MPI specifies two main types of primitives:
+1. _point-to-point_ : one process communicates with another process (1:1) 
+2. _collective_ : group of processes communicates within the group (many:many)
+
+These primitives are obviously useful for distributed deep learning. Each GPU process has weight gradients we need add up? Use the `all_reduce()` primitive. Each GPU process `P_i` comes up with a tensor `x_i` that needs to be shared to all other GPU processes? Use the `all_gather()` primitive, etc. Below is a helpful graphic directly from the MPI 4.0 standard to cement the concept.
+
+![Multi GPU](/assets/posts/DL2021/MPICollectiveCommunication.png)
+
 # Multi-GPU Training on Machine
 
 ## Training
 
-![Edit Settings](/assets/posts/DL2021/MultiGPU.svg)
+![Multi GPU](/assets/posts/DL2021/MultiGPU.svg)
 image_caption
 
 https://pytorch.org/tutorials/intermediate/dist_tuto.html

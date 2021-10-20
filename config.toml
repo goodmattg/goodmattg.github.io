@@ -14,12 +14,13 @@ math = true # enable KaTeX (https://katex.org/) globally
 
 [params.footer]
 text = "By Matthew Goodman"
+
 [params.style] # appearance options (can be omitted)
 avatarSize = "200px"
 colorBlack = "#222222"
 colorRed = "#3f51b5"
-fontFamily = "Inconsolata"
-pageWidth = "750px"
+fontFamily = "Roboto"
+pageWidth = "1000px"
 
 [permalinks]
 "/" = "/:filename"
@@ -56,4 +57,4 @@ unsafe = true # allow raw HTML in markdown files
 
 [markup.highlight]
 linenos = "true"
-style = "rrt"
+style = "monokai"
