@@ -12,23 +12,23 @@ comments = true
 <br>
 {{</ centered>}}
 
-This post is going to cover the state of deep learning in 2021. If you're coming from a university classroom, get ready for an exhausting amount of detail. The classic pattern of "just feed some data through the network and backpropogate" is still the truth, but it takes ~5x more effort beyond the network to get anything useful.
+This post is going to cover the state of deep learning in 2021. If you're coming from a university classroom, get ready for an exhausting amount of detail. The classic pattern of "just feed some data through the network and backpropogate" is still the truth, but it takes ~10x more effort beyond the network to get anything useful.
 
-# Table of Contents
+## Table of Contents
 
 {{< table_of_contents >}}
 
-# Theory
+## Theory
 
 TODO
 
-# Requirements
+## Requirements
 
-## Language: Python
+### Language: Python
 
 The lingua franca of modern DL is Python. All the major research codebases are in Python, the major DL frameworks all have Python bindings, and the vast majority of tooling is written for Python users. I don't know of any big league research organizations that use anything other than Python.
 
-# CPU Training on Machine
+## CPU Training on Machine
 
 This is the "Hello World" of DL, but we'll explore this scenario in some detail so we can reference it in later sections. Let's use the `torchvision` library from the PyTorch team to train a simple classifier on MNIST. 
 
@@ -110,7 +110,7 @@ The questions I will repeat over and over in the context of our examples:
 2. What happens if the dataset is changes over time?
 
 
-# GPU Training on Machine
+## GPU Training on Machine
 
 This example is the same scenario as "CPU Training on Machine", but we now have 1 GPU in addition to our CPUs.
 
@@ -121,13 +121,27 @@ This example is the same scenario as "CPU Training on Machine", but we now have 
 https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader
 https://pytorch.org/docs/stable/notes/multiprocessing.html#multiprocessing-cuda-note
 
-# Distributed Deep Learning
+## Distributed Deep Learning
 
-It will be useful to understand the role of distributed communications in DL before digging in to multi-GPU training. The plain english explanation is when training a model on a large dataset with multiple gpu's, it speeds things up to _parallelize_ the model training by sending different chunks of the data to each GPU, have each GPU compute weight updates separately, and then add up those weight updates to produce one global weight update at each time step. The copy of the model on each GPU will have the same weights after each iteration of backpropagatation, but we've now consumed _# gpu's_ times the data in a single iteration. Throughout this process the GPU's need to be in constant communication, and so a distributed communications protocol is required.
+It will be useful to understand the role of distributed communications in DL before digging in to multi-GPU training. To speed up model training on a large dataset using multiple GPUs, we turn to "_data parallel training_". The plain english explanation is we can speed up model training by sending different chunks (i.e. "_batches_") of the very large dataset to each GPU, have each GPU compute weight updates separately, and then add up those weight updates (i.e. "_gradients_") to produce one global weight update at each time step. The step where we add up the weight updates is known as `all_reduce()`, and we'll cover it in more detail in the MPI section. The copy of the model on each GPU will have the same weights after each iteration of backpropagation, but we've now consumed _# gpu's_ times the data in a single iteration. Throughout this process the GPU's need to be in constant communication, and so a distributed communications protocol is required.
 
-## Message Passing Interface (MPI)
+![Distributed Communication](/assets/posts/DL2021/DistributedBackend.svg)
 
-Message Passing Interface (MPI) surfaced out of a supercomputing computing community working group in the 1990's. From the MPI 4.0 specification[^1]: 
+### Hardware
+
+The bottom layer of our distributed training stack is hardware. Our network has CPUs, GPUs, and in the future perhaps TPUs and FPGAs. For modern deep learning, the only GPUs anyone uses are sold by NVIDIA - they hold a monopoly on the market. Why? How? The short story: NVIDIA owns CUDA. CUDA makes it easy to write code that can take advantage of GPU parallelization. Deep learning, and especially computer vision based deep learning, is __a lot of convolutions__. Convolutions are "shift, add, sum" - very easy math to parallelize, __extremely fast operation when parallelized__. All the major numerical computation libraries built in CUDA support to use GPUs since it was first and easiest. Only NVIDIA GPUs support CUDA, so by default you can now only use NVIDIA GPUs for deep learning.
+
+>CUDA is a parallel computing platform and programming model that makes using a GPU for general purpose computing simple and elegant. The developer still programs in the familiar C, C++, Fortran, or an ever expanding list of supported languages, and incorporates extensions of these languages in the form of a few basic keywords.... These keywords let the developer express massive amounts of parallelism and direct the compiler to the portion of the application that maps to the GPU.
+
+In 2016 Google announced the Tensor Processing Unit (TPU), an application specific integrated circuit (ASIC) specifically built for deep learning. Without going into hardware detail, TPUs are significantly faster than GPUs for deep learning. GPUs are multipurpose - they are graphics processing units, literally designed to handle graphics workloads. It just so happens that GPUs are effective for deep learning, but they are not power or memory efficient. Unlike GPUs, TPUs leverage `systolic arrays` to handle large multiplications and additions with memory efficiency [^1]. Google initially used its TPUs internally to handle its massive DL workloads, but now offers TPU enabled training and inference as a cloud offering and for sale.
+
+[^1]: https://cloud.google.com/blog/products/ai-machine-learning/what-makes-tpus-fine-tuned-for-deep-learning
+
+### Network Switching
+
+### Message Passing Interface (MPI)
+
+Message Passing Interface (MPI) surfaced out of a supercomputing computing community working group in the 1990's. From the MPI 4.0 specification[^2]: 
 
 > MPI (Message-Passing Interface) is a message-passing library interface specification...
 MPI addresses primarily the message-passing parallel programming model, in which data is moved from the address space of one process to
@@ -135,7 +149,7 @@ that of another process through cooperative operations on each process. Extensio
 “classical” message-passing model are provided in collective operations, remote-memory
 access operations, dynamic process creation, and parallel I/O
 
-[^1]: https://www.mpi-forum.org/docs/mpi-4.0/mpi40-report.pdf
+[^2]: https://www.mpi-forum.org/docs/mpi-4.0/mpi40-report.pdf
 
 MPI specifies _primitives_ (i.e. building blocks) that can be used to compose complex distributed communications patterns. MPI specifies two main types of primitives:
 1. _point-to-point_ : one process communicates with another process (1:1) 
@@ -145,9 +159,15 @@ These primitives are obviously useful for distributed deep learning. Each GPU pr
 
 ![Collective Communication](/assets/posts/DL2021/MPICollectiveCommunication.png)
 
-# Multi-GPU Training on Machine
+### Distributed Training Frameworks
 
-## Training
+Horovod: https://youtu.be/SphfeTl70MI
+
+Comparison of NVLink vs alternatives: https://arxiv.org/pdf/1903.04611.pdf
+
+## Multi-GPU Training on Machine
+
+### Training
 
 ![Multi GPU](/assets/posts/DL2021/MultiGPU.svg)
 image_caption
@@ -155,8 +175,8 @@ image_caption
 https://pytorch.org/tutorials/intermediate/dist_tuto.html
 https://pytorch.org/docs/stable/distributed.html
 
-# Multi-GPU Single Node Training Cloud
-# Multi-GPU, Multi-Node Training Cloud
+## Multi-GPU Single Node Training Cloud
+## Multi-GPU, Multi-Node Training Cloud
 
 Truly large-scale models are trained in the multi-gpu, multi-node setting. Examples include GPT-3, DeepMind's DOTA model, and Google's DL driven recommendation algorithms. Recall that a 'node' is typically a physical machine with 8 GPU's. When practitioners say a model was trained on 1024 GPU's, that precisely means the model was trained on 1024 / 8 = 128 physical nodes, each with 8 GPU's. 
 
