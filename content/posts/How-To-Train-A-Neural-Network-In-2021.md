@@ -143,7 +143,7 @@ MPI specifies _primitives_ (i.e. building blocks) that can be used to compose co
 
 These primitives are obviously useful for distributed deep learning. Each GPU process has weight gradients we need add up? Use the `all_reduce()` primitive. Each GPU process `P_i` comes up with a tensor `x_i` that needs to be shared to all other GPU processes? Use the `all_gather()` primitive, etc. Below is a helpful graphic directly from the MPI 4.0 standard to cement the concept.
 
-![Multi GPU](/assets/posts/DL2021/MPICollectiveCommunication.png)
+![Collective Communication](/assets/posts/DL2021/MPICollectiveCommunication.png)
 
 # Multi-GPU Training on Machine
 

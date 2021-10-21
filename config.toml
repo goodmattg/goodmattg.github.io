@@ -19,7 +19,7 @@ text = "By Matthew Goodman"
 avatarSize = "200px"
 colorBlack = "#222222"
 colorRed = "#3f51b5"
-fontFamily = "Roboto"
+fontFamily = "Georgia"
 pageWidth = "1000px"
 
 [permalinks]
