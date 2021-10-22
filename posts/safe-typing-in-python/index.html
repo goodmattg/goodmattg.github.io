@@ -5,6 +5,7 @@
 <meta name=description content="The website of Matthew Goodman">
 <meta name=author content="Matthew Goodman">
 <link rel=preconnect href=https://fonts.gstatic.com>
+<link href="http://fonts.googleapis.com/css?family=Roboto" rel=stylesheet>
 <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel=stylesheet>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel=stylesheet>
 <link rel=stylesheet href=https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css integrity=sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2 crossorigin=anonymous>
@@ -57,44 +58,44 @@ Contact
 </div>
 <p>When we talk about type safety in the context of statically typed languages, we mean that the language builds in a typing checking mechanism into the compiler. No type-check, no compilation.</p>
 <p>But in the context of research / algorithms oriented software that has no uptime requirements, the bias coming out of academia is to get the math into code, these days Python, and put it in production. Python is dynamically typed and has no type inference&mldr; so the typing is optional. What Mypy users rarely discuss is the cognitive burden of maintaining the type system that is separate from the code. With a lot of tasks on your plate and new features you are waiting to start, sometimes it feels silly to type annotate Python. Is this really necessary?</p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
 <table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79">4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79">5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79">6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79">7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79">8
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">8
 </span></code></pre></td>
 <td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>def(a):
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>def(a):
     print(a)
-    <span style=color:red>return</span>
+    <span style=color:#66d9ef>return</span>
 
-<span style=color:#0f0># With types</span>
-def(a: int) -&gt; <span style=color:red>None</span>:
+<span style=color:#75715e># With types</span>
+def(a: int) <span style=color:#f92672>-&gt;</span> <span style=color:#66d9ef>None</span>:
     print(a)
-    <span style=color:red>return</span>
+    <span style=color:#66d9ef>return</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>The situation we experience more often is that the simple and obvious functions get type annotated, but the complex ones that deal with uncommon types, like declaring types for decorators <code>F = TypeVar('F', bound=Callable[..., Any])</code>, go un-typed. And we expect this! Catching subtle bugs via the mypy type-checking mechanism is a long game.</p>
 <p>Highly effective teams know that type annotation is one of the best ways to make a codebase <em>stronger</em>. I know that&rsquo;s a vague and probably incorrect word to use in the context of software, but it really feels that way in a Python codebase. Without type annotations, it&rsquo;s the blind leading the blind - you need faith that variable names accurately describe the data that code will operate on. &ldquo;Faith&rdquo; is cold-comfort when we start talking SLA&rsquo;s.</p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
 <table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79">4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79">5
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
 </span></code></pre></td>
 <td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:red>def</span> <span style=color:#ff0>concatenate_str</span>(x: str, y: str) -&gt; str:
-    <span style=color:red>return</span> x + y
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>concatenate_str</span>(x: str, y: str) <span style=color:#f92672>-&gt;</span> str:
+    <span style=color:#66d9ef>return</span> x <span style=color:#f92672>+</span> y
 
-<span style=color:#0f0># the function name said &#39;_str&#39; but our data is &#39;int&#39;</span>
-concatenate(<span style=color:#f60>1</span>, <span style=color:#f60>2</span>) -&gt; <span style=color:#f60>3</span>
+<span style=color:#75715e># the function name said &#39;_str&#39; but our data is &#39;int&#39;</span>
+concatenate(<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>2</span>) <span style=color:#f92672>-&gt;</span> <span style=color:#ae81ff>3</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>prevent programmer&rsquo;s from making dumb mistakes in their work. I believe that well-designed code is a force multiplier</p>
@@ -106,48 +107,48 @@ concatenate(<span style=color:#f60>1</span>, <span style=color:#f60>2</span>) -&
 <blockquote>
 <p>&ldquo;operator &lsquo;>&rsquo; not defined for Int and None&rdquo;</p>
 </blockquote>
-<div class=highlight><div style=color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
 <table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79">16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79">17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79">18
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79">19
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
 </span></code></pre></td>
 <td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#0f0># We have a vague understanding that &#39;a&#39; is an int</span>
-__init__(self, val=<span style=color:red>None</span>):
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e># We have a vague understanding that &#39;a&#39; is an int</span>
+__init__(self, val<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>):
     func(val)
 
-<span style=color:#0f0># No types - explosion</span>
-<span style=color:red>def</span> <span style=color:#ff0>func</span>(a):
-    <span style=color:red>if</span> a &gt; <span style=color:#f60>3</span>:
-        <span style=color:red>return</span> a
-    <span style=color:red>else</span>:
-        <span style=color:red>return</span> -<span style=color:#f60>1</span>
+<span style=color:#75715e># No types - explosion</span>
+<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>func</span>(a):
+    <span style=color:#66d9ef>if</span> a <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>3</span>:
+        <span style=color:#66d9ef>return</span> a
+    <span style=color:#66d9ef>else</span>:
+        <span style=color:#66d9ef>return</span> <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>
     
-<span style=color:#0f0># Types annotations remind us that &#39;a&#39; can be None.</span>
-<span style=color:#0f0># either handle the Optional case (None), or prevent</span>
-<span style=color:#0f0># ever invoking &#39;func&#39;</span>
-<span style=color:red>def</span> <span style=color:#ff0>func</span>(a: Optional[int]) -&gt; int:
-    <span style=color:red>if</span> a is <span style=color:red>None</span> or a &lt; <span style=color:#f60>3</span>:
-        <span style=color:red>return</span> -<span style=color:#f60>1</span>
-    <span style=color:red>else</span>:
-        <span style=color:red>return</span> a
+<span style=color:#75715e># Types annotations remind us that &#39;a&#39; can be None.</span>
+<span style=color:#75715e># either handle the Optional case (None), or prevent</span>
+<span style=color:#75715e># ever invoking &#39;func&#39;</span>
+<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>func</span>(a: Optional[int]) <span style=color:#f92672>-&gt;</span> int:
+    <span style=color:#66d9ef>if</span> a <span style=color:#f92672>is</span> <span style=color:#66d9ef>None</span> <span style=color:#f92672>or</span> a <span style=color:#f92672>&lt;</span> <span style=color:#ae81ff>3</span>:
+        <span style=color:#66d9ef>return</span> <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>
+    <span style=color:#66d9ef>else</span>:
+        <span style=color:#66d9ef>return</span> a
 </code></pre></td></tr></table>
 </div>
 </div><h2 id=2-dont-use-python-for-production-services>2. Don&rsquo;t use Python for production services</h2>
@@ -158,17 +159,17 @@ __init__(self, val=<span style=color:red>None</span>):
 <p>If you have to maintain a type system anyways, it&rsquo;s easier to choose a statically typed language where the compiler builds in type-checking. Also, most popular IDE&rsquo;s for statically typed languages have type hints - so by choosing Python you&rsquo;re just increasing the cognitive load for developers.</p>
 <h2 id=3-configure-mypy-to-prevent-returning-any>3. Configure MyPy to prevent returning Any</h2>
 <p>Developers are people, and people can be lazy. The laziest way to get around MyPy errors is to return type <code>Any</code> - the supertype of all types. This is like returning <code>Any</code> in Scala; as a last resort developers will do this to satisfy the type-checker so they can keep moving. Stop them, or at least make them annotate in code every time they really mean to return <code>Any</code>. Keep the MyPy file as concise as possible, but fail on any errors reported.</p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
 <table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79">4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79">5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7c7c79">6
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
 </span></code></pre></td>
 <td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown># file: mypy.ini
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown># file: mypy.ini
 
 # global options:
 
