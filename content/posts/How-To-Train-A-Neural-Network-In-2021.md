@@ -102,28 +102,13 @@ Several things verify that our model works correctly:
 
 This example is representative of how tutorials and most universities teach deep learning, but it is not useful in practice. Let's dig in on several of the assumptions that make this example so elegant. First, the MNIST dataset is __tiny__, only 9.9 MB,  and __static__. Why do we focus on this? Because in practice, the datasets we want to use to power insights or new features are __massive__ and __dynamic__ (constantly changing). It is easy in this example to download MNIST to our local device to train the model - it only takes a few seconds to make an HTTP request to the server with the tarball of the MNIST dataset and download the whole dataset. And once the dataset is in memory, the time cost of loading small batches of the dataset into our model on the CPU is __effectively optimal__. MNIST is just 28x28 pixel images - it takes almost no time to load a small batch of 28x28 images, and those images take up almost no RAM. You can't beat the speed of just loading data from disk onto CPUs without fancy I/O optimizations which we'll cover in a later section. If we were lazy and inefficient, we could always re-download the MNIST dataset from the server every time we trained the model and __it would still work__. We would only add a few seconds to each training run, and the amount of memory we consume is only 9.9 MB. 
 
-Also observe that all of the operations in the function above 
-
-The questions I will repeat over and over in the context of our examples:
-
-1. What happens when the dataset cannot fit in memory? 
-2. What happens if the dataset is changes over time?
-
-
-## GPU Training on Machine
-
-This example is the same scenario as "CPU Training on Machine", but we now have 1 GPU in addition to our CPUs.
-
-![Single GPU](/assets/posts/DL2021/SingleGPU.svg)
-
-![Local Globa rank](/assets/posts/DL2021/LocalGlobalRank.svg)
-
-https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader
-https://pytorch.org/docs/stable/notes/multiprocessing.html#multiprocessing-cuda-note
+Also observe that all of the operations in the function above.. TODO 
 
 ## Distributed Deep Learning
 
-It will be useful to understand the role of distributed communications in DL before digging in to multi-GPU training. To speed up model training on a large dataset using multiple GPUs, we turn to "_data parallel training_". The plain english explanation is we can speed up model training by sending different chunks (i.e. "_batches_") of the very large dataset to each GPU, have each GPU compute weight updates separately, and then add up those weight updates (i.e. "_gradients_") to produce one global weight update at each time step. The step where we add up the weight updates is known as `all_reduce()`, and we'll cover it in more detail in the MPI section. The copy of the model on each GPU will have the same weights after each iteration of backpropagation, but we've now consumed _# gpu's_ times the data in a single iteration. Throughout this process the GPU's need to be in constant communication, and so a distributed communications protocol is required.
+Now we that we've shown the example above, we can _throw away almost every assumption we just made_. In real life, DL / AI / ML is not magic. All we are doing is using backpropagation to compute gradient updates for an optimization function. The _magic_ is cleverly selecting a model that maps our input data to our objective, sometimes being clever with _how_ we train the model(s), and training on as much data we have available. For all of the literature on "efficient training" and network architectures that have stronger capacity to _generalize_, in practice we want to train the model using __as much data as humanly possible__. Practically any clever DL trick we can think of can be ignored if we have more training data. So if you're a DL practitioner in an organization, and the goal is to get a model you can actually use (in business or research), your main goal is to acquire as much data as possible. If you're successful and can acquire a massive dataset (>10TB), you will be able to train something useful, but your dataset __does not fit in memory__. Furthermore, your dataset is probably generated via an internal ETL pipeline, or by interns tasked with getting you more data, which means it __changes over time__. 
+
+It will be useful to understand the role of distributed communications in DL before digging into distributed deep training. To speed up model training on a large dataset using multiple GPUs, we turn to "_data parallel training_". The plain english explanation is we can speed up model training by sending different chunks (i.e. "_batches_") of the very large dataset to each GPU, have each GPU compute weight updates separately, and then add up those weight updates (i.e. "_gradients_") to produce one global weight update at each time step. The step where we add up the weight updates is known as `all_reduce()`, and we'll cover it in more detail in the MPI section. The copy of the model on each GPU will have the same weights after each iteration of backpropagation, but we've now consumed _# gpu's_ times the data in a single iteration. Throughout this process the GPU's need to be in constant communication, and so a distributed communications protocol is required.
 
 ![Distributed Communication](/assets/posts/DL2021/DistributedBackend.svg)
 
@@ -157,6 +142,9 @@ MPI specifies _primitives_ (i.e. building blocks) that can be used to compose co
 
 These primitives are obviously useful for distributed deep learning. Each GPU process has weight gradients we need add up? Use the `all_reduce()` primitive. Each GPU process `P_i` comes up with a tensor `x_i` that needs to be shared to all other GPU processes? Use the `all_gather()` primitive, etc. Below is a helpful graphic directly from the MPI 4.0 standard to cement the concept.
 
+![Local Global rank](/assets/posts/DL2021/LocalGlobalRank.svg)
+https://pytorch.org/docs/stable/notes/multiprocessing.html#multiprocessing-cuda-note
+
 ![Collective Communication](/assets/posts/DL2021/MPICollectiveCommunication.png)
 
 ### Distributed Training Frameworks
@@ -165,7 +153,16 @@ Horovod: https://youtu.be/SphfeTl70MI
 
 Comparison of NVLink vs alternatives: https://arxiv.org/pdf/1903.04611.pdf
 
-## Multi-GPU Training on Machine
+
+## Single GPU Training
+
+This example is the same scenario as "CPU Training on Machine", but we now have 1 GPU in addition to our CPUs.
+
+![Single GPU](/assets/posts/DL2021/SingleGPU.svg)
+
+https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader
+
+## Multi GPU, Single Node Training
 
 ### Training
 
@@ -175,8 +172,17 @@ image_caption
 https://pytorch.org/tutorials/intermediate/dist_tuto.html
 https://pytorch.org/docs/stable/distributed.html
 
-## Multi-GPU Single Node Training Cloud
-## Multi-GPU, Multi-Node Training Cloud
+## Multi GPU, Multi Node Training
+
+All processes in the process group[^3] use ring communication 
+
+![Multi GPU](/assets/posts/DL2021/MultiGPUMultiNode.svg)
+
+[^3]: https://github.com/pytorch/pytorch/blob/v1.7.0/torch/lib/c10d/ProcessGroup.hpp
+
+
+## Multi GPU Single Node Training Cloud
+## Multi GPU, Multi-Node Training Cloud
 
 Truly large-scale models are trained in the multi-gpu, multi-node setting. Examples include GPT-3, DeepMind's DOTA model, and Google's DL driven recommendation algorithms. Recall that a 'node' is typically a physical machine with 8 GPU's. When practitioners say a model was trained on 1024 GPU's, that precisely means the model was trained on 1024 / 8 = 128 physical nodes, each with 8 GPU's. 
 
