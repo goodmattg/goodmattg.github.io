@@ -12,7 +12,7 @@ comments = true
 <br>
 {{</ centered>}}
 
-This post is going to cover the state of deep learning in 2021. If you're coming from a university classroom, get ready for an exhausting amount of detail. The classic pattern of "just feed some data through the network and backpropogate" is still the truth, but it takes ~10x more effort beyond the network to get anything useful.
+This post is going to cover the state of deep learning in 2021 with particular emphasis on AI infrastructure and deep learning tooling. If you're coming from a theory-based university classroom, get ready for an exhausting amount of detail. The classic pattern of "just feed some data through the network and backpropogate" is still the truth, but it takes ~10x more effort beyond the network to get anything useful.
 
 ## Table of Contents
 
@@ -156,7 +156,7 @@ Comparison of NVLink vs alternatives: https://arxiv.org/pdf/1903.04611.pdf
 
 ## Single GPU Training
 
-This example is the same scenario as "CPU Training on Machine", but we now have 1 GPU in addition to our CPUs.
+This is the same scenario as "CPU Training on Machine", but we now have 1 GPU in addition to our CPUs.
 
 ![Single GPU](/assets/posts/DL2021/SingleGPU.svg)
 
@@ -164,7 +164,15 @@ https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader
 
 ## Multi GPU, Single Node Training
 
-### Training
+This is the same scenario as "Single GPU Training", but we now have >1 GPUs on our node. Most deep learning practitioners in academia, small industry research groups, and hobbyists operate under this scenario. Simply put, you take as many GPU's as you can afford and put them on a single physical machine. This avoids the need to consider inter-machine networking, and in reality, this still works for most SOTA research.
+
+As seen in the figure below, the deep learning framework creates a process to manage each GPU's training. The GPU's each receive a different mini-batch of the data for the forward pass, compute gradients, and then proceed to `all_reduce`. Now we have two main ways to perform the `all_reduce`. 
+
+The first way is to designate one of the processes the `master` process, usually the process managing GPU 0, and have each GPU process send gradients to the `master` process. The master process accumulates all gradients and sends the _reduced_ gradients back to each GPU process. Now each GPU has the same gradients to update weights. This is particularly effective for this scenario because the GPUs are all __on the same machine__; they are connected by a dedicated IO bus that supports extremely fast inter-GPU communication. In PyTorch this the `DataParallel`[^3] model 
+
+TODO: Does the second way exist??? What are the tradeoffs if so. 
+
+[^4]: https://NEED_THE_LINK_FOR_DATA_PARALLEL.com
 
 ![Multi GPU](/assets/posts/DL2021/MultiGPU.svg)
 image_caption
@@ -174,19 +182,18 @@ https://pytorch.org/docs/stable/distributed.html
 
 ## Multi GPU, Multi Node Training
 
-All processes in the process group[^3] use ring communication 
+All processes in the process group[^4] use ring communication 
 
 ![Multi GPU](/assets/posts/DL2021/MultiGPUMultiNode.svg)
 
-[^3]: https://github.com/pytorch/pytorch/blob/v1.7.0/torch/lib/c10d/ProcessGroup.hpp
+[^4]: https://github.com/pytorch/pytorch/blob/v1.7.0/torch/lib/c10d/ProcessGroup.hpp
 
 
-## Multi GPU Single Node Training Cloud
 ## Multi GPU, Multi-Node Training Cloud
 
 Truly large-scale models are trained in the multi-gpu, multi-node setting. Examples include GPT-3, DeepMind's DOTA model, and Google's DL driven recommendation algorithms. Recall that a 'node' is typically a physical machine with 8 GPU's. When practitioners say a model was trained on 1024 GPU's, that precisely means the model was trained on 1024 / 8 = 128 physical nodes, each with 8 GPU's. 
 
-Let's take a moment to think of the broad challenges here before getting into specifics. We're now training a model across 128 separate physical machines. This introduces problems related to communication, i.e. that the physical nodes will have to communicate with each other over some network, and problems of 
+Let's take a moment to think of the broad challenges here before getting into specifics. We're now training a model across 128 separate physical machines. This introduces problems related to communication, i.e. that the physical nodes will have to communicate with each other over some network, and problems of speed. It takes time to load each batch of data from the data store to each physical machine. What if the data size is large (videos, raw audio), and what if DB reads are slow?
 
 6a. Distributed Training Frameworks (_Training Backends_)
 a. MPI
@@ -199,12 +206,39 @@ e. Parameter Servers
 https://pytorch.org/tutorials/intermediate/rpc_param_server_tutorial.html
 
 
-7. Cloud Workflows for Deep Learning
-8. Deep Learning Frameworks
-9. Higher Level Frameworks 
+## Cloud Workflows for Deep Learning
+## Deep Learning Frameworks
+## Higher Level Frameworks 
 Keras, Ignite, Lightning
-9. Data Ingestion Patterns
+## Data Ingestion Patterns
 
-Resources:
+## Frameworks*
 
-Andrej Karpathy's Recipe for Training Neural Networks (2019)
+Let's talk about frameworks for a second. This section has an asterisk because I want to make it clear these are opinions, not facts. Frameworks provide higher level patterns / abstractions that structure your usage of a tool and _in theory_ enable you to do more complex tasks with less effort. I say in theory because at worst, the frameworks themselves have a steep learning curve and don't enable you to do anything the underlying tool couldn't do.
+
+### PyTorch Ignite with PyTorch
+* Elegant `engine` construct to manage logging, hooks, training execution
+* Clean interface over PyTorch distributed module
+* Narrow set of excellent utilities for logging, checkpoint management, etc.
+* Poor support for custom code - rewriting open source code to operate with an ignite engine is difficult
+* Low-level, sits one level above PyTorch so not _too_ abstract
+* Small but active developer community
+
+### PyTorch Lightning with PyTorch
+* Strong abstractions for new developers
+* Excellent support for multi GPU training
+* Integrations with upcoming deep learning backends
+* Large developer community
+* The guy who started PyTorch Lightning is shameless, he goes for personal attention at every opportunity, and they misrepresent other's work as the Lighning's work. -10.
+
+### Keras with TensorFlow
+* Excellent abstractions over TensorFlow for new developers
+* Such widespread usage that Google moved to provide first-class support
+* TensorFlow adopted many core ideas
+* No longer needed to advanced TensorFlow
+* Doesn't play nice with the entire Google Cloud DL ecosystem
+
+## Reading List (Links)
+
+* Andrej Karpathy's Recipe for Training Neural Networks (2019)
+* https://lambdalabs.com/blog/introduction-multi-gpu-multi-node-distributed-training-nccl-2-0/
