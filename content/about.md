@@ -6,9 +6,9 @@ title = "About"
 
 {{< figure class="avatar" src="/avatar.jpg" >}}
 
-Relentless reader and builder. I'm a software engineer with experience in deep-learning based computer vision, distributed AutoML services, platform engineering, and full-stack web development.
+Reader and builder. I'm a software engineer with experience in deep-learning based computer vision, distributed AutoML services, platform engineering, and full-stack web development.
 
-In my free time I building things, taking on new challenges, and being active. If you have a new challenge, please reach out.
+In my free time I like to build things, take on new challenges, and be outside.
 
 -- Matt
 

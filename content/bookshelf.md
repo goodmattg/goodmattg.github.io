@@ -2,10 +2,12 @@
 Title = "Bookshelf"
 +++
 
-## An attempt to track my reading (incomplete)
+## An attempt to track my reading
 
 Book | Author | Started | Finished | Notes 
 -----|-------|-------|-------|--------
+The Hard About Hard Things | Ben Horowitz | 11/07/21 | 11/14/21 | Many lessons. Importance of clear communication providing employee feedback. Importance of actively minimizing politics. Did a16z popularize the use of "partner" for venture capital funds? If your company is growing fast enough, existing jobs will be different - the same person may not be able to handle both. |
+Never Split the Difference | Chris Voss | 10/27/21 | 11/06/21 | Mirroring. Do a position audit where you lay out the bad stuff first. Go for a "no" first since "no" empowers your counterparty. Force counterparty to say answer your questions. Use "How" and "Why" instead of "yes" and "no". Stay calm, don't go in with a time frame. Don't haggle, don't split the difference (at least for hostage negotiations). |
 Zero to One | Peter Thiel | 08/25/21 | 10/12/21 | What important truth do you believe that very few people agree with you on? Competition is for losers; look to own small markets with excellent features and stickiness, then expand outward. Move last - “Let your plans be dark and impenetrable as night, and when you move, fall like a thunderbolt.”, Sun Tzu. Look for secrets to found companies. Founders are polarizing, don't be afraid to embrace it. We are building towards an accelerating future. |
 Blood Meridian | Cormac McCarthy | 08/20 | - | |
 Venture Deals | Brad Feld, Jason Mendelson | 08/11/21 | 9/17/21 | Must read for any startup founder. Biggest takeways are pre/post money valuations, hire good lawyers, and know who you are dealing with and their incentives at all times. | 
