@@ -59,7 +59,7 @@ Contact
 <p>Prove Newton&rsquo;s Theorem for $t \in \mathbb{R}$ for $|x|&lt;1$. If $t=n$ is any positive integer obtain the standard binomial formula $(a+b)^n=\sum_{k=0}^n\binom{n}{k}a^{n-k}b^k$.</p>
 <p>$$(1+x)^t=1+\binom{t}{1}x+\binom{t}{2}x^2+\binom{t}{3}x^3\cdots=\sum_{k=0}^{\infty}\binom{t}{k}x^k$$</p>
 <p>My calculus is rusty, so my first and only instinct when I see an infinite series like this with incrementing exponents is to use Taylor&rsquo;s approximation theorem with remainder.</p>
-<p>$$f^{n+1}(x) = \underbrace{\sum_{k=0}^{n}f^{(k)}(0)\frac{x^k}{k!}}_\text{T(x)}~+~\underbrace{\frac{1}{n!}\int_0^xt^nf^{n+1}(x-t)~dt}_{R_n(x)}$$</p>
+<p>$$f^{n+1}(x) = \underbrace{\sum_{k=0}^{n}f^{(k)}(0)\frac{x^k}{k!}}<em>\text{T(x)}~+~\underbrace{\frac{1}{n!}\int_0^xt^nf^{n+1}(x-t)~dt}</em>{R_n(x)}$$</p>
 <p>Looking this over, we can tell this is probably a good approach. That initial term matches up almost perfectly to our proof objective. Let&rsquo;s find the $k_{th}$ derivative of the function.</p>
 <p>$$
 \begin{aligned}

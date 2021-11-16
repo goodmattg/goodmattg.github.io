@@ -56,7 +56,7 @@ Contact
 <hr>
 <br>
 </div>
-<p>This post is going to cover the state of deep learning in 2021. If you&rsquo;re coming from a university classroom, get ready for an exhausting amount of detail. The classic pattern of &ldquo;just feed some data through the network and backpropogate&rdquo; is still the truth, but it takes ~10x more effort beyond the network to get anything useful.</p>
+<p>This post is going to cover the state of deep learning in 2021 with particular emphasis on AI infrastructure and deep learning tooling. If you&rsquo;re coming from a theory-based university classroom, get ready for an exhausting amount of detail. The classic pattern of &ldquo;just feed some data through the network and backpropogate&rdquo; is still the truth, but it takes ~10x more effort beyond the network to get anything useful.</p>
 <h2 id=table-of-contents>Table of Contents</h2>
 <div class=toc>
 <nav id=TableOfContents>
@@ -78,14 +78,21 @@ Contact
 </ul>
 </li>
 <li><a href=#single-gpu-training>Single GPU Training</a></li>
-<li><a href=#multi-gpu-single-node-training>Multi GPU, Single Node Training</a>
+<li><a href=#multi-gpu-single-node-training>Multi GPU, Single Node Training</a></li>
+<li><a href=#multi-gpu-multi-node-training>Multi GPU, Multi Node Training</a></li>
+<li><a href=#multi-gpu-multi-node-training-cloud>Multi GPU, Multi-Node Training Cloud</a></li>
+<li><a href=#cloud-workflows-for-deep-learning>Cloud Workflows for Deep Learning</a></li>
+<li><a href=#deep-learning-frameworks>Deep Learning Frameworks</a></li>
+<li><a href=#higher-level-frameworks>Higher Level Frameworks</a></li>
+<li><a href=#data-ingestion-patterns>Data Ingestion Patterns</a></li>
+<li><a href=#frameworks>Frameworks*</a>
 <ul>
-<li><a href=#training>Training</a></li>
+<li><a href=#pytorch-ignite-with-pytorch>PyTorch Ignite with PyTorch</a></li>
+<li><a href=#pytorch-lightning-with-pytorch>PyTorch Lightning with PyTorch</a></li>
+<li><a href=#keras-with-tensorflow>Keras with TensorFlow</a></li>
 </ul>
 </li>
-<li><a href=#multi-gpu-multi-node-training>Multi GPU, Multi Node Training</a></li>
-<li><a href=#multi-gpu-single-node-training-cloud>Multi GPU Single Node Training Cloud</a></li>
-<li><a href=#multi-gpu-multi-node-training-cloud>Multi GPU, Multi-Node Training Cloud</a></li>
+<li><a href=#reading-list-links>Reading List (Links)</a></li>
 </ul>
 </nav>
 </div>
@@ -263,11 +270,14 @@ access operations, dynamic process creation, and parallel I/O</p>
 <p>Horovod: <a href=https://youtu.be/SphfeTl70MI>https://youtu.be/SphfeTl70MI</a></p>
 <p>Comparison of NVLink vs alternatives: <a href=https://arxiv.org/pdf/1903.04611.pdf>https://arxiv.org/pdf/1903.04611.pdf</a></p>
 <h2 id=single-gpu-training>Single GPU Training</h2>
-<p>This example is the same scenario as &ldquo;CPU Training on Machine&rdquo;, but we now have 1 GPU in addition to our CPUs.</p>
+<p>This is the same scenario as &ldquo;CPU Training on Machine&rdquo;, but we now have 1 GPU in addition to our CPUs.</p>
 <p><img src=/assets/posts/DL2021/SingleGPU.svg alt="Single GPU"></p>
 <p><a href=https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader>https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader</a></p>
 <h2 id=multi-gpu-single-node-training>Multi GPU, Single Node Training</h2>
-<h3 id=training>Training</h3>
+<p>This is the same scenario as &ldquo;Single GPU Training&rdquo;, but we now have >1 GPUs on our node. Most deep learning practitioners in academia, small industry research groups, and hobbyists operate under this scenario. Simply put, you take as many GPU&rsquo;s as you can afford and put them on a single physical machine. This avoids the need to consider inter-machine networking, and in reality, this still works for most SOTA research.</p>
+<p>As seen in the figure below, the deep learning framework creates a process to manage each GPU&rsquo;s training. The GPU&rsquo;s each receive a different mini-batch of the data for the forward pass, compute gradients, and then proceed to <code>all_reduce</code>. Now we have two main ways to perform the <code>all_reduce</code>.</p>
+<p>The first way is to designate one of the processes the <code>master</code> process, usually the process managing GPU 0, and have each GPU process send gradients to the <code>master</code> process. The master process accumulates all gradients and sends the <em>reduced</em> gradients back to each GPU process. Now each GPU has the same gradients to update weights. This is particularly effective for this scenario because the GPUs are all <strong>on the same machine</strong>; they are connected by a dedicated IO bus that supports extremely fast inter-GPU communication. In PyTorch this the <code>DataParallel</code>[^3] model</p>
+<p>TODO: Does the second way exist??? What are the tradeoffs if so.</p>
 <p><img src=/assets/posts/DL2021/MultiGPU.svg alt="Multi GPU">
 image_caption</p>
 <p><a href=https://pytorch.org/tutorials/intermediate/dist_tuto.html>https://pytorch.org/tutorials/intermediate/dist_tuto.html</a>
@@ -275,10 +285,9 @@ image_caption</p>
 <h2 id=multi-gpu-multi-node-training>Multi GPU, Multi Node Training</h2>
 <p>All processes in the process group<sup id=fnref:3><a href=#fn:3 class=footnote-ref role=doc-noteref>3</a></sup> use ring communication</p>
 <p><img src=/assets/posts/DL2021/MultiGPUMultiNode.svg alt="Multi GPU"></p>
-<h2 id=multi-gpu-single-node-training-cloud>Multi GPU Single Node Training Cloud</h2>
 <h2 id=multi-gpu-multi-node-training-cloud>Multi GPU, Multi-Node Training Cloud</h2>
 <p>Truly large-scale models are trained in the multi-gpu, multi-node setting. Examples include GPT-3, DeepMind&rsquo;s DOTA model, and Google&rsquo;s DL driven recommendation algorithms. Recall that a &lsquo;node&rsquo; is typically a physical machine with 8 GPU&rsquo;s. When practitioners say a model was trained on 1024 GPU&rsquo;s, that precisely means the model was trained on 1024 / 8 = 128 physical nodes, each with 8 GPU&rsquo;s.</p>
-<p>Let&rsquo;s take a moment to think of the broad challenges here before getting into specifics. We&rsquo;re now training a model across 128 separate physical machines. This introduces problems related to communication, i.e. that the physical nodes will have to communicate with each other over some network, and problems of</p>
+<p>Let&rsquo;s take a moment to think of the broad challenges here before getting into specifics. We&rsquo;re now training a model across 128 separate physical machines. This introduces problems related to communication, i.e. that the physical nodes will have to communicate with each other over some network, and problems of speed. It takes time to load each batch of data from the data store to each physical machine. What if the data size is large (videos, raw audio), and what if DB reads are slow?</p>
 <p>6a. Distributed Training Frameworks (<em>Training Backends</em>)
 a. MPI
 b. DDP (NCCL)
@@ -287,15 +296,43 @@ c. Horovod
 d. BytePS
 e. Parameter Servers</p>
 <p><a href=https://pytorch.org/tutorials/intermediate/rpc_param_server_tutorial.html>https://pytorch.org/tutorials/intermediate/rpc_param_server_tutorial.html</a></p>
-<ol start=7>
-<li>Cloud Workflows for Deep Learning</li>
-<li>Deep Learning Frameworks</li>
-<li>Higher Level Frameworks
-Keras, Ignite, Lightning</li>
-<li>Data Ingestion Patterns</li>
-</ol>
-<p>Resources:</p>
-<p>Andrej Karpathy&rsquo;s Recipe for Training Neural Networks (2019)</p>
+<h2 id=cloud-workflows-for-deep-learning>Cloud Workflows for Deep Learning</h2>
+<h2 id=deep-learning-frameworks>Deep Learning Frameworks</h2>
+<h2 id=higher-level-frameworks>Higher Level Frameworks</h2>
+<p>Keras, Ignite, Lightning</p>
+<h2 id=data-ingestion-patterns>Data Ingestion Patterns</h2>
+<h2 id=frameworks>Frameworks*</h2>
+<p>Let&rsquo;s talk about frameworks for a second. This section has an asterisk because I want to make it clear these are opinions, not facts. Frameworks provide higher level patterns / abstractions that structure your usage of a tool and <em>in theory</em> enable you to do more complex tasks with less effort. I say in theory because at worst, the frameworks themselves have a steep learning curve and don&rsquo;t enable you to do anything the underlying tool couldn&rsquo;t do.</p>
+<h3 id=pytorch-ignite-with-pytorch>PyTorch Ignite with PyTorch</h3>
+<ul>
+<li>Elegant <code>engine</code> construct to manage logging, hooks, training execution</li>
+<li>Clean interface over PyTorch distributed module</li>
+<li>Narrow set of excellent utilities for logging, checkpoint management, etc.</li>
+<li>Poor support for custom code - rewriting open source code to operate with an ignite engine is difficult</li>
+<li>Low-level, sits one level above PyTorch so not <em>too</em> abstract</li>
+<li>Small but active developer community</li>
+</ul>
+<h3 id=pytorch-lightning-with-pytorch>PyTorch Lightning with PyTorch</h3>
+<ul>
+<li>Strong abstractions for new developers</li>
+<li>Excellent support for multi GPU training</li>
+<li>Integrations with upcoming deep learning backends</li>
+<li>Large developer community</li>
+<li>The guy who started PyTorch Lightning is shameless, he goes for personal attention at every opportunity, and they misrepresent other&rsquo;s work as the Lighning&rsquo;s work. -10.</li>
+</ul>
+<h3 id=keras-with-tensorflow>Keras with TensorFlow</h3>
+<ul>
+<li>Excellent abstractions over TensorFlow for new developers</li>
+<li>Such widespread usage that Google moved to provide first-class support</li>
+<li>TensorFlow adopted many core ideas</li>
+<li>No longer needed to advanced TensorFlow</li>
+<li>Doesn&rsquo;t play nice with the entire Google Cloud DL ecosystem</li>
+</ul>
+<h2 id=reading-list-links>Reading List (Links)</h2>
+<ul>
+<li>Andrej Karpathy&rsquo;s Recipe for Training Neural Networks (2019)</li>
+<li><a href=https://lambdalabs.com/blog/introduction-multi-gpu-multi-node-distributed-training-nccl-2-0/>https://lambdalabs.com/blog/introduction-multi-gpu-multi-node-distributed-training-nccl-2-0/</a></li>
+</ul>
 <section class=footnotes role=doc-endnotes>
 <hr>
 <ol>
@@ -306,7 +343,7 @@ Keras, Ignite, Lightning</li>
 <p><a href=https://www.mpi-forum.org/docs/mpi-4.0/mpi40-report.pdf>https://www.mpi-forum.org/docs/mpi-4.0/mpi40-report.pdf</a>&#160;<a href=#fnref:2 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
 </li>
 <li id=fn:3 role=doc-endnote>
-<p><a href=https://github.com/pytorch/pytorch/blob/v1.7.0/torch/lib/c10d/ProcessGroup.hpp>https://github.com/pytorch/pytorch/blob/v1.7.0/torch/lib/c10d/ProcessGroup.hpp</a>&#160;<a href=#fnref:3 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+<p><a href=https://NEED_THE_LINK_FOR_DATA_PARALLEL.com>https://NEED_THE_LINK_FOR_DATA_PARALLEL.com</a>&#160;<a href=#fnref:3 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>
