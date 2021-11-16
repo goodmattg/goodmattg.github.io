@@ -38,10 +38,6 @@ Bookshelf
 Quotes
 </a>
 <span class="nav-item navbar-text mx-1">|</span>
-<a class="nav-item nav-link" href=/resume>
-Resume
-</a>
-<span class="nav-item navbar-text mx-1">|</span>
 <a class="nav-item nav-link" href=/contact>
 Contact
 </a>
@@ -142,380 +138,380 @@ $$</p>
 <li>childrenTok:  <em>[String]</em></li>
 </ul>
 <h3 id=computing-tree-kernels>Computing Tree Kernels</h3>
-<div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<div class=highlight><div style=color:#8a8a8a;background-color:#1c1c1c;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
 <table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">  9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 18
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 19
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 20
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 21
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 22
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 23
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 24
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 25
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 26
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 27
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 28
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 29
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 30
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 31
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 32
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 33
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 34
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 35
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 36
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 37
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 38
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 39
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 40
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 41
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 42
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 43
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 44
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 45
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 46
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 47
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 48
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 49
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 50
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 51
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 52
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 53
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 54
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 55
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 56
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 57
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 58
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 59
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 60
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 61
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 62
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 63
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 64
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 65
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 66
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 67
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 68
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 69
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 70
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 71
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 72
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 73
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 74
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 75
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 76
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 77
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 78
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 79
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 80
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 81
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 82
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 83
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 84
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 85
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 86
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 87
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 88
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 89
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 90
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 91
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 92
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 93
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 94
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 95
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 96
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 97
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 98
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 99
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">100
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">101
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">102
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">103
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">104
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">105
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">106
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">107
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">108
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">109
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">110
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">111
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">112
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">113
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">114
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">115
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">116
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">117
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">118
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">119
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">120
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">121
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">122
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">123
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">124
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">125
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">126
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">127
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">128
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">129
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">130
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">131
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">132
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">133
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">134
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">135
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">136
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">137
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">138
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">139
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">140
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">141
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">142
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">143
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">144
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">145
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">146
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">147
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">148
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">149
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">150
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">151
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">152
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">153
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">154
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">155
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">156
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">157
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">158
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">159
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">160
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">161
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">162
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">163
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">164
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">165
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">166
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">167
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">168
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">169
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">170
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">171
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">172
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">173
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">174
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">175
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">176
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">177
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">178
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">179
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">180
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">181
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">182
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">183
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">184
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">185
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">186
+<pre tabindex=0 style=color:#8a8a8a;background-color:#1c1c1c;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#454545">  1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">  2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">  3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">  4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">  5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">  6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">  7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">  8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">  9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 30
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 31
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 32
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 33
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 34
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 35
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 36
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 37
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 38
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 39
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 40
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 41
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 42
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 43
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 44
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 45
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 46
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 47
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 48
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 49
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 50
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 51
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 52
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 53
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 54
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 55
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 56
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 57
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 58
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 59
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 60
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 61
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 62
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 63
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 64
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 65
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 66
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 67
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 68
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 69
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 70
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 71
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 72
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 73
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 74
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 75
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 76
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 77
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 78
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 79
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 80
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 81
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 82
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 83
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 84
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 85
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 86
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 87
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 88
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 89
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 90
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 91
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 92
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 93
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 94
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 95
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 96
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 97
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 98
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 99
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">100
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">101
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">102
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">103
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">104
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">105
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">106
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">107
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">108
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">109
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">110
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">111
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">112
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">113
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">114
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">115
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">116
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">117
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">118
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">119
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">120
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">121
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">122
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">123
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">124
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">125
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">126
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">127
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">128
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">129
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">130
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">131
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">132
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">133
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">134
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">135
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">136
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">137
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">138
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">139
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">140
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">141
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">142
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">143
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">144
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">145
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">146
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">147
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">148
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">149
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">150
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">151
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">152
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">153
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">154
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">155
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">156
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">157
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">158
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">159
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">160
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">161
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">162
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">163
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">164
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">165
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">166
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">167
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">168
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">169
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">170
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">171
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">172
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">173
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">174
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">175
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">176
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">177
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">178
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">179
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">180
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">181
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">182
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">183
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">184
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">185
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">186
 </span></code></pre></td>
 <td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>
+<pre tabindex=0 style=color:#8a8a8a;background-color:#1c1c1c;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>
 
-<span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
-<span style=color:#f92672>import</span> math
-<span style=color:#f92672>from</span> nltk.corpus <span style=color:#f92672>import</span> wordnet <span style=color:#66d9ef>as</span> wn
+<span style=color:#d75f00>import</span> numpy <span style=color:#5f8700>as</span> np
+<span style=color:#d75f00>import</span> math
+<span style=color:#d75f00>from</span> nltk.corpus <span style=color:#d75f00>import</span> wordnet <span style=color:#5f8700>as</span> wn
 
-<span style=color:#e6db74>&#39;&#39;&#39;
-</span><span style=color:#e6db74>Helper Methods
-</span><span style=color:#e6db74>&#39;&#39;&#39;</span>
-<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>_isLeaf_</span>(tree, parentNode):
-    <span style=color:#66d9ef>return</span> (len(tree[parentNode][<span style=color:#e6db74>&#39;children&#39;</span>]) <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span>)
+<span style=color:#00afaf>&#39;&#39;&#39;
+</span><span style=color:#00afaf>Helper Methods
+</span><span style=color:#00afaf>&#39;&#39;&#39;</span>
+<span style=color:#5f8700>def</span> <span style=color:#0087ff>_isLeaf_</span>(tree, parentNode):
+    <span style=color:#5f8700>return</span> (<span style=color:#0087ff>len</span>(tree[parentNode][<span style=color:#00afaf>&#39;children&#39;</span>]) == <span style=color:#00afaf>0</span>)
 
-<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>_isPreterminal_</span>(tree, parentNode):
-    <span style=color:#66d9ef>for</span> idx <span style=color:#f92672>in</span> tree[parentNode][<span style=color:#e6db74>&#39;children&#39;</span>]:
-        <span style=color:#66d9ef>if</span> <span style=color:#f92672>not</span> _isLeaf_(tree, idx):
-            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>False</span>
-    <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>True</span>
+<span style=color:#5f8700>def</span> <span style=color:#0087ff>_isPreterminal_</span>(tree, parentNode):
+    <span style=color:#5f8700>for</span> idx <span style=color:#5f8700>in</span> tree[parentNode][<span style=color:#00afaf>&#39;children&#39;</span>]:
+        <span style=color:#5f8700>if</span> <span style=color:#5f8700>not</span> _isLeaf_(tree, idx):
+            <span style=color:#5f8700>return</span> <span style=color:#d75f00>False</span>
+    <span style=color:#5f8700>return</span> <span style=color:#d75f00>True</span>
 
-<span style=color:#e6db74>&#39;&#39;&#39;
-</span><span style=color:#e6db74>Implementation of the Colins-Duffy or Subset-Tree (SST) Kernel
-</span><span style=color:#e6db74>&#39;&#39;&#39;</span>
+<span style=color:#00afaf>&#39;&#39;&#39;
+</span><span style=color:#00afaf>Implementation of the Colins-Duffy or Subset-Tree (SST) Kernel
+</span><span style=color:#00afaf>&#39;&#39;&#39;</span>
 
-<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>_cdHelper_</span>(tree1, tree2, node1, node2, store, lam, SST_ON):
-    <span style=color:#75715e># No duplicate computations</span>
-    <span style=color:#66d9ef>if</span> store[node1, node2] <span style=color:#f92672>&gt;=</span> <span style=color:#ae81ff>0</span>:
-        <span style=color:#66d9ef>return</span>
+<span style=color:#5f8700>def</span> <span style=color:#0087ff>_cdHelper_</span>(tree1, tree2, node1, node2, store, lam, SST_ON):
+    <span style=color:#4e4e4e># No duplicate computations</span>
+    <span style=color:#5f8700>if</span> store[node1, node2] &gt;= <span style=color:#00afaf>0</span>:
+        <span style=color:#5f8700>return</span>
 
-    <span style=color:#75715e># Leaves yield similarity score by definition</span>
-    <span style=color:#66d9ef>if</span> (_isLeaf_(tree1, node1) <span style=color:#f92672>or</span> _isLeaf_(tree2, node2)):
-        store[node1, node2] <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
-        <span style=color:#66d9ef>return</span>
+    <span style=color:#4e4e4e># Leaves yield similarity score by definition</span>
+    <span style=color:#5f8700>if</span> (_isLeaf_(tree1, node1) <span style=color:#5f8700>or</span> _isLeaf_(tree2, node2)):
+        store[node1, node2] = <span style=color:#00afaf>0</span>
+        <span style=color:#5f8700>return</span>
 
-    <span style=color:#75715e># same parent node</span>
-    <span style=color:#66d9ef>if</span> tree1[node1][<span style=color:#e6db74>&#39;posOrTok&#39;</span>] <span style=color:#f92672>==</span> tree2[node2][<span style=color:#e6db74>&#39;posOrTok&#39;</span>]:
-        <span style=color:#75715e># same children tokens</span>
-        <span style=color:#66d9ef>if</span> tree1[node1][<span style=color:#e6db74>&#39;childrenTok&#39;</span>] <span style=color:#f92672>==</span> tree2[node2][<span style=color:#e6db74>&#39;childrenTok&#39;</span>]:
-            <span style=color:#75715e># Check if both nodes are pre-terminal</span>
-            <span style=color:#66d9ef>if</span> _isPreterminal_(tree1, node1) <span style=color:#f92672>and</span> _isPreterminal_(tree2, node2):
-                store[node1, node2] <span style=color:#f92672>=</span> lam
-                <span style=color:#66d9ef>return</span>
-            <span style=color:#75715e># Not pre-terminal. Recurse among the children of both token trees.</span>
-            <span style=color:#66d9ef>else</span>:
-                nChildren <span style=color:#f92672>=</span> len(tree1[node1][<span style=color:#e6db74>&#39;children&#39;</span>])
+    <span style=color:#4e4e4e># same parent node</span>
+    <span style=color:#5f8700>if</span> tree1[node1][<span style=color:#00afaf>&#39;posOrTok&#39;</span>] == tree2[node2][<span style=color:#00afaf>&#39;posOrTok&#39;</span>]:
+        <span style=color:#4e4e4e># same children tokens</span>
+        <span style=color:#5f8700>if</span> tree1[node1][<span style=color:#00afaf>&#39;childrenTok&#39;</span>] == tree2[node2][<span style=color:#00afaf>&#39;childrenTok&#39;</span>]:
+            <span style=color:#4e4e4e># Check if both nodes are pre-terminal</span>
+            <span style=color:#5f8700>if</span> _isPreterminal_(tree1, node1) <span style=color:#5f8700>and</span> _isPreterminal_(tree2, node2):
+                store[node1, node2] = lam
+                <span style=color:#5f8700>return</span>
+            <span style=color:#4e4e4e># Not pre-terminal. Recurse among the children of both token trees.</span>
+            <span style=color:#5f8700>else</span>:
+                nChildren = <span style=color:#0087ff>len</span>(tree1[node1][<span style=color:#00afaf>&#39;children&#39;</span>])
 
-                runningTotal <span style=color:#f92672>=</span> <span style=color:#66d9ef>None</span>
-                <span style=color:#66d9ef>for</span> idx <span style=color:#f92672>in</span> range(nChildren):
-                     <span style=color:#75715e># index -&gt;  node_id</span>
-                    tmp_n1 <span style=color:#f92672>=</span> tree1[node1][<span style=color:#e6db74>&#39;children&#39;</span>][idx]
-                    tmp_n2 <span style=color:#f92672>=</span> tree2[node2][<span style=color:#e6db74>&#39;children&#39;</span>][idx]
-                    <span style=color:#75715e># Recursively run helper</span>
+                runningTotal = <span style=color:#d75f00>None</span>
+                <span style=color:#5f8700>for</span> idx <span style=color:#5f8700>in</span> <span style=color:#0087ff>range</span>(nChildren):
+                     <span style=color:#4e4e4e># index -&gt;  node_id</span>
+                    tmp_n1 = tree1[node1][<span style=color:#00afaf>&#39;children&#39;</span>][idx]
+                    tmp_n2 = tree2[node2][<span style=color:#00afaf>&#39;children&#39;</span>][idx]
+                    <span style=color:#4e4e4e># Recursively run helper</span>
                     _cdHelper_(tree1, tree2, tmp_n1, tmp_n2, store, lam, SST_ON)
-                    <span style=color:#75715e># Set the initial value for the layer. Else multiplicative product.</span>
-                    <span style=color:#66d9ef>if</span> (runningTotal <span style=color:#f92672>==</span> <span style=color:#66d9ef>None</span>):
-                        runningTotal <span style=color:#f92672>=</span> SST_ON <span style=color:#f92672>+</span> store[tmp_n1, tmp_n2]
-                    <span style=color:#66d9ef>else</span>:
-                        runningTotal <span style=color:#f92672>*=</span> (SST_ON <span style=color:#f92672>+</span> store[tmp_n1, tmp_n2])
+                    <span style=color:#4e4e4e># Set the initial value for the layer. Else multiplicative product.</span>
+                    <span style=color:#5f8700>if</span> (runningTotal == <span style=color:#d75f00>None</span>):
+                        runningTotal = SST_ON + store[tmp_n1, tmp_n2]
+                    <span style=color:#5f8700>else</span>:
+                        runningTotal *= (SST_ON + store[tmp_n1, tmp_n2])
 
-                store[node1, node2] <span style=color:#f92672>=</span> lam <span style=color:#f92672>*</span> runningTotal
-                <span style=color:#66d9ef>return</span>
-        <span style=color:#66d9ef>else</span>:
-            store[node1, node2] <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
-    <span style=color:#66d9ef>else</span>: <span style=color:#75715e># parent nodes are different</span>
-        store[node1, node2] <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
-        <span style=color:#66d9ef>return</span>
+                store[node1, node2] = lam * runningTotal
+                <span style=color:#5f8700>return</span>
+        <span style=color:#5f8700>else</span>:
+            store[node1, node2] = <span style=color:#00afaf>0</span>
+    <span style=color:#5f8700>else</span>: <span style=color:#4e4e4e># parent nodes are different</span>
+        store[node1, node2] = <span style=color:#00afaf>0</span>
+        <span style=color:#5f8700>return</span>
 
 
-<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>_cdKernel_</span>(tree1, tree2, lam, SST_ON):
-    <span style=color:#75715e># Fill the initial state of the store</span>
-    store <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>empty((len(tree1), len(tree2)))
-    store<span style=color:#f92672>.</span>fill(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>)
-    <span style=color:#75715e># O(N^2) to compute the tree dot product</span>
-    <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(len(tree1)):
-        <span style=color:#66d9ef>for</span> j <span style=color:#f92672>in</span> range(len(tree2)):
+<span style=color:#5f8700>def</span> <span style=color:#0087ff>_cdKernel_</span>(tree1, tree2, lam, SST_ON):
+    <span style=color:#4e4e4e># Fill the initial state of the store</span>
+    store = np.empty((<span style=color:#0087ff>len</span>(tree1), <span style=color:#0087ff>len</span>(tree2)))
+    store.fill(-<span style=color:#00afaf>1</span>)
+    <span style=color:#4e4e4e># O(N^2) to compute the tree dot product</span>
+    <span style=color:#5f8700>for</span> i <span style=color:#5f8700>in</span> <span style=color:#0087ff>range</span>(<span style=color:#0087ff>len</span>(tree1)):
+        <span style=color:#5f8700>for</span> j <span style=color:#5f8700>in</span> <span style=color:#0087ff>range</span>(<span style=color:#0087ff>len</span>(tree2)):
             _cdHelper_(tree1, tree2, i, j, store, lam, SST_ON)
 
-    <span style=color:#66d9ef>return</span> store<span style=color:#f92672>.</span>sum()
+    <span style=color:#5f8700>return</span> store.sum()
 
-<span style=color:#e6db74>&#39;&#39;&#39;
-</span><span style=color:#e6db74>Returns a tuple w/ format: (raw, normalized)
-</span><span style=color:#e6db74>If NORMALIZE_FLAG set to False, tuple[1] = -1
-</span><span style=color:#e6db74>&#39;&#39;&#39;</span>
-<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>_CollinsDuffy_</span>(tree1, tree2, lam, NORMALIZE_FLAG, SST_ON):
-    raw_score <span style=color:#f92672>=</span> _cdKernel_(tree1, tree2, lam, SST_ON)
-    <span style=color:#66d9ef>if</span> (NORMALIZE_FLAG):
-        t1_score <span style=color:#f92672>=</span> _cdKernel_(tree1, tree1, lam, SST_ON)
-        t2_score <span style=color:#f92672>=</span> _cdKernel_(tree2, tree2, lam, SST_ON)
-        <span style=color:#66d9ef>return</span> (raw_score,(raw_score <span style=color:#f92672>/</span> math<span style=color:#f92672>.</span>sqrt(t1_score <span style=color:#f92672>*</span> t2_score)))
-    <span style=color:#66d9ef>else</span>:
-        <span style=color:#66d9ef>return</span> (raw_score,<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>)
+<span style=color:#00afaf>&#39;&#39;&#39;
+</span><span style=color:#00afaf>Returns a tuple w/ format: (raw, normalized)
+</span><span style=color:#00afaf>If NORMALIZE_FLAG set to False, tuple[1] = -1
+</span><span style=color:#00afaf>&#39;&#39;&#39;</span>
+<span style=color:#5f8700>def</span> <span style=color:#0087ff>_CollinsDuffy_</span>(tree1, tree2, lam, NORMALIZE_FLAG, SST_ON):
+    raw_score = _cdKernel_(tree1, tree2, lam, SST_ON)
+    <span style=color:#5f8700>if</span> (NORMALIZE_FLAG):
+        t1_score = _cdKernel_(tree1, tree1, lam, SST_ON)
+        t2_score = _cdKernel_(tree2, tree2, lam, SST_ON)
+        <span style=color:#5f8700>return</span> (raw_score,(raw_score / math.sqrt(t1_score * t2_score)))
+    <span style=color:#5f8700>else</span>:
+        <span style=color:#5f8700>return</span> (raw_score,-<span style=color:#00afaf>1</span>)
 
 
-<span style=color:#e6db74>&#39;&#39;&#39;
-</span><span style=color:#e6db74>Implementation of the Partial Tree Kernel (PTK) from:
-</span><span style=color:#e6db74>&#34;Efficient Convolution Kernels for Dependency and Constituent Syntactic Trees&#34;
-</span><span style=color:#e6db74>by Alessandro Moschitti
-</span><span style=color:#e6db74>&#39;&#39;&#39;</span>
+<span style=color:#00afaf>&#39;&#39;&#39;
+</span><span style=color:#00afaf>Implementation of the Partial Tree Kernel (PTK) from:
+</span><span style=color:#00afaf>&#34;Efficient Convolution Kernels for Dependency and Constituent Syntactic Trees&#34;
+</span><span style=color:#00afaf>by Alessandro Moschitti
+</span><span style=color:#00afaf>&#39;&#39;&#39;</span>
 
-<span style=color:#e6db74>&#39;&#39;&#39;
-</span><span style=color:#e6db74>The delta function is stolen from the Collins-Duffy kernel
-</span><span style=color:#e6db74>&#39;&#39;&#39;</span>
+<span style=color:#00afaf>&#39;&#39;&#39;
+</span><span style=color:#00afaf>The delta function is stolen from the Collins-Duffy kernel
+</span><span style=color:#00afaf>&#39;&#39;&#39;</span>
 
-<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>_deltaP_</span>(tree1, tree2, seq1, seq2, store, lam, mu, p):
+<span style=color:#5f8700>def</span> <span style=color:#0087ff>_deltaP_</span>(tree1, tree2, seq1, seq2, store, lam, mu, p):
 
-<span style=color:#75715e>#     # Enumerate subsequences of length p+1 for each child set</span>
-    <span style=color:#66d9ef>if</span> p <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span>:
-        <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>
-    <span style=color:#66d9ef>else</span>:
-        <span style=color:#75715e># generate delta(a,b)</span>
-        _delta_(tree1, tree2, seq1[<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>], seq2[<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>], store, lam, mu)
-        <span style=color:#66d9ef>if</span> store[seq1[<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>], seq2[<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>]] <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span>:
-            <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>
-        <span style=color:#66d9ef>else</span>:
-            runningTot <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
-            <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(p<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>, len(seq1)<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>):
-                <span style=color:#66d9ef>for</span> r <span style=color:#f92672>in</span> range(p<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>, len(seq2)<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>):
-                    scaleFactor <span style=color:#f92672>=</span> pow(lam, len(seq1[:<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>])<span style=color:#f92672>-</span>i<span style=color:#f92672>+</span>len(seq2[:<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>])<span style=color:#f92672>-</span>r)
-                    dp <span style=color:#f92672>=</span> _deltaP_(tree1, tree2, seq1[:i], seq2[:r], store, lam, mu, p<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>)
-                    runningTot <span style=color:#f92672>+=</span> (scaleFactor <span style=color:#f92672>*</span> dp)
-            <span style=color:#66d9ef>return</span> runningTot
+<span style=color:#4e4e4e>#     # Enumerate subsequences of length p+1 for each child set</span>
+    <span style=color:#5f8700>if</span> p == <span style=color:#00afaf>0</span>:
+        <span style=color:#5f8700>return</span> <span style=color:#00afaf>0</span>
+    <span style=color:#5f8700>else</span>:
+        <span style=color:#4e4e4e># generate delta(a,b)</span>
+        _delta_(tree1, tree2, seq1[-<span style=color:#00afaf>1</span>], seq2[-<span style=color:#00afaf>1</span>], store, lam, mu)
+        <span style=color:#5f8700>if</span> store[seq1[-<span style=color:#00afaf>1</span>], seq2[-<span style=color:#00afaf>1</span>]] == <span style=color:#00afaf>0</span>:
+            <span style=color:#5f8700>return</span> <span style=color:#00afaf>0</span>
+        <span style=color:#5f8700>else</span>:
+            runningTot = <span style=color:#00afaf>0</span>
+            <span style=color:#5f8700>for</span> i <span style=color:#5f8700>in</span> <span style=color:#0087ff>range</span>(p-<span style=color:#00afaf>1</span>, <span style=color:#0087ff>len</span>(seq1)-<span style=color:#00afaf>1</span>):
+                <span style=color:#5f8700>for</span> r <span style=color:#5f8700>in</span> <span style=color:#0087ff>range</span>(p-<span style=color:#00afaf>1</span>, <span style=color:#0087ff>len</span>(seq2)-<span style=color:#00afaf>1</span>):
+                    scaleFactor = <span style=color:#0087ff>pow</span>(lam, <span style=color:#0087ff>len</span>(seq1[:-<span style=color:#00afaf>1</span>])-i+<span style=color:#0087ff>len</span>(seq2[:-<span style=color:#00afaf>1</span>])-r)
+                    dp = _deltaP_(tree1, tree2, seq1[:i], seq2[:r], store, lam, mu, p-<span style=color:#00afaf>1</span>)
+                    runningTot += (scaleFactor * dp)
+            <span style=color:#5f8700>return</span> runningTot
 
-<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>_delta_</span>(tree1, tree2, node1, node2, store, lam, mu):
-<span style=color:#75715e>#     print(&#34;Evaluating Delta: (%d,%d)&#34; % (node1, node2))</span>
+<span style=color:#5f8700>def</span> <span style=color:#0087ff>_delta_</span>(tree1, tree2, node1, node2, store, lam, mu):
+<span style=color:#4e4e4e>#     print(&#34;Evaluating Delta: (%d,%d)&#34; % (node1, node2))</span>
 
-    <span style=color:#75715e># No duplicate computations</span>
-    <span style=color:#66d9ef>if</span> store[node1, node2] <span style=color:#f92672>&gt;=</span> <span style=color:#ae81ff>0</span>:
-        <span style=color:#66d9ef>return</span>
+    <span style=color:#4e4e4e># No duplicate computations</span>
+    <span style=color:#5f8700>if</span> store[node1, node2] &gt;= <span style=color:#00afaf>0</span>:
+        <span style=color:#5f8700>return</span>
 
-    <span style=color:#75715e># Leaves yield similarity score by definition</span>
-    <span style=color:#66d9ef>if</span> (_isLeaf_(tree1, node1) <span style=color:#f92672>or</span> _isLeaf_(tree2, node2)):
-        store[node1, node2] <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
-        <span style=color:#66d9ef>return</span>
+    <span style=color:#4e4e4e># Leaves yield similarity score by definition</span>
+    <span style=color:#5f8700>if</span> (_isLeaf_(tree1, node1) <span style=color:#5f8700>or</span> _isLeaf_(tree2, node2)):
+        store[node1, node2] = <span style=color:#00afaf>0</span>
+        <span style=color:#5f8700>return</span>
 
-    <span style=color:#75715e># same parent node</span>
-    <span style=color:#66d9ef>if</span> tree1[node1][<span style=color:#e6db74>&#39;posOrTok&#39;</span>] <span style=color:#f92672>==</span> tree2[node2][<span style=color:#e6db74>&#39;posOrTok&#39;</span>]:
+    <span style=color:#4e4e4e># same parent node</span>
+    <span style=color:#5f8700>if</span> tree1[node1][<span style=color:#00afaf>&#39;posOrTok&#39;</span>] == tree2[node2][<span style=color:#00afaf>&#39;posOrTok&#39;</span>]:
 
-        <span style=color:#66d9ef>if</span> _isPreterminal_(tree1, node1) <span style=color:#f92672>and</span> _isPreterminal_(tree2, node2):
-            <span style=color:#66d9ef>if</span> tree1[node1][<span style=color:#e6db74>&#39;childrenTok&#39;</span>] <span style=color:#f92672>==</span> tree2[node2][<span style=color:#e6db74>&#39;childrenTok&#39;</span>]:
-                store[node1, node2] <span style=color:#f92672>=</span> lam
-            <span style=color:#66d9ef>else</span>:
-                store[node1, node2] <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
-            <span style=color:#66d9ef>return</span>
+        <span style=color:#5f8700>if</span> _isPreterminal_(tree1, node1) <span style=color:#5f8700>and</span> _isPreterminal_(tree2, node2):
+            <span style=color:#5f8700>if</span> tree1[node1][<span style=color:#00afaf>&#39;childrenTok&#39;</span>] == tree2[node2][<span style=color:#00afaf>&#39;childrenTok&#39;</span>]:
+                store[node1, node2] = lam
+            <span style=color:#5f8700>else</span>:
+                store[node1, node2] = <span style=color:#00afaf>0</span>
+            <span style=color:#5f8700>return</span>
 
-        <span style=color:#66d9ef>else</span>:
-            <span style=color:#75715e># establishes p_max</span>
-            childmin <span style=color:#f92672>=</span> min(len(tree1[node1][<span style=color:#e6db74>&#39;children&#39;</span>]), len(tree2[node2][<span style=color:#e6db74>&#39;children&#39;</span>]))
-            deltaTot <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
-            <span style=color:#66d9ef>for</span> p <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>1</span>,childmin<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>):
-                <span style=color:#75715e># compute delta_p</span>
-                deltaTot <span style=color:#f92672>+=</span> _deltaP_(tree1, tree2,
-                                     tree1[node1][<span style=color:#e6db74>&#39;children&#39;</span>],
-                                     tree2[node2][<span style=color:#e6db74>&#39;children&#39;</span>], store, lam, mu, p)
+        <span style=color:#5f8700>else</span>:
+            <span style=color:#4e4e4e># establishes p_max</span>
+            childmin = <span style=color:#0087ff>min</span>(<span style=color:#0087ff>len</span>(tree1[node1][<span style=color:#00afaf>&#39;children&#39;</span>]), <span style=color:#0087ff>len</span>(tree2[node2][<span style=color:#00afaf>&#39;children&#39;</span>]))
+            deltaTot = <span style=color:#00afaf>0</span>
+            <span style=color:#5f8700>for</span> p <span style=color:#5f8700>in</span> <span style=color:#0087ff>range</span>(<span style=color:#00afaf>1</span>,childmin+<span style=color:#00afaf>1</span>):
+                <span style=color:#4e4e4e># compute delta_p</span>
+                deltaTot += _deltaP_(tree1, tree2,
+                                     tree1[node1][<span style=color:#00afaf>&#39;children&#39;</span>],
+                                     tree2[node2][<span style=color:#00afaf>&#39;children&#39;</span>], store, lam, mu, p)
 
-            store[node1, node2] <span style=color:#f92672>=</span> mu <span style=color:#f92672>*</span> (pow(lam,<span style=color:#ae81ff>2</span>) <span style=color:#f92672>+</span> deltaTot)
-            <span style=color:#66d9ef>return</span>
+            store[node1, node2] = mu * (<span style=color:#0087ff>pow</span>(lam,<span style=color:#00afaf>2</span>) + deltaTot)
+            <span style=color:#5f8700>return</span>
 
-    <span style=color:#66d9ef>else</span>:
-        <span style=color:#75715e># parent nodes are different</span>
-        store[node1, node2] <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
-        <span style=color:#66d9ef>return</span>
+    <span style=color:#5f8700>else</span>:
+        <span style=color:#4e4e4e># parent nodes are different</span>
+        store[node1, node2] = <span style=color:#00afaf>0</span>
+        <span style=color:#5f8700>return</span>
 
-<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>_ptKernel_</span>(tree1, tree2, lam, mu):
-    <span style=color:#75715e># Fill the initial state of the store</span>
-    store <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>empty((len(tree1), len(tree2)))
-    store<span style=color:#f92672>.</span>fill(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>)
+<span style=color:#5f8700>def</span> <span style=color:#0087ff>_ptKernel_</span>(tree1, tree2, lam, mu):
+    <span style=color:#4e4e4e># Fill the initial state of the store</span>
+    store = np.empty((<span style=color:#0087ff>len</span>(tree1), <span style=color:#0087ff>len</span>(tree2)))
+    store.fill(-<span style=color:#00afaf>1</span>)
 
-    <span style=color:#75715e># O(N^2) to compute the tree dot product</span>
-    <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(len(tree1)):
-        <span style=color:#66d9ef>for</span> j <span style=color:#f92672>in</span> range(len(tree2)):
+    <span style=color:#4e4e4e># O(N^2) to compute the tree dot product</span>
+    <span style=color:#5f8700>for</span> i <span style=color:#5f8700>in</span> <span style=color:#0087ff>range</span>(<span style=color:#0087ff>len</span>(tree1)):
+        <span style=color:#5f8700>for</span> j <span style=color:#5f8700>in</span> <span style=color:#0087ff>range</span>(<span style=color:#0087ff>len</span>(tree2)):
             _delta_(tree1, tree2, i, j, store, lam, mu)
 
-    <span style=color:#66d9ef>return</span> store<span style=color:#f92672>.</span>sum()
+    <span style=color:#5f8700>return</span> store.sum()
 
-<span style=color:#e6db74>&#39;&#39;&#39;
-</span><span style=color:#e6db74>Returns a tuple w/ format: (raw, normalized)
-</span><span style=color:#e6db74>If NORMALIZE_FLAG set to False, tuple[1] = -1
-</span><span style=color:#e6db74>&#39;&#39;&#39;</span>
-<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>_MoschittiPT_</span>(tree1, tree2, lam, mu, NORMALIZE_FLAG):
-    raw_score <span style=color:#f92672>=</span> _ptKernel_(tree1, tree2, lam, mu)
-    <span style=color:#66d9ef>if</span> (NORMALIZE_FLAG):
-        t1_score <span style=color:#f92672>=</span> _ptKernel_(tree1, tree1, lam, mu)
-        t2_score <span style=color:#f92672>=</span> _ptKernel_(tree2, tree2, lam, mu)
-        <span style=color:#66d9ef>return</span> (raw_score,(raw_core <span style=color:#f92672>/</span> math<span style=color:#f92672>.</span>sqrt(t1_score <span style=color:#f92672>*</span> t2_score)))
-    <span style=color:#66d9ef>else</span>:
-        <span style=color:#66d9ef>return</span> (raw_score,<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>)
+<span style=color:#00afaf>&#39;&#39;&#39;
+</span><span style=color:#00afaf>Returns a tuple w/ format: (raw, normalized)
+</span><span style=color:#00afaf>If NORMALIZE_FLAG set to False, tuple[1] = -1
+</span><span style=color:#00afaf>&#39;&#39;&#39;</span>
+<span style=color:#5f8700>def</span> <span style=color:#0087ff>_MoschittiPT_</span>(tree1, tree2, lam, mu, NORMALIZE_FLAG):
+    raw_score = _ptKernel_(tree1, tree2, lam, mu)
+    <span style=color:#5f8700>if</span> (NORMALIZE_FLAG):
+        t1_score = _ptKernel_(tree1, tree1, lam, mu)
+        t2_score = _ptKernel_(tree2, tree2, lam, mu)
+        <span style=color:#5f8700>return</span> (raw_score,(raw_core / math.sqrt(t1_score * t2_score)))
+    <span style=color:#5f8700>else</span>:
+        <span style=color:#5f8700>return</span> (raw_score,-<span style=color:#00afaf>1</span>)
 
 
 </code></pre></td></tr></table>

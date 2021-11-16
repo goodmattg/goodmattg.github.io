@@ -38,10 +38,6 @@ Bookshelf
 Quotes
 </a>
 <span class="nav-item navbar-text mx-1">|</span>
-<a class="nav-item nav-link" href=/resume>
-Resume
-</a>
-<span class="nav-item navbar-text mx-1">|</span>
 <a class="nav-item nav-link" href=/contact>
 Contact
 </a>
@@ -103,130 +99,130 @@ Contact
 <p>The lingua franca of modern DL is Python. All the major research codebases are in Python, the major DL frameworks all have Python bindings, and the vast majority of tooling is written for Python users. I don&rsquo;t know of any big league research organizations that use anything other than Python.</p>
 <h2 id=cpu-training-on-machine>CPU Training on Machine</h2>
 <p>This is the &ldquo;Hello World&rdquo; of DL, but we&rsquo;ll explore this scenario in some detail so we can reference it in later sections. Let&rsquo;s use the <code>torchvision</code> library from the PyTorch team to train a simple classifier on MNIST.</p>
-<div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<div class=highlight><div style=color:#8a8a8a;background-color:#1c1c1c;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
 <table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">48
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">49
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">50
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">51
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">52
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">53
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">54
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">55
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">56
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">57
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">58
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">59
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">60
+<pre tabindex=0 style=color:#8a8a8a;background-color:#1c1c1c;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">30
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">31
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">32
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">33
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">34
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">35
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">36
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">37
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">38
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">39
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">40
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">41
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">42
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">43
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">44
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">45
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">46
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">47
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">48
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">49
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">50
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">51
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">52
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">53
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">54
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">55
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">56
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">57
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">58
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">59
+</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">60
 </span></code></pre></td>
 <td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>
-<span style=color:#f92672>import</span> torch.nn <span style=color:#66d9ef>as</span> nn
-<span style=color:#f92672>import</span> torch.nn.functional <span style=color:#66d9ef>as</span> F
-<span style=color:#f92672>import</span> torch.optim <span style=color:#66d9ef>as</span> optim
-<span style=color:#f92672>import</span> torchvision.transforms <span style=color:#66d9ef>as</span> transforms
+<pre tabindex=0 style=color:#8a8a8a;background-color:#1c1c1c;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>
+<span style=color:#d75f00>import</span> torch.nn <span style=color:#5f8700>as</span> nn
+<span style=color:#d75f00>import</span> torch.nn.functional <span style=color:#5f8700>as</span> F
+<span style=color:#d75f00>import</span> torch.optim <span style=color:#5f8700>as</span> optim
+<span style=color:#d75f00>import</span> torchvision.transforms <span style=color:#5f8700>as</span> transforms
 
-<span style=color:#f92672>from</span> torch.utils.data <span style=color:#f92672>import</span> DataLoader
-<span style=color:#f92672>from</span> torchvision.datasets <span style=color:#f92672>import</span> MNIST
+<span style=color:#d75f00>from</span> torch.utils.data <span style=color:#d75f00>import</span> DataLoader
+<span style=color:#d75f00>from</span> torchvision.datasets <span style=color:#d75f00>import</span> MNIST
 
-transform <span style=color:#f92672>=</span> transforms<span style=color:#f92672>.</span>Compose([
-                               transforms<span style=color:#f92672>.</span>ToTensor(),
-                               transforms<span style=color:#f92672>.</span>Normalize(
-                                 (<span style=color:#ae81ff>0.1307</span>,), (<span style=color:#ae81ff>0.3081</span>,))
+transform = transforms.Compose([
+                               transforms.ToTensor(),
+                               transforms.Normalize(
+                                 (<span style=color:#00afaf>0.1307</span>,), (<span style=color:#00afaf>0.3081</span>,))
                              ])
 
-<span style=color:#75715e># NOTE: Dataset downloaded to local machine</span>
-trainset <span style=color:#f92672>=</span> MNIST(root<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;./data&#39;</span>, train<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>, download<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>, transform<span style=color:#f92672>=</span>transform)
-trainloader <span style=color:#f92672>=</span> DataLoader(trainset, batch_size<span style=color:#f92672>=</span><span style=color:#ae81ff>4</span>, shuffle<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>, num_workers<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>)
+<span style=color:#4e4e4e># NOTE: Dataset downloaded to local machine</span>
+trainset = MNIST(root=<span style=color:#00afaf>&#39;./data&#39;</span>, train=<span style=color:#d75f00>True</span>, download=<span style=color:#d75f00>True</span>, transform=transform)
+trainloader = DataLoader(trainset, batch_size=<span style=color:#00afaf>4</span>, shuffle=<span style=color:#d75f00>True</span>, num_workers=<span style=color:#00afaf>2</span>)
 
-<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Net</span>(nn<span style=color:#f92672>.</span>Module):
-    <span style=color:#66d9ef>def</span> __init__(self):
-        super(Net, self)<span style=color:#f92672>.</span>__init__()
-        self<span style=color:#f92672>.</span>conv1 <span style=color:#f92672>=</span> nn<span style=color:#f92672>.</span>Conv2d(<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>10</span>, kernel_size<span style=color:#f92672>=</span><span style=color:#ae81ff>5</span>)
-        self<span style=color:#f92672>.</span>conv2 <span style=color:#f92672>=</span> nn<span style=color:#f92672>.</span>Conv2d(<span style=color:#ae81ff>10</span>, <span style=color:#ae81ff>20</span>, kernel_size<span style=color:#f92672>=</span><span style=color:#ae81ff>5</span>)
-        self<span style=color:#f92672>.</span>conv2_drop <span style=color:#f92672>=</span> nn<span style=color:#f92672>.</span>Dropout2d()
-        self<span style=color:#f92672>.</span>fc1 <span style=color:#f92672>=</span> nn<span style=color:#f92672>.</span>Linear(<span style=color:#ae81ff>320</span>, <span style=color:#ae81ff>50</span>)
-        self<span style=color:#f92672>.</span>fc2 <span style=color:#f92672>=</span> nn<span style=color:#f92672>.</span>Linear(<span style=color:#ae81ff>50</span>, <span style=color:#ae81ff>10</span>)
+<span style=color:#5f8700>class</span> <span style=color:#0087ff>Net</span>(nn.Module):
+    <span style=color:#5f8700>def</span> __init__(<span style=color:#0087ff>self</span>):
+        <span style=color:#0087ff>super</span>(Net, <span style=color:#0087ff>self</span>).__init__()
+        <span style=color:#0087ff>self</span>.conv1 = nn.Conv2d(<span style=color:#00afaf>1</span>, <span style=color:#00afaf>10</span>, kernel_size=<span style=color:#00afaf>5</span>)
+        <span style=color:#0087ff>self</span>.conv2 = nn.Conv2d(<span style=color:#00afaf>10</span>, <span style=color:#00afaf>20</span>, kernel_size=<span style=color:#00afaf>5</span>)
+        <span style=color:#0087ff>self</span>.conv2_drop = nn.Dropout2d()
+        <span style=color:#0087ff>self</span>.fc1 = nn.Linear(<span style=color:#00afaf>320</span>, <span style=color:#00afaf>50</span>)
+        <span style=color:#0087ff>self</span>.fc2 = nn.Linear(<span style=color:#00afaf>50</span>, <span style=color:#00afaf>10</span>)
 
-    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>forward</span>(self, x):
-        x <span style=color:#f92672>=</span> F<span style=color:#f92672>.</span>relu(F<span style=color:#f92672>.</span>max_pool2d(self<span style=color:#f92672>.</span>conv1(x), <span style=color:#ae81ff>2</span>))
-        x <span style=color:#f92672>=</span> F<span style=color:#f92672>.</span>relu(F<span style=color:#f92672>.</span>max_pool2d(self<span style=color:#f92672>.</span>conv2_drop(self<span style=color:#f92672>.</span>conv2(x)), <span style=color:#ae81ff>2</span>))
-        x <span style=color:#f92672>=</span> x<span style=color:#f92672>.</span>view(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>320</span>)
-        x <span style=color:#f92672>=</span> F<span style=color:#f92672>.</span>relu(self<span style=color:#f92672>.</span>fc1(x))
-        x <span style=color:#f92672>=</span> F<span style=color:#f92672>.</span>dropout(x, training<span style=color:#f92672>=</span>self<span style=color:#f92672>.</span>training)
-        x <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>fc2(x)
-        <span style=color:#66d9ef>return</span> F<span style=color:#f92672>.</span>log_softmax(x)
+    <span style=color:#5f8700>def</span> <span style=color:#0087ff>forward</span>(<span style=color:#0087ff>self</span>, x):
+        x = F.relu(F.max_pool2d(<span style=color:#0087ff>self</span>.conv1(x), <span style=color:#00afaf>2</span>))
+        x = F.relu(F.max_pool2d(<span style=color:#0087ff>self</span>.conv2_drop(<span style=color:#0087ff>self</span>.conv2(x)), <span style=color:#00afaf>2</span>))
+        x = x.view(-<span style=color:#00afaf>1</span>, <span style=color:#00afaf>320</span>)
+        x = F.relu(<span style=color:#0087ff>self</span>.fc1(x))
+        x = F.dropout(x, training=<span style=color:#0087ff>self</span>.training)
+        x = <span style=color:#0087ff>self</span>.fc2(x)
+        <span style=color:#5f8700>return</span> F.log_softmax(x)
 
-net <span style=color:#f92672>=</span> Net()
+net = Net()
 
-criterion <span style=color:#f92672>=</span> nn<span style=color:#f92672>.</span>CrossEntropyLoss()
-optimizer <span style=color:#f92672>=</span> optim<span style=color:#f92672>.</span>SGD(net<span style=color:#f92672>.</span>parameters(), lr<span style=color:#f92672>=</span><span style=color:#ae81ff>0.001</span>, momentum<span style=color:#f92672>=</span><span style=color:#ae81ff>0.9</span>)
+criterion = nn.CrossEntropyLoss()
+optimizer = optim.SGD(net.parameters(), lr=<span style=color:#00afaf>0.001</span>, momentum=<span style=color:#00afaf>0.9</span>)
 
-<span style=color:#66d9ef>for</span> epoch <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>2</span>):
-    running_loss <span style=color:#f92672>=</span> <span style=color:#ae81ff>0.0</span>
-    <span style=color:#66d9ef>for</span> i, data <span style=color:#f92672>in</span> enumerate(trainloader, <span style=color:#ae81ff>0</span>):
-        <span style=color:#75715e># NOTE: Data loaded from disk into RAM</span>
-        inputs, labels <span style=color:#f92672>=</span> data
+<span style=color:#5f8700>for</span> epoch <span style=color:#5f8700>in</span> <span style=color:#0087ff>range</span>(<span style=color:#00afaf>2</span>):
+    running_loss = <span style=color:#00afaf>0.0</span>
+    <span style=color:#5f8700>for</span> i, data <span style=color:#5f8700>in</span> <span style=color:#0087ff>enumerate</span>(trainloader, <span style=color:#00afaf>0</span>):
+        <span style=color:#4e4e4e># NOTE: Data loaded from disk into RAM</span>
+        inputs, labels = data
 
-        optimizer<span style=color:#f92672>.</span>zero_grad()
+        optimizer.zero_grad()
 
-        <span style=color:#75715e># NOTE: CPU computes forward pass, backward pass, update weights</span>
-        outputs <span style=color:#f92672>=</span> net(inputs)
-        loss <span style=color:#f92672>=</span> criterion(outputs, labels)
-        loss<span style=color:#f92672>.</span>backward()
-        optimizer<span style=color:#f92672>.</span>step()
+        <span style=color:#4e4e4e># NOTE: CPU computes forward pass, backward pass, update weights</span>
+        outputs = net(inputs)
+        loss = criterion(outputs, labels)
+        loss.backward()
+        optimizer.step()
 
-        running_loss <span style=color:#f92672>+=</span> loss<span style=color:#f92672>.</span>item()
-        <span style=color:#66d9ef>if</span> i <span style=color:#f92672>%</span> <span style=color:#ae81ff>2000</span> <span style=color:#f92672>==</span> <span style=color:#ae81ff>1999</span>:
-            print(<span style=color:#e6db74>&#39;[</span><span style=color:#e6db74>%d</span><span style=color:#e6db74>, </span><span style=color:#e6db74>%5d</span><span style=color:#e6db74>] loss: </span><span style=color:#e6db74>%.3f</span><span style=color:#e6db74>&#39;</span> <span style=color:#f92672>%</span> (epoch <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>, i <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>, running_loss <span style=color:#f92672>/</span> <span style=color:#ae81ff>2000</span>))
-            running_loss <span style=color:#f92672>=</span> <span style=color:#ae81ff>0.0</span>
+        running_loss += loss.item()
+        <span style=color:#5f8700>if</span> i % <span style=color:#00afaf>2000</span> == <span style=color:#00afaf>1999</span>:
+            <span style=color:#0087ff>print</span>(<span style=color:#00afaf>&#39;[</span><span style=color:#00afaf>%d</span><span style=color:#00afaf>, </span><span style=color:#00afaf>%5d</span><span style=color:#00afaf>] loss: </span><span style=color:#00afaf>%.3f</span><span style=color:#00afaf>&#39;</span> % (epoch + <span style=color:#00afaf>1</span>, i + <span style=color:#00afaf>1</span>, running_loss / <span style=color:#00afaf>2000</span>))
+            running_loss = <span style=color:#00afaf>0.0</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Several things verify that our model works correctly:</p>
