@@ -27,17 +27,13 @@ pageWidth = "1000px"
 
 [menu]
 [[menu.main]]
-name = "Posts"
-url = "/posts"
-weight = 2
-[[menu.main]]
 name = "About"
 url = "/about"
 weight = 1
 [[menu.main]]
-name = "Contact"
-url = "/contact"
-weight = 4
+name = "Posts"
+url = "/posts"
+weight = 2
 [[menu.main]]
 name = "Bookshelf"
 url = "/bookshelf"
@@ -46,6 +42,14 @@ weight = 3
 name = "Quotes"
 url = "/quotes"
 weight = 3
+[[menu.main]]
+name = "Contact"
+url = "/contact"
+weight = 4
+[[menu.main]]
+name = "SyncMotion"
+url = "/sync-motion"
+weight = 5
 
 [markup.goldmark.renderer]
 unsafe = true # allow raw HTML in markdown files
