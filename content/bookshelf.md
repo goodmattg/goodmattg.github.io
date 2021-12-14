@@ -6,6 +6,7 @@ Title = "Bookshelf"
 
 Book | Author | Started | Finished | Notes 
 -----|-------|-------|-------|--------
+Goodbye to a River | John Graves | 12/10/21 | - |
 God Save Texas | Lawrence Wright | 11/21/21 | 12/08/21 | Prose that captures the inherent contradictions in the state. Doesn't shy away from exploring the political landscape, the interwoven history and culture of the state, and its mixed future. Succinct theory of stages of cultural - I agree with the idea that so called _peak_ culture is self-referential. Makes me ashamed I haven't camped out in Big Bend, visited Marfa or Terlingua. So many adventures in the state worth having.
 The Rust Programming Language | Steve Klabnick, Carol Nichols | 11/20/21 | - | Not finished yet. Explicit ownership is a great concept. Using semicolon to denote statements that don't return vs. expressions.
 The Hard About Hard Things | Ben Horowitz | 11/07/21 | 11/14/21 | Many lessons. Importance of clear communication providing employee feedback. Importance of actively minimizing politics. Did a16z popularize the use of "partner" for venture capital funds? If your company is growing fast enough, existing jobs will be different - the same person may not be able to handle both. |
