@@ -6,6 +6,7 @@ Title = "Bookshelf"
 
 Book | Author | Started | Finished | Notes 
 -----|-------|-------|-------|--------
+The Wisdom of Insecurity | Allan Watts | 12/20/21 | - | 
 Goodbye to a River | John Graves | 12/10/21 | - |
 God Save Texas | Lawrence Wright | 11/21/21 | 12/08/21 | Prose that captures the inherent contradictions in the state. Doesn't shy away from exploring the political landscape, the interwoven history and culture of the state, and its mixed future. Succinct theory of stages of cultural - I agree with the idea that so called _peak_ culture is self-referential. Makes me ashamed I haven't camped out in Big Bend, visited Marfa or Terlingua. So many adventures in the state worth having.
 The Rust Programming Language | Steve Klabnick, Carol Nichols | 11/20/21 | - | Not finished yet. Explicit ownership is a great concept. Using semicolon to denote statements that don't return vs. expressions.
