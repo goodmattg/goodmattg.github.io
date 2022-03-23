@@ -1,193 +1,89 @@
-<!doctype html><html><head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
-<title>Lessons Learned using MyPy in Production</title>
-<meta name=description content="The website of Matthew Goodman">
-<meta name=author content="Matthew Goodman">
-<link rel=preconnect href=https://fonts.gstatic.com>
-<link href="https://fonts.googleapis.com/css?family=Roboto" rel=stylesheet>
-<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel=stylesheet>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel=stylesheet>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css integrity=sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2 crossorigin=anonymous>
-<link rel=stylesheet href=/sass/researcher.min.css>
-<link rel=icon type=image/ico href=https://goodmattg.github.io/favicon.ico>
-</head>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css integrity=sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X crossorigin=anonymous>
-<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js integrity=sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4 crossorigin=anonymous></script>
+<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><title>Lessons Learned using MyPy in Production</title><meta name=description content="The website of Matthew Goodman"><meta name=author content="Matthew Goodman"><link rel=preconnect href=https://fonts.gstatic.com><link href="https://fonts.googleapis.com/css?family=Roboto" rel=stylesheet><link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel=stylesheet><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css integrity=sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2 crossorigin=anonymous><link rel=stylesheet href=/sass/researcher.min.css><link rel=icon type=image/ico href=https://goodmattg.github.io/favicon.ico></head><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css integrity=sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js integrity=sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4 crossorigin=anonymous></script>
 <script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js integrity=sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa crossorigin=anonymous onload=renderMathInElement(document.body)></script>
-<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"\\[",right:"\\]",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1}]})})</script>
-<body><div class="container mt-5">
-<nav class="navbar navbar-expand-sm flex-column flex-sm-row text-nowrap p-0">
-<a class="navbar-brand mx-0 mr-sm-auto" href=https://goodmattg.github.io>
-Matt Goodman
-</a>
-<div class="navbar-nav flex-row flex-wrap justify-content-center">
-<a class="nav-item nav-link" href=/about>
-About
-</a>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"\\[",right:"\\]",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1}]})})</script><body><div class="container mt-5"><nav class="navbar navbar-expand-sm flex-column flex-sm-row text-nowrap p-0"><a class="navbar-brand mx-0 mr-sm-auto" href=https://goodmattg.github.io>Matt Goodman</a><div class="navbar-nav flex-row flex-wrap justify-content-center"><a class="nav-item nav-link" href=/about>About</a>
 <span class="nav-item navbar-text mx-1">|</span>
-<a class="nav-item nav-link" href=/posts>
-Posts
-</a>
+<a class="nav-item nav-link" href=/posts>Posts</a>
 <span class="nav-item navbar-text mx-1">|</span>
-<a class="nav-item nav-link" href=/bookshelf>
-Bookshelf
-</a>
+<a class="nav-item nav-link" href=/bookshelf>Bookshelf</a>
 <span class="nav-item navbar-text mx-1">|</span>
-<a class="nav-item nav-link" href=/quotes>
-Quotes
-</a>
+<a class="nav-item nav-link" href=/quotes>Quotes</a>
 <span class="nav-item navbar-text mx-1">|</span>
-<a class="nav-item nav-link" href=/contact>
-Contact
-</a>
+<a class="nav-item nav-link" href=/contact>Contact</a>
 <span class="nav-item navbar-text mx-1">|</span>
-<a class="nav-item nav-link" href=/sync-motion>
-SyncMotion
-</a>
-</div>
-</nav>
-</div>
-<hr>
-<div id=content>
-<div class=container>
-<div style=text-align:center class=centered-div>
-<h1 id=lessons-learned-using-mypy-in-production>Lessons Learned using MyPy in Production</h1>
-<hr>
-<br>
-</div>
-<p>When we talk about type safety in the context of statically typed languages, we mean that the language builds in a typing checking mechanism into the compiler. No type-check, no compilation.</p>
-<p>But in the context of research / algorithms oriented software that has no uptime requirements, the bias coming out of academia is to get the math into code, these days Python, and put it in production. Python is dynamically typed and has no type inference&mldr; so the typing is optional. What Mypy users rarely discuss is the cognitive burden of maintaining the type system that is separate from the code. With a lot of tasks on your plate and new features you are waiting to start, sometimes it feels silly to type annotate Python. Is this really necessary?</p>
-<div class=highlight><div style=color:#8a8a8a;background-color:#1c1c1c;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#8a8a8a;background-color:#1c1c1c;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#454545">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">8
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#8a8a8a;background-color:#1c1c1c;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>def(a):
-    <span style=color:#0087ff>print</span>(a)
-    <span style=color:#5f8700>return</span>
-
-<span style=color:#4e4e4e># With types</span>
-def(a: <span style=color:#0087ff>int</span>) -&gt; <span style=color:#d75f00>None</span>:
-    <span style=color:#0087ff>print</span>(a)
-    <span style=color:#5f8700>return</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>The situation we experience more often is that the simple and obvious functions get type annotated, but the complex ones that deal with uncommon types, like declaring types for decorators <code>F = TypeVar('F', bound=Callable[..., Any])</code>, go un-typed. And we expect this! Catching subtle bugs via the mypy type-checking mechanism is a long game.</p>
-<p>Highly effective teams know that type annotation is one of the best ways to make a codebase <em>stronger</em>. I know that&rsquo;s a vague and probably incorrect word to use in the context of software, but it really feels that way in a Python codebase. Without type annotations, it&rsquo;s the blind leading the blind - you need faith that variable names accurately describe the data that code will operate on. &ldquo;Faith&rdquo; is cold-comfort when we start talking SLA&rsquo;s.</p>
-<div class=highlight><div style=color:#8a8a8a;background-color:#1c1c1c;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#8a8a8a;background-color:#1c1c1c;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#454545">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">5
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#8a8a8a;background-color:#1c1c1c;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#5f8700>def</span> <span style=color:#0087ff>concatenate_str</span>(x: <span style=color:#0087ff>str</span>, y: <span style=color:#0087ff>str</span>) -&gt; <span style=color:#0087ff>str</span>:
-    <span style=color:#5f8700>return</span> x + y
-
-<span style=color:#4e4e4e># the function name said &#39;_str&#39; but our data is &#39;int&#39;</span>
-concatenate(<span style=color:#00afaf>1</span>, <span style=color:#00afaf>2</span>) -&gt; <span style=color:#00afaf>3</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>prevent programmer&rsquo;s from making dumb mistakes in their work. I believe that well-designed code is a force multiplier</p>
-<p>The following code will type check, even though the types are wrong. Mypy is a tool for type <strong>annotation</strong>; it&rsquo;s a document of what you want the types to be, and if the types are what you say they are, then the code is type safe.</p>
-<h1 id=lessons>Lessons</h1>
-<p>So if the investment in type annotations (Mypy) only pays off with a full commitment, the most common scientific libraries are still working on type stubs, and no one has the time or willingness to fully commit, the question is, why even bother?</p>
-<h2 id=1-mindfulness-is-enough-to-prevent-common-mistakes>1. Mindfulness is enough to prevent common mistakes</h2>
-<p>Even if they go completely unused in any formal way, just making developers write types prevents dumb mistakes. For Python, this is often <code>Optional[T]</code> vs <code>[T]</code>. <strong>This is not a joke</strong>. Errors like this have led to downtime and rollbacks for production services.</p>
-<blockquote>
-<p>&ldquo;operator &lsquo;>&rsquo; not defined for Int and None&rdquo;</p>
-</blockquote>
-<div class=highlight><div style=color:#8a8a8a;background-color:#1c1c1c;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#8a8a8a;background-color:#1c1c1c;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#454545"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">15
-</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">16
-</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">17
-</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">18
-</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">19
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#8a8a8a;background-color:#1c1c1c;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#4e4e4e># We have a vague understanding that &#39;a&#39; is an int</span>
-__init__(<span style=color:#0087ff>self</span>, val=<span style=color:#d75f00>None</span>):
-    func(val)
-
-<span style=color:#4e4e4e># No types - explosion</span>
-<span style=color:#5f8700>def</span> <span style=color:#0087ff>func</span>(a):
-    <span style=color:#5f8700>if</span> a &gt; <span style=color:#00afaf>3</span>:
-        <span style=color:#5f8700>return</span> a
-    <span style=color:#5f8700>else</span>:
-        <span style=color:#5f8700>return</span> -<span style=color:#00afaf>1</span>
-    
-<span style=color:#4e4e4e># Types annotations remind us that &#39;a&#39; can be None.</span>
-<span style=color:#4e4e4e># either handle the Optional case (None), or prevent</span>
-<span style=color:#4e4e4e># ever invoking &#39;func&#39;</span>
-<span style=color:#5f8700>def</span> <span style=color:#0087ff>func</span>(a: Optional[<span style=color:#0087ff>int</span>]) -&gt; <span style=color:#0087ff>int</span>:
-    <span style=color:#5f8700>if</span> a <span style=color:#5f8700>is</span> <span style=color:#d75f00>None</span> <span style=color:#5f8700>or</span> a &lt; <span style=color:#00afaf>3</span>:
-        <span style=color:#5f8700>return</span> -<span style=color:#00afaf>1</span>
-    <span style=color:#5f8700>else</span>:
-        <span style=color:#5f8700>return</span> a
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=2-dont-use-python-for-production-services>2. Don&rsquo;t use Python for production services</h2>
-<p>If your service has SLA&rsquo;s or has multiple downstream services, don&rsquo;t use Python. To have any chance at service stability, you&rsquo;ll need to fully use MyPy, and have some CI hooks that check for type soundness and prevent non type-annotated code from deploying. Your engineers will need to have the MyPy docs open frequently to maintain the type system, and from experience, you&rsquo;ll get a lot of complaints.</p>
-<blockquote>
-<p>&ldquo;I know this code works - our test-suite passes, why am I wasting time getting MyPy to stop complaining about an unbound type?&rdquo;</p>
-</blockquote>
-<p>If you have to maintain a type system anyways, it&rsquo;s easier to choose a statically typed language where the compiler builds in type-checking. Also, most popular IDE&rsquo;s for statically typed languages have type hints - so by choosing Python you&rsquo;re just increasing the cognitive load for developers.</p>
-<h2 id=3-configure-mypy-to-prevent-returning-any>3. Configure MyPy to prevent returning Any</h2>
-<p>Developers are people, and people can be lazy. The laziest way to get around MyPy errors is to return type <code>Any</code> - the supertype of all types. This is like returning <code>Any</code> in Scala; as a last resort developers will do this to satisfy the type-checker so they can keep moving. Stop them, or at least make them annotate in code every time they really mean to return <code>Any</code>. Keep the MyPy file as concise as possible, but fail on any errors reported.</p>
-<div class=highlight><div style=color:#8a8a8a;background-color:#1c1c1c;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#8a8a8a;background-color:#1c1c1c;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#454545">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#454545">6
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#8a8a8a;background-color:#1c1c1c;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown><span style=color:#d75f00># file: mypy.ini
-</span><span style=color:#d75f00></span>
-<span style=color:#d75f00># global options:
-</span><span style=color:#d75f00></span>
-[mypy]
-warn_return_any = True
-</code></pre></td></tr></table>
-</div>
-</div><h1 id=takeways>Takeways</h1>
-<p>There&rsquo;s truth to the criticisms of trying to use Python in production. I&rsquo;ve personally found that types lead to better code, and try to avoid dynamically typed code without type annotations at all costs - the extra time it takes to reconcile types always leads to stronger production code. It isn&rsquo;t static vs. dynamic, but instead interpreted vs. compiled that is the main differentiator in developer productivity.</p>
-<h1 id=references>References</h1>
-<p>[1] Types for anyone who knows a programming language: <a href="https://www.destroyallsoftware.com/compendium/types?share_key=baf6b67369843fa2">https://www.destroyallsoftware.com/compendium/types?share_key=baf6b67369843fa2</a></p>
-</div>
-</div><div id=footer class=mb-5>
-<script src=https://utteranc.es/client.js repo=goodmattg/goodmattg.github.io issue-term=pathname label=blog theme=github-light crossorigin=anonymous async></script>
-<hr>
-<div class="container text-center">
-<a href=https://goodmattg.github.io><small>By Matthew Goodman</small></a>
-</div>
-</div>
-</body>
-</html>
+<a class="nav-item nav-link" href=/sync-motion>SyncMotion</a></div></nav></div><hr><div id=content><div class=container><div style=text-align:center class=centered-div><h1 id=lessons-learned-using-mypy-in-production>Lessons Learned using MyPy in Production</h1><hr><br></div><p>When we talk about type safety in the context of statically typed languages, we mean that the language builds in a typing checking mechanism into the compiler. No type-check, no compilation.</p><p>But in the context of research / algorithms oriented software that has no uptime requirements, the bias coming out of academia is to get the math into code, these days Python, and put it in production. Python is dynamically typed and has no type inference&mldr; so the typing is optional. What Mypy users rarely discuss is the cognitive burden of maintaining the type system that is separate from the code. With a lot of tasks on your plate and new features you are waiting to start, sometimes it feels silly to type annotate Python. Is this really necessary?</p><div class=highlight><div style=color:#8a8a8a;background-color:#1c1c1c;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#8a8a8a;background-color:#1c1c1c;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#454545">1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#454545">2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#454545">3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#454545">4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#454545">5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#454545">6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#454545">7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#454545">8
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#8a8a8a;background-color:#1c1c1c;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>def(a):
+</span></span><span style=display:flex><span>    <span style=color:#0087ff>print</span>(a)
+</span></span><span style=display:flex><span>    <span style=color:#5f8700>return</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#4e4e4e># With types</span>
+</span></span><span style=display:flex><span>def(a: <span style=color:#0087ff>int</span>) -&gt; <span style=color:#d75f00>None</span>:
+</span></span><span style=display:flex><span>    <span style=color:#0087ff>print</span>(a)
+</span></span><span style=display:flex><span>    <span style=color:#5f8700>return</span>
+</span></span></code></pre></td></tr></table></div></div><p>The situation we experience more often is that the simple and obvious functions get type annotated, but the complex ones that deal with uncommon types, like declaring types for decorators <code>F = TypeVar('F', bound=Callable[..., Any])</code>, go un-typed. And we expect this! Catching subtle bugs via the mypy type-checking mechanism is a long game.</p><p>Highly effective teams know that type annotation is one of the best ways to make a codebase <em>stronger</em>. I know that&rsquo;s a vague and probably incorrect word to use in the context of software, but it really feels that way in a Python codebase. Without type annotations, it&rsquo;s the blind leading the blind - you need faith that variable names accurately describe the data that code will operate on. &ldquo;Faith&rdquo; is cold-comfort when we start talking SLA&rsquo;s.</p><div class=highlight><div style=color:#8a8a8a;background-color:#1c1c1c;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#8a8a8a;background-color:#1c1c1c;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#454545">1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#454545">2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#454545">3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#454545">4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#454545">5
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#8a8a8a;background-color:#1c1c1c;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#5f8700>def</span> <span style=color:#0087ff>concatenate_str</span>(x: <span style=color:#0087ff>str</span>, y: <span style=color:#0087ff>str</span>) -&gt; <span style=color:#0087ff>str</span>:
+</span></span><span style=display:flex><span>    <span style=color:#5f8700>return</span> x + y
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#4e4e4e># the function name said &#39;_str&#39; but our data is &#39;int&#39;</span>
+</span></span><span style=display:flex><span>concatenate(<span style=color:#00afaf>1</span>, <span style=color:#00afaf>2</span>) -&gt; <span style=color:#00afaf>3</span>
+</span></span></code></pre></td></tr></table></div></div><p>prevent programmer&rsquo;s from making dumb mistakes in their work. I believe that well-designed code is a force multiplier</p><p>The following code will type check, even though the types are wrong. Mypy is a tool for type <strong>annotation</strong>; it&rsquo;s a document of what you want the types to be, and if the types are what you say they are, then the code is type safe.</p><h1 id=lessons>Lessons</h1><p>So if the investment in type annotations (Mypy) only pays off with a full commitment, the most common scientific libraries are still working on type stubs, and no one has the time or willingness to fully commit, the question is, why even bother?</p><h2 id=1-mindfulness-is-enough-to-prevent-common-mistakes>1. Mindfulness is enough to prevent common mistakes</h2><p>Even if they go completely unused in any formal way, just making developers write types prevents dumb mistakes. For Python, this is often <code>Optional[T]</code> vs <code>[T]</code>. <strong>This is not a joke</strong>. Errors like this have led to downtime and rollbacks for production services.</p><blockquote><p>&ldquo;operator &lsquo;>&rsquo; not defined for Int and None&rdquo;</p></blockquote><div class=highlight><div style=color:#8a8a8a;background-color:#1c1c1c;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#8a8a8a;background-color:#1c1c1c;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#454545"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#454545"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#454545"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#454545"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#454545"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#454545"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#454545"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#454545"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#454545"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#454545">10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#454545">11
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#454545">12
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#454545">13
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#454545">14
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#454545">15
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#454545">16
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#454545">17
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#454545">18
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#454545">19
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#8a8a8a;background-color:#1c1c1c;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#4e4e4e># We have a vague understanding that &#39;a&#39; is an int</span>
+</span></span><span style=display:flex><span>__init__(<span style=color:#0087ff>self</span>, val=<span style=color:#d75f00>None</span>):
+</span></span><span style=display:flex><span>    func(val)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#4e4e4e># No types - explosion</span>
+</span></span><span style=display:flex><span><span style=color:#5f8700>def</span> <span style=color:#0087ff>func</span>(a):
+</span></span><span style=display:flex><span>    <span style=color:#5f8700>if</span> a &gt; <span style=color:#00afaf>3</span>:
+</span></span><span style=display:flex><span>        <span style=color:#5f8700>return</span> a
+</span></span><span style=display:flex><span>    <span style=color:#5f8700>else</span>:
+</span></span><span style=display:flex><span>        <span style=color:#5f8700>return</span> -<span style=color:#00afaf>1</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span><span style=color:#4e4e4e># Types annotations remind us that &#39;a&#39; can be None.</span>
+</span></span><span style=display:flex><span><span style=color:#4e4e4e># either handle the Optional case (None), or prevent</span>
+</span></span><span style=display:flex><span><span style=color:#4e4e4e># ever invoking &#39;func&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#5f8700>def</span> <span style=color:#0087ff>func</span>(a: Optional[<span style=color:#0087ff>int</span>]) -&gt; <span style=color:#0087ff>int</span>:
+</span></span><span style=display:flex><span>    <span style=color:#5f8700>if</span> a <span style=color:#5f8700>is</span> <span style=color:#d75f00>None</span> <span style=color:#5f8700>or</span> a &lt; <span style=color:#00afaf>3</span>:
+</span></span><span style=display:flex><span>        <span style=color:#5f8700>return</span> -<span style=color:#00afaf>1</span>
+</span></span><span style=display:flex><span>    <span style=color:#5f8700>else</span>:
+</span></span><span style=display:flex><span>        <span style=color:#5f8700>return</span> a
+</span></span></code></pre></td></tr></table></div></div><h2 id=2-dont-use-python-for-production-services>2. Don&rsquo;t use Python for production services</h2><p>If your service has SLA&rsquo;s or has multiple downstream services, don&rsquo;t use Python. To have any chance at service stability, you&rsquo;ll need to fully use MyPy, and have some CI hooks that check for type soundness and prevent non type-annotated code from deploying. Your engineers will need to have the MyPy docs open frequently to maintain the type system, and from experience, you&rsquo;ll get a lot of complaints.</p><blockquote><p>&ldquo;I know this code works - our test-suite passes, why am I wasting time getting MyPy to stop complaining about an unbound type?&rdquo;</p></blockquote><p>If you have to maintain a type system anyways, it&rsquo;s easier to choose a statically typed language where the compiler builds in type-checking. Also, most popular IDE&rsquo;s for statically typed languages have type hints - so by choosing Python you&rsquo;re just increasing the cognitive load for developers.</p><h2 id=3-configure-mypy-to-prevent-returning-any>3. Configure MyPy to prevent returning Any</h2><p>Developers are people, and people can be lazy. The laziest way to get around MyPy errors is to return type <code>Any</code> - the supertype of all types. This is like returning <code>Any</code> in Scala; as a last resort developers will do this to satisfy the type-checker so they can keep moving. Stop them, or at least make them annotate in code every time they really mean to return <code>Any</code>. Keep the MyPy file as concise as possible, but fail on any errors reported.</p><div class=highlight><div style=color:#8a8a8a;background-color:#1c1c1c;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#8a8a8a;background-color:#1c1c1c;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#454545">1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#454545">2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#454545">3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#454545">4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#454545">5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#454545">6
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#8a8a8a;background-color:#1c1c1c;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown><span style=display:flex><span><span style=color:#d75f00># file: mypy.ini
+</span></span></span><span style=display:flex><span><span style=color:#d75f00></span>
+</span></span><span style=display:flex><span><span style=color:#d75f00># global options:
+</span></span></span><span style=display:flex><span><span style=color:#d75f00></span>
+</span></span><span style=display:flex><span>[mypy]
+</span></span><span style=display:flex><span>warn_return_any = True
+</span></span></code></pre></td></tr></table></div></div><h1 id=takeways>Takeways</h1><p>There&rsquo;s truth to the criticisms of trying to use Python in production. I&rsquo;ve personally found that types lead to better code, and try to avoid dynamically typed code without type annotations at all costs - the extra time it takes to reconcile types always leads to stronger production code. It isn&rsquo;t static vs. dynamic, but instead interpreted vs. compiled that is the main differentiator in developer productivity.</p><h1 id=references>References</h1><p>[1] Types for anyone who knows a programming language: <a href="https://www.destroyallsoftware.com/compendium/types?share_key=baf6b67369843fa2">https://www.destroyallsoftware.com/compendium/types?share_key=baf6b67369843fa2</a></p></div></div><div id=footer class=mb-5><script src=https://utteranc.es/client.js repo=goodmattg/goodmattg.github.io issue-term=pathname label=blog theme=github-light crossorigin=anonymous async></script><hr><div class="container text-center"><a href=https://goodmattg.github.io><small>By Matthew Goodman</small></a></div></div></body></html>
