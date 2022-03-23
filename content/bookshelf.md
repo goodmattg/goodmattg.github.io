@@ -6,6 +6,8 @@ Title = "Bookshelf"
 
 Book | Author | Started | Finished | Notes 
 -----|-------|-------|-------|--------
+A Biography of The Pixel | Alvy Ray Smith | - | - | Exhaustive history of early computing and visual display. I really enjoy the historical background on Kotelnikov, Shannon, Fourier, etc. He makes it easy to skip the historical section when they get __too__ in the weeds and get back to the science. Alvy did a service to future scientists with this work.
+Bewilderment | Richard Powers | - | 3/16/22 | Good, not great. Enjoyed the literary device of describing foreign worlds to reflect on Earth's peculiarity in the universe. The portrayal of the strained father was great, the child not as much. Flashbacks to his relationship with his dead wife was what kept me engaged. The meshing with science as a way to explore that relationship was very cool - almost took this into science fiction genre. The politics were overly preachy. | 
 The Wisdom of Insecurity | Allan Watts | 12/20/21 | - | 
 Goodbye to a River | John Graves | 12/10/21 | - |
 God Save Texas | Lawrence Wright | 11/21/21 | 12/08/21 | Prose that captures the inherent contradictions in the state. Doesn't shy away from exploring the political landscape, the interwoven history and culture of the state, and its mixed future. Succinct theory of stages of cultural - I agree with the idea that so called _peak_ culture is self-referential. Makes me ashamed I haven't camped out in Big Bend, visited Marfa or Terlingua. So many adventures in the state worth having.
