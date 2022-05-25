@@ -15,7 +15,7 @@ math = true # enable KaTeX (https://katex.org/) globally
 showtoc = true 
 
 [params.homeInfoParams]
-Content = "Welcome to my Matt's Log. I use this space to log my thoughts, reading, technical experiments, and new ideas. I hope you find something useful in my thoughts."
+Content = "Welcome to Matt's Log. I use this space to log my thoughts, reading, technical experiments, and new ideas. I hope you find something useful here."
 Title = "Hi there \U0001F44B"
 
 [[params.socialIcons]]
