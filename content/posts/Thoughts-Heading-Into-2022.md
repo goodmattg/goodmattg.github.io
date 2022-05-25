@@ -1,6 +1,13 @@
++++
+title = "Thoughts Heading into 2022"
+date = 2022-01-10
+categories = ["thoughts"]
+comments = true
++++
+
 Community is everything. Building a network effect through your community is becoming a key marker of success. This much is obvious and written to death in thinkpieces. Tools to actually support that community, to make it more enjoyeable for them to participate are still growing. Think about how Discord went from gaming chat, to the defacto community management platform for web3 / bleeding-edge software projects. 
 
-As developers we build these things we think are great... and then they go nowhere. You're either in the situtation where the thing you made is really that much better than the thing that came before it - the true 10x better case. Great, good for you. Your project is so badly needed or cool it will instantly gain adoption. But in the case where your advantage is only marginal... what to do exactly? It is painfully difficult to market your product. 
+As developers we build these things we think are great... and then they go nowhere. You're either in the situation where the thing you made is really that much better than the thing that came before it - the true 10x better case. Great, good for you. Your project is so badly needed or cool it will instantly gain adoption. But in the case where your advantage is only marginal... what to do exactly? It is painfully difficult to market your product. 
 
 Part of what we forget is that we are all players in an industry. It is a _luxury_ for western developers to talk about "playing" with new languages in their "free time". Free time - time away from the burdens of life and working to survive is a luxury that comes much easily in developing nations. You may have free time, but optimizing that free time is given more care than it is Silicon XYZ. 
 

@@ -6,11 +6,7 @@ categories = ["Deep Learning", "Neural Network", "DL", "AI", "GPU", "AIInfra"]
 comments = true
 +++
 
-{{< centered >}}
-# Deep Learning in 2021
 <hr>
-<br>
-{{</ centered>}}
 
 This post is going to cover the state of deep learning in 2021 with particular emphasis on AI infrastructure and deep learning tooling. If you're coming from a theory-based university classroom, get ready for an exhausting amount of detail. The classic pattern of "just feed some data through the network and backpropogate" is still the truth, but it takes ~10x more effort beyond the network to get anything useful.
 
