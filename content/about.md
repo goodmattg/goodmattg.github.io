@@ -4,7 +4,7 @@ title = "About"
 
 ## About Me
 
-{{< figure class="avatar" src="/avatar.jpg" >}}
+<!-- {{< figure class="avatar" src="/avatar.jpg" >}} -->
 
 Reader and builder. I'm an engineer with experience in deep-learning based computer vision, distributed AutoML services, platform engineering, and full-stack web development. 
 

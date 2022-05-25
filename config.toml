@@ -2,37 +2,51 @@ baseURL = "https://goodmattg.github.io"
 disableKinds = ["taxonomy", "term"] 
 enableEmoji = true 
 googleAnalytics = "" # add your tracking id
-theme = "researcher" 
-title = "Matt Goodman" 
+theme = "PaperMod" 
+title = "Matt's Log" 
 
 [params]
-author = "Matthew Goodman" 
-description = "The website of Matthew Goodman" 
-favicon = "favicon.ico" # path to a .ico to use as favicon
+ShowCodeCopyButtons = true 
+author = "Matt Goodman" 
+description = "Matt Goodman's Log" 
+env = "production" 
 logo = "" # url or path to a logo to put in the header
 math = true # enable KaTeX (https://katex.org/) globally
 
-[params.footer]
-text = "By Matthew Goodman"
+[params.homeInfoParams]
+Content = "Welcome to my Matt's Log. I use this space to log my thoughts, reading, technical experiments, and new ideas. I hope you find something useful in my thoughts."
+Title = "Hi there \U0001F44B"
 
-[params.style] # appearance options (can be omitted)
-avatarSize = "200px"
-colorBlack = "#222222"
-colorRed = "#3f51b5"
-fontFamily = "Georgia"
-pageWidth = "1000px"
+[[params.socialIcons]]
+name = "twitter"
+url = "https://twitter.com/goodmattg"
+[[params.socialIcons]]
+name = "github"
+url = "https://github.com/goodmattg"
+[[params.socialIcons]]
+name = "rss"
+url = "https://goodmattg.xyz/index.xml"
+
+[params.assets]
+apple_touch_icon = "magnet-apple-touch-icon.png" 
+favicon = "magnet.ico" # path to a .ico to use as favicon
+favicon16x16 = "magnet-16x16.ico" 
+favicon32x32 = "magnet-32x32.ico" 
+
+[params.footer]
+text = "By Matt Goodman"
 
 [permalinks]
 "/" = "/:filename"
 
 [menu]
 [[menu.main]]
-name = "About"
-url = "/about"
-weight = 1
-[[menu.main]]
 name = "Posts"
 url = "/posts"
+weight = 1
+[[menu.main]]
+name = "About"
+url = "/about"
 weight = 2
 [[menu.main]]
 name = "Bookshelf"
@@ -46,14 +60,12 @@ weight = 3
 name = "Contact"
 url = "/contact"
 weight = 4
-[[menu.main]]
-name = "SyncMotion"
-url = "/sync-motion"
-weight = 5
 
 [markup.goldmark.renderer]
 unsafe = true # allow raw HTML in markdown files
 
 [markup.highlight]
+codeFences = true
+guessSyntax = true
 linenos = "true"
 style = "solarized-dark256"

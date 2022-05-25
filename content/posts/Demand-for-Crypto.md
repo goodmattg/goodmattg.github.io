@@ -6,11 +6,7 @@ categories = ["Crypto", "Bitcoin", "Ether", "FX"]
 comments = true
 +++
 
-{{< centered >}}
-# Demand for Cryptocurrency is Demand for Alpha 
 <hr>
-<br>
-{{</ centered>}}
 
 ## The Demand: smart people who want lucrative jobs correlated with "smartness"
 
